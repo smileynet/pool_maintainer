@@ -1,0 +1,354 @@
+import { Meta, Canvas, Story } from '@storybook/blocks'
+
+<Meta title="Design System/Forms" />
+
+# Form Patterns & Validation
+
+This guide covers form design patterns, validation strategies, and best practices for the Pool Maintenance System. All forms prioritize safety, compliance, and user experience.
+
+## 🎯 Design Principles
+
+### Safety First
+
+- **MAHC Compliance**: All chemical inputs follow Model Aquatic Health Code guidelines
+- **Real-time Validation**: Immediate feedback for safety-critical values
+- **Error Prevention**: Range indicators and helpful guidance
+- **Confirmation**: Double-check critical actions that affect pool safety
+
+### User Experience
+
+- **Progressive Disclosure**: Show relevant fields based on context
+- **Clear Labeling**: Descriptive labels with units and ranges
+- **Visual Hierarchy**: Priority-based layout with critical fields emphasized
+- **Mobile Optimization**: Touch-friendly inputs for on-site technicians
+
+## 🧪 Chemical Reading Forms
+
+Chemical reading forms are the most critical components in our system, requiring strict validation and safety checks.
+
+### Basic Chemical Form Pattern
+
+<Canvas>
+  <Story id="components-molecules-form-patterns--chemical-reading-form" />
+</Canvas>
+
+### Key Features
+
+- **Cross-field Validation**: pH and chlorine effectiveness relationship
+- **Range Indicators**: Visual guides for safe chemical levels
+- **Critical Alerts**: Immediate warnings for dangerous levels
+- **Auto-calculations**: Derived values like chlorine demand
+
+### Chemical Safety Validation
+
+```typescript
+// Example validation schema
+const chemicalReadingSchema = z.object({
+  chlorine: z.coerce
+    .number()
+    .min(0, 'Chlorine level cannot be negative')
+    .max(10, 'Chlorine level dangerously high - maximum 10 ppm')
+    .refine((val) => val >= 0.5, {
+      message: 'CRITICAL: Chlorine below 0.5 ppm - pool closure required',
+    }),
+  ph: z.coerce
+    .number()
+    .min(6.0, 'pH dangerously low - equipment damage risk')
+    .max(8.5, 'pH dangerously high - ineffective chlorine')
+    .refine((val) => val >= 7.0 && val <= 7.8, {
+      message: 'WARNING: pH outside optimal range (7.2-7.6)',
+    }),
+  temperature: z.coerce
+    .number()
+    .min(15, 'Temperature too low for accurate readings')
+    .max(40, 'Temperature dangerously high'),
+  alkalinity: z.coerce
+    .number()
+    .min(0, 'Total alkalinity cannot be negative')
+    .max(300, 'Total alkalinity dangerously high'),
+})
+```
+
+### Critical Value Handling
+
+When chemical readings indicate dangerous conditions:
+
+1. **Immediate Alert**: Red styling and warning icons
+2. **Confirmation Dialog**: Require technician to confirm critical readings
+3. **Automatic Actions**: Suggest immediate corrective measures
+4. **Escalation**: Notify supervisors for critical safety issues
+
+## 📋 Maintenance Task Forms
+
+Task creation and management forms help organize pool maintenance work efficiently.
+
+### Task Creation Pattern
+
+<Canvas>
+  <Story id="components-atoms-select--maintenance-task-selection" />
+</Canvas>
+
+### Form Structure
+
+```typescript
+interface MaintenanceTaskForm {
+  title: string
+  description: string
+  poolId: string
+  assignedTo: string
+  priority: 'low' | 'medium' | 'high' | 'critical'
+  estimatedDuration: number
+  scheduledDate: Date
+  type: 'chemical' | 'cleaning' | 'equipment' | 'inspection'
+  equipment?: string[]
+  chemicals?: ChemicalRequirement[]
+  safetyNotes?: string
+}
+```
+
+### Priority-Based Validation
+
+Different task priorities have different validation requirements:
+
+- **Critical**: Requires supervisor approval and safety checklist
+- **High**: Must be scheduled within 24 hours
+- **Medium**: Standard validation and scheduling
+- **Low**: Flexible scheduling with resource availability checks
+
+## 👥 Technician Assignment Forms
+
+Forms for assigning work to technicians with certification and availability checks.
+
+### Assignment Pattern
+
+<Canvas>
+  <Story id="components-atoms-select--technician-selection" />
+</Canvas>
+
+### Certification Matching
+
+The system automatically filters technicians based on:
+
+- **Chemical Certifications**: Required for chemical handling tasks
+- **Equipment Training**: Specific equipment maintenance requirements
+- **Safety Certifications**: Pool safety and rescue certifications
+- **Availability Status**: Real-time availability tracking
+
+## 🏊 Pool Selection & Context
+
+Pool selection affects available options and validation rules throughout forms.
+
+### Context-Aware Forms
+
+<Canvas>
+  <Story id="components-atoms-select--chemical-reading-form" />
+</Canvas>
+
+When a pool is selected, forms automatically:
+
+1. **Load Pool-Specific Data**: Chemical history, equipment list, maintenance schedule
+2. **Apply Pool Rules**: Size-based chemical calculations, equipment compatibility
+3. **Show Relevant Options**: Only compatible chemicals and procedures
+4. **Historical Context**: Previous readings and trending data
+
+## ✅ Validation Patterns
+
+### Client-Side Validation
+
+**Real-time Feedback**
+
+- As-you-type validation for immediate feedback
+- Visual indicators for field status (valid, invalid, warning)
+- Progressive validation that doesn't overwhelm users
+
+**Field Dependencies**
+
+- Cross-field validation for related values
+- Conditional required fields based on selections
+- Auto-population of derived values
+
+### Server-Side Validation
+
+**Safety Checks**
+
+- Business rule validation for critical safety requirements
+- Historical data analysis for anomaly detection
+- Compliance checks against MAHC guidelines
+
+**Data Integrity**
+
+- Unique constraint validation
+- Reference data validation (valid pool IDs, technician IDs)
+- Audit trail requirements
+
+### Error Handling
+
+**Error Message Guidelines**
+
+```typescript
+// Good: Specific, actionable error messages
+'Chlorine level of 0.3 ppm is below safe minimum of 1.0 ppm. Add 2.5 lbs chlorine or close pool immediately.'
+
+// Bad: Generic, unhelpful messages
+'Invalid value'
+'Field is required'
+'Validation error'
+```
+
+**Error States**
+
+- **Critical**: Red styling, stop form submission, require supervisor override
+- **Warning**: Yellow styling, allow submission with confirmation
+- **Info**: Blue styling, helpful guidance without blocking
+
+## 📱 Mobile-First Design
+
+### Touch-Friendly Inputs
+
+All form controls are optimized for mobile use:
+
+- **Minimum Touch Target**: 44px minimum for all interactive elements
+- **Spacing**: Adequate spacing between fields to prevent mis-taps
+- **Input Types**: Appropriate keyboard types (numeric, email, etc.)
+- **Zoom Prevention**: Properly sized inputs prevent unwanted zooming
+
+### Field Organization
+
+**Logical Grouping**
+
+- Related fields grouped together visually
+- Progressive disclosure for complex forms
+- Collapsible sections for advanced options
+
+**Scanning Patterns**
+
+- Most critical fields at the top
+- Left-aligned labels for easy scanning
+- Consistent field ordering across similar forms
+
+## 🎨 Visual Design
+
+### Form Layout
+
+**Single Column Layout**
+
+- Optimal for mobile and desktop
+- Clear visual flow from top to bottom
+- Reduced cognitive load
+
+**Field Spacing**
+
+- Consistent 16px spacing between fields
+- 24px spacing between field groups
+- 32px spacing between major sections
+
+### Color Coding
+
+**Status Colors**
+
+- Green: Safe/optimal values
+- Yellow: Warning/attention needed
+- Red: Critical/dangerous values
+- Blue: Information/guidance
+
+**Field States**
+
+- Default: Neutral border color
+- Focus: Blue border and outline
+- Valid: Subtle green indication
+- Error: Red border and error text
+- Disabled: Reduced opacity and contrast
+
+## 🔧 Implementation Guidelines
+
+### React Hook Form Integration
+
+```typescript
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+function ChemicalReadingForm() {
+  const form = useForm({
+    resolver: zodResolver(chemicalReadingSchema),
+    defaultValues: {
+      chlorine: '',
+      ph: '',
+      temperature: '',
+      alkalinity: '',
+    },
+  })
+
+  const onSubmit = (data) => {
+    // Handle critical values first
+    if (data.chlorine < 0.5) {
+      showCriticalAlert('Pool closure required')
+      return
+    }
+
+    // Normal submission process
+    submitReading(data)
+  }
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        {/* Form fields */}
+      </form>
+    </Form>
+  )
+}
+```
+
+### Accessibility Considerations
+
+**ARIA Labels**
+
+- Descriptive labels for screen readers
+- Error announcements for validation failures
+- Field relationships (aria-describedby)
+
+**Keyboard Navigation**
+
+- Logical tab order through form fields
+- Skip links for long forms
+- Escape key to cancel operations
+
+**Error Handling**
+
+- Focus management after validation errors
+- Clear error announcements
+- Error summary at form level for multiple errors
+
+## 📖 Best Practices
+
+### Form Design
+
+1. **Keep It Simple**: Only include necessary fields
+2. **Logical Flow**: Order fields in a natural sequence
+3. **Clear Actions**: Distinguish primary from secondary actions
+4. **Save Progress**: Auto-save for long forms when possible
+
+### Validation
+
+1. **Validate Early**: Catch errors as soon as possible
+2. **Be Specific**: Provide clear, actionable error messages
+3. **Show Progress**: Indicate validation status visually
+4. **Allow Recovery**: Make it easy to fix errors
+
+### Safety
+
+1. **Double-Check Critical Values**: Confirm dangerous readings
+2. **Provide Context**: Show acceptable ranges and guidance
+3. **Track Changes**: Maintain audit trails for compliance
+4. **Escalate Issues**: Notify supervisors of critical conditions
+
+### Performance
+
+1. **Lazy Validation**: Don't validate until user interaction
+2. **Debounce Input**: Avoid excessive validation calls
+3. **Optimize Re-renders**: Use proper memoization
+4. **Cache Data**: Store frequently accessed pool/technician data
+
+---
+
+This forms system ensures pool safety through careful validation, clear communication, and user-friendly design patterns that work across all devices and use cases.

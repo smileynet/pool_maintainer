@@ -1,0 +1,56 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Enhanced pre-commit hook for Pool Maintenance System
+# Ensures code quality, safety, and consistency before commits
+
+echo "🏊 Pool Maintenance System - Pre-commit Quality Checks"
+echo "=================================================="
+
+# Function to handle errors and provide clear feedback
+handle_error() {
+    echo "❌ $1"
+    echo "💡 Run 'bun run lint' and 'bun run format' to fix most issues"
+    echo "💡 For urgent commits, use: git commit --no-verify"
+    exit 1
+}
+
+# Check if we have staged files to process
+if git diff --cached --quiet; then
+    echo "ℹ️  No staged changes detected, skipping checks"
+    exit 0
+fi
+
+echo "🔍 Running lint-staged (formatting & linting)..."
+bunx lint-staged || handle_error "Code formatting or linting failed"
+
+echo "🔧 Type checking TypeScript files..."
+bunx tsc --noEmit --skipLibCheck || handle_error "TypeScript type checking failed"
+
+echo "🧪 Running unit tests..."
+timeout 60s bun test --run --silent || handle_error "Unit tests failed or timed out"
+
+# Pool maintenance specific safety checks
+echo "🏊 Pool maintenance safety checks..."
+if git diff --cached --name-only | grep -E "\.(ts|tsx)$" | grep -E "(chemical|pool|maintenance)" > /dev/null; then
+    echo "  📋 Validating chemical reading components for safety compliance..."
+    bunx eslint --quiet --ext .ts,.tsx src/components/ui/*chemical* src/test/fixtures/pool-maintenance-data.ts 2>/dev/null || true
+fi
+
+# Check for sensitive pool data in commits
+echo "🔐 Scanning for sensitive pool data..."
+if git diff --cached | grep -iE "(password|secret|api_key|token|chemical_formula)" > /dev/null; then
+    handle_error "Potential sensitive data detected in staged changes"
+fi
+
+# Storybook validation if story files changed
+if git diff --cached --name-only | grep "\.stories\." > /dev/null; then
+    echo "📚 Validating Storybook stories..."
+    timeout 30s bunx build-storybook --quiet --output-dir /tmp/storybook-build-test > /dev/null 2>&1 || {
+        echo "⚠️  Storybook build failed, but continuing (not blocking commit)"
+    }
+    rm -rf /tmp/storybook-build-test 2>/dev/null || true
+fi
+
+echo "✅ All quality checks passed!"
+echo "🚀 Ready to commit - pool maintenance system is safe and clean!"

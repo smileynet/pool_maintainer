@@ -1,0 +1,693 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title="Design System/Typography" />
+
+# Typography System
+
+Our typography system prioritizes clarity, hierarchy, and readability for pool maintenance professionals working in various conditions. The system supports quick scanning of critical information and provides clear visual hierarchy for complex data.
+
+## 🎯 Design Principles
+
+### Clarity First
+
+- **High Contrast**: Ensure readability in bright outdoor conditions
+- **Appropriate Sizing**: Large enough for quick reading while working
+- **Clear Hierarchy**: Important information stands out immediately
+- **Consistent Spacing**: Predictable rhythm throughout the interface
+
+### Professional Context
+
+- **Technical Precision**: Clear display of numerical data and measurements
+- **Safety Communication**: Critical information is unmistakably prominent
+- **Multi-device Support**: Optimized for phones, tablets, and desktop
+- **Accessibility**: WCAG 2.1 AA compliant with screen reader support
+
+## 📝 Font Family
+
+### Primary Font: System UI Stack
+
+We use the system font stack for optimal performance and native feel:
+
+```css
+font-family:
+  ui-sans-serif,
+  system-ui,
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  Roboto,
+  'Helvetica Neue',
+  Arial,
+  'Noto Sans',
+  sans-serif,
+  'Apple Color Emoji',
+  'Segoe UI Emoji',
+  'Segoe UI Symbol',
+  'Noto Color Emoji';
+```
+
+**Benefits:**
+
+- **Fast Loading**: No web font downloads required
+- **Native Feel**: Matches user's operating system
+- **Excellent Legibility**: Optimized for each platform
+- **Wide Language Support**: International character sets
+
+### Monospace Font: Technical Data
+
+For precise data display (chemical readings, measurements):
+
+```css
+font-family:
+  ui-monospace, SFMono-Regular, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New',
+  monospace;
+```
+
+**Usage:**
+
+- Chemical measurement values
+- Time stamps and precise data
+- Code snippets in documentation
+- Serial numbers and technical identifiers
+
+## 📏 Typography Scale
+
+### Heading Hierarchy
+
+<div style={{ marginBottom: '2rem' }}>
+  <h1
+    style={{
+      fontSize: '2.25rem',
+      fontWeight: '800',
+      lineHeight: '2.5rem',
+      color: '#111827',
+      marginBottom: '1rem',
+    }}
+  >
+    Heading 1 - 36px/800 weight
+  </h1>
+  <p style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '2rem' }}>
+    Main page titles, dashboard headings (rare usage)
+  </p>
+
+<h2
+  style={{
+    fontSize: '1.875rem',
+    fontWeight: '700',
+    lineHeight: '2.25rem',
+    color: '#111827',
+    marginBottom: '1rem',
+  }}
+>
+  Heading 2 - 30px/700 weight
+</h2>
+<p style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '2rem' }}>
+  Section headings, card titles, major interface areas
+</p>
+
+<h3
+  style={{
+    fontSize: '1.5rem',
+    fontWeight: '600',
+    lineHeight: '2rem',
+    color: '#111827',
+    marginBottom: '1rem',
+  }}
+>
+  Heading 3 - 24px/600 weight
+</h3>
+<p style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '2rem' }}>
+  Subsection headings, component titles, form sections
+</p>
+
+<h4
+  style={{
+    fontSize: '1.25rem',
+    fontWeight: '600',
+    lineHeight: '1.75rem',
+    color: '#111827',
+    marginBottom: '1rem',
+  }}
+>
+  Heading 4 - 20px/600 weight
+</h4>
+<p style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '2rem' }}>
+  Minor headings, field labels, table headers
+</p>
+
+<h5
+  style={{
+    fontSize: '1.125rem',
+    fontWeight: '600',
+    lineHeight: '1.75rem',
+    color: '#111827',
+    marginBottom: '1rem',
+  }}
+>
+  Heading 5 - 18px/600 weight
+</h5>
+<p style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '2rem' }}>
+  Small section headings, emphasized labels
+</p>
+
+  <h6
+    style={{
+      fontSize: '1rem',
+      fontWeight: '600',
+      lineHeight: '1.5rem',
+      color: '#111827',
+      marginBottom: '1rem',
+    }}
+  >
+    Heading 6 - 16px/600 weight
+  </h6>
+  <p style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '2rem' }}>
+    Smallest headings, inline emphasis
+  </p>
+</div>
+
+### Body Text Hierarchy
+
+<div style={{ marginBottom: '2rem' }}>
+  <p
+    style={{ fontSize: '1.125rem', lineHeight: '1.75rem', color: '#111827', marginBottom: '1rem' }}
+  >
+    <strong>Large Body Text - 18px</strong>
+    <br />
+    Primary content, important descriptions, main interface text. Used for content that needs
+    emphasis or better readability.
+  </p>
+
+<p style={{ fontSize: '1rem', lineHeight: '1.5rem', color: '#111827', marginBottom: '1rem' }}>
+  <strong>Base Body Text - 16px</strong>
+  <br />
+  Standard body text, form inputs, general content. The foundation of our typography system for
+  comfortable reading.
+</p>
+
+<p style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#111827', marginBottom: '1rem' }}>
+  <strong>Small Body Text - 14px</strong>
+  <br />
+  Secondary information, help text, captions. Used for supporting details that shouldn't dominate
+  the interface.
+</p>
+
+  <p style={{ fontSize: '0.75rem', lineHeight: '1rem', color: '#6b7280', marginBottom: '1rem' }}>
+    <strong>Caption Text - 12px</strong>
+    <br />
+    Metadata, timestamps, fine print. The smallest readable text for supplementary information.
+  </p>
+</div>
+
+## 🔢 Data Display Typography
+
+### Metric Display
+
+For chemical readings and critical measurements:
+
+<div
+  style={{
+    padding: '1.5rem',
+    backgroundColor: '#f9fafb',
+    borderRadius: '8px',
+    marginBottom: '2rem',
+  }}
+>
+  <div
+    style={{
+      fontSize: '2.25rem',
+      fontWeight: '700',
+      color: '#111827',
+      fontFamily: 'ui-monospace, monospace',
+    }}
+  >
+    2.4 <span style={{ fontSize: '1rem', fontWeight: '400', color: '#6b7280' }}>ppm</span>
+  </div>
+  <p style={{ fontSize: '0.875rem', color: '#6b7280', marginTop: '0.5rem' }}>
+    Large Metric - 36px/700 weight (monospace)
+  </p>
+</div>
+
+<div
+  style={{
+    padding: '1.5rem',
+    backgroundColor: '#f9fafb',
+    borderRadius: '8px',
+    marginBottom: '2rem',
+  }}
+>
+  <div
+    style={{
+      fontSize: '1.5rem',
+      fontWeight: '600',
+      color: '#111827',
+      fontFamily: 'ui-monospace, monospace',
+    }}
+  >
+    7.2 <span style={{ fontSize: '0.875rem', fontWeight: '400', color: '#6b7280' }}>pH</span>
+  </div>
+  <p style={{ fontSize: '0.875rem', color: '#6b7280', marginTop: '0.5rem' }}>
+    Medium Metric - 24px/600 weight (monospace)
+  </p>
+</div>
+
+<div
+  style={{
+    padding: '1.5rem',
+    backgroundColor: '#f9fafb',
+    borderRadius: '8px',
+    marginBottom: '2rem',
+  }}
+>
+  <div
+    style={{
+      fontSize: '1.125rem',
+      fontWeight: '600',
+      color: '#111827',
+      fontFamily: 'ui-monospace, monospace',
+    }}
+  >
+    78°F <span style={{ fontSize: '0.75rem', fontWeight: '400', color: '#6b7280' }}>temp</span>
+  </div>
+  <p style={{ fontSize: '0.875rem', color: '#6b7280', marginTop: '0.5rem' }}>
+    Small Metric - 18px/600 weight (monospace)
+  </p>
+</div>
+
+### Status and Label Typography
+
+<div style={{ marginBottom: '2rem' }}>
+  <div
+    style={{
+      display: 'inline-block',
+      padding: '0.25rem 0.75rem',
+      backgroundColor: '#10b981',
+      color: 'white',
+      borderRadius: '9999px',
+      fontSize: '0.875rem',
+      fontWeight: '600',
+      marginRight: '1rem',
+      marginBottom: '0.5rem',
+    }}
+  >
+    ACTIVE
+  </div>
+  <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>Badge Text - 14px/600 weight</span>
+</div>
+
+<div style={{ marginBottom: '2rem' }}>
+  <div
+    style={{
+      fontSize: '0.75rem',
+      fontWeight: '500',
+      color: '#374151',
+      textTransform: 'uppercase',
+      letterSpacing: '0.05em',
+      marginBottom: '0.5rem',
+    }}
+  >
+    FIELD LABEL
+  </div>
+  <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+    Form Label - 12px/500 weight, uppercase, tracked
+  </span>
+</div>
+
+## 📱 Responsive Typography
+
+### Mobile Optimization
+
+Typography scales appropriately for smaller screens:
+
+```css
+/* Mobile-first approach */
+.heading-responsive {
+  font-size: 1.5rem; /* 24px on mobile */
+  line-height: 2rem;
+}
+
+@media (min-width: 640px) {
+  .heading-responsive {
+    font-size: 1.875rem; /* 30px on tablet+ */
+    line-height: 2.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heading-responsive {
+    font-size: 2.25rem; /* 36px on desktop */
+    line-height: 2.5rem;
+  }
+}
+```
+
+### Touch Target Considerations
+
+Interactive text maintains minimum 44px touch target:
+
+- Button text: Adequate padding around text
+- Link text: Sufficient line height and spacing
+- Form labels: Clear tap areas for focusing inputs
+
+## 🎨 Color and Contrast
+
+### Text Color Hierarchy
+
+Based on our color system, ensuring WCAG 2.1 AA compliance:
+
+<div style={{ marginBottom: '2rem' }}>
+  <p style={{ color: '#111827', fontSize: '1rem', marginBottom: '0.5rem' }}>
+    <strong>Primary Text (#111827)</strong> - Main content, headings
+  </p>
+  <p style={{ color: '#374151', fontSize: '1rem', marginBottom: '0.5rem' }}>
+    <strong>Secondary Text (#374151)</strong> - Supporting content
+  </p>
+  <p style={{ color: '#6b7280', fontSize: '1rem', marginBottom: '0.5rem' }}>
+    <strong>Muted Text (#6b7280)</strong> - Metadata, captions
+  </p>
+  <p style={{ color: '#9ca3af', fontSize: '1rem', marginBottom: '0.5rem' }}>
+    <strong>Subtle Text (#9ca3af)</strong> - Placeholder text, disabled states
+  </p>
+</div>
+
+### Status-Specific Typography
+
+<div style={{ marginBottom: '2rem' }}>
+  <p style={{ color: '#10b981', fontSize: '1rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+    ✓ Safe Conditions - Success Green
+  </p>
+  <p style={{ color: '#f59e0b', fontSize: '1rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+    ⚠ Attention Needed - Warning Amber
+  </p>
+  <p style={{ color: '#ef4444', fontSize: '1rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+    ⚠ Critical Alert - Danger Red
+  </p>
+  <p style={{ color: '#3b82f6', fontSize: '1rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+    ℹ Information - Info Blue
+  </p>
+</div>
+
+## ♿ Accessibility Features
+
+### Screen Reader Support
+
+Typography includes semantic HTML and ARIA attributes:
+
+```html
+<!-- Good: Semantic heading structure -->
+<h2 id="pool-status">Pool Status Overview</h2>
+<dl aria-labelledby="pool-status">
+  <dt>Current Chlorine Level</dt>
+  <dd>
+    <span class="metric-large" aria-label="2.4 parts per million">2.4 ppm</span>
+    <span class="status-good" aria-label="within safe range">Safe</span>
+  </dd>
+</dl>
+
+<!-- Good: Accessible data tables -->
+<table role="table" aria-label="Chemical readings summary">
+  <caption>
+    Daily chemical test results for all pools
+  </caption>
+  <thead>
+    <tr>
+      <th scope="col">Pool</th>
+      <th scope="col">Chlorine (ppm)</th>
+      <th scope="col">pH Level</th>
+    </tr>
+  </thead>
+</table>
+```
+
+### High Contrast Mode
+
+Typography adapts to system high contrast preferences:
+
+```css
+@media (prefers-contrast: high) {
+  .text-primary {
+    color: #000000;
+  }
+  .text-secondary {
+    color: #000000;
+  }
+  .text-muted {
+    color: #404040;
+  }
+
+  .bg-card {
+    background-color: #ffffff;
+    border: 2px solid #000000;
+  }
+}
+```
+
+### Reduced Motion
+
+Respects user preferences for reduced motion:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  .text-animated {
+    animation: none;
+    transition: none;
+  }
+}
+```
+
+## 🔧 Implementation Guidelines
+
+### CSS Classes
+
+Standard typography classes for consistent implementation:
+
+```css
+/* Heading classes */
+.text-h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 2.5rem;
+}
+.text-h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 2.25rem;
+}
+.text-h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2rem;
+}
+.text-h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+}
+
+/* Body text classes */
+.text-body-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.text-body {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+.text-body-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.text-caption {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+/* Metric classes */
+.text-metric-lg {
+  font-size: 2.25rem;
+  font-weight: 700;
+  font-family: ui-monospace, monospace;
+}
+.text-metric-md {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: ui-monospace, monospace;
+}
+.text-metric-sm {
+  font-size: 1.125rem;
+  font-weight: 600;
+  font-family: ui-monospace, monospace;
+}
+
+/* Utility classes */
+.text-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.text-code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.875rem;
+}
+```
+
+### React Component Examples
+
+```typescript
+// Typography component for consistent usage
+interface TypographyProps {
+  variant: 'h1' | 'h2' | 'h3' | 'h4' | 'body' | 'body-sm' | 'caption' | 'metric'
+  color?: 'primary' | 'secondary' | 'muted' | 'success' | 'warning' | 'danger'
+  children: React.ReactNode
+  className?: string
+}
+
+export function Typography({ variant, color = 'primary', children, className = '' }: TypographyProps) {
+  const baseClasses = {
+    h1: 'text-h1',
+    h2: 'text-h2',
+    h3: 'text-h3',
+    h4: 'text-h4',
+    body: 'text-body',
+    'body-sm': 'text-body-sm',
+    caption: 'text-caption',
+    metric: 'text-metric-lg'
+  }
+
+  const colorClasses = {
+    primary: 'text-gray-900',
+    secondary: 'text-gray-700',
+    muted: 'text-gray-500',
+    success: 'text-green-600',
+    warning: 'text-amber-600',
+    danger: 'text-red-600'
+  }
+
+  const Component = variant.startsWith('h') ? variant as keyof JSX.IntrinsicElements : 'p'
+
+  return (
+    <Component className={`${baseClasses[variant]} ${colorClasses[color]} ${className}`}>
+      {children}
+    </Component>
+  )
+}
+
+// Usage examples
+<Typography variant="h2" color="primary">Pool Chemical Status</Typography>
+<Typography variant="metric" color="success">2.4 ppm</Typography>
+<Typography variant="caption" color="muted">Last updated 5 minutes ago</Typography>
+```
+
+## 📊 Pool-Specific Typography Patterns
+
+### Chemical Reading Display
+
+```html
+<div class="chemical-reading">
+  <div class="reading-value">
+    <span class="text-metric-lg text-success">2.4</span>
+    <span class="text-body-sm text-muted">ppm</span>
+  </div>
+  <div class="reading-label text-label text-muted">Free Chlorine</div>
+  <div class="reading-status text-body-sm text-success">Within safe range</div>
+</div>
+```
+
+### Task Priority Display
+
+```html
+<div class="task-header">
+  <h3 class="text-h4 text-primary">Weekly Filter Cleaning</h3>
+  <span class="priority-badge text-label bg-warning text-warning-dark">HIGH</span>
+</div>
+<p class="text-body-sm text-secondary">Replace and clean main filtration system components</p>
+<div class="task-meta text-caption text-muted">Assigned to John Smith • Due today at 2:00 PM</div>
+```
+
+### Status Messages
+
+```html
+<!-- Success message -->
+<div class="alert alert-success">
+  <h4 class="text-h5 text-success">Chemical levels updated successfully</h4>
+  <p class="text-body-sm text-success-dark">
+    All pool chemical readings are now within safe ranges.
+  </p>
+</div>
+
+<!-- Warning message -->
+<div class="alert alert-warning">
+  <h4 class="text-h5 text-warning">Attention: pH level approaching limits</h4>
+  <p class="text-body-sm text-warning-dark">
+    Current pH of 7.7 is acceptable but should be lowered to optimal range.
+  </p>
+</div>
+
+<!-- Critical message -->
+<div class="alert alert-danger">
+  <h4 class="text-h5 text-danger">CRITICAL: Chlorine below safe minimum</h4>
+  <p class="text-body-sm text-danger-dark">
+    Immediate action required. Pool closure may be necessary.
+  </p>
+</div>
+```
+
+## 📖 Best Practices
+
+### Do's
+
+✅ **Use semantic HTML** for proper document structure
+✅ **Maintain consistent hierarchy** across similar interfaces
+✅ **Test readability** in various lighting conditions
+✅ **Ensure adequate contrast** for all text combinations
+✅ **Use monospace fonts** for precise numerical data
+✅ **Provide sufficient line spacing** for comfortable reading
+
+### Don'ts
+
+❌ **Don't use too many font sizes** in a single interface
+❌ **Don't rely on typography alone** to convey critical information
+❌ **Don't use decorative fonts** for functional text
+❌ **Don't ignore responsive scaling** for mobile devices
+❌ **Don't compromise accessibility** for visual appeal
+❌ **Don't use insufficient contrast** even for decorative text
+
+### Content Guidelines
+
+- **Be Concise**: Use clear, direct language
+- **Use Active Voice**: "Test chlorine levels" not "Chlorine levels should be tested"
+- **Include Units**: Always specify measurement units (ppm, °F, etc.)
+- **Provide Context**: Explain what readings mean for pool safety
+- **Use Consistent Terminology**: Standardize technical language across the app
+
+## 🔬 Technical Specifications
+
+### Font Loading Strategy
+
+```css
+/* Preload system fonts for faster rendering */
+@font-face {
+  font-family: 'system-ui';
+  font-display: swap;
+  src: local('system-ui'), local('.SFNSText-Regular'), local('San Francisco'), local('Helvetica');
+}
+
+/* Progressive enhancement for web fonts (if needed) */
+@font-face {
+  font-family: 'Pool-Mono';
+  font-display: swap;
+  src: url('/fonts/pool-mono.woff2') format('woff2');
+}
+```
+
+### Performance Considerations
+
+- **System Fonts**: No network requests required
+- **Font Display**: Use `font-display: swap` for custom fonts
+- **Subset Loading**: Only load required character sets
+- **Critical Path**: Inline critical typography CSS
+
+---
+
+This typography system ensures clear communication of pool maintenance information across all devices and conditions, prioritizing safety, accessibility, and professional presentation.

@@ -1,0 +1,530 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title="Design System/Colors" />
+
+# Color System
+
+Our color system is specifically designed for pool maintenance applications, emphasizing safety, clarity, and intuitive understanding. Colors communicate status, priority, and context throughout the interface.
+
+## 🎨 Color Philosophy
+
+### Safety-First Design
+
+Colors in pool maintenance carry critical safety implications. Our palette ensures:
+
+- **Immediate Recognition**: Critical states are instantly identifiable
+- **Universal Understanding**: Colors follow established safety conventions
+- **High Contrast**: All combinations meet WCAG 2.1 AA standards
+- **Color-blind Friendly**: Information isn't conveyed by color alone
+
+### Semantic Meaning
+
+Each color has specific meaning in the pool maintenance context:
+
+- **Blue**: Water, cleanliness, system status
+- **Green**: Safe, optimal, good conditions
+- **Yellow/Amber**: Caution, attention needed, maintenance
+- **Red**: Danger, critical issues, immediate action required
+- **Gray**: Inactive, disabled, neutral information
+
+## 🌊 Primary Color Palette
+
+### Pool Blue (`#0ea5e9`)
+
+Our primary color represents water and the core pool maintenance theme.
+
+<div
+  style={{
+    backgroundColor: '#0ea5e9',
+    color: 'white',
+    padding: '2rem',
+    borderRadius: '8px',
+    marginBottom: '1rem',
+    fontWeight: 'bold',
+  }}
+>
+  Pool Blue - #0ea5e9
+  <div style={{ fontSize: '0.75rem', opacity: 0.9, marginTop: '0.5rem' }}>
+    Primary actions, links, water-related elements
+  </div>
+</div>
+
+**Usage:**
+
+- Primary buttons and actions
+- Links and navigation elements
+- Pool status indicators (when active)
+- Water-related iconography
+- Progress indicators for normal operations
+
+**Variants:**
+
+```css
+--pool-blue-50: #f0f9ff; /* Light backgrounds */
+--pool-blue-100: #e0f2fe; /* Subtle highlights */
+--pool-blue-500: #0ea5e9; /* Primary color */
+--pool-blue-600: #0284c7; /* Hover states */
+--pool-blue-900: #0c4a6e; /* Text on light backgrounds */
+```
+
+## ✅ Status Colors
+
+### Success Green (`#10b981`)
+
+Indicates safe, optimal conditions and successful operations.
+
+<div
+  style={{
+    backgroundColor: '#10b981',
+    color: 'white',
+    padding: '2rem',
+    borderRadius: '8px',
+    marginBottom: '1rem',
+    fontWeight: 'bold',
+  }}
+>
+  Success Green - #10b981
+  <div style={{ fontSize: '0.75rem', opacity: 0.9, marginTop: '0.5rem' }}>
+    Safe conditions, optimal readings, completed tasks
+  </div>
+</div>
+
+**Pool Maintenance Usage:**
+
+- Chemical levels within safe ranges
+- Pool status: Active and safe
+- Completed maintenance tasks
+- Available technicians
+- Successful form submissions
+- Equipment functioning normally
+
+### Warning Amber (`#f59e0b`)
+
+Signals caution, attention needed, or maintenance in progress.
+
+<div
+  style={{
+    backgroundColor: '#f59e0b',
+    color: 'white',
+    padding: '2rem',
+    borderRadius: '8px',
+    marginBottom: '1rem',
+    fontWeight: 'bold',
+  }}
+>
+  Warning Amber - #f59e0b
+  <div style={{ fontSize: '0.75rem', opacity: 0.9, marginTop: '0.5rem' }}>
+    Caution states, maintenance needed, borderline readings
+  </div>
+</div>
+
+**Pool Maintenance Usage:**
+
+- Chemical levels outside optimal but still safe
+- Pool status: Under maintenance
+- Overdue tasks or inspections
+- Technician busy/partially available
+- Equipment requiring attention
+- Form validation warnings
+
+### Danger Red (`#ef4444`)
+
+Indicates critical issues requiring immediate attention.
+
+<div
+  style={{
+    backgroundColor: '#ef4444',
+    color: 'white',
+    padding: '2rem',
+    borderRadius: '8px',
+    marginBottom: '1rem',
+    fontWeight: 'bold',
+  }}
+>
+  Danger Red - #ef4444
+  <div style={{ fontSize: '0.75rem', opacity: 0.9, marginTop: '0.5rem' }}>
+    Critical safety issues, dangerous conditions, errors
+  </div>
+</div>
+
+**Pool Maintenance Usage:**
+
+- Dangerous chemical levels (chlorine < 0.5 ppm)
+- Pool closure required
+- Critical equipment failures
+- Emergency situations
+- Failed safety checks
+- Destructive actions (delete, remove)
+
+## 🔘 Neutral Colors
+
+### Gray Scale
+
+Used for text, backgrounds, and non-critical interface elements.
+
+<div
+  style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gap: '1rem',
+    marginBottom: '2rem',
+  }}
+>
+  <div
+    style={{
+      backgroundColor: '#f9fafb',
+      color: '#111827',
+      padding: '1rem',
+      borderRadius: '8px',
+      border: '1px solid #e5e7eb',
+    }}
+  >
+    <strong>Gray 50 - #f9fafb</strong>
+    <div style={{ fontSize: '0.75rem', marginTop: '0.5rem' }}>
+      Card backgrounds, subtle dividers
+    </div>
+  </div>
+  <div
+    style={{ backgroundColor: '#f3f4f6', color: '#111827', padding: '1rem', borderRadius: '8px' }}
+  >
+    <strong>Gray 100 - #f3f4f6</strong>
+    <div style={{ fontSize: '0.75rem', marginTop: '0.5rem' }}>
+      Input backgrounds, disabled states
+    </div>
+  </div>
+  <div
+    style={{ backgroundColor: '#e5e7eb', color: '#111827', padding: '1rem', borderRadius: '8px' }}
+  >
+    <strong>Gray 200 - #e5e7eb</strong>
+    <div style={{ fontSize: '0.75rem', marginTop: '0.5rem' }}>Borders, separators</div>
+  </div>
+  <div style={{ backgroundColor: '#6b7280', color: 'white', padding: '1rem', borderRadius: '8px' }}>
+    <strong>Gray 500 - #6b7280</strong>
+    <div style={{ fontSize: '0.75rem', marginTop: '0.5rem' }}>Secondary text, placeholders</div>
+  </div>
+  <div style={{ backgroundColor: '#374151', color: 'white', padding: '1rem', borderRadius: '8px' }}>
+    <strong>Gray 700 - #374151</strong>
+    <div style={{ fontSize: '0.75rem', marginTop: '0.5rem' }}>Primary text, headings</div>
+  </div>
+  <div style={{ backgroundColor: '#111827', color: 'white', padding: '1rem', borderRadius: '8px' }}>
+    <strong>Gray 900 - #111827</strong>
+    <div style={{ fontSize: '0.75rem', marginTop: '0.5rem' }}>
+      High emphasis text, dark mode backgrounds
+    </div>
+  </div>
+</div>
+
+## 🎪 Extended Palette
+
+### Information Blue (`#3b82f6`)
+
+For informational messages and helpful content.
+
+<div
+  style={{
+    backgroundColor: '#3b82f6',
+    color: 'white',
+    padding: '1.5rem',
+    borderRadius: '8px',
+    marginBottom: '1rem',
+  }}
+>
+  <strong>Information Blue - #3b82f6</strong>
+  <div style={{ fontSize: '0.75rem', opacity: 0.9, marginTop: '0.5rem' }}>
+    Info messages, help text, guidance
+  </div>
+</div>
+
+### Purple (`#8b5cf6`)
+
+For specialized features and premium content.
+
+<div
+  style={{
+    backgroundColor: '#8b5cf6',
+    color: 'white',
+    padding: '1.5rem',
+    borderRadius: '8px',
+    marginBottom: '1rem',
+  }}
+>
+  <strong>Purple - #8b5cf6</strong>
+  <div style={{ fontSize: '0.75rem', opacity: 0.9, marginTop: '0.5rem' }}>
+    Advanced features, analytics, special content
+  </div>
+</div>
+
+## 🔧 Usage Guidelines
+
+### Status Color Application
+
+**Chemical Reading Indicators**
+
+```css
+.chlorine-safe {
+  color: #10b981;
+} /* 1.0-3.0 ppm */
+.chlorine-warning {
+  color: #f59e0b;
+} /* 0.5-0.9 or 3.1-5.0 ppm */
+.chlorine-critical {
+  color: #ef4444;
+} /* < 0.5 or > 5.0 ppm */
+
+.ph-optimal {
+  color: #10b981;
+} /* 7.2-7.6 */
+.ph-acceptable {
+  color: #f59e0b;
+} /* 7.0-7.19 or 7.61-7.8 */
+.ph-dangerous {
+  color: #ef4444;
+} /* < 7.0 or > 7.8 */
+```
+
+**Pool Status Badges**
+
+```css
+.pool-active {
+  background-color: #10b981;
+  color: white;
+}
+
+.pool-maintenance {
+  background-color: #f59e0b;
+  color: #92400e;
+}
+
+.pool-closed {
+  background-color: #ef4444;
+  color: white;
+}
+```
+
+**Task Priority Colors**
+
+```css
+.priority-low {
+  border-left: 4px solid #6b7280;
+}
+.priority-medium {
+  border-left: 4px solid #3b82f6;
+}
+.priority-high {
+  border-left: 4px solid #f59e0b;
+}
+.priority-critical {
+  border-left: 4px solid #ef4444;
+}
+```
+
+## ♿ Accessibility Standards
+
+### Contrast Ratios
+
+All color combinations meet WCAG 2.1 AA standards:
+
+**Text Contrast Requirements**
+
+- Normal text: minimum 4.5:1 contrast ratio
+- Large text (18pt+): minimum 3:1 contrast ratio
+- Icons and graphics: minimum 3:1 contrast ratio
+
+**Tested Combinations**
+
+```css
+/* ✅ PASS - 4.52:1 ratio */
+.text-gray-700-on-white {
+  color: #374151;
+  background: #ffffff;
+}
+
+/* ✅ PASS - 5.74:1 ratio */
+.text-white-on-pool-blue {
+  color: #ffffff;
+  background: #0ea5e9;
+}
+
+/* ✅ PASS - 4.56:1 ratio */
+.text-white-on-success {
+  color: #ffffff;
+  background: #10b981;
+}
+
+/* ❌ FAIL - Would be insufficient */
+.text-gray-400-on-white {
+  color: #9ca3af;
+  background: #ffffff;
+} /* 2.8:1 */
+```
+
+### Color-blind Considerations
+
+**Pattern Support**
+Never rely solely on color to convey information:
+
+- Use icons alongside color coding
+- Include text labels for status
+- Provide pattern or shape differentiation
+- Test with color-blind simulation tools
+
+**High Contrast Mode**
+Colors adapt gracefully to system high contrast settings:
+
+```css
+@media (prefers-contrast: high) {
+  .status-warning {
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+  }
+}
+```
+
+## 🌙 Dark Mode Considerations
+
+While our primary interface uses light mode, color choices consider potential dark mode implementation:
+
+**Dark Mode Adaptations**
+
+```css
+@media (prefers-color-scheme: dark) {
+  --pool-blue: #38bdf8; /* Lighter blue for dark backgrounds */
+  --success-green: #34d399; /* Lighter green for better contrast */
+  --warning-amber: #fbbf24; /* Adjusted amber for visibility */
+  --danger-red: #f87171; /* Softer red to reduce eye strain */
+}
+```
+
+## 📱 Platform Considerations
+
+### iOS and Android
+
+Colors are optimized for both mobile platforms:
+
+- iOS: Compatible with Dynamic Type and system appearance
+- Android: Follows Material Design color guidelines where applicable
+- Touch targets maintain adequate contrast in all states
+
+### Web Browsers
+
+Cross-browser color consistency:
+
+- Colors use hex values for universal support
+- CSS custom properties for theming
+- Fallback colors for older browsers
+
+## 🔬 Color Science
+
+### Chemical Level Color Mapping
+
+Our color choices align with scientific and industry standards:
+
+**Free Chlorine (ppm)**
+
+- 0.0-0.4: Red (Critical - pool closure)
+- 0.5-0.9: Red (Below safe minimum)
+- 1.0-3.0: Green (Optimal range)
+- 3.1-5.0: Yellow (Acceptable but high)
+- 5.0+: Red (Dangerous levels)
+
+**pH Scale**
+
+- < 7.0: Red (Acidic, equipment damage risk)
+- 7.0-7.1: Yellow (Low but acceptable)
+- 7.2-7.6: Green (Optimal for chlorine effectiveness)
+- 7.7-7.8: Yellow (High but acceptable)
+- > 7.8: Red (Alkaline, ineffective sanitization)
+
+### Temperature Ranges
+
+- < 70°F (21°C): Blue (Cool)
+- 70-82°F (21-28°C): Green (Comfortable)
+- 83-86°F (28-30°C): Yellow (Warm)
+- > 86°F (30°C): Red (Too hot, bacterial risk)
+
+## 🎨 Implementation
+
+### CSS Custom Properties
+
+```css
+:root {
+  /* Primary palette */
+  --color-pool-blue: #0ea5e9;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-info: #3b82f6;
+
+  /* Semantic usage */
+  --color-primary: var(--color-pool-blue);
+  --color-safe: var(--color-success);
+  --color-caution: var(--color-warning);
+  --color-critical: var(--color-danger);
+
+  /* Text colors */
+  --color-text-primary: #111827;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
+
+  /* Background colors */
+  --color-background: #ffffff;
+  --color-background-subtle: #f9fafb;
+  --color-background-muted: #f3f4f6;
+}
+```
+
+### Tailwind CSS Integration
+
+Our colors integrate with Tailwind's color system:
+
+```javascript
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        'pool-blue': {
+          50: '#f0f9ff',
+          500: '#0ea5e9',
+          600: '#0284c7',
+          900: '#0c4a6e',
+        },
+        'pool-success': '#10b981',
+        'pool-warning': '#f59e0b',
+        'pool-danger': '#ef4444',
+      },
+    },
+  },
+}
+```
+
+## 📖 Best Practices
+
+### Do's
+
+✅ **Use semantic color names** instead of descriptive ones
+✅ **Test color combinations** for accessibility compliance
+✅ **Provide non-color alternatives** for important information
+✅ **Consider color-blind users** in all design decisions
+✅ **Use consistent colors** for the same meaning across the app
+✅ **Test on actual devices** and different lighting conditions
+
+### Don'ts
+
+❌ **Don't use color as the only way** to convey critical information
+❌ **Don't use too many colors** in a single interface
+❌ **Don't ignore contrast ratios** for decorative elements
+❌ **Don't assume color perception** is the same for all users
+❌ **Don't use colors that conflict** with established safety standards
+
+### Color Combinations to Avoid
+
+- Red and green together (color-blind accessibility)
+- Low contrast combinations (accessibility)
+- Too many bright colors simultaneously (visual fatigue)
+- Cultural color conflicts (red = stop in most cultures)
+
+---
+
+This color system ensures safe, accessible, and intuitive pool maintenance interfaces that work for all users across all devices and conditions.

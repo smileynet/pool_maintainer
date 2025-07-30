@@ -1,0 +1,515 @@
+import { Meta, Canvas, Story } from '@storybook/blocks'
+
+<Meta title="Design System/Data Display" />
+
+# Data Display Patterns
+
+This guide covers how to effectively display pool maintenance data, including status indicators, metrics, readings, and dashboard components. Our data display patterns prioritize clarity, safety, and actionable insights.
+
+## 🎯 Core Principles
+
+### Information Hierarchy
+
+- **Critical First**: Safety-critical information gets top priority
+- **Contextual Grouping**: Related data is visually grouped together
+- **Progressive Disclosure**: Details available on demand without overwhelming
+- **Scannable Layout**: Quick identification of important information
+
+### Visual Communication
+
+- **Color Coding**: Consistent color language for status and severity
+- **Iconography**: Universal symbols for quick recognition
+- **Typography**: Clear hierarchy with emphasis on critical values
+- **Spacing**: Adequate whitespace for readability and touch targets
+
+## 🎨 Status Indicators
+
+Status indicators communicate the current state of pools, equipment, tasks, and chemical levels.
+
+### Badge Components
+
+<Canvas>
+  <Story id="components-atoms-badge--pool-status-indicators" />
+</Canvas>
+
+### Status Color Language
+
+**Pool Status**
+
+- 🟢 **Green (Active)**: Pool is operational and safe
+- 🟡 **Yellow (Maintenance)**: Scheduled maintenance in progress
+- 🔴 **Red (Closed)**: Pool closed due to safety concerns
+- ⚪ **Gray (Offline)**: Pool temporarily unavailable
+
+**Chemical Status**
+
+- 🟢 **Good**: Values within optimal range
+- 🟡 **Warning**: Values outside optimal but still safe
+- 🔴 **Critical**: Immediate attention required
+- 🔵 **Info**: Additional information available
+
+**Task Priority**
+
+- 🔴 **Critical**: Immediate action required (safety)
+- 🟠 **High**: Must be completed within 24 hours
+- 🔵 **Medium**: Standard priority task
+- ⚪ **Low**: Can be scheduled flexibly
+
+### Technician Availability
+
+<Canvas>
+  <Story id="components-atoms-select--async-technician-loading" />
+</Canvas>
+
+**Availability States**
+
+- 🟢 **Available**: Ready for task assignment
+- 🟡 **Busy**: Currently assigned to another task
+- 🔴 **Unavailable**: Off duty or emergency
+
+## 📊 Card-Based Data Display
+
+Cards are our primary method for displaying grouped information about pools, tasks, readings, and technicians.
+
+### Pool Status Cards
+
+<Canvas>
+  <Story id="components-molecules-card--pool-status-card" />
+</Canvas>
+
+**Key Information**
+
+- Pool name and location
+- Current operational status
+- Capacity and pool type
+- Last testing time
+- Quick action buttons
+
+### Chemical Reading Cards
+
+<Canvas>
+  <Story id="components-molecules-card--chemical-reading-card" />
+</Canvas>
+
+**Critical Features**
+
+- **Trend Indicators**: Visual arrows showing chemical level changes
+- **Target Ranges**: Clear indication of safe vs. dangerous levels
+- **Timestamp**: When readings were taken
+- **Technician**: Who performed the test
+- **Quick Actions**: View details or create new reading
+
+### Maintenance Task Cards
+
+<Canvas>
+  <Story id="components-molecules-card--maintenance-task-card" />
+</Canvas>
+
+**Task Information**
+
+- Task title and description
+- Priority and status badges
+- Assigned technician and pool
+- Scheduled date and estimated duration
+- Progress indicators for active tasks
+- Context-sensitive action buttons
+
+### Technician Profile Cards
+
+<Canvas>
+  <Story id="components-molecules-card--technician-profile-card" />
+</Canvas>
+
+**Profile Data**
+
+- Name, role, and current status
+- Certifications and qualifications
+- Contact information
+- Assignment and profile actions
+
+## 📈 Dashboard Summary Cards
+
+Summary cards provide at-a-glance metrics for system overview.
+
+<Canvas>
+  <Story id="components-molecules-card--dashboard-summary-cards" />
+</Canvas>
+
+### Metric Categories
+
+**Operational Metrics**
+
+- Active pools count
+- Available technicians
+- Pending tasks
+- Completed maintenance
+
+**Safety Metrics**
+
+- Critical alerts count
+- Overdue inspections
+- Chemical compliance rate
+- Safety incident tracking
+
+**Performance Metrics**
+
+- Average response time
+- Task completion rate
+- Technician utilization
+- Equipment uptime
+
+### Trend Indicators
+
+Visual indicators show how metrics are changing:
+
+- ↗️ **Trending Up**: Green for positive metrics, red for negative
+- ↘️ **Trending Down**: Red for positive metrics, green for negative
+- ➡️ **Stable**: Gray indication for no significant change
+
+The trend context determines color meaning:
+
+- More available technicians = good (green up arrow)
+- More critical alerts = bad (red up arrow)
+
+## 🔄 Real-time Data Updates
+
+### Live Status Indicators
+
+Data that affects safety updates in real-time:
+
+- **Chemical Levels**: Automatic updates from IoT sensors
+- **Technician Status**: Location and availability tracking
+- **Equipment Status**: Pump, filter, and heater monitoring
+- **Pool Occupancy**: Real-time swimmer counts where available
+
+### Update Patterns
+
+**Automatic Refresh**
+
+- Critical safety data: Every 30 seconds
+- General status: Every 2 minutes
+- Historical data: On user action
+
+**Manual Refresh**
+
+- Pull-to-refresh on mobile
+- Refresh button for specific components
+- Full page refresh option
+
+**Error Handling**
+
+- Graceful degradation when data is unavailable
+- Clear indication of last successful update
+- Retry mechanisms for failed updates
+
+## 📋 Data Tables and Lists
+
+### Sortable Data Tables
+
+For detailed data analysis and management:
+
+```typescript
+interface PoolMaintenanceTable {
+  columns: {
+    pool: string
+    lastTested: Date
+    chlorine: number
+    ph: number
+    status: PoolStatus
+    assignedTechnician: string
+    actions: ActionMenu
+  }
+  sorting: {
+    defaultSort: 'lastTested'
+    direction: 'desc'
+  }
+  filtering: {
+    status: PoolStatus[]
+    technician: string[]
+    dateRange: DateRange
+  }
+}
+```
+
+### List Layouts
+
+<Canvas>
+  <Story id="components-molecules-card--card-layout-patterns" />
+</Canvas>
+
+**Grid Layout**: For equal-priority items like pool overviews
+**List Layout**: For sequential data like maintenance tasks
+**Timeline Layout**: For chronological data like chemical readings
+
+## 🎨 Visual Design Guidelines
+
+### Color Usage
+
+**Semantic Colors**
+
+```css
+/* Pool maintenance color palette */
+--pool-blue: #0ea5e9; /* Primary water theme */
+--safe-green: #10b981; /* Safe/good conditions */
+--warning-amber: #f59e0b; /* Caution/attention */
+--danger-red: #ef4444; /* Critical/unsafe */
+--neutral-gray: #6b7280; /* Inactive/disabled */
+```
+
+**Background Colors**
+
+- Light gray (#f9fafb) for card backgrounds
+- White (#ffffff) for primary content areas
+- Pool blue tint (#f0f9ff) for themed sections
+- Colored backgrounds for status emphasis
+
+### Typography Scale
+
+**Data Display Hierarchy**
+
+```css
+/* Large metrics and critical values */
+.metric-primary {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* Secondary metrics and labels */
+.metric-secondary {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+/* Body text and descriptions */
+.content-text {
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+/* Supporting information and metadata */
+.meta-text {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+```
+
+### Spacing and Layout
+
+**Card Spacing**
+
+- Internal padding: 16px (mobile), 24px (desktop)
+- Between cards: 16px minimum
+- Card margins: 8px for grid layouts
+
+**Information Density**
+
+- Mobile: Single column, larger touch targets
+- Tablet: Two-column layouts with comfortable spacing
+- Desktop: Multi-column grids with more information density
+
+## ♿ Accessibility Guidelines
+
+### Color and Contrast
+
+**WCAG 2.1 AA Compliance**
+
+- Minimum 4.5:1 contrast ratio for normal text
+- Minimum 3:1 contrast ratio for large text
+- Never rely on color alone to convey information
+
+**Color-blind Considerations**
+
+- Use icons alongside color coding
+- Distinct shapes and patterns for different states
+- High contrast mode compatibility
+
+### Screen Reader Support
+
+**Semantic HTML**
+
+```html
+<!-- Good: Semantic structure -->
+<article role="region" aria-labelledby="pool-status">
+  <h3 id="pool-status">Main Pool Status</h3>
+  <dl>
+    <dt>Current Status</dt>
+    <dd>
+      <span class="badge badge-success" role="status" aria-label="Pool is active and safe">
+        Active
+      </span>
+    </dd>
+  </dl>
+</article>
+```
+
+**ARIA Labels**
+
+- Descriptive labels for complex data
+- Status announcements for real-time updates
+- Role definitions for custom components
+
+### Keyboard Navigation
+
+**Focus Management**
+
+- Logical tab order through data displays
+- Skip links for repetitive content
+- Clear focus indicators on all interactive elements
+
+**Keyboard Shortcuts**
+
+- `r` - Refresh current data
+- `f` - Focus search/filter
+- `Escape` - Close modal/overlay content
+
+## 📱 Responsive Design
+
+### Mobile Adaptations
+
+**Simplified Cards**
+
+- Reduced information density
+- Larger touch targets (minimum 44px)
+- Thumb-friendly interaction zones
+- Swipe gestures for secondary actions
+
+**Priority Content**
+
+- Most critical information visible first
+- Progressive disclosure for details
+- Context-sensitive action buttons
+
+### Tablet and Desktop
+
+**Enhanced Layouts**
+
+- Multi-column card grids
+- Side-by-side detail views
+- Hover states for additional information
+- Keyboard shortcuts and power user features
+
+## 🔧 Implementation Examples
+
+### Real-time Chemical Display
+
+```typescript
+function ChemicalReadingDisplay({ poolId }: { poolId: string }) {
+  const { data: reading, error } = useChemicalReading(poolId)
+
+  if (error) {
+    return (
+      <Card className="border-destructive">
+        <CardContent className="flex items-center gap-2 text-destructive">
+          <AlertTriangle className="h-4 w-4" />
+          <span>Unable to load chemical data</span>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  const getStatusColor = (value: number, range: [number, number]) => {
+    if (value < range[0] || value > range[1]) return 'destructive'
+    return 'success'
+  }
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <TestTube className="h-5 w-5" />
+          Chemical Reading
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <p className="text-sm font-medium">Free Chlorine</p>
+            <p className={`text-2xl font-bold text-${getStatusColor(reading.chlorine, [1.0, 3.0])}`}>
+              {reading.chlorine} ppm
+            </p>
+          </div>
+          <div>
+            <p className="text-sm font-medium">pH Level</p>
+            <p className={`text-2xl font-bold text-${getStatusColor(reading.ph, [7.2, 7.6])}`}>
+              {reading.ph}
+            </p>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+```
+
+### Dashboard Metric Card
+
+```typescript
+interface MetricCardProps {
+  title: string
+  value: string | number
+  change: string
+  trend: 'up' | 'down' | 'stable'
+  icon: React.ComponentType
+  colorScheme: 'success' | 'warning' | 'danger' | 'info'
+}
+
+function MetricCard({ title, value, change, trend, icon: Icon, colorScheme }: MetricCardProps) {
+  return (
+    <Card>
+      <CardContent className="pt-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm font-medium text-muted-foreground">{title}</p>
+            <div className="flex items-center gap-2 mt-2">
+              <span className="text-2xl font-bold">{value}</span>
+              <div className={`flex items-center gap-1 text-sm text-${getTrendColor(trend, colorScheme)}`}>
+                {trend === 'up' && <TrendingUp className="h-4 w-4" />}
+                {trend === 'down' && <TrendingDown className="h-4 w-4" />}
+                {trend === 'stable' && <Minus className="h-4 w-4" />}
+                <span>{change}</span>
+              </div>
+            </div>
+          </div>
+          <div className={`h-12 w-12 rounded-full bg-${colorScheme}-50 flex items-center justify-center`}>
+            <Icon className={`h-6 w-6 text-${colorScheme}-600`} />
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+```
+
+## 📖 Best Practices
+
+### Data Presentation
+
+1. **Lead with Critical Information**: Safety status first, details second
+2. **Use Consistent Patterns**: Same information types displayed similarly
+3. **Provide Context**: Include units, ranges, and reference values
+4. **Show Trends**: Historical context helps with decision-making
+
+### Visual Design
+
+1. **Maintain Consistency**: Use the same colors and patterns throughout
+2. **Avoid Information Overload**: Progressive disclosure for complex data
+3. **Test Accessibility**: Verify contrast and screen reader compatibility
+4. **Consider All Devices**: Responsive design for various screen sizes
+
+### Performance
+
+1. **Optimize Images**: Use appropriate formats and sizes
+2. **Lazy Load**: Only load visible content initially
+3. **Cache Data**: Store frequently accessed information locally
+4. **Debounce Updates**: Avoid excessive re-renders
+
+### User Experience
+
+1. **Provide Feedback**: Loading states and error handling
+2. **Enable Interaction**: Clickable elements where appropriate
+3. **Show Progress**: Indicate completion status for ongoing tasks
+4. **Allow Customization**: User preferences for layout and density
+
+---
+
+Our data display system ensures that pool maintenance professionals can quickly understand system status, identify issues, and take appropriate action to maintain safe swimming environments.

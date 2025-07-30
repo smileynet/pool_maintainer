@@ -1,0 +1,221 @@
+import { Meta, Description } from '@storybook/blocks'
+
+<Meta title="Introduction" />
+
+# Pool Maintenance System Component Library
+
+Welcome to the Pool Maintenance System component library. This Storybook documents all UI components used in our community pool maintenance and scheduling management application.
+
+## 🏊 About This Project
+
+The Pool Maintenance System is designed to help communities manage their pool facilities efficiently by providing:
+
+- **Maintenance Scheduling**: Schedule regular maintenance tasks and track completion
+- **Chemical Management**: Monitor and manage pool chemical levels for safety compliance
+- **Technician Management**: Assign and track technician availability and certifications
+- **Real-time Monitoring**: Live chemical readings and pool status updates
+- **Safety Compliance**: Ensure adherence to MAHC (Model Aquatic Health Code) guidelines
+- **Multi-role Access**: Support for pool managers, technicians, and administrators
+- **Emergency Response**: Critical alert system for immediate safety concerns
+
+### Key Features
+
+- 🧪 **Chemical Testing**: Automated chlorine, pH, and alkalinity monitoring
+- 📊 **Dashboard Analytics**: Visual representations of pool health and maintenance metrics
+- 🔧 **Task Management**: Priority-based assignment and tracking system
+- 📱 **Mobile Ready**: Responsive design for technicians working on-site
+- ⚠️ **Safety Alerts**: Instant notifications for chemical imbalances or equipment failures
+
+## 🎨 Design System
+
+Our design system is built on these principles:
+
+### Colors
+
+- **Primary**: Sky blue (#0ea5e9) - represents water and cleanliness
+- **Secondary**: Emerald (#10b981) - indicates healthy/safe conditions
+- **Warning**: Amber (#f59e0b) - for caution states
+- **Danger**: Red (#ef4444) - for alerts and critical issues
+
+### Component Architecture
+
+We follow Atomic Design principles with pool maintenance-specific patterns:
+
+- **Atoms**: Basic UI elements
+  - [Button](/docs/components-atoms-button--docs) - Action triggers with pool-specific variants
+  - [Input](/docs/components-atoms-input--docs) - Form inputs with validation for chemical readings
+  - [Badge](/docs/components-atoms-badge--docs) - Status indicators for pool conditions and alerts
+  - [Select](/docs/components-atoms-select--docs) - Dropdowns for technician, pool, and chemical selection
+
+- **Molecules**: Composed component groups
+  - [Card](/docs/components-molecules-card--docs) - Information containers for pools, tasks, and readings
+  - [Form Patterns](/docs/components-molecules-form-patterns--docs) - MAHC-compliant validation patterns
+
+- **Organisms**: Complex pool maintenance components
+  - Dashboard layouts with real-time data
+  - Chemical reading forms with cross-field validation
+  - Technician assignment interfaces
+
+### Component Categories
+
+Our Storybook is organized into these main categories:
+
+1. **Atoms** - Fundamental building blocks
+2. **Molecules** - Composite components
+3. **Organisms** - Complex interface sections
+4. **Templates** - Page-level layouts
+5. **Pages** - Complete user workflows
+
+## 🛠️ Technology Stack
+
+- **React 19**: Latest React features with concurrent rendering
+- **TypeScript**: Full type safety with strict configuration
+- **Vite 7.0.4**: Lightning-fast build tool with hot module replacement
+- **Tailwind CSS**: Utility-first CSS with custom pool maintenance design tokens
+- **shadcn/ui**: Accessible component primitives built on Radix UI
+- **Storybook 8.6**: Component documentation with CSF3 format
+- **React Hook Form + Zod**: Type-safe form validation for chemical readings
+- **Lucide React**: Beautiful icons for pool maintenance interfaces
+- **Bun**: Fast JavaScript runtime and package manager
+
+### Code Quality
+
+- **ESLint v9**: Flat configuration with React 19 and TypeScript rules
+- **Prettier**: Code formatting with Tailwind CSS class sorting
+- **Husky**: Git hooks for pre-commit quality checks
+- **TypeScript**: Strict type checking with `noEmit` compilation
+
+## ♿ Accessibility
+
+All components are built with accessibility in mind:
+
+- WCAG 2.1 AA compliance
+- Full keyboard navigation support
+- Screen reader friendly
+- High contrast mode support
+- Focus indicators on all interactive elements
+
+## 🧪 Testing & Quality Assurance
+
+Our comprehensive quality strategy includes:
+
+- **Unit Tests**: Component logic testing with Vitest
+- **Visual Regression**: Automated screenshot testing with Playwright
+- **Type Safety**: Strict TypeScript checking with `bun run type-check`
+- **Code Quality**: ESLint and Prettier with `bun run quality`
+- **Pre-commit Hooks**: Automated quality checks including pool safety validations
+
+### Available Scripts
+
+```bash
+# Code quality
+bun run lint         # Run ESLint
+bun run lint:fix     # Auto-fix ESLint issues
+bun run format       # Format code with Prettier
+bun run type-check   # TypeScript type checking
+bun run quality      # Run all quality checks
+
+# Development
+bun run dev          # Start dev server (network accessible)
+bun run storybook    # Start Storybook (network accessible)
+bun run build        # Build for production
+```
+
+## 📚 How to Use This Storybook
+
+### Navigation
+
+- Use the sidebar to browse components by category (Atoms → Molecules → Organisms)
+- Each component has multiple stories showing different states and pool maintenance scenarios
+- Use the controls panel to interact with component props in real-time
+- Toggle between light/dark/pool themes using the toolbar
+- Search components using the search bar (⌘+K or Ctrl+K)
+
+### Pool Maintenance Examples
+
+Each component includes realistic pool maintenance scenarios:
+
+- **Select Component**: Technician assignment, pool selection, chemical type selection
+- **Card Component**: Pool status dashboards, chemical readings with trends, maintenance tasks
+- **Form Patterns**: MAHC-compliant chemical reading forms with validation
+- **Input Component**: Chemical value inputs with range validation
+- **Badge Component**: Status indicators for pool conditions and technician availability
+
+### Component Documentation
+
+Each component story includes:
+
+- **Overview**: Component purpose and pool maintenance usage
+- **Props**: Interactive controls to modify component behavior
+- **Code**: Copy-ready code snippets with TypeScript types
+- **Real Data**: Uses fixtures from `src/test/fixtures/pool-maintenance-data.ts`
+- **Accessibility**: WCAG 2.1 compliance notes and keyboard navigation
+
+### Interactive Features
+
+- **Live Controls**: Modify props and see changes instantly
+- **Async Examples**: See loading states and error handling
+- **Validation Demos**: Experience form validation with pool safety rules
+- **Theme Testing**: Test components across different visual themes
+
+## 🚀 Getting Started
+
+### Local Development
+
+```bash
+# Install dependencies
+bun install
+
+# Run development server (accessible on network)
+bun run dev
+
+# Run Storybook (accessible on network)
+bun run storybook
+
+# Run quality checks
+bun run quality
+```
+
+### Network Access
+
+Both development server and Storybook are configured for network access:
+
+- **Dev Server**: http://localhost:5080 (accessible on local network)
+- **Storybook**: http://localhost:6080 (accessible on local network)
+
+### Project Structure
+
+```
+src/
+├── components/ui/        # shadcn/ui components with pool customizations
+├── test/fixtures/        # Pool maintenance test data
+├── utils/               # Storybook decorators and utilities
+└── stories/             # Documentation and guides
+```
+
+## 📖 Pool Safety & Compliance
+
+This system prioritizes safety through:
+
+- **MAHC Compliance**: All chemical validation follows Model Aquatic Health Code
+- **Critical Alerts**: Immediate warnings for unsafe chemical levels
+- **Audit Trails**: Complete tracking of all chemical readings and maintenance
+- **Multi-level Validation**: Component, form, and business rule validation
+
+### Chemical Safety Ranges
+
+- **Free Chlorine**: 1.0-3.0 ppm (critical below 0.5 ppm)
+- **pH Level**: 7.2-7.6 (optimal for chlorine effectiveness)
+- **Total Alkalinity**: 80-120 ppm (pH stability)
+- **Temperature**: Monitor for comfort and chemical effectiveness
+
+## 📖 Additional Resources
+
+- **Component Data**: See `src/test/fixtures/pool-maintenance-data.ts`
+- **Theme Configuration**: Custom pool themes in Storybook decorators
+- **Validation Logic**: Form patterns with Zod schemas for safety compliance
+- **Git Hooks**: Pre-commit safety checks in `.husky/pre-commit`
+
+---
+
+Built with ❤️ for community pool safety and maintenance excellence.

@@ -1,0 +1,139 @@
+{
+  "hooks": {
+    "pre-commit": {
+      "description": "Quality checks and safety validation before commit",
+      "commands": [
+        {
+          "name": "format-code",
+          "command": "bun run format",
+          "description": "Auto-format all code files"
+        },
+        {
+          "name": "lint-fix",
+          "command": "bun run lint:fix",
+          "description": "Fix ESLint issues automatically"
+        },
+        {
+          "name": "type-check",
+          "command": "bun run type-check",
+          "description": "Verify TypeScript types"
+        },
+        {
+          "name": "test-units",
+          "command": "bun run test:run",
+          "description": "Run unit tests"
+        }
+      ],
+      "safety_checks": [
+        {
+          "name": "chemical-validation",
+          "description": "Verify chemical range calculations meet MAHC compliance",
+          "pattern": "src/**/*chemical*",
+          "validation": "Check for proper range validation (1.0-3.0 ppm chlorine, 7.2-7.6 pH)"
+        },
+        {
+          "name": "safety-critical-tests",
+          "description": "Ensure safety-critical functions have tests",
+          "pattern": "src/**/safety*",
+          "validation": "Safety functions must have corresponding tests"
+        }
+      ]
+    },
+    "pre-push": {
+      "description": "Comprehensive validation before pushing to remote",
+      "commands": [
+        {
+          "name": "full-quality-check",
+          "command": "bun run quality",
+          "description": "Complete quality validation"
+        },
+        {
+          "name": "all-tests",
+          "command": "bun run test:all",
+          "description": "Run all test suites"
+        },
+        {
+          "name": "build-check",
+          "command": "bun run build",
+          "description": "Verify production build succeeds"
+        }
+      ]
+    },
+    "post-merge": {
+      "description": "Actions after successful merge",
+      "commands": [
+        {
+          "name": "dependency-check",
+          "command": "bun install",
+          "description": "Update dependencies if needed"
+        },
+        {
+          "name": "storybook-build-check",
+          "command": "bun run build-storybook",
+          "description": "Verify Storybook builds correctly"
+        }
+      ]
+    }
+  },
+  "project_rules": {
+    "pool_safety_compliance": {
+      "description": "Pool maintenance safety and compliance rules",
+      "rules": [
+        {
+          "name": "chemical_ranges",
+          "description": "All chemical calculations must include MAHC compliance validation",
+          "applies_to": ["src/**/*chemical*", "src/**/*pool*"]
+        },
+        {
+          "name": "emergency_protocols",
+          "description": "Emergency response functions must have proper error handling",
+          "applies_to": ["src/**/*emergency*", "src/**/*alert*"]
+        },
+        {
+          "name": "technician_certification",
+          "description": "Staff assignment functions must validate certifications",
+          "applies_to": ["src/**/*technician*", "src/**/*staff*"]
+        }
+      ]
+    },
+    "component_standards": {
+      "description": "Component development and documentation standards",
+      "rules": [
+        {
+          "name": "storybook_required",
+          "description": "All UI components must have Storybook stories",
+          "applies_to": ["src/components/ui/*.tsx"]
+        },
+        {
+          "name": "accessibility_compliance",
+          "description": "Components must meet WCAG 2.1 AA standards",
+          "applies_to": ["src/components/**/*.tsx"]
+        },
+        {
+          "name": "typescript_strict",
+          "description": "All TypeScript must pass strict mode compilation",
+          "applies_to": ["src/**/*.ts", "src/**/*.tsx"]
+        }
+      ]
+    }
+  },
+  "notifications": {
+    "safety_critical_changes": {
+      "description": "Alert when safety-critical code is modified",
+      "patterns": ["**/chemical*", "**/safety*", "**/emergency*"],
+      "action": "Require additional review for pool safety compliance"
+    },
+    "component_library_changes": {
+      "description": "Update Storybook when UI components change",
+      "patterns": ["src/components/ui/*.tsx"],
+      "action": "Verify Storybook stories are updated"
+    }
+  },
+  "metadata": {
+    "project_type": "pool_maintenance_system",
+    "safety_critical": true,
+    "compliance_standards": ["MAHC", "WCAG_2.1_AA"],
+    "last_updated": "2025-07-30",
+    "version": "1.0.0"
+  }
+}

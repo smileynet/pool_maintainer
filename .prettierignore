@@ -1,0 +1,52 @@
+# Dependencies and build outputs
+node_modules/
+dist/
+build/
+coverage/
+storybook-static/
+.next/
+.nuxt/
+.cache/
+.turbo/
+
+# Lock files (preserve exact formatting)
+*.lock
+bun.lockb
+package-lock.json
+yarn.lock
+
+# Public assets (user-controlled)
+public/
+
+# Generated files and logs
+*.min.js
+*.min.css
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment and config files that should preserve formatting
+.env*
+*.config.js
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Git
+.git/
+
+# Playwright test artifacts
+test-results/
+playwright-report/
+
+# Temporary files
+*.tmp
+*.temp
+.husky/_/
+
+# Auto-generated documentation that should preserve formatting
+CHANGELOG.md
