@@ -1,9 +1,12 @@
 import { describe, it, expect } from 'vitest'
 
+// Base URL for testing
+const API_BASE = 'http://localhost:3000'
+
 describe('API Integration', () => {
   it('should mock API calls with MSW', async () => {
     // Test that MSW is working by making a fetch request
-    const response = await fetch('/api/pools')
+    const response = await fetch(`${API_BASE}/api/pools`)
     const data = await response.json()
 
     expect(response.status).toBe(200)
@@ -21,7 +24,7 @@ describe('API Integration', () => {
       status: 'active' as const,
     }
 
-    const response = await fetch('/api/pools', {
+    const response = await fetch(`${API_BASE}/api/pools`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -38,7 +41,7 @@ describe('API Integration', () => {
   })
 
   it('should handle authentication', async () => {
-    const response = await fetch('/api/auth/login', {
+    const response = await fetch(`${API_BASE}/api/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

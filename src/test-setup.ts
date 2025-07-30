@@ -5,8 +5,14 @@ import { server } from './mocks/server'
 // Global test setup for Vitest
 // This file is loaded before all test files
 
+// Node.js 18+ has built-in fetch, no polyfill needed
+// Just ensure it's available globally for tests
+if (typeof globalThis.fetch === 'undefined') {
+  throw new Error('fetch is not available in this Node.js version')
+}
+
 // Establish API mocking before all tests
-beforeAll(() => server.listen())
+beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
 
 // Reset any request handlers that we may add during the tests,
 // so they don't affect other tests

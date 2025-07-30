@@ -80,8 +80,23 @@ const chemicalReadings: ChemicalReading[] = [
 // API handlers
 export const handlers = [
   // Pools endpoints
+  http.get('http://localhost:3000/api/pools', () => {
+    return HttpResponse.json({ pools })
+  }),
+
   http.get('/api/pools', () => {
     return HttpResponse.json({ pools })
+  }),
+
+  http.get('http://localhost:3000/api/pools/:poolId', ({ params }) => {
+    const { poolId } = params
+    const pool = pools.find((p) => p.id === poolId)
+
+    if (!pool) {
+      return new HttpResponse(null, { status: 404 })
+    }
+
+    return HttpResponse.json({ pool })
   }),
 
   http.get('/api/pools/:poolId', ({ params }) => {
@@ -93,6 +108,17 @@ export const handlers = [
     }
 
     return HttpResponse.json({ pool })
+  }),
+
+  http.post('http://localhost:3000/api/pools', async ({ request }) => {
+    const newPool = (await request.json()) as Omit<Pool, 'id'>
+    const pool: Pool = {
+      ...newPool,
+      id: String(pools.length + 1),
+    }
+    pools.push(pool)
+
+    return HttpResponse.json({ pool }, { status: 201 })
   }),
 
   http.post('/api/pools', async ({ request }) => {
@@ -156,6 +182,25 @@ export const handlers = [
   }),
 
   // Auth endpoints (for future use)
+  http.post('http://localhost:3000/api/auth/login', async ({ request }) => {
+    const { email, password } = (await request.json()) as { email: string; password: string }
+
+    // Simple mock authentication
+    if (email === 'admin@pool.com' && password === 'password123') {
+      return HttpResponse.json({
+        user: {
+          id: '1',
+          email: 'admin@pool.com',
+          name: 'Pool Administrator',
+          role: 'admin',
+        },
+        token: 'mock-jwt-token',
+      })
+    }
+
+    return new HttpResponse(null, { status: 401 })
+  }),
+
   http.post('/api/auth/login', async ({ request }) => {
     const { email, password } = (await request.json()) as { email: string; password: string }
 
@@ -173,6 +218,10 @@ export const handlers = [
     }
 
     return new HttpResponse(null, { status: 401 })
+  }),
+
+  http.post('http://localhost:3000/api/auth/logout', () => {
+    return HttpResponse.json({ message: 'Logged out successfully' })
   }),
 
   http.post('/api/auth/logout', () => {
