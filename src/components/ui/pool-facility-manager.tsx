@@ -560,24 +560,60 @@ const PoolFacilityCard = ({
           </div>
         )}
 
-        {/* Assignment and Schedule */}
-        <div className="space-y-1 text-sm">
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">Technician:</span>
-            <span className="text-foreground font-medium">{pool.assignedTechnician}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">Next Maintenance:</span>
-            <span
-              className={cn(
-                'text-xs',
-                new Date(pool.nextMaintenance) <= new Date(Date.now() + 24 * 60 * 60 * 1000)
-                  ? 'text-primary font-medium'
-                  : 'text-muted-foreground'
+        {/* Enhanced Assignment and Schedule */}
+        <div className="space-y-3">
+          {/* Technician Assignment with Workload */}
+          <div className="bg-muted/30 rounded-lg p-3">
+            <div className="mb-2 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="bg-primary/20 flex h-8 w-8 items-center justify-center rounded-full">
+                  <span className="text-primary text-sm font-medium">
+                    {pool.assignedTechnician
+                      .split(' ')
+                      .map((n) => n[0])
+                      .join('')}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-foreground text-sm font-medium">
+                    {pool.assignedTechnician}
+                  </span>
+                  <div className="text-muted-foreground text-xs">Assigned Technician</div>
+                </div>
+              </div>
+              {/* Workload Indicator */}
+              <div className="text-right">
+                <Badge variant="outline" className="text-xs">
+                  {pool.status === 'emergency'
+                    ? 'Priority'
+                    : pool.status === 'maintenance'
+                      ? 'Active'
+                      : 'Monitoring'}
+                </Badge>
+              </div>
+            </div>
+
+            {/* Next Maintenance Schedule */}
+            <div className="flex items-center gap-2 text-xs">
+              <Clock className="text-muted-foreground h-3 w-3" />
+              <span className="text-muted-foreground">Next maintenance:</span>
+              <span
+                className={cn(
+                  'font-medium',
+                  new Date(pool.nextMaintenance) <= new Date(Date.now() + 24 * 60 * 60 * 1000)
+                    ? 'text-orange-600'
+                    : new Date(pool.nextMaintenance) <=
+                        new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
+                      ? 'text-yellow-600'
+                      : 'text-muted-foreground'
+                )}
+              >
+                {new Date(pool.nextMaintenance).toLocaleDateString()}
+              </span>
+              {new Date(pool.nextMaintenance) <= new Date(Date.now() + 24 * 60 * 60 * 1000) && (
+                <AlertCircle className="h-3 w-3 text-orange-600" />
               )}
-            >
-              {new Date(pool.nextMaintenance).toLocaleDateString()}
-            </span>
+            </div>
           </div>
         </div>
 
@@ -768,54 +804,164 @@ const PoolDetailView = ({
         </div>
       </div>
 
-      {/* Equipment Status */}
+      {/* Enhanced Equipment Status */}
       <div>
-        <h4 className="mb-3 font-medium">Equipment Status</h4>
-        <div className="grid grid-cols-3 gap-4">
-          <div className="bg-card rounded-lg p-3 text-center">
-            <Activity className="text-primary mx-auto mb-1 h-6 w-6" />
-            <div className="text-sm font-medium">Pump</div>
-            <Badge
-              className={
-                pool.equipment.pump === 'working'
-                  ? 'bg-green-600 text-white'
+        <h4 className="mb-3 flex items-center gap-2 font-medium">
+          <Settings className="h-4 w-4" />
+          Equipment Status
+        </h4>
+        <div className="space-y-3">
+          {/* Pump Status */}
+          <div className="flex items-center justify-between rounded-lg border p-3">
+            <div className="flex items-center gap-3">
+              <div
+                className={cn(
+                  'flex h-10 w-10 items-center justify-center rounded-full',
+                  pool.equipment.pump === 'working'
+                    ? 'bg-green-100 text-green-600'
+                    : pool.equipment.pump === 'maintenance'
+                      ? 'bg-yellow-100 text-yellow-600'
+                      : 'bg-red-100 text-red-600'
+                )}
+              >
+                <Activity className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="font-medium">Water Pump</div>
+                <div className="text-muted-foreground text-xs">
+                  {pool.equipment.pump === 'working'
+                    ? 'Operating normally'
+                    : pool.equipment.pump === 'maintenance'
+                      ? 'Scheduled maintenance'
+                      : 'Requires immediate attention'}
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <Badge
+                variant={
+                  pool.equipment.pump === 'working'
+                    ? 'secondary'
+                    : pool.equipment.pump === 'maintenance'
+                      ? 'outline'
+                      : 'destructive'
+                }
+                className={cn(
+                  pool.equipment.pump === 'failure' && 'animate-pulse',
+                  pool.equipment.pump === 'maintenance' && 'border-yellow-500 text-yellow-700'
+                )}
+              >
+                {pool.equipment.pump === 'working'
+                  ? 'Operational'
                   : pool.equipment.pump === 'maintenance'
-                    ? 'bg-yellow-500 text-black'
-                    : 'bg-destructive text-white'
-              }
-            >
-              {pool.equipment.pump}
-            </Badge>
+                    ? 'Maintenance'
+                    : 'Failure'}
+              </Badge>
+              {pool.equipment.pump === 'failure' && (
+                <AlertTriangle className="text-destructive h-4 w-4 animate-pulse" />
+              )}
+            </div>
           </div>
-          <div className="bg-card rounded-lg p-3 text-center">
-            <Settings className="text-primary mx-auto mb-1 h-6 w-6" />
-            <div className="text-sm font-medium">Filter</div>
-            <Badge
-              className={
-                pool.equipment.filter === 'clean'
-                  ? 'bg-green-600 text-white'
+
+          {/* Filter Status */}
+          <div className="flex items-center justify-between rounded-lg border p-3">
+            <div className="flex items-center gap-3">
+              <div
+                className={cn(
+                  'flex h-10 w-10 items-center justify-center rounded-full',
+                  pool.equipment.filter === 'clean'
+                    ? 'bg-green-100 text-green-600'
+                    : pool.equipment.filter === 'needs_cleaning'
+                      ? 'bg-yellow-100 text-yellow-600'
+                      : 'bg-red-100 text-red-600'
+                )}
+              >
+                <Settings className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="font-medium">Filtration System</div>
+                <div className="text-muted-foreground text-xs">
+                  {pool.equipment.filter === 'clean'
+                    ? 'Filter clean and functioning'
+                    : pool.equipment.filter === 'needs_cleaning'
+                      ? 'Cleaning scheduled'
+                      : 'Filter replacement required'}
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <Badge
+                variant={
+                  pool.equipment.filter === 'clean'
+                    ? 'secondary'
+                    : pool.equipment.filter === 'needs_cleaning'
+                      ? 'outline'
+                      : 'destructive'
+                }
+                className={cn(
+                  pool.equipment.filter === 'replacement' && 'animate-pulse',
+                  pool.equipment.filter === 'needs_cleaning' && 'border-yellow-500 text-yellow-700'
+                )}
+              >
+                {pool.equipment.filter === 'clean'
+                  ? 'Clean'
                   : pool.equipment.filter === 'needs_cleaning'
-                    ? 'bg-yellow-500 text-black'
-                    : 'bg-destructive text-white'
-              }
-            >
-              {pool.equipment.filter.replace('_', ' ')}
-            </Badge>
+                    ? 'Needs Cleaning'
+                    : 'Replace'}
+              </Badge>
+              {pool.equipment.filter === 'replacement' && (
+                <AlertTriangle className="text-destructive h-4 w-4 animate-pulse" />
+              )}
+            </div>
           </div>
-          <div className="bg-card rounded-lg p-3 text-center">
-            <TrendingUp className="text-primary mx-auto mb-1 h-6 w-6" />
-            <div className="text-sm font-medium">Heater</div>
-            <Badge
-              className={
-                pool.equipment.heater === 'working'
-                  ? 'bg-green-600 text-white'
+
+          {/* Heater Status */}
+          <div className="flex items-center justify-between rounded-lg border p-3">
+            <div className="flex items-center gap-3">
+              <div
+                className={cn(
+                  'flex h-10 w-10 items-center justify-center rounded-full',
+                  pool.equipment.heater === 'working'
+                    ? 'bg-green-100 text-green-600'
+                    : pool.equipment.heater === 'maintenance'
+                      ? 'bg-yellow-100 text-yellow-600'
+                      : 'bg-gray-100 text-gray-600'
+                )}
+              >
+                <TrendingUp className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="font-medium">Pool Heater</div>
+                <div className="text-muted-foreground text-xs">
+                  {pool.equipment.heater === 'working'
+                    ? 'Maintaining temperature'
+                    : pool.equipment.heater === 'maintenance'
+                      ? 'Under maintenance'
+                      : 'Currently offline'}
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <Badge
+                variant={
+                  pool.equipment.heater === 'working'
+                    ? 'secondary'
+                    : pool.equipment.heater === 'maintenance'
+                      ? 'outline'
+                      : 'outline'
+                }
+                className={cn(
+                  pool.equipment.heater === 'maintenance' && 'border-yellow-500 text-yellow-700',
+                  pool.equipment.heater === 'off' && 'text-muted-foreground'
+                )}
+              >
+                {pool.equipment.heater === 'working'
+                  ? 'Active'
                   : pool.equipment.heater === 'maintenance'
-                    ? 'bg-yellow-500 text-black'
-                    : 'bg-muted text-muted-foreground'
-              }
-            >
-              {pool.equipment.heater}
-            </Badge>
+                    ? 'Maintenance'
+                    : 'Off'}
+              </Badge>
+            </div>
           </div>
         </div>
       </div>
