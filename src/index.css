@@ -7,9 +7,9 @@
 @import './styles/gradient-overlays.css';
 /* COLOR ZONES - Distinct visual areas for different application sections */
 @import './styles/color-zones.css';
-/* Keep safety components and theme fixes for compatibility */
+/* Keep safety components for compatibility */
 @import './styles/safety-components.css';
-@import './styles/theme-fixes.css';
+/* Removed theme-fixes.css - now using proper shadcn/ui theming system */
 
 @custom-variant dark (&:is(.dark *));
 

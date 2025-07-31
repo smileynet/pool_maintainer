@@ -10,18 +10,9 @@
    * FORCE LIGHT THEME DEFAULTS - OUTDOOR VISIBILITY PRIORITY
    * ============================================================================ */
 
-  /* Use semantic surface tokens for proper theming */
-  .bg-background {
-    background-color: var(--semantic-surface-primary) !important;
-  }
+  /* Using Tailwind's built-in bg-background class from config */
 
-  .bg-border {
-    background-color: var(--semantic-border-default) !important;
-  }
-
-  .border-border {
-    border-color: var(--semantic-border-default) !important;
-  }
+  /* Removed bg-border and border-border classes - using Tailwind defaults */
 
   /* Button variant utility classes - map to Crystal Waters theme */
   .bg-primary {
