@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { PoolFacilityManager } from '@/components/ui/pool-facility-manager'
+import { ChemicalTestHistory } from '@/components/ui/chemical-test-history'
 import {
   Droplet,
   Users,
@@ -15,13 +16,16 @@ import {
   Activity,
   BarChart3,
   Settings,
+  History,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import './App.css'
 
 function App() {
   // Navigation state
-  const [activeTab, setActiveTab] = useState<'overview' | 'facilities' | 'analytics'>('overview')
+  const [activeTab, setActiveTab] = useState<'overview' | 'facilities' | 'history' | 'analytics'>(
+    'overview'
+  )
 
   // Mock data for the pool maintenance dashboard
   const recentReadings = [
@@ -90,6 +94,7 @@ function App() {
   const tabs = [
     { id: 'overview', label: 'Overview', icon: Activity },
     { id: 'facilities', label: 'Pool Facilities', icon: MapPin },
+    { id: 'history', label: 'Test History', icon: History },
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
   ]
 
@@ -333,6 +338,7 @@ function App() {
       <main className="mx-auto min-h-screen max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         {activeTab === 'overview' && renderOverview()}
         {activeTab === 'facilities' && <PoolFacilityManager />}
+        {activeTab === 'history' && <ChemicalTestHistory />}
         {activeTab === 'analytics' && renderAnalytics()}
       </main>
     </div>
