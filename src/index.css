@@ -1,23 +1,17 @@
+/* Import custom styles first (CSS requirement) */
 @import 'tw-animate-css';
-/* UNIFIED TOKEN SYSTEM - Single source of truth for all colors */
 @import './styles/unified-token-system.css';
-/* WCAG-COMPLIANT COLOR PAIRS - Pre-tested accessible combinations */
 @import './styles/wcag-color-pairs.css';
-/* GRADIENT OVERLAYS - Visual depth and modern design elements */
 @import './styles/gradient-overlays.css';
-/* COLOR ZONES - Distinct visual areas for different application sections */
 @import './styles/color-zones.css';
-/* Keep safety components for compatibility */
 @import './styles/safety-components.css';
-/* Removed theme-fixes.css - now using proper shadcn/ui theming system */
 
-@custom-variant dark (&:is(.dark *));
-
+/* Tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* SHADCN/UI INTEGRATION WITH UNIFIED TOKEN SYSTEM */
+/* Electric Lagoon Theme - Following shadcn/ui best practices */
 @layer base {
   :root {
     /* Map shadcn/ui variables to Electric Lagoon theme */
@@ -70,6 +64,19 @@
 
     /* Border Radius */
     --radius: 0.5rem;
+
+    /* Radius utilities */
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+
+    /* Chart colors */
+    --chart-1: 200 60% 20%; /* Electric blue */
+    --chart-2: 140 65% 55%; /* Electric mint */
+    --chart-3: 45 95% 55%; /* Electric yellow */
+    --chart-4: 25 85% 60%; /* Electric coral */
+    --chart-5: 0 85% 50%; /* Electric red */
   }
 
   .dark {
@@ -112,35 +119,22 @@
     --input: 200 18% 22%;
     --ring: 25 80% 65%; /* Maps to electric coral focus */
   }
-}
 
-@layer base {
+  /* Global styles following shadcn/ui patterns */
   * {
     border-color: hsl(var(--border));
   }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-  }
-}
-
-/* Radius utilities for consistency */
-@layer base {
-  :root {
-    --radius-sm: calc(var(--radius) - 4px);
-    --radius-md: calc(var(--radius) - 2px);
-    --radius-lg: var(--radius);
-    --radius-xl: calc(var(--radius) + 4px);
-  }
-}
-
-/* Chart variables mapped to unified semantic tokens */
-@layer base {
-  :root {
-    --chart-1: var(--semantic-brand-primary); /* Electric blue */
-    --chart-2: var(--semantic-status-safe); /* Electric mint */
-    --chart-3: var(--semantic-status-caution); /* Electric yellow */
-    --chart-4: var(--semantic-status-critical); /* Electric coral */
-    --chart-5: var(--semantic-status-emergency); /* Dark electric coral */
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
   }
 }
