@@ -14,6 +14,12 @@ const badgeVariants = cva(
           'bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90 border-transparent',
         destructive:
           'bg-destructive [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60 border-transparent text-white',
+        success:
+          'border-transparent bg-green-600 text-white focus-visible:ring-green-600/20 dark:focus-visible:ring-green-600/40 [a&]:hover:bg-green-700',
+        warning:
+          'border-transparent bg-yellow-500 text-black focus-visible:ring-yellow-500/20 dark:focus-visible:ring-yellow-500/40 [a&]:hover:bg-yellow-600',
+        critical:
+          'border-transparent bg-red-600 text-white focus-visible:ring-red-600/20 dark:focus-visible:ring-red-600/40 [a&]:hover:bg-red-700',
         outline: 'text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground',
       },
     },
@@ -34,4 +40,5 @@ function Badge({
   return <Comp data-slot="badge" className={cn(badgeVariants({ variant }), className)} {...props} />
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export { Badge, badgeVariants }

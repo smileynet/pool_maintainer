@@ -263,32 +263,31 @@ const getStatusConfig = (status: PoolFacility['status']) => {
   switch (status) {
     case 'operational':
       return {
-        color: 'bg-[var(--semantic-status-safe)] hover:bg-[var(--semantic-status-safe)]/80',
+        color: 'bg-green-600 hover:bg-green-700 text-white',
         icon: CheckCircle,
         text: 'Operational',
       }
     case 'maintenance':
       return {
-        color:
-          'bg-[var(--semantic-status-caution)] text-[var(--semantic-text-primary)] hover:bg-[var(--semantic-status-caution)]/80',
+        color: 'bg-yellow-500 hover:bg-yellow-600 text-black',
         icon: Wrench,
         text: 'Maintenance',
       }
     case 'closed':
       return {
-        color: 'bg-[var(--semantic-text-secondary)] hover:bg-[var(--semantic-text-secondary)]/80',
+        color: 'bg-muted hover:bg-muted/80 text-muted-foreground',
         icon: Clock,
         text: 'Closed',
       }
     case 'emergency':
       return {
-        color: 'bg-[var(--semantic-status-critical)] hover:bg-[var(--semantic-status-critical)]/80',
+        color: 'bg-destructive hover:bg-destructive/80 text-white',
         icon: AlertTriangle,
         text: 'Emergency',
       }
     default:
       return {
-        color: 'bg-[var(--semantic-text-secondary)] hover:bg-[var(--semantic-text-secondary)]/80',
+        color: 'bg-muted hover:bg-muted/80 text-muted-foreground',
         icon: Clock,
         text: 'Unknown',
       }
@@ -299,23 +298,17 @@ const getStatusConfig = (status: PoolFacility['status']) => {
 const getChemicalStatus = (level: number, type: 'chlorine' | 'ph' | 'alkalinity') => {
   switch (type) {
     case 'chlorine':
-      if (level < 1.0)
-        return { status: 'critical', color: 'text-[var(--semantic-status-critical)]' }
-      if (level < 1.5 || level > 3.0)
-        return { status: 'warning', color: 'text-[var(--semantic-status-caution)]' }
-      return { status: 'safe', color: 'text-[var(--semantic-status-safe)]' }
+      if (level < 1.0) return { status: 'critical', color: 'text-destructive' }
+      if (level < 1.5 || level > 3.0) return { status: 'warning', color: 'text-yellow-600' }
+      return { status: 'safe', color: 'text-green-600' }
     case 'ph':
-      if (level < 7.0 || level > 8.0)
-        return { status: 'critical', color: 'text-[var(--semantic-status-critical)]' }
-      if (level < 7.2 || level > 7.6)
-        return { status: 'warning', color: 'text-[var(--semantic-status-caution)]' }
-      return { status: 'safe', color: 'text-[var(--semantic-status-safe)]' }
+      if (level < 7.0 || level > 8.0) return { status: 'critical', color: 'text-destructive' }
+      if (level < 7.2 || level > 7.6) return { status: 'warning', color: 'text-yellow-600' }
+      return { status: 'safe', color: 'text-green-600' }
     case 'alkalinity':
-      if (level < 60 || level > 180)
-        return { status: 'critical', color: 'text-[var(--semantic-status-critical)]' }
-      if (level < 80 || level > 120)
-        return { status: 'warning', color: 'text-[var(--semantic-status-caution)]' }
-      return { status: 'safe', color: 'text-[var(--semantic-status-safe)]' }
+      if (level < 60 || level > 180) return { status: 'critical', color: 'text-destructive' }
+      if (level < 80 || level > 120) return { status: 'warning', color: 'text-yellow-600' }
+      return { status: 'safe', color: 'text-green-600' }
   }
 }
 
@@ -343,21 +336,30 @@ const PoolFacilityCard = ({
     <Card
       className={cn(
         'card-interactive relative overflow-hidden',
-        pool.status === 'emergency' &&
-          'ring-opacity-50 ring-2 ring-[var(--semantic-status-emergency)]',
-        pool.status === 'maintenance' && 'ring-1 ring-[var(--semantic-status-caution)]'
+        pool.status === 'emergency' && 'ring-opacity-50 ring-destructive ring-2',
+        pool.status === 'maintenance' && 'ring-1 ring-yellow-500'
       )}
     >
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div>
             <CardTitle className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-[var(--semantic-brand-primary)]" />
+              <MapPin className="text-primary h-4 w-4" />
               {pool.name}
             </CardTitle>
             <CardDescription>{pool.location}</CardDescription>
           </div>
-          <Badge className={statusConfig.color}>
+          <Badge
+            variant={
+              pool.status === 'operational'
+                ? 'secondary'
+                : pool.status === 'maintenance'
+                  ? 'outline'
+                  : pool.status === 'emergency'
+                    ? 'destructive'
+                    : 'outline'
+            }
+          >
             <StatusIcon className="mr-1 h-3 w-3" />
             {statusConfig.text}
           </Badge>
@@ -373,24 +375,24 @@ const PoolFacilityCard = ({
               className={cn(
                 'font-medium',
                 occupancyPercentage > 90
-                  ? 'text-[var(--semantic-status-critical)]'
+                  ? 'text-destructive'
                   : occupancyPercentage > 75
-                    ? 'text-[var(--semantic-status-caution)]'
-                    : 'text-[var(--semantic-status-safe)]'
+                    ? 'text-yellow-600'
+                    : 'text-green-600'
               )}
             >
               {pool.currentOccupancy}/{pool.capacity} ({occupancyPercentage}%)
             </span>
           </div>
-          <div className="h-2 w-full rounded-full bg-[var(--semantic-border-default)]">
+          <div className="bg-border h-2 w-full rounded-full">
             <div
               className={cn(
                 'h-2 rounded-full transition-all',
                 occupancyPercentage > 90
-                  ? 'bg-[var(--semantic-status-critical)]'
+                  ? 'bg-destructive'
                   : occupancyPercentage > 75
-                    ? 'bg-[var(--semantic-status-caution)]'
-                    : 'bg-[var(--semantic-status-safe)]'
+                    ? 'bg-yellow-500'
+                    : 'bg-green-500'
               )}
               style={{ width: `${occupancyPercentage}%` }}
             />
@@ -400,24 +402,24 @@ const PoolFacilityCard = ({
         {/* Chemical Levels Quick View */}
         <div className="grid grid-cols-2 gap-2 text-sm">
           <div>
-            <span className="text-[var(--semantic-text-secondary)]">Free Cl:</span>
+            <span className="text-muted-foreground">Free Cl:</span>
             <span className={cn('ml-1 font-medium', chlorineStatus.color)}>
               {pool.chemicalLevels.freeChlorine} ppm
             </span>
           </div>
           <div>
-            <span className="text-[var(--semantic-text-secondary)]">pH:</span>
+            <span className="text-muted-foreground">pH:</span>
             <span className={cn('ml-1 font-medium', phStatus.color)}>{pool.chemicalLevels.ph}</span>
           </div>
           <div>
-            <span className="text-[var(--semantic-text-secondary)]">Temp:</span>
-            <span className="ml-1 font-medium text-[var(--semantic-text-primary)]">
+            <span className="text-muted-foreground">Temp:</span>
+            <span className="text-foreground ml-1 font-medium">
               {pool.chemicalLevels.temperature}°F
             </span>
           </div>
           <div>
-            <span className="text-[var(--semantic-text-secondary)]">Last Test:</span>
-            <span className="ml-1 text-xs text-[var(--semantic-text-secondary)]">
+            <span className="text-muted-foreground">Last Test:</span>
+            <span className="text-muted-foreground ml-1 text-xs">
               {new Date(pool.chemicalLevels.lastTested).toLocaleTimeString()}
             </span>
           </div>
@@ -427,13 +429,13 @@ const PoolFacilityCard = ({
         {pool.alerts.length > 0 && (
           <div className="flex flex-wrap gap-1">
             {criticalAlerts > 0 && (
-              <Badge className="bg-[var(--semantic-status-critical)] text-xs text-white">
+              <Badge variant="destructive" className="text-xs">
                 <AlertTriangle className="mr-1 h-3 w-3" />
                 {criticalAlerts} Critical
               </Badge>
             )}
             {highAlerts > 0 && (
-              <Badge className="bg-[var(--semantic-status-caution)] text-xs text-[var(--semantic-text-primary)]">
+              <Badge variant="outline" className="border-yellow-500 text-xs text-yellow-700">
                 {highAlerts} High Priority
               </Badge>
             )}
@@ -443,19 +445,17 @@ const PoolFacilityCard = ({
         {/* Assignment and Schedule */}
         <div className="space-y-1 text-sm">
           <div className="flex justify-between">
-            <span className="text-[var(--semantic-text-secondary)]">Technician:</span>
-            <span className="font-medium text-[var(--semantic-text-primary)]">
-              {pool.assignedTechnician}
-            </span>
+            <span className="text-muted-foreground">Technician:</span>
+            <span className="text-foreground font-medium">{pool.assignedTechnician}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-[var(--semantic-text-secondary)]">Next Maintenance:</span>
+            <span className="text-muted-foreground">Next Maintenance:</span>
             <span
               className={cn(
                 'text-xs',
                 new Date(pool.nextMaintenance) <= new Date(Date.now() + 24 * 60 * 60 * 1000)
-                  ? 'font-medium text-[var(--semantic-action-primary)]'
-                  : 'text-[var(--semantic-text-secondary)]'
+                  ? 'text-primary font-medium'
+                  : 'text-muted-foreground'
               )}
             >
               {new Date(pool.nextMaintenance).toLocaleDateString()}
@@ -469,18 +469,14 @@ const PoolFacilityCard = ({
             size="sm"
             variant="outline"
             onClick={() => onQuickTest(pool.id)}
-            className="flex-1 border-[var(--semantic-action-primary)] text-[var(--semantic-action-primary)] hover:bg-[var(--semantic-surface-elevated)]"
+            className="flex-1"
           >
             <TestTube className="mr-1 h-3 w-3" />
             Quick Test
           </Button>
           <Dialog>
             <DialogTrigger asChild>
-              <Button
-                size="sm"
-                variant="outline"
-                className="border-[var(--semantic-brand-secondary)] text-[var(--semantic-brand-secondary)] hover:bg-[var(--semantic-surface-elevated)]"
-              >
+              <Button size="sm" variant="outline" className="">
                 <Eye className="mr-1 h-3 w-3" />
                 Details
               </Button>
@@ -517,7 +513,7 @@ const PoolDetailView = ({
           <Badge className={getStatusConfig(pool.status).color}>
             {getStatusConfig(pool.status).text}
           </Badge>
-          <span className="text-sm text-[var(--semantic-text-secondary)]">
+          <span className="text-muted-foreground text-sm">
             Last updated: {new Date().toLocaleString()}
           </span>
         </div>
@@ -572,7 +568,7 @@ const PoolDetailView = ({
             </div>
           </div>
         </div>
-        <div className="mt-2 text-xs text-[var(--semantic-text-secondary)]">
+        <div className="text-muted-foreground mt-2 text-xs">
           Last tested: {new Date(pool.chemicalLevels.lastTested).toLocaleString()}
         </div>
       </div>
@@ -581,46 +577,46 @@ const PoolDetailView = ({
       <div>
         <h4 className="mb-3 font-medium">Equipment Status</h4>
         <div className="grid grid-cols-3 gap-4">
-          <div className="rounded-lg bg-[var(--semantic-surface-elevated)] p-3 text-center">
-            <Activity className="mx-auto mb-1 h-6 w-6 text-[var(--semantic-brand-primary)]" />
+          <div className="bg-card rounded-lg p-3 text-center">
+            <Activity className="text-primary mx-auto mb-1 h-6 w-6" />
             <div className="text-sm font-medium">Pump</div>
             <Badge
               className={
                 pool.equipment.pump === 'working'
-                  ? 'bg-[var(--semantic-status-safe)]'
+                  ? 'bg-green-600 text-white'
                   : pool.equipment.pump === 'maintenance'
-                    ? 'bg-[var(--semantic-status-caution)] text-[var(--semantic-text-primary)]'
-                    : 'bg-[var(--semantic-status-critical)]'
+                    ? 'bg-yellow-500 text-black'
+                    : 'bg-destructive text-white'
               }
             >
               {pool.equipment.pump}
             </Badge>
           </div>
-          <div className="rounded-lg bg-[var(--semantic-surface-elevated)] p-3 text-center">
-            <Settings className="mx-auto mb-1 h-6 w-6 text-[var(--semantic-brand-primary)]" />
+          <div className="bg-card rounded-lg p-3 text-center">
+            <Settings className="text-primary mx-auto mb-1 h-6 w-6" />
             <div className="text-sm font-medium">Filter</div>
             <Badge
               className={
                 pool.equipment.filter === 'clean'
-                  ? 'bg-[var(--semantic-status-safe)]'
+                  ? 'bg-green-600 text-white'
                   : pool.equipment.filter === 'needs_cleaning'
-                    ? 'bg-[var(--semantic-status-caution)] text-[var(--semantic-text-primary)]'
-                    : 'bg-[var(--semantic-status-critical)]'
+                    ? 'bg-yellow-500 text-black'
+                    : 'bg-destructive text-white'
               }
             >
               {pool.equipment.filter.replace('_', ' ')}
             </Badge>
           </div>
-          <div className="rounded-lg bg-[var(--semantic-surface-elevated)] p-3 text-center">
-            <TrendingUp className="mx-auto mb-1 h-6 w-6 text-[var(--semantic-brand-primary)]" />
+          <div className="bg-card rounded-lg p-3 text-center">
+            <TrendingUp className="text-primary mx-auto mb-1 h-6 w-6" />
             <div className="text-sm font-medium">Heater</div>
             <Badge
               className={
                 pool.equipment.heater === 'working'
-                  ? 'bg-[var(--semantic-status-safe)]'
+                  ? 'bg-green-600 text-white'
                   : pool.equipment.heater === 'maintenance'
-                    ? 'bg-[var(--semantic-status-caution)] text-[var(--semantic-text-primary)]'
-                    : 'bg-[var(--semantic-text-secondary)]'
+                    ? 'bg-yellow-500 text-black'
+                    : 'bg-muted text-muted-foreground'
               }
             >
               {pool.equipment.heater}
@@ -640,30 +636,30 @@ const PoolDetailView = ({
                 className={cn(
                   'rounded-lg border-l-4 p-3',
                   alert.severity === 'critical'
-                    ? 'border-[var(--semantic-status-critical)] bg-[var(--semantic-surface-elevated)]'
+                    ? 'border-destructive bg-card'
                     : alert.severity === 'high'
-                      ? 'border-[var(--semantic-status-critical)] bg-[var(--semantic-surface-elevated)]'
+                      ? 'border-destructive bg-card'
                       : alert.severity === 'medium'
-                        ? 'border-[var(--semantic-status-caution)] bg-[var(--semantic-surface-elevated)]'
-                        : 'border-[var(--semantic-brand-primary)] bg-[var(--semantic-surface-elevated)]'
+                        ? 'bg-card border-yellow-500'
+                        : 'border-primary bg-card'
                 )}
               >
                 <div className="flex items-start justify-between">
                   <div>
                     <div className="text-sm font-medium">{alert.message}</div>
-                    <div className="mt-1 text-xs text-[var(--semantic-text-secondary)]">
+                    <div className="text-muted-foreground mt-1 text-xs">
                       {new Date(alert.timestamp).toLocaleString()}
                     </div>
                   </div>
                   <Badge
                     className={
                       alert.severity === 'critical'
-                        ? 'bg-[var(--semantic-status-critical)]'
+                        ? 'bg-destructive text-white'
                         : alert.severity === 'high'
-                          ? 'bg-[var(--semantic-status-critical)]'
+                          ? 'bg-destructive text-white'
                           : alert.severity === 'medium'
-                            ? 'bg-[var(--semantic-status-caution)] text-[var(--semantic-text-primary)]'
-                            : 'bg-[var(--semantic-brand-primary)]'
+                            ? 'bg-yellow-500 text-black'
+                            : 'bg-primary text-white'
                     }
                   >
                     {alert.severity}
@@ -682,21 +678,21 @@ const PoolDetailView = ({
           {pool.maintenanceHistory.slice(0, 3).map((maintenance) => (
             <div
               key={maintenance.id}
-              className="flex items-center justify-between rounded bg-[var(--semantic-surface-elevated)] p-2"
+              className="bg-card flex items-center justify-between rounded p-2"
             >
               <div>
                 <div className="text-sm font-medium">{maintenance.type}</div>
-                <div className="text-xs text-[var(--semantic-text-secondary)]">
+                <div className="text-muted-foreground text-xs">
                   {maintenance.technician} - {maintenance.date}
                 </div>
               </div>
               <Badge
                 className={
                   maintenance.status === 'completed'
-                    ? 'bg-[var(--semantic-status-safe)]'
+                    ? 'bg-green-600 text-white'
                     : maintenance.status === 'pending'
-                      ? 'bg-[var(--semantic-status-caution)] text-[var(--semantic-text-primary)]'
-                      : 'bg-[var(--semantic-status-critical)]'
+                      ? 'bg-yellow-500 text-black'
+                      : 'bg-destructive text-white'
                 }
               >
                 {maintenance.status}
@@ -777,18 +773,13 @@ export const PoolFacilityManager = () => {
       <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
         <div>
           <h2 className="text-2xl font-bold">Pool Facility Management</h2>
-          <p className="text-[var(--semantic-text-secondary)]">
+          <p className="text-muted-foreground">
             Real-time monitoring and management of all pool facilities
           </p>
         </div>
 
         <div className="flex gap-2">
-          <Button
-            variant="outline"
-            onClick={handleRefresh}
-            disabled={refreshing}
-            className="border-[var(--semantic-brand-secondary)] text-[var(--semantic-brand-secondary)] hover:bg-[var(--semantic-surface-elevated)]"
-          >
+          <Button variant="outline" onClick={handleRefresh} disabled={refreshing} className="">
             <RefreshCw className={cn('mr-2 h-4 w-4', refreshing && 'animate-spin')} />
             {refreshing ? 'Refreshing...' : 'Refresh'}
           </Button>
@@ -803,50 +794,38 @@ export const PoolFacilityManager = () => {
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
         <Card className="card-interactive p-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-[var(--semantic-brand-primary)]">
-              {totalPools}
-            </div>
-            <div className="text-sm text-[var(--semantic-text-secondary)]">Total Pools</div>
+            <div className="text-primary text-2xl font-bold">{totalPools}</div>
+            <div className="text-muted-foreground text-sm">Total Pools</div>
           </div>
         </Card>
         <Card className="card-interactive p-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-[var(--semantic-status-safe)]">
-              {operationalPools}
-            </div>
-            <div className="text-sm text-[var(--semantic-text-secondary)]">Operational</div>
+            <div className="text-2xl font-bold text-green-600">{operationalPools}</div>
+            <div className="text-muted-foreground text-sm">Operational</div>
           </div>
         </Card>
         <Card className="card-interactive p-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-[var(--semantic-status-caution)]">
-              {maintenancePools}
-            </div>
-            <div className="text-sm text-[var(--semantic-text-secondary)]">Maintenance</div>
+            <div className="text-2xl font-bold text-yellow-600">{maintenancePools}</div>
+            <div className="text-muted-foreground text-sm">Maintenance</div>
           </div>
         </Card>
         <Card className="card-interactive p-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-[var(--semantic-status-critical)]">
-              {emergencyPools}
-            </div>
-            <div className="text-sm text-[var(--semantic-text-secondary)]">Emergency</div>
+            <div className="text-destructive text-2xl font-bold">{emergencyPools}</div>
+            <div className="text-muted-foreground text-sm">Emergency</div>
           </div>
         </Card>
         <Card className="card-interactive p-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-[var(--semantic-action-primary)]">
-              {totalAlerts}
-            </div>
-            <div className="text-sm text-[var(--semantic-text-secondary)]">Total Alerts</div>
+            <div className="text-primary text-2xl font-bold">{totalAlerts}</div>
+            <div className="text-muted-foreground text-sm">Total Alerts</div>
           </div>
         </Card>
         <Card className="card-interactive p-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-[var(--semantic-status-critical)]">
-              {criticalAlerts}
-            </div>
-            <div className="text-sm text-[var(--semantic-text-secondary)]">Critical</div>
+            <div className="text-destructive text-2xl font-bold">{criticalAlerts}</div>
+            <div className="text-muted-foreground text-sm">Critical</div>
           </div>
         </Card>
       </div>
@@ -878,7 +857,7 @@ export const PoolFacilityManager = () => {
           </SelectContent>
         </Select>
 
-        <div className="flex items-center text-sm text-[var(--semantic-text-secondary)]">
+        <div className="text-muted-foreground flex items-center text-sm">
           Showing {filteredAndSortedPools.length} of {totalPools} pools
         </div>
       </div>
@@ -897,13 +876,9 @@ export const PoolFacilityManager = () => {
 
       {filteredAndSortedPools.length === 0 && (
         <div className="py-12 text-center">
-          <MapPin className="mx-auto mb-4 h-12 w-12 text-[var(--semantic-text-secondary)]" />
-          <h3 className="mb-2 text-lg font-medium text-[var(--semantic-text-primary)]">
-            No pools found
-          </h3>
-          <p className="text-[var(--semantic-text-secondary)]">
-            No pools match the current filter criteria.
-          </p>
+          <MapPin className="text-muted-foreground mx-auto mb-4 h-12 w-12" />
+          <h3 className="text-foreground mb-2 text-lg font-medium">No pools found</h3>
+          <p className="text-muted-foreground">No pools match the current filter criteria.</p>
         </div>
       )}
     </div>

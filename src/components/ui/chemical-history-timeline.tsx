@@ -308,10 +308,10 @@ export const ChemicalHistoryTimeline = ({
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <h3 className="flex items-center gap-2 text-lg font-semibold">
-            <BarChart3 className="h-5 w-5 text-[var(--semantic-brand-primary)]" />
+            <BarChart3 className="text-primary h-5 w-5" />
             Chemical History Timeline
           </h3>
-          <p className="text-sm text-[var(--semantic-text-secondary)]">
+          <p className="text-muted-foreground text-sm">
             Track chemical trends over time with MAHC compliance monitoring
           </p>
         </div>
@@ -390,27 +390,25 @@ export const ChemicalHistoryTimeline = ({
           <CardContent className="pt-4">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <div className="text-sm text-[var(--semantic-text-secondary)]">
+                <div className="text-muted-foreground text-sm">
                   Current {selectedChemicalInfo?.label}
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-2xl font-bold">
                     {filteredData[0].values[selectedChemical]}
                   </span>
-                  <span className="text-sm text-[var(--semantic-text-secondary)]">
+                  <span className="text-muted-foreground text-sm">
                     {selectedChemicalInfo?.unit}
                   </span>
                   <div className="flex items-center gap-1">
-                    {trend.direction === 'up' && (
-                      <TrendingUp className="h-4 w-4 text-[var(--semantic-status-safe)]" />
-                    )}
+                    {trend.direction === 'up' && <TrendingUp className="h-4 w-4 text-green-600" />}
                     {trend.direction === 'down' && (
-                      <TrendingDown className="h-4 w-4 text-[var(--semantic-status-critical)]" />
+                      <TrendingDown className="text-destructive h-4 w-4" />
                     )}
                     {trend.direction === 'stable' && (
-                      <Minus className="h-4 w-4 text-[var(--semantic-text-secondary)]" />
+                      <Minus className="text-muted-foreground h-4 w-4" />
                     )}
-                    <span className="text-xs text-[var(--semantic-text-secondary)]">
+                    <span className="text-muted-foreground text-xs">
                       {trend.change > 0 ? `±${trend.change}` : 'stable'}
                     </span>
                   </div>
@@ -419,13 +417,13 @@ export const ChemicalHistoryTimeline = ({
 
               {showCompliance && chemicalStandard && (
                 <div className="text-right">
-                  <div className="text-sm text-[var(--semantic-text-secondary)]">MAHC Range</div>
+                  <div className="text-muted-foreground text-sm">MAHC Range</div>
                   <div className="text-sm">
                     <span className="font-medium">
                       {chemicalStandard.min} - {chemicalStandard.max} {chemicalStandard.unit}
                     </span>
                   </div>
-                  <div className="text-xs text-[var(--semantic-text-secondary)]">
+                  <div className="text-muted-foreground text-xs">
                     Ideal: {chemicalStandard.ideal.min} - {chemicalStandard.ideal.max}
                   </div>
                 </div>
@@ -440,11 +438,9 @@ export const ChemicalHistoryTimeline = ({
         {filteredData.length === 0 ? (
           <Card>
             <CardContent className="py-8 text-center">
-              <Calendar className="mx-auto h-12 w-12 text-[var(--semantic-text-secondary)]" />
-              <h4 className="mt-4 text-lg font-medium text-[var(--semantic-text-primary)]">
-                No readings found
-              </h4>
-              <p className="mt-2 text-sm text-[var(--semantic-text-secondary)]">
+              <Calendar className="text-muted-foreground mx-auto h-12 w-12" />
+              <h4 className="text-foreground mt-4 text-lg font-medium">No readings found</h4>
+              <p className="text-muted-foreground mt-2 text-sm">
                 No chemical readings available for the selected time range.
               </p>
             </CardContent>
@@ -466,14 +462,10 @@ export const ChemicalHistoryTimeline = ({
                 key={reading.id}
                 className={cn(
                   'transition-all duration-200',
-                  reading.status === 'emergency' &&
-                    'border-[var(--semantic-status-emergency)] bg-[var(--semantic-surface-elevated)]',
-                  reading.status === 'critical' &&
-                    'border-[var(--semantic-status-critical)] bg-[var(--semantic-surface-elevated)]',
-                  reading.status === 'warning' &&
-                    'border-[var(--semantic-status-caution)] bg-[var(--semantic-surface-elevated)]',
-                  reading.status === 'compliant' &&
-                    'border-[var(--semantic-status-safe)] bg-[var(--semantic-surface-elevated)]'
+                  reading.status === 'emergency' && 'bg-card border-red-500',
+                  reading.status === 'critical' && 'border-destructive bg-card',
+                  reading.status === 'warning' && 'bg-card border-yellow-500',
+                  reading.status === 'compliant' && 'bg-card border-green-500'
                 )}
               >
                 <CardHeader className="pb-2">
@@ -482,14 +474,10 @@ export const ChemicalHistoryTimeline = ({
                       <div
                         className={cn(
                           'flex h-10 w-10 items-center justify-center rounded-full',
-                          reading.status === 'emergency' &&
-                            'bg-[var(--semantic-status-emergency)] text-white',
-                          reading.status === 'critical' &&
-                            'bg-[var(--semantic-status-critical)] text-white',
-                          reading.status === 'warning' &&
-                            'bg-[var(--semantic-status-caution)] text-white',
-                          reading.status === 'compliant' &&
-                            'bg-[var(--semantic-status-safe)] text-white'
+                          reading.status === 'emergency' && 'bg-red-500 text-white',
+                          reading.status === 'critical' && 'bg-destructive text-white',
+                          reading.status === 'warning' && 'bg-yellow-500 text-white',
+                          reading.status === 'compliant' && 'bg-green-500 text-white'
                         )}
                       >
                         <TestTube className="h-5 w-5" />
@@ -502,9 +490,7 @@ export const ChemicalHistoryTimeline = ({
                             minute: '2-digit',
                           })}
                         </div>
-                        <div className="text-sm text-[var(--semantic-text-secondary)]">
-                          by {reading.technician}
-                        </div>
+                        <div className="text-muted-foreground text-sm">by {reading.technician}</div>
                       </div>
                     </div>
 
@@ -514,13 +500,10 @@ export const ChemicalHistoryTimeline = ({
                           <span
                             className={cn(
                               'text-lg font-bold',
-                              validation?.status === 'emergency' &&
-                                'text-[var(--semantic-status-emergency)]',
-                              validation?.status === 'critical' &&
-                                'text-[var(--semantic-status-critical)]',
-                              validation?.status === 'warning' &&
-                                'text-[var(--semantic-status-caution)]',
-                              validation?.status === 'good' && 'text-[var(--semantic-status-safe)]'
+                              validation?.status === 'emergency' && 'text-red-500',
+                              validation?.status === 'critical' && 'text-destructive',
+                              validation?.status === 'warning' && 'text-yellow-600',
+                              validation?.status === 'good' && 'text-green-600'
                             )}
                           >
                             {currentValue} {selectedChemicalInfo?.unit}
@@ -528,11 +511,11 @@ export const ChemicalHistoryTimeline = ({
                           {Math.abs(valueChange) > 0.05 && (
                             <div className="flex items-center gap-1">
                               {valueChange > 0 ? (
-                                <TrendingUp className="h-3 w-3 text-[var(--semantic-status-safe)]" />
+                                <TrendingUp className="h-3 w-3 text-green-600" />
                               ) : (
-                                <TrendingDown className="h-3 w-3 text-[var(--semantic-status-critical)]" />
+                                <TrendingDown className="text-destructive h-3 w-3" />
                               )}
-                              <span className="text-xs text-[var(--semantic-text-secondary)]">
+                              <span className="text-muted-foreground text-xs">
                                 {valueChange > 0 ? '+' : ''}
                                 {valueChange.toFixed(2)}
                               </span>
@@ -572,13 +555,10 @@ export const ChemicalHistoryTimeline = ({
                               key={chemical.value}
                               className={cn(
                                 'rounded-lg border p-2',
-                                isSelected &&
-                                  'border-[var(--semantic-brand-primary)] bg-[var(--semantic-surface-elevated)]'
+                                isSelected && 'border-primary bg-card'
                               )}
                             >
-                              <div className="text-xs text-[var(--semantic-text-secondary)]">
-                                {chemical.label}
-                              </div>
+                              <div className="text-muted-foreground text-xs">{chemical.label}</div>
                               <div className="font-medium">
                                 {value} {chemical.unit}
                               </div>
@@ -588,13 +568,13 @@ export const ChemicalHistoryTimeline = ({
                       </div>
 
                       {validation && showCompliance && selectedChemical && (
-                        <div className="mt-3 rounded-md border border-[var(--semantic-border-default)] p-3">
+                        <div className="border-border mt-3 rounded-md border p-3">
                           <div className="text-sm">
                             <div className={cn('font-medium', validation.color)}>
                               {validation.message}
                             </div>
                             {validation.recommendation && (
-                              <div className="mt-1 text-xs text-[var(--semantic-text-secondary)]">
+                              <div className="text-muted-foreground mt-1 text-xs">
                                 <strong>Recommendation:</strong> {validation.recommendation}
                               </div>
                             )}

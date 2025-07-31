@@ -55,6 +55,14 @@
     --destructive: 25 90% 55%; /* More vibrant electric coral for errors */
     --destructive-foreground: 0 0% 98%; /* White text */
 
+    /* Status Actions - Mapped to consistent semantic colors */
+    --success: 140 80% 40%; /* Electric green - safe status */
+    --success-foreground: 0 0% 98%; /* White text */
+    --warning: 45 95% 55%; /* Electric yellow - caution status */
+    --warning-foreground: 200 60% 20%; /* Dark text on yellow */
+    --critical: 0 85% 50%; /* Electric red - critical status */
+    --critical-foreground: 0 0% 98%; /* White text */
+
     /* Borders & Inputs */
     --border: 200 30% 85%; /* Light electric blue borders - more vibrant */
     --input: 200 30% 85%; /* Light electric blue inputs - more vibrant */
@@ -91,6 +99,14 @@
 
     --destructive: 25 85% 64%; /* Keep electric coral destructive */
     --destructive-foreground: 200 40% 92%;
+
+    /* Status Actions - Dark mode variants */
+    --success: 140 70% 45%; /* Brighter electric green for dark mode */
+    --success-foreground: 200 40% 92%;
+    --warning: 45 90% 60%; /* Brighter electric yellow for dark mode */
+    --warning-foreground: 200 18% 8%;
+    --critical: 0 80% 55%; /* Brighter electric red for dark mode */
+    --critical-foreground: 200 40% 92%;
 
     --border: 200 18% 22%; /* Maps to dark electric border */
     --input: 200 18% 22%;

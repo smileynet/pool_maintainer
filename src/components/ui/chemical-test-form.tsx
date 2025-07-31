@@ -88,13 +88,11 @@ const ChemicalInput = ({
           className={cn(
             'transition-colors',
             validation?.status === 'emergency' &&
-              'border-[var(--semantic-status-emergency)] bg-[var(--semantic-surface-elevated)] focus-visible:ring-[var(--semantic-status-emergency)]',
+              'bg-card border-red-500 focus-visible:ring-red-500',
             validation?.status === 'critical' &&
-              'border-[var(--semantic-status-critical)] focus-visible:ring-[var(--semantic-status-critical)]',
-            validation?.status === 'warning' &&
-              'border-[var(--semantic-status-caution)] focus-visible:ring-[var(--semantic-status-caution)]',
-            validation?.status === 'good' &&
-              'border-[var(--semantic-status-safe)] focus-visible:ring-[var(--semantic-status-safe)]'
+              'border-destructive focus-visible:ring-destructive',
+            validation?.status === 'warning' && 'border-yellow-500 focus-visible:ring-yellow-500',
+            validation?.status === 'good' && 'border-green-500 focus-visible:ring-green-500'
           )}
         />
         {validation && (
@@ -234,7 +232,7 @@ export const ChemicalTestForm = ({
       <div className="flex items-center justify-between">
         <div>
           <h3 className="flex items-center gap-2 text-lg font-semibold">
-            <TestTube className="h-5 w-5 text-[var(--semantic-brand-primary)]" />
+            <TestTube className="text-primary h-5 w-5" />
             Chemical Test Entry
           </h3>
           <p className="text-muted-foreground text-sm">
@@ -389,12 +387,9 @@ export const ChemicalTestForm = ({
         <Card
           className={cn(
             'border-2',
-            complianceReport.overall === 'emergency' &&
-              'border-[var(--semantic-status-emergency)] bg-[var(--semantic-surface-elevated)]',
-            complianceReport.overall === 'non-compliant' &&
-              'border-[var(--semantic-status-critical)] bg-[var(--semantic-surface-elevated)]',
-            complianceReport.overall === 'warning' &&
-              'border-[var(--semantic-status-caution)] bg-[var(--semantic-surface-elevated)]'
+            complianceReport.overall === 'emergency' && 'bg-card border-red-500',
+            complianceReport.overall === 'non-compliant' && 'border-destructive bg-card',
+            complianceReport.overall === 'warning' && 'bg-card border-yellow-500'
           )}
         >
           <CardContent className="pt-4">
@@ -402,22 +397,18 @@ export const ChemicalTestForm = ({
               <AlertTriangle
                 className={cn(
                   'mt-0.5 h-5 w-5',
-                  complianceReport.overall === 'emergency' &&
-                    'text-[var(--semantic-status-emergency)]',
-                  complianceReport.overall === 'non-compliant' &&
-                    'text-[var(--semantic-status-critical)]',
-                  complianceReport.overall === 'warning' && 'text-[var(--semantic-status-caution)]'
+                  complianceReport.overall === 'emergency' && 'text-red-500',
+                  complianceReport.overall === 'non-compliant' && 'text-destructive',
+                  complianceReport.overall === 'warning' && 'text-yellow-600'
                 )}
               />
               <div className="flex-1">
                 <h4
                   className={cn(
                     'font-medium',
-                    complianceReport.overall === 'emergency' &&
-                      'text-[var(--semantic-text-primary)]',
-                    complianceReport.overall === 'non-compliant' &&
-                      'text-[var(--semantic-text-primary)]',
-                    complianceReport.overall === 'warning' && 'text-[var(--semantic-text-primary)]'
+                    complianceReport.overall === 'emergency' && 'text-foreground',
+                    complianceReport.overall === 'non-compliant' && 'text-foreground',
+                    complianceReport.overall === 'warning' && 'text-foreground'
                   )}
                 >
                   {complianceReport.overall === 'emergency' &&
@@ -430,12 +421,9 @@ export const ChemicalTestForm = ({
                 <div
                   className={cn(
                     'mt-2 text-sm',
-                    complianceReport.overall === 'emergency' &&
-                      'text-[var(--semantic-text-secondary)]',
-                    complianceReport.overall === 'non-compliant' &&
-                      'text-[var(--semantic-text-secondary)]',
-                    complianceReport.overall === 'warning' &&
-                      'text-[var(--semantic-text-secondary)]'
+                    complianceReport.overall === 'emergency' && 'text-muted-foreground',
+                    complianceReport.overall === 'non-compliant' && 'text-muted-foreground',
+                    complianceReport.overall === 'warning' && 'text-muted-foreground'
                   )}
                 >
                   <div className="mb-2">
@@ -475,11 +463,9 @@ export const ChemicalTestForm = ({
             </div>
 
             {poolClosure.shouldClose && (
-              <div className="mt-3 rounded-md border border-[var(--semantic-status-emergency)] bg-[var(--semantic-surface-elevated)] p-3">
-                <div className="text-sm font-medium text-[var(--semantic-text-primary)]">
-                  🚫 Pool Closure Required
-                </div>
-                <div className="mt-1 text-xs text-[var(--semantic-text-secondary)]">
+              <div className="bg-card mt-3 rounded-md border border-red-500 p-3">
+                <div className="text-foreground text-sm font-medium">🚫 Pool Closure Required</div>
+                <div className="text-muted-foreground mt-1 text-xs">
                   {poolClosure.reasons.join('; ')}
                 </div>
               </div>
@@ -495,10 +481,9 @@ export const ChemicalTestForm = ({
           disabled={!hasRequiredFields || !hasReadings}
           className={cn(
             'flex-1',
-            complianceReport?.overall === 'emergency' &&
-              'bg-[var(--semantic-status-emergency)] hover:bg-[var(--semantic-status-critical)/50)]',
+            complianceReport?.overall === 'emergency' && 'bg-red-600 text-white hover:bg-red-700',
             complianceReport?.overall === 'non-compliant' &&
-              'bg-[var(--semantic-status-critical)] hover:bg-[var(--semantic-status-critical)/50)]'
+              'bg-destructive hover:bg-destructive/90 text-white'
           )}
         >
           <CheckCircle className="mr-2 h-4 w-4" />
