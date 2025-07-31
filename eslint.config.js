@@ -13,8 +13,9 @@ export default tseslint.config([
       'dist/**',
       'build/**',
       'coverage/**',
-      '*.config.js',
-      '*.config.ts',
+      'vite.config.ts',
+      'tailwind.config.js',
+      'postcss.config.js',
       'node_modules/**',
       '.storybook/main.ts', // Storybook config can be complex
     ],
@@ -55,6 +56,15 @@ export default tseslint.config([
       'no-var': 'error',
       'object-shorthand': 'error',
       'prefer-template': 'error',
+      
+      // Prevent theming bypasses - enforce shadcn/ui patterns
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'JSXAttribute[name.name="className"][value.value=/var\\(--semantic-/]',
+          message: 'Do not use semantic CSS variables directly. Use shadcn/ui component variants instead (e.g., variant="default" instead of className="bg-[var(--semantic-action-primary)]").',
+        },
+      ],
     },
   },
   {
@@ -76,13 +86,30 @@ export default tseslint.config([
       // Pool maintenance component safety rules
       'react-hooks/exhaustive-deps': 'error', // Critical for chemical reading state consistency
       'react-hooks/rules-of-hooks': 'error',
+      
+      // Theming enforcement for React components
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'JSXAttribute[name.name="className"][value.value=/text-\\[var\\(--semantic-/]',
+          message: 'Do not use semantic text variables directly. Use Tailwind utilities like text-foreground, text-muted-foreground instead.',
+        },
+        {
+          selector: 'JSXAttribute[name.name="className"][value.value=/bg-\\[var\\(--semantic-/]',
+          message: 'Do not use semantic background variables directly. Use Tailwind utilities like bg-background, bg-card, or component variants.',
+        },
+        {
+          selector: 'JSXAttribute[name.name="className"][value.value=/border-\\[var\\(--semantic-/]',
+          message: 'Do not use semantic border variables directly. Use Tailwind utilities like border-border or border-muted.',
+        },
+      ],
     },
   },
   {
     // Storybook-specific configuration
     files: ['**/*.stories.{ts,tsx}', '**/*.story.{ts,tsx}'],
     plugins: {
-      storybook: storybook,
+      storybook,
     },
     rules: {
       // Storybook specific rules
