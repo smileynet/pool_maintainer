@@ -1,9 +1,15 @@
 # Pool Maintenance System - Current Project Tasks
 
-**Project**: Community Pool Maintenance & Scheduling Management System  
-**Phase**: 1.3 → 2.1 Transition (Storybook Documentation Complete)  
-**Last Updated**: 2025-07-30  
-**Next Review**: Phase 2.1 completion
+**Project**: Pool Maintenance Data Management - Spreadsheet Replacement  
+**Phase**: 2.1 Core Data Entry & Management (Refocused)  
+**Last Updated**: 2025-07-31  
+**Next Review**: Basic workflow completion
+
+## 🎯 Project Vision
+
+**Current State**: Users track pool maintenance in spreadsheets  
+**Goal**: Simple app that makes data entry, review, and management easier than spreadsheets  
+**Approach**: Digitize existing workflows with better UX, validation, and organization
 
 ## 🎯 Current Sprint - Phase 2.1: Core Pool Management
 
@@ -16,51 +22,65 @@
 - [x] **Test Infrastructure** - Vitest unit tests, Playwright E2E/visual tests
 - [x] **Main App Update** - Replaced default Vite page with pool maintenance dashboard
 
-### ✅ Recently Completed (Phase 2.1 Core)
+### ✅ Recently Completed (Foundation)
 
-- [x] **Chemical History Timeline Component** - Interactive timeline with trend tracking, MAHC compliance overlays, and export functionality
-- [x] **Modern Theming System Implementation** - Comprehensive CSS custom properties-based theming with safety-critical color palettes
-- [x] **Layout System Enhancement** - Advanced responsive layout system using container queries for component-level responsiveness
-- [x] **Safety-Critical Design Patterns** - Emergency UI patterns, high-contrast modes, and WCAG accessibility compliance
-- [x] **Design Token System** - Comprehensive token system for colors, spacing, typography, and safety states
+- [x] **Component Library** - Complete UI component system with forms, tables, cards, and responsive design
+- [x] **Responsive Design System** - Mobile-first design that works well on tablets/phones for field use
+- [x] **Chemical Test Form Framework** - Basic form structure for chemical data entry
+- [x] **Pool Facility Display Components** - Components for showing pool status and history
+- [x] **MAHC Validation Logic** - Chemical safety range validation and compliance checking
+- [x] **Modern Theming** - Clean, professional interface suitable for maintenance operations
 
-### 🚧 Active Tasks (Priority Order)
+### 🚧 Active Tasks (Spreadsheet Replacement Focus)
 
-#### HIGH PRIORITY
-   - **Dependencies**: Theming system (#2)
-   - **Estimated Effort**: 2-3 hours
+#### PRIMARY WORKFLOW
 
-#### MEDIUM PRIORITY
-
-4. **Safety Alert System** `[READY]`
-   - **Description**: Critical alert system for immediate safety concerns
+1. **Chemical Test Data Entry** `[READY]`
+   - **Description**: Make chemical test entry faster and more accurate than spreadsheets
    - **Acceptance Criteria**:
-     - Real-time alert notifications
-     - Priority-based alert categorization
-     - Emergency response workflow triggers
-     - Alert history and acknowledgment tracking
-   - **Dependencies**: Theming system for critical state styling
-   - **Estimated Effort**: 2-3 hours
+     - Quick, validated form for common chemical tests
+     - Auto-fill technician names and pool selections
+     - Instant MAHC compliance feedback during entry
+     - Save draft capability for incomplete tests
+   - **Replaces**: Manual spreadsheet data entry
 
-5. **Dashboard Layout Enhancement** `[READY]`
-   - **Description**: Enhance main dashboard with comprehensive pool management overview
+2. **Test History & Review** `[READY]`
+   - **Description**: Better way to review past tests than scrolling spreadsheet rows
    - **Acceptance Criteria**:
-     - Multi-pool status overview
-     - Quick action buttons for common tasks
-     - Recent activity feed
-     - Staff availability summary
-   - **Dependencies**: Layout system (#3)
-   - **Estimated Effort**: 2-3 hours
+     - Searchable, filterable test history
+     - Visual indicators for out-of-range readings
+     - Export capability to CSV/Excel
+     - Trend visualization for key chemicals
+   - **Replaces**: Spreadsheet browsing and manual analysis
 
-### 📋 Upcoming Phase 2.2 Tasks
+3. **Pool Status Dashboard** `[READY]`
+   - **Description**: At-a-glance pool status derived from recent test data
+   - **Acceptance Criteria**:
+     - Current status based on most recent tests
+     - Highlight pools needing attention
+     - Simple pool selection for new tests
+     - Basic summary statistics
+   - **Replaces**: Manual spreadsheet status tracking
 
-#### Task Management System
+#### ENHANCED FEATURES
 
-- [ ] **Maintenance Task Scheduling Interface**
-- [ ] **Technician Assignment and Workload Management**
-- [ ] **Task Completion Tracking and Status Updates**
-- [ ] **Priority-based Task Queue Management**
-- [ ] **Recurring Maintenance Schedule Templates**
+4. **Data Management Tools** `[FUTURE]`
+   - **Description**: Organization and cleanup tools better than spreadsheet capabilities
+   - **Acceptance Criteria**:
+     - Bulk edit/delete capabilities
+     - Data validation and cleanup tools
+     - Backup and restore functionality
+     - User management for multi-person teams
+
+### 📋 Future Enhancements (Phase 2.2+)
+
+#### Beyond Basic Spreadsheet Replacement
+
+- [ ] **Maintenance Task Tracking** - Simple task lists and completion tracking
+- [ ] **Multi-User Support** - Team collaboration features
+- [ ] **Advanced Analytics** - Trend analysis and reporting
+- [ ] **Mobile App** - Native mobile app for field technicians
+- [ ] **Integration** - Connect with existing pool management systems
 
 ### 📋 Phase 2.3: Mobile & Advanced Features
 
@@ -99,15 +119,15 @@ Currently no blocked tasks.
 
 **Phase 1.3 Completion**: ✅ 100% (Storybook documentation complete)
 
-**Phase 2.1 Progress**: 🚧 0% (Starting core pool management)
+**Phase 2.1 Progress**: 🚧 40% (Foundation complete, core workflows in progress)
 
-- Pool Facility Management: Not started
-- Chemical Monitoring: Not started
-- Safety Alert System: Not started
-- Dashboard Enhancement: Not started
-- Mobile Optimization: Not started
+- UI Foundation: ✅ Complete (Components, responsive design, theming)
+- Chemical Data Entry: 🚧 In Progress (Form exists, needs workflow integration)
+- Test History & Review: ❌ Not Started (Basic display exists, needs enhancement)
+- Pool Status Dashboard: 🚧 Partial (Over-engineered, needs simplification)
+- Data Management: ❌ Not Started (Export, search, filtering needed)
 
-**Overall Project Progress**: ~35% (Foundation and documentation complete)
+**Overall Project Progress**: ~30% (Solid foundation, focused on core workflows)
 
 ### 🔧 Technical Debt & Improvements
 
@@ -128,14 +148,14 @@ Currently no blocked tasks.
 
 ### 🎯 Success Metrics
 
-**Phase 2.1 Completion Criteria**:
+**Phase 2.1 Completion Criteria** (Spreadsheet Replacement):
 
-- [ ] Pool facility management fully operational
-- [ ] Chemical monitoring with real-time safety validation
-- [ ] Emergency alert system functional
-- [ ] Mobile-responsive pool technician interface
-- [ ] All safety-critical functions properly tested
-- [ ] MAHC compliance validation implemented
+- [ ] Chemical test entry is faster than spreadsheet input
+- [ ] Test history browsing is clearer than spreadsheet rows
+- [ ] Pool status overview is more informative than manual tracking
+- [ ] Data validation prevents errors that occur in spreadsheets
+- [ ] Export functionality maintains spreadsheet compatibility
+- [ ] Mobile interface works well for field data entry
 
 **Quality Gates**:
 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, CardContent } from './card'
 import { Button } from './button'
 import { Input } from './input'
@@ -13,6 +13,7 @@ import {
   Thermometer,
   Droplet,
   FlaskConical,
+  Save,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import {
@@ -23,8 +24,16 @@ import {
   getIdealRange,
   type ChemicalType,
 } from '@/lib/mahc-validation'
+import {
+  saveChemicalTest,
+  saveDraft,
+  addTechnicianName,
+  getTechnicianNames,
+  getPoolsByTests,
+  type ChemicalTest,
+} from '@/lib/localStorage'
 
-// Chemical test data types
+// Chemical test data types (ChemicalTest imported from localStorage)
 interface ChemicalReading {
   freeChlorine: number
   totalChlorine: number
@@ -33,23 +42,6 @@ interface ChemicalReading {
   cyanuricAcid: number
   calcium: number
   temperature: number
-}
-
-interface ChemicalTest {
-  id: string
-  poolId: string
-  poolName: string
-  readings: ChemicalReading
-  technician: string
-  timestamp: string
-  notes: string
-  status: 'draft' | 'submitted' | 'approved' | 'flagged' | 'emergency'
-  corrections?: {
-    chemical: string
-    amount: string
-    action: string
-  }[]
-  complianceReport?: ReturnType<typeof generateComplianceReport>
 }
 
 // Chemical input field component
@@ -119,16 +111,13 @@ const ChemicalInput = ({
   )
 }
 
-// Mock pool data for selection
-const mockPools = [
+// Default pool data for selection
+const defaultPools = [
   { id: 'POOL-001', name: 'Main Community Pool' },
   { id: 'POOL-002', name: 'Kiddie Pool' },
   { id: 'POOL-003', name: 'Therapy Pool' },
   { id: 'POOL-004', name: 'Lap Pool' },
 ]
-
-// Mock technician data
-const mockTechnicians = ['John Smith', 'Sarah Johnson', 'Mike Davis', 'Emily Wilson', 'Alex Chen']
 
 // Main Chemical Test Form Component
 export const ChemicalTestForm = ({
@@ -140,6 +129,7 @@ export const ChemicalTestForm = ({
   onSubmit: (test: ChemicalTest) => void
   onCancel: () => void
 }) => {
+  // Form data state
   const [formData, setFormData] = useState<Partial<ChemicalTest>>({
     poolId: '',
     poolName: '',
@@ -156,6 +146,25 @@ export const ChemicalTestForm = ({
     },
     ...initialData,
   })
+
+  // Dynamic data from localStorage
+  const [availablePools, setAvailablePools] = useState(defaultPools)
+  const [availableTechnicians, setAvailableTechnicians] = useState<string[]>([])
+
+  // Save status state
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
+  const [saveMessage, setSaveMessage] = useState('')
+
+  // Load dynamic data on component mount
+  useEffect(() => {
+    const poolsFromTests = getPoolsByTests()
+    if (poolsFromTests.length > 0) {
+      setAvailablePools(poolsFromTests)
+    }
+
+    const technicianNames = getTechnicianNames()
+    setAvailableTechnicians(technicianNames)
+  }, [])
 
   const [readingValues, setReadingValues] = useState({
     freeChlorine: initialData?.readings?.freeChlorine?.toString() || '',
@@ -200,8 +209,45 @@ export const ChemicalTestForm = ({
     ? shouldClosePool(numericReadings)
     : { shouldClose: false, reasons: [] }
 
-  const handleSubmit = () => {
+  // Save draft functionality
+  const handleSaveDraft = async () => {
+    if (!formData.poolId || !formData.technician) {
+      setSaveStatus('error')
+      setSaveMessage('Pool and technician required to save draft')
+      setTimeout(() => setSaveStatus('idle'), 3000)
+      return
+    }
+
+    setSaveStatus('saving')
+    const draftId = initialData?.id || `DRAFT-${Date.now()}`
+
+    const success = saveDraft({
+      ...formData,
+      id: draftId,
+      readings: formData.readings!,
+    })
+
+    if (success) {
+      setSaveStatus('saved')
+      setSaveMessage('Draft saved successfully')
+
+      // Add new technician name to list
+      if (formData.technician && !availableTechnicians.includes(formData.technician)) {
+        addTechnicianName(formData.technician)
+        setAvailableTechnicians((prev) => [...prev, formData.technician!])
+      }
+    } else {
+      setSaveStatus('error')
+      setSaveMessage('Failed to save draft')
+    }
+
+    setTimeout(() => setSaveStatus('idle'), 3000)
+  }
+
+  const handleSubmit = async () => {
     if (!hasRequiredFields || !hasReadings || !complianceReport) return
+
+    setSaveStatus('saving')
 
     // Determine status based on compliance report
     let status: ChemicalTest['status'] = 'submitted'
@@ -214,16 +260,34 @@ export const ChemicalTestForm = ({
     const test: ChemicalTest = {
       id: initialData?.id || `TEST-${Date.now()}`,
       poolId: formData.poolId!,
-      poolName: mockPools.find((p) => p.id === formData.poolId)?.name || '',
+      poolName: availablePools.find((p) => p.id === formData.poolId)?.name || '',
       readings: formData.readings!,
       technician: formData.technician!,
       timestamp: new Date().toISOString(),
       notes: formData.notes || '',
       status,
-      complianceReport,
     }
 
-    onSubmit(test)
+    // Save to localStorage first
+    const saveSuccess = saveChemicalTest(test)
+
+    if (saveSuccess) {
+      setSaveStatus('saved')
+      setSaveMessage('Test saved successfully')
+
+      // Add new technician name to list if not already present
+      if (formData.technician && !availableTechnicians.includes(formData.technician)) {
+        addTechnicianName(formData.technician)
+        setAvailableTechnicians((prev) => [...prev, formData.technician!])
+      }
+
+      // Call the original onSubmit callback
+      onSubmit(test)
+    } else {
+      setSaveStatus('error')
+      setSaveMessage('Failed to save test')
+      setTimeout(() => setSaveStatus('idle'), 3000)
+    }
   }
 
   return (
@@ -260,7 +324,7 @@ export const ChemicalTestForm = ({
               <SelectValue placeholder="Select pool facility" />
             </SelectTrigger>
             <SelectContent>
-              {mockPools.map((pool) => (
+              {availablePools.map((pool) => (
                 <SelectItem key={pool.id} value={pool.id}>
                   {pool.name}
                 </SelectItem>
@@ -274,21 +338,30 @@ export const ChemicalTestForm = ({
             <User className="h-4 w-4" />
             Technician
           </Label>
-          <Select
-            value={formData.technician}
-            onValueChange={(value) => setFormData((prev) => ({ ...prev, technician: value }))}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Select technician" />
-            </SelectTrigger>
-            <SelectContent>
-              {mockTechnicians.map((tech) => (
-                <SelectItem key={tech} value={tech}>
-                  {tech}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          {availableTechnicians.length > 0 ? (
+            <Select
+              value={formData.technician}
+              onValueChange={(value) => setFormData((prev) => ({ ...prev, technician: value }))}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select or enter technician name" />
+              </SelectTrigger>
+              <SelectContent>
+                {availableTechnicians.map((tech) => (
+                  <SelectItem key={tech} value={tech}>
+                    {tech}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          ) : null}
+          <Input
+            type="text"
+            placeholder="Enter technician name"
+            value={formData.technician || ''}
+            onChange={(e) => setFormData((prev) => ({ ...prev, technician: e.target.value }))}
+            className="mt-2"
+          />
         </div>
       </div>
 
@@ -474,11 +547,42 @@ export const ChemicalTestForm = ({
         </Card>
       )}
 
+      {/* Save Status Feedback */}
+      {saveStatus !== 'idle' && (
+        <Card
+          className={cn(
+            'border-2',
+            saveStatus === 'saved' && 'border-green-500 bg-green-50',
+            saveStatus === 'error' && 'border-red-500 bg-red-50',
+            saveStatus === 'saving' && 'border-blue-500 bg-blue-50'
+          )}
+        >
+          <CardContent className="pt-4">
+            <div className="flex items-center gap-2">
+              {saveStatus === 'saving' && <Clock className="h-4 w-4 animate-spin text-blue-600" />}
+              {saveStatus === 'saved' && <CheckCircle className="h-4 w-4 text-green-600" />}
+              {saveStatus === 'error' && <AlertTriangle className="h-4 w-4 text-red-600" />}
+              <span
+                className={cn(
+                  'text-sm font-medium',
+                  saveStatus === 'saved' && 'text-green-800',
+                  saveStatus === 'error' && 'text-red-800',
+                  saveStatus === 'saving' && 'text-blue-800'
+                )}
+              >
+                {saveStatus === 'saving' && 'Saving...'}
+                {saveMessage}
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Action Buttons */}
       <div className="flex gap-3 pt-4">
         <Button
           onClick={handleSubmit}
-          disabled={!hasRequiredFields || !hasReadings}
+          disabled={!hasRequiredFields || !hasReadings || saveStatus === 'saving'}
           className={cn(
             'flex-1',
             complianceReport?.overall === 'emergency' && 'bg-red-600 text-white hover:bg-red-700',
@@ -492,6 +596,16 @@ export const ChemicalTestForm = ({
           {complianceReport?.overall === 'warning' && 'Submit (Warning)'}
           {(!complianceReport || complianceReport.overall === 'compliant') && 'Submit Test'}
         </Button>
+
+        <Button
+          variant="secondary"
+          onClick={handleSaveDraft}
+          disabled={!formData.poolId || !formData.technician || saveStatus === 'saving'}
+        >
+          <Save className="mr-2 h-4 w-4" />
+          Save Draft
+        </Button>
+
         <Button variant="outline" onClick={onCancel}>
           Cancel
         </Button>
