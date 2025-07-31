@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge'
 import { PoolFacilityManager } from '@/components/ui/pool-facility-manager'
 import { ChemicalTestHistory } from '@/components/ui/chemical-test-history'
 import { PoolStatusDashboard } from '@/components/ui/pool-status-dashboard'
+import { ChemicalTrendChart } from '@/components/ui/chemical-trend-chart'
 import { Droplet, TestTube, MapPin, Activity, BarChart3, Settings, History } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import './App.css'
@@ -126,29 +127,60 @@ function App() {
     </div>
   )
 
-  // Render analytics placeholder
+  // Render analytics content
   const renderAnalytics = () => (
     <div className="space-y-8">
       <div>
         <h2 className="text-foreground mb-2 text-2xl font-bold">Analytics & Reports</h2>
         <p className="text-muted-foreground">
-          Advanced analytics and reporting features coming in Phase 2.3
+          Chemical trend analysis and performance insights from your test data.
         </p>
       </div>
 
-      <Card className="bg-card p-12 text-center">
-        <BarChart3 className="text-muted-foreground mx-auto mb-4 h-16 w-16" />
-        <h3 className="text-foreground mb-2 text-lg font-medium">Analytics Dashboard</h3>
-        <p className="text-muted-foreground mb-4">
-          Advanced reporting, trend analysis, and predictive maintenance features will be available
-          in the next phase.
-        </p>
-        <div className="flex justify-center gap-2">
-          <Badge variant="secondary">Chemical Trends</Badge>
-          <Badge variant="secondary">Usage Analytics</Badge>
-          <Badge variant="warning">Performance Reports</Badge>
-          <Badge variant="critical">Compliance Tracking</Badge>
-        </div>
+      {/* Chemical Trend Charts */}
+      <ChemicalTrendChart />
+
+      {/* Future Analytics Features */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <BarChart3 className="h-5 w-5" />
+            Advanced Analytics
+          </CardTitle>
+          <CardDescription>Additional reporting features coming soon</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="p-4 text-center">
+              <Badge variant="secondary" className="mb-2">
+                Coming Soon
+              </Badge>
+              <h4 className="font-medium">Usage Analytics</h4>
+              <p className="text-muted-foreground text-sm">Pool utilization patterns</p>
+            </div>
+            <div className="p-4 text-center">
+              <Badge variant="secondary" className="mb-2">
+                Coming Soon
+              </Badge>
+              <h4 className="font-medium">Performance Reports</h4>
+              <p className="text-muted-foreground text-sm">Maintenance efficiency metrics</p>
+            </div>
+            <div className="p-4 text-center">
+              <Badge variant="secondary" className="mb-2">
+                Coming Soon
+              </Badge>
+              <h4 className="font-medium">Compliance Tracking</h4>
+              <p className="text-muted-foreground text-sm">MAHC compliance history</p>
+            </div>
+            <div className="p-4 text-center">
+              <Badge variant="secondary" className="mb-2">
+                Coming Soon
+              </Badge>
+              <h4 className="font-medium">Predictive Insights</h4>
+              <p className="text-muted-foreground text-sm">Maintenance predictions</p>
+            </div>
+          </div>
+        </CardContent>
       </Card>
     </div>
   )
