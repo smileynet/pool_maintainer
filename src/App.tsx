@@ -4,20 +4,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { PoolFacilityManager } from '@/components/ui/pool-facility-manager'
 import { ChemicalTestHistory } from '@/components/ui/chemical-test-history'
-import {
-  Droplet,
-  Users,
-  Clock,
-  TestTube,
-  MapPin,
-  AlertTriangle,
-  CheckCircle,
-  TrendingUp,
-  Activity,
-  BarChart3,
-  Settings,
-  History,
-} from 'lucide-react'
+import { PoolStatusDashboard } from '@/components/ui/pool-status-dashboard'
+import { Droplet, TestTube, MapPin, Activity, BarChart3, Settings, History } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import './App.css'
 
@@ -26,69 +14,6 @@ function App() {
   const [activeTab, setActiveTab] = useState<'overview' | 'facilities' | 'history' | 'analytics'>(
     'overview'
   )
-
-  // Mock data for the pool maintenance dashboard
-  const recentReadings = [
-    {
-      id: 'pool-001',
-      name: 'Main Community Pool',
-      chlorine: 2.4,
-      ph: 7.3,
-      status: 'good',
-      lastTested: '2 hours ago',
-    },
-    {
-      id: 'pool-002',
-      name: 'Kiddie Pool',
-      chlorine: 1.8,
-      ph: 7.5,
-      status: 'good',
-      lastTested: '45 minutes ago',
-    },
-    {
-      id: 'pool-003',
-      name: 'Therapy Pool',
-      chlorine: 0.8,
-      ph: 7.1,
-      status: 'warning',
-      lastTested: '3 hours ago',
-    },
-  ]
-
-  const metrics = [
-    {
-      title: 'Active Pools',
-      value: '3',
-      change: '+0',
-      icon: MapPin,
-      color: 'text-[var(--semantic-brand-primary)]',
-      bgColor: 'bg-[var(--semantic-surface-secondary)]',
-    },
-    {
-      title: 'Pending Tasks',
-      value: '7',
-      change: '+2',
-      icon: Clock,
-      color: 'text-[var(--semantic-action-primary)]',
-      bgColor: 'bg-[var(--semantic-surface-elevated)]',
-    },
-    {
-      title: 'Available Technicians',
-      value: '4',
-      change: '+1',
-      icon: Users,
-      color: 'text-[var(--semantic-brand-secondary)]',
-      bgColor: 'bg-[var(--semantic-surface-elevated)]',
-    },
-    {
-      title: 'Critical Alerts',
-      value: '1',
-      change: '-2',
-      icon: AlertTriangle,
-      color: 'text-[var(--semantic-status-critical)]',
-      bgColor: 'bg-[var(--semantic-surface-elevated)]',
-    },
-  ]
 
   // Tab navigation items
   const tabs = [
@@ -103,139 +28,84 @@ function App() {
     <div className="space-y-8">
       {/* Welcome Section */}
       <div>
-        <h2 className="text-foreground mb-2 text-2xl font-bold">Welcome to Pool Maintenance</h2>
+        <h2 className="text-foreground mb-2 text-2xl font-bold">Pool Maintenance Dashboard</h2>
         <p className="text-muted-foreground">
-          Monitor and manage community pool safety and maintenance operations.
+          Real-time pool status and chemical monitoring from your test data.
         </p>
       </div>
 
-      {/* Metrics Grid */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {metrics.map((metric, index) => (
-          <Card key={index}>
-            <CardContent className="pt-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-muted-foreground text-sm font-medium">{metric.title}</p>
-                  <div className="mt-2 flex items-center gap-2">
-                    <span className="text-2xl font-bold">{metric.value}</span>
-                    <div className="text-secondary flex items-center gap-1 text-sm">
-                      <TrendingUp className="h-4 w-4" />
-                      <span>{metric.change}</span>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className={`h-12 w-12 rounded-full ${metric.bgColor} flex items-center justify-center`}
-                >
-                  <metric.icon className={`h-6 w-6 ${metric.color}`} />
+      {/* Pool Status Dashboard */}
+      <PoolStatusDashboard
+        onViewPool={(_poolId) => {
+          // Could navigate to detailed pool view in the future
+          // For now, no action needed
+        }}
+      />
+
+      {/* Quick Actions */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Quick Actions</CardTitle>
+          <CardDescription>Common pool maintenance tasks</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+            <Button
+              className="h-auto justify-start p-4"
+              variant="outline"
+              onClick={() => setActiveTab('facilities')}
+            >
+              <TestTube className="mr-3 h-5 w-5" />
+              <div className="text-left">
+                <div className="font-medium">Record Chemical Reading</div>
+                <div className="text-muted-foreground text-sm">
+                  Log chlorine, pH, and other measurements
                 </div>
               </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+            </Button>
 
-      {/* Pool Status Grid */}
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        {/* Recent Chemical Readings */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <TestTube className="h-5 w-5" />
-              Recent Chemical Readings
-            </CardTitle>
-            <CardDescription>Latest water quality test results</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {recentReadings.map((reading) => (
-                <div
-                  key={reading.id}
-                  className="bg-muted/50 flex items-center justify-between rounded-lg p-3"
-                >
-                  <div className="flex-1">
-                    <h4 className="font-medium">{reading.name}</h4>
-                    <div className="text-muted-foreground mt-1 flex items-center gap-4 text-sm">
-                      <span>Cl: {reading.chlorine} ppm</span>
-                      <span>pH: {reading.ph}</span>
-                      <span>{reading.lastTested}</span>
-                    </div>
-                  </div>
-                  <Badge variant={reading.status === 'good' ? 'secondary' : 'outline'}>
-                    {reading.status === 'good' && <CheckCircle className="mr-1 h-3 w-3" />}
-                    {reading.status === 'warning' && <AlertTriangle className="mr-1 h-3 w-3" />}
-                    {reading.status === 'good' ? 'Safe' : 'Attention'}
-                  </Badge>
+            <Button
+              className="h-auto justify-start p-4"
+              variant="outline"
+              onClick={() => setActiveTab('history')}
+            >
+              <Activity className="mr-3 h-5 w-5" />
+              <div className="text-left">
+                <div className="font-medium">View Test History</div>
+                <div className="text-muted-foreground text-sm">
+                  Review and manage chemical test records
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+              </div>
+            </Button>
 
-        {/* Quick Actions */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
-            <CardDescription>Common pool maintenance tasks</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 gap-3">
-              <Button
-                className="h-auto justify-start p-4"
-                variant="outline"
-                onClick={() => setActiveTab('facilities')}
-              >
-                <TestTube className="mr-3 h-5 w-5" />
-                <div className="text-left">
-                  <div className="font-medium">Record Chemical Reading</div>
-                  <div className="text-muted-foreground text-sm">
-                    Log chlorine, pH, and other measurements
-                  </div>
-                </div>
-              </Button>
+            <Button
+              className="h-auto justify-start p-4"
+              variant="outline"
+              onClick={() => setActiveTab('facilities')}
+            >
+              <MapPin className="mr-3 h-5 w-5" />
+              <div className="text-left">
+                <div className="font-medium">Manage Pool Facilities</div>
+                <div className="text-muted-foreground text-sm">Configure pools and settings</div>
+              </div>
+            </Button>
 
-              <Button
-                className="h-auto justify-start p-4"
-                variant="outline"
-                onClick={() => setActiveTab('facilities')}
-              >
-                <Users className="mr-3 h-5 w-5" />
-                <div className="text-left">
-                  <div className="font-medium">Assign Maintenance Task</div>
-                  <div className="text-muted-foreground text-sm">Schedule work for technicians</div>
+            <Button
+              className="h-auto justify-start p-4"
+              variant="outline"
+              onClick={() => setActiveTab('analytics')}
+            >
+              <BarChart3 className="mr-3 h-5 w-5" />
+              <div className="text-left">
+                <div className="font-medium">Analytics & Reports</div>
+                <div className="text-muted-foreground text-sm">
+                  Chemical trends and compliance reports
                 </div>
-              </Button>
-
-              <Button
-                className="h-auto justify-start p-4"
-                variant="outline"
-                onClick={() => setActiveTab('facilities')}
-              >
-                <MapPin className="mr-3 h-5 w-5" />
-                <div className="text-left">
-                  <div className="font-medium">Pool Status Update</div>
-                  <div className="text-muted-foreground text-sm">Change operational status</div>
-                </div>
-              </Button>
-
-              <Button
-                className="h-auto justify-start p-4"
-                variant="outline"
-                onClick={() => setActiveTab('analytics')}
-              >
-                <Activity className="mr-3 h-5 w-5" />
-                <div className="text-left">
-                  <div className="font-medium">View Reports</div>
-                  <div className="text-muted-foreground text-sm">
-                    Access maintenance history and analytics
-                  </div>
-                </div>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+              </div>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Component Library Link */}
       <div className="text-center">
