@@ -37,11 +37,7 @@ export const withPoolMaintenanceTheme: Decorator = (Story) => {
     <div
       className="rounded-lg p-4"
       style={{
-        backgroundColor: 'var(--pool-bg, #f0f9ff)',
-        '--pool-primary': '#0ea5e9', // Sky blue for water
-        '--pool-secondary': '#10b981', // Emerald for clean/healthy
-        '--pool-warning': '#f59e0b', // Amber for caution
-        '--pool-danger': '#ef4444', // Red for alerts
+        backgroundColor: 'var(--color-surface, #E3FAFF)',
       }}
     >
       <style>{`

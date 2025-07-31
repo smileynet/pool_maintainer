@@ -1,0 +1,220 @@
+/**
+ * Community Pool Color Palette
+ * 
+ * A warm, inviting color scheme that evokes sunny days at the neighborhood pool
+ * Designed for outdoor visibility, safety, and community atmosphere
+ */
+
+:root {
+  /* ============================================================================
+   * PRIMARY PALETTE - COMMUNITY POOL ATMOSPHERE
+   * ============================================================================ */
+  
+  /* Pool Water Blues - The heart of our aquatic theme */
+  --color-pool-water: #0AD1E0;        /* Robin egg blue - clear pool water */
+  --color-pool-deep: #3197D6;         /* Celestial blue - deeper water */
+  --color-pool-shallow: #7BB9D5;      /* Downy - shallow water */
+  --color-pool-sparkle: #A8E2F0;      /* Blizzard blue - water sparkles */
+  --color-pool-foam: #E3FAFF;         /* Bubbles - pool foam/splash */
+  
+  /* Sunshine & Summer Warmth - Complementary warm tones */
+  --color-sunshine: #FFD962;          /* Warm yellow - summer sun */
+  --color-sunshine-bright: #FFF59D;   /* Light yellow - bright sunlight */
+  --color-sunshine-glow: #FFB74D;     /* Orange-yellow - sunset glow */
+  --color-sandy: #FFA64A;             /* Sandy brown - pool deck */
+  --color-coral: #FF7F50;             /* Coral - summer fun accent */
+  
+  /* Community & Safety Greens - Grass, nature, safety */
+  --color-grass: #4CAF50;             /* Fresh grass green */
+  --color-grass-light: #81C784;       /* Light grass - sunny lawn */
+  --color-safety-green: #66BB6A;      /* Lifeguard safety green */
+  --color-mint: #A5D6A7;              /* Mint - refreshing accent */
+  
+  /* Facility & Structure Neutrals - Buildings, concrete, shade */
+  --color-concrete: #E0E0E0;          /* Pool deck concrete */
+  --color-shade: #9E9E9E;             /* Shaded areas */
+  --color-pavilion: #757575;          /* Pavilion/structure gray */
+  --color-fence: #BDBDBD;             /* Chain link/fence color */
+  
+  /* ============================================================================
+   * SEMANTIC ASSIGNMENTS - POOL MANAGEMENT UI
+   * ============================================================================ */
+  
+  /* Primary Actions - Pool water theme */
+  --color-primary: var(--color-pool-water);
+  --color-primary-hover: var(--color-pool-deep);
+  --color-primary-light: var(--color-pool-sparkle);
+  --color-primary-dark: var(--color-pool-deep);
+  
+  /* Secondary Actions - Sunshine theme */
+  --color-secondary: var(--color-sunshine);
+  --color-secondary-hover: var(--color-sunshine-glow);
+  --color-secondary-light: var(--color-sunshine-bright);
+  
+  /* Success States - Grass/nature theme */
+  --color-success: var(--color-safety-green);
+  --color-success-light: var(--color-mint);
+  --color-success-dark: var(--color-grass);
+  
+  /* Warning States - Warm sandy tones */
+  --color-warning: var(--color-sandy);
+  --color-warning-light: #FFCC80;
+  --color-warning-dark: #FF8A65;
+  
+  /* Critical States - Coral red for visibility */
+  --color-danger: var(--color-coral);
+  --color-danger-light: #FF8A80;
+  --color-danger-dark: #E64A19;
+  
+  /* ============================================================================
+   * UI ELEMENT COLORS - OUTDOOR OPTIMIZED
+   * ============================================================================ */
+  
+  /* Backgrounds - Light and bright for outdoor visibility */
+  --color-background: #FFFFFF;
+  --color-surface: #FAFAFA;
+  --color-surface-elevated: var(--color-pool-foam);
+  --color-card: #FFFFFF;
+  --color-card-hover: var(--color-pool-foam);
+  
+  /* Text Colors - High contrast for sunlight */
+  --color-text-primary: #1A237E;      /* Deep blue for maximum contrast */
+  --color-text-secondary: #283593;    /* Medium blue */
+  --color-text-muted: #5C6BC0;        /* Lighter blue for less important text */
+  --color-text-on-primary: #FFFFFF;   /* White on blue backgrounds */
+  --color-text-on-warning: #000000;   /* Black on yellow for contrast */
+  
+  /* Borders & Dividers */
+  --color-border: var(--color-fence);
+  --color-border-light: var(--color-concrete);
+  --color-border-focus: var(--color-pool-water);
+  
+  /* ============================================================================
+   * SPECIAL PURPOSE COLORS
+   * ============================================================================ */
+  
+  /* Pool Status Indicators */
+  --color-pool-open: var(--color-pool-water);
+  --color-pool-closed: var(--color-shade);
+  --color-pool-maintenance: var(--color-sunshine);
+  --color-pool-emergency: var(--color-coral);
+  
+  /* Chemical Level Indicators - Using nature metaphors */
+  --color-chemical-balanced: var(--color-safety-green);
+  --color-chemical-adjusting: var(--color-sunshine);
+  --color-chemical-critical: var(--color-coral);
+  
+  /* Staff & Equipment */
+  --color-lifeguard: var(--color-coral);      /* Traditional lifeguard red */
+  --color-maintenance: var(--color-pavilion);   /* Maintenance gray */
+  --color-equipment-ok: var(--color-grass);     /* Equipment running well */
+  --color-equipment-service: var(--color-sandy); /* Needs service */
+  
+  /* ============================================================================
+   * ATMOSPHERIC EFFECTS
+   * ============================================================================ */
+  
+  /* Shadows - Softer for outdoor feel */
+  --shadow-sm: 0 1px 3px rgba(49, 151, 214, 0.12);
+  --shadow-md: 0 4px 6px rgba(49, 151, 214, 0.15);
+  --shadow-lg: 0 10px 15px rgba(49, 151, 214, 0.18);
+  
+  /* Glows & Highlights */
+  --glow-water: 0 0 20px rgba(10, 209, 224, 0.3);
+  --glow-sunshine: 0 0 20px rgba(255, 217, 98, 0.4);
+  
+  /* Gradients - Sky and water effects */
+  --gradient-sky: linear-gradient(180deg, #87CEEB 0%, #E0F7FA 100%);
+  --gradient-water: linear-gradient(180deg, var(--color-pool-sparkle) 0%, var(--color-pool-deep) 100%);
+  --gradient-sunset: linear-gradient(90deg, var(--color-sunshine) 0%, var(--color-coral) 100%);
+}
+
+/* ============================================================================
+ * DARK MODE ADJUSTMENTS - Evening pool operations
+ * ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Maintain pool identity but adjust for low light */
+    --color-pool-water: #0080AB;      /* Deeper blue for night */
+    --color-pool-deep: #004D7A;        /* Very deep blue */
+    --color-sunshine: #FFB300;         /* Warmer yellow for evening */
+    
+    /* Backgrounds */
+    --color-background: #001F3F;       /* Deep ocean blue */
+    --color-surface: #003366;          /* Slightly lighter blue */
+    --color-card: #004080;             /* Card background */
+    
+    /* Text */
+    --color-text-primary: #E3F2FD;     /* Light blue-white */
+    --color-text-secondary: #B3E5FC;   /* Light blue */
+    --color-text-muted: #81D4FA;       /* Muted light blue */
+    
+    /* Adjust shadows for dark mode */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ============================================================================
+ * UTILITY CLASSES - Community Pool Theme
+ * ============================================================================ */
+
+.pool-open {
+  background-color: var(--color-pool-sparkle);
+  color: var(--color-pool-deep);
+  border: 2px solid var(--color-pool-water);
+}
+
+.pool-closed {
+  background-color: var(--color-concrete);
+  color: var(--color-pavilion);
+  border: 2px solid var(--color-shade);
+}
+
+.summer-glow {
+  box-shadow: var(--glow-sunshine);
+}
+
+.water-shimmer {
+  background: var(--gradient-water);
+  background-size: 200% 200%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Lifeguard-style alert */
+.lifeguard-alert {
+  background-color: var(--color-coral);
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Community bulletin style */
+.community-notice {
+  background-color: var(--color-sunshine-bright);
+  color: var(--color-text-primary);
+  border-left: 4px solid var(--color-sunshine);
+  padding: 1rem;
+}
+
+/* Pool deck texture effect */
+.pool-deck {
+  background-color: var(--color-concrete);
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(255, 255, 255, 0.1) 10px,
+      rgba(255, 255, 255, 0.1) 20px
+    );
+}

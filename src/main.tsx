@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App'
+import { ThemeProvider } from './components/ui/theme-provider'
 
 // Add immediate feedback
 console.log('main.tsx is loading...')
@@ -27,7 +28,9 @@ function mountApp() {
     console.log('Rendering app...')
     reactRoot.render(
       <StrictMode>
-        <App />
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
       </StrictMode>
     )
     

@@ -1,0 +1,355 @@
+/**
+ * Pool Maintenance System - Design Tokens
+ * 
+ * Comprehensive design system with safety-critical theming patterns
+ * Includes high-contrast modes and chemical safety color palettes
+ */
+
+:root {
+  /* ============================================================================
+   * BASE COLOR PALETTE - COMMUNITY POOL OUTDOOR THEME
+   * ============================================================================ */
+  
+  /* Primary Pool Colors - Community Pool Water Theme */
+  --color-pool-primary: #0AD1E0;      /* Robin egg blue - clear pool water */
+  --color-pool-primary-dark: #3197D6;  /* Celestial blue - deeper water */
+  --color-pool-primary-light: #A8E2F0; /* Blizzard blue - water sparkles */
+  --color-pool-primary-50: #E3FAFF;    /* Bubbles - pool foam/splash */
+  
+  /* Sunshine & Summer Colors - Community Atmosphere */
+  --color-sunshine: #FFD962;          /* Warm yellow - summer sun */
+  --color-sunshine-bright: #FFF59D;   /* Light yellow - bright sunlight */
+  --color-sunshine-glow: #FFB74D;     /* Orange-yellow - sunset glow */
+  --color-sandy: #FFA64A;             /* Sandy brown - pool deck */
+  --color-coral: #FF7F50;             /* Coral - summer fun accent */
+  
+  /* Community & Nature Colors */
+  --color-grass: #4CAF50;             /* Fresh grass green */
+  --color-grass-light: #81C784;       /* Light grass - sunny lawn */
+  --color-mint: #A5D6A7;              /* Mint - refreshing accent */
+
+  /* ============================================================================
+   * SAFETY-CRITICAL COLOR SYSTEM
+   * ============================================================================ */
+  
+  /* Chemical Safety Status Colors - Community Pool Theme (WCAG AAA) */
+  --color-safe: var(--color-grass);           /* Fresh grass green - safe levels */
+  --color-safe-dark: #388E3C;                 /* Darker green for emphasis */
+  --color-safe-light: var(--color-grass-light); /* Light green backgrounds */
+  --color-safe-50: #E8F5E9;                   /* Minimal green tint */
+
+  --color-caution: var(--color-sandy);        /* Sandy brown - caution levels */
+  --color-caution-dark: #F57C00;              /* Darker orange for emphasis */
+  --color-caution-light: #FFCC80;             /* Light orange backgrounds */
+  --color-caution-50: #FFF3E0;                /* Minimal orange tint */
+
+  --color-critical: var(--color-coral);       /* Coral - critical levels */
+  --color-critical-dark: #D84315;             /* Darker coral for emphasis */
+  --color-critical-light: #FFAB91;            /* Light coral backgrounds */
+  --color-critical-50: #FBE9E7;               /* Minimal coral tint */
+
+  --color-emergency: #D32F2F;                 /* Deep red - emergency closure */
+  --color-emergency-dark: #B71C1C;            /* Darkest red for emphasis */
+  --color-emergency-light: #EF5350;           /* Emergency highlights */
+  --color-emergency-50: #FFEBEE;              /* Emergency backgrounds */
+
+  /* ============================================================================
+   * CHEMICAL LEVEL VISUALIZATION
+   * ============================================================================ */
+  
+  /* pH Level Colors - Acid to Base Scale */
+  --color-ph-acidic: #dc2626;         /* Red - dangerously acidic */
+  --color-ph-low: #f59e0b;            /* Amber - low pH */
+  --color-ph-optimal: #10b981;        /* Green - optimal pH range */
+  --color-ph-high: #f59e0b;           /* Amber - high pH */
+  --color-ph-basic: #8b5cf6;          /* Purple - dangerously basic */
+
+  /* Chlorine Level Colors */
+  --color-chlorine-none: #dc2626;     /* Red - no chlorine */
+  --color-chlorine-low: #f59e0b;      /* Amber - low chlorine */
+  --color-chlorine-optimal: #10b981;  /* Green - optimal chlorine */
+  --color-chlorine-high: #f59e0b;     /* Amber - high chlorine */
+  --color-chlorine-excessive: #dc2626; /* Red - dangerous levels */
+
+  /* Equipment Status Colors */
+  --color-equipment-running: #047857;  /* Green - normal operation (AAA contrast) */
+  --color-equipment-maintenance: #b45309; /* Amber - needs attention (AAA contrast) */
+  --color-equipment-stopped: #6b7280;  /* Gray - offline */
+  --color-equipment-error: #b91c1c;    /* Red - malfunction (AAA contrast) */
+
+  /* ============================================================================
+   * NEUTRAL COLORS - Gray Scale
+   * ============================================================================ */
+  
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-gray-950: #030712;
+
+  /* ============================================================================
+   * ACCESSIBILITY & HIGH CONTRAST
+   * ============================================================================ */
+  
+  /* High Contrast Mode Colors - Maximum Outdoor Visibility */
+  --color-hc-background: #ffffff;      /* Pure white backgrounds */
+  --color-hc-surface: var(--color-pool-primary-50); /* Subtle pool tint */
+  --color-hc-text: #0D47A1;           /* Very dark blue text */
+  --color-hc-text-secondary: #1565C0;  /* Dark blue secondary text */
+  --color-hc-border: #01579B;         /* Strong blue borders */
+  --color-hc-focus: var(--color-pool-primary-dark); /* Pool blue focus ring */
+
+  /* Safety Colors - High Contrast Community Pool Variants */
+  --color-hc-safe: #2E7D32;           /* Darkest grass green */
+  --color-hc-caution: #E65100;        /* Darkest sandy orange */
+  --color-hc-critical: #BF360C;       /* Darkest coral red */
+  --color-hc-emergency: #B71C1C;      /* Darkest emergency red */
+
+  /* ============================================================================
+   * SEMANTIC COLOR ASSIGNMENTS - COMMUNITY POOL THEME (LIGHT DEFAULT)
+   * ============================================================================ */
+  
+  /* Primary Brand Colors - Community Pool Water Theme */
+  --color-primary: var(--color-pool-primary);
+  --color-primary-foreground: #ffffff;
+  
+  /* Secondary Brand Colors - Sunshine Theme */
+  --color-secondary: var(--color-sunshine);
+  --color-secondary-foreground: #1A237E;  /* Deep blue text on yellow */
+  
+  /* Status Colors - High Contrast for Outdoor Visibility */
+  --color-success: var(--color-grass);     /* Fresh grass green for success */
+  --color-success-foreground: #ffffff;
+  --color-warning: var(--color-sandy);     /* Sandy warning color */
+  --color-warning-foreground: #1A237E;     /* Deep blue text for contrast */
+  --color-danger: var(--color-coral);      /* Coral for danger/critical */
+  --color-danger-foreground: #ffffff;
+  --color-emergency: #E64A19;              /* Deep orange-red for emergency */
+  --color-emergency-foreground: #ffffff;
+
+  /* Background Colors - Community Pool Atmosphere */
+  --color-background: #ffffff;                  /* Pure white for outdoor visibility */
+  --color-surface: var(--color-pool-primary-50); /* Subtle pool foam color */
+  --color-surface-hover: #D4F7FC;               /* Slightly deeper pool tint */
+  --color-surface-secondary: #F0FDFF;           /* Very light pool color */
+  
+  /* Text Colors - Deep Blue for Outdoor Contrast */
+  --color-text: #1A237E;                        /* Deep indigo for maximum outdoor contrast */
+  --color-text-secondary: #283593;              /* Medium indigo */
+  --color-text-muted: #5C6BC0;                  /* Lighter indigo for less important text */
+  --color-text-inverse: #ffffff;                /* White text for dark backgrounds */
+  
+  /* Border Colors - Pool-Themed */
+  --color-border: #B3E5FC;                      /* Light pool blue borders */
+  --color-border-hover: #81D4FA;                /* Deeper pool blue on hover */
+  --color-border-focus: var(--color-pool-primary);
+
+  /* ============================================================================
+   * SPACING SYSTEM - Pool Maintenance Specific
+   * ============================================================================ */
+  
+  /* Component Spacing */
+  --spacing-dashboard-gap: 1.5rem;     /* Dashboard card spacing */
+  --spacing-form-gap: 1rem;            /* Form field spacing */
+  --spacing-chemical-reading: 0.75rem; /* Chemical reading spacing */
+  --spacing-alert-padding: 1rem;       /* Alert component padding */
+  --spacing-timeline-gap: 0.75rem;     /* Timeline item spacing */
+  
+  /* Safety Critical Dimensions */
+  --size-touch-target: 44px;           /* Minimum touch target size */
+  --size-emergency-button: 60px;       /* Emergency action button size */
+  --size-status-indicator: 12px;       /* Status dot size */
+  --size-chemical-gauge: 120px;        /* Chemical level gauge size */
+
+  /* ============================================================================
+   * TYPOGRAPHY SYSTEM
+   * ============================================================================ */
+  
+  /* Font Families */
+  --font-family-primary: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-family-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-family-dyslexic: "OpenDyslexic", var(--font-family-primary);
+  
+  /* Font Sizes - Pool Management Context */
+  --font-size-chemical-reading: 1.5rem;   /* Chemical value display */
+  --font-size-status-label: 0.875rem;     /* Status indicators */
+  --font-size-alert-title: 1.125rem;      /* Alert headings */
+  --font-size-dashboard-metric: 2rem;     /* Dashboard metrics */
+  --font-size-emergency-text: 1.25rem;    /* Emergency alerts */
+
+  /* Font Weights */
+  --font-weight-chemical: 700;         /* Chemical readings (bold) */
+  --font-weight-status: 600;           /* Status text (semibold) */
+  --font-weight-alert: 600;            /* Alert text (semibold) */
+  --font-weight-emergency: 800;        /* Emergency text (extrabold) */
+
+  /* ============================================================================
+   * ELEVATION & SHADOWS
+   * ============================================================================ */
+  
+  /* Standard Shadows - Softer Pool-Themed */
+  --shadow-sm: 0 1px 3px rgba(49, 151, 214, 0.12);
+  --shadow: 0 4px 6px rgba(49, 151, 214, 0.15);
+  --shadow-md: 0 10px 15px rgba(49, 151, 214, 0.18);
+  --shadow-lg: 0 20px 25px rgba(49, 151, 214, 0.20);
+  
+  /* Safety-Critical Shadows - Community Pool Theme */
+  --shadow-alert: 0 4px 12px 0 rgba(255, 127, 80, 0.25);    /* Coral glow for alerts */
+  --shadow-emergency: 0 6px 20px 0 rgba(211, 47, 47, 0.35); /* Strong red glow */
+  --shadow-success: 0 4px 12px 0 rgba(76, 175, 80, 0.25);   /* Grass green glow */
+  
+  /* Special Effect Shadows */
+  --shadow-water: 0 0 20px rgba(10, 209, 224, 0.3);         /* Water shimmer effect */
+  --shadow-sunshine: 0 0 20px rgba(255, 217, 98, 0.4);      /* Sunshine glow effect */
+  
+  /* ============================================================================
+   * ANIMATION & TRANSITIONS
+   * ============================================================================ */
+  
+  /* Standard Transitions */
+  --transition-standard: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 100ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Safety-Critical Animations */
+  --transition-alert: 150ms cubic-bezier(0.4, 0, 0.2, 1);   /* Quick alert transitions */
+  --transition-emergency: 100ms linear;                      /* Immediate emergency feedback */
+  
+  /* Animation Durations */
+  --duration-pulse: 2s;                /* Status indicator pulse */
+  --duration-blink: 1s;                /* Emergency blink animation */
+  --duration-fade: 300ms;              /* Content fade transitions */
+
+  /* ============================================================================
+   * BORDER RADIUS SYSTEM
+   * ============================================================================ */
+  
+  --radius-xs: 0.125rem;               /* 2px */
+  --radius-sm: 0.25rem;                /* 4px */
+  --radius: 0.375rem;                  /* 6px - standard */
+  --radius-md: 0.5rem;                 /* 8px */
+  --radius-lg: 0.75rem;                /* 12px */
+  --radius-xl: 1rem;                   /* 16px */
+  --radius-full: 9999px;               /* Fully rounded */
+  
+  /* Component-Specific Radius */
+  --radius-chemical-gauge: var(--radius-lg);
+  --radius-status-indicator: var(--radius-full);
+  --radius-alert-box: var(--radius-md);
+
+  /* ============================================================================
+   * BREAKPOINTS - Container Query Support
+   * ============================================================================ */
+  
+  --breakpoint-xs: 20rem;              /* 320px */
+  --breakpoint-sm: 24rem;              /* 384px */
+  --breakpoint-md: 28rem;              /* 448px */
+  --breakpoint-lg: 32rem;              /* 512px */
+  --breakpoint-xl: 36rem;              /* 576px */
+  --breakpoint-2xl: 42rem;             /* 672px */
+  
+  /* ============================================================================
+   * Z-INDEX SCALE
+   * ============================================================================ */
+  
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-emergency-alert: 9999;           /* Highest priority for emergency alerts */
+}
+
+/* ============================================================================
+ * DARK MODE THEME OVERRIDES
+ * ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark Mode Color Adjustments - Evening Pool Operations */
+    --color-background: #001F3F;              /* Deep ocean blue night sky */
+    --color-surface: #003366;                 /* Slightly lighter blue */
+    --color-surface-hover: #004080;           /* Pool blue hover */
+    --color-surface-secondary: #00264D;      /* Darker blue surface */
+    
+    /* Maintain pool identity with adjusted colors */
+    --color-pool-primary: #0080AB;           /* Deeper blue for night */
+    --color-pool-primary-dark: #004D7A;      /* Very deep blue */
+    --color-sunshine: #FFB300;               /* Warmer yellow for evening */
+    --color-grass: #66BB6A;                  /* Brighter green for dark mode */
+    
+    --color-text: #E3F2FD;                   /* Light blue-white */
+    --color-text-secondary: #B3E5FC;         /* Light blue */
+    --color-text-muted: #81D4FA;             /* Muted light blue */
+    
+    --color-border: #0277BD;                 /* Pool blue borders */
+    --color-border-hover: #0288D1;           /* Lighter blue on hover */
+    
+    /* Maintain Safety Colors in Dark Mode - Critical for visibility */
+    --color-safe: #66BB6A;                   /* Bright grass green */
+    --color-caution: #FFB74D;                /* Bright sandy orange */
+    --color-critical: #FF7043;               /* Bright coral */
+    --color-emergency: #FF5252;              /* Bright emergency red */
+    
+    /* Adjust shadows for dark mode */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 10px 15px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.6);
+    
+    /* Glowing effects more prominent in dark */
+    --shadow-water: 0 0 30px rgba(0, 128, 171, 0.5);
+    --shadow-sunshine: 0 0 30px rgba(255, 179, 0, 0.6);
+  }
+}
+
+/* ============================================================================
+ * HIGH CONTRAST MODE
+ * ============================================================================ */
+
+@media (prefers-contrast: high) {
+  :root {
+    /* Override with high contrast variants */
+    --color-background: var(--color-hc-background);
+    --color-text: var(--color-hc-text);
+    --color-border: var(--color-hc-border);
+    --color-focus: var(--color-hc-focus);
+    
+    /* Safety colors with maximum contrast */
+    --color-safe: var(--color-hc-safe);
+    --color-caution: var(--color-hc-caution);
+    --color-critical: var(--color-hc-critical);
+    --color-emergency: var(--color-hc-emergency);
+    
+    /* Stronger shadows for better definition */
+    --shadow: 0 2px 8px 0 rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 12px 0 rgb(0 0 0 / 0.3);
+  }
+}
+
+/* ============================================================================
+ * REDUCED MOTION PREFERENCES
+ * ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    /* Reduce animation durations */
+    --transition-standard: 50ms linear;
+    --transition-fast: 25ms linear;
+    --transition-slow: 50ms linear;
+    --transition-alert: 25ms linear;
+    --transition-emergency: 0ms;        /* No animation for emergencies */
+    
+    /* Disable pulsing animations */
+    --duration-pulse: 0ms;
+    --duration-blink: 0ms;
+  }
+}

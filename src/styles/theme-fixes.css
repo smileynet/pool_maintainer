@@ -1,0 +1,316 @@
+/**
+ * Theme Fixes for Pool Maintenance Application
+ * 
+ * Addresses contrast issues and ensures proper light theme defaults
+ * High contrast colors optimized for outdoor pool environments
+ */
+
+@layer components {
+  /* ============================================================================
+   * FORCE LIGHT THEME DEFAULTS - OUTDOOR VISIBILITY PRIORITY
+   * ============================================================================ */
+  
+  /* Override any dark backgrounds that snuck in */
+  .bg-background {
+    background-color: #ffffff !important;
+  }
+  
+  .bg-card {
+    background-color: #f8fafc !important;
+  }
+  
+  .bg-surface {
+    background-color: #f1f5f9 !important;
+  }
+  
+  /* Force high contrast text for outdoor reading - Deep Indigo */
+  .text-foreground {
+    color: #1A237E !important;
+  }
+  
+  .text-card-foreground {
+    color: #1A237E !important;
+  }
+  
+  .text-muted-foreground {
+    color: #5C6BC0 !important;
+  }
+  
+  .text-secondary {
+    color: #283593 !important;
+  }
+
+  /* ============================================================================
+   * COMPONENT-SPECIFIC FIXES
+   * ============================================================================ */
+  
+  /* Chemical Test Form - High Contrast for Safety */
+  .chemical-test-form {
+    background-color: #ffffff;
+    color: #0f172a;
+  }
+  
+  .chemical-test-form .text-gray-600 {
+    color: #475569 !important;
+  }
+  
+  .chemical-test-form .text-gray-500 {
+    color: #64748b !important;
+  }
+  
+  /* Chemical History Timeline - Outdoor Optimized */
+  .chemical-history-timeline {
+    background-color: #ffffff;
+  }
+  
+  .chemical-history-timeline .text-gray-600 {
+    color: #475569 !important;
+  }
+  
+  /* Card Components - Enhanced Contrast */
+  .card {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+  }
+  
+  .card-header {
+    color: #0f172a !important;
+  }
+  
+  .card-content {
+    color: #0f172a !important;
+  }
+  
+  /* Button Components - Community Pool Theme */
+  .btn-primary {
+    background-color: #0AD1E0 !important;
+    color: #ffffff !important;
+    border: none !important;
+  }
+  
+  .btn-secondary {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+  }
+  
+  .btn-outline {
+    background-color: transparent !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+  }
+  
+  .btn-ghost {
+    background-color: transparent !important;
+    color: #334155 !important;
+  }
+
+  /* ============================================================================
+   * SAFETY STATUS INDICATORS - MAXIMUM CONTRAST
+   * ============================================================================ */
+  
+  /* Chemical Status Badges - Community Pool Theme */
+  .status-safe {
+    background-color: #E8F5E9 !important;
+    color: #2E7D32 !important;
+    border-color: #81C784 !important;
+  }
+  
+  .status-caution {
+    background-color: #FFF3E0 !important;
+    color: #E65100 !important;
+    border-color: #FFCC80 !important;
+  }
+  
+  .status-critical {
+    background-color: #FBE9E7 !important;
+    color: #BF360C !important;
+    border-color: #FFAB91 !important;
+  }
+  
+  .status-emergency {
+    background-color: #FFEBEE !important;
+    color: #B71C1C !important;
+    border: 2px solid #D32F2F !important;
+    font-weight: 800 !important;
+  }
+
+  /* ============================================================================
+   * FORM INPUT ELEMENTS - HIGH VISIBILITY
+   * ============================================================================ */
+  
+  input, textarea, select {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+  }
+  
+  input:focus, textarea:focus, select:focus {
+    border-color: #0ea5e9 !important;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1) !important;
+  }
+  
+  input::placeholder, textarea::placeholder {
+    color: #94a3b8 !important;
+  }
+  
+  /* Labels */
+  label {
+    color: #334155 !important;
+    font-weight: 500 !important;
+  }
+
+  /* ============================================================================
+   * TABLE AND DATA DISPLAY - OUTDOOR READABILITY
+   * ============================================================================ */
+  
+  table {
+    background-color: #ffffff !important;
+  }
+  
+  th {
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+    font-weight: 600 !important;
+  }
+  
+  td {
+    color: #334155 !important;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9fafb !important;
+  }
+  
+  /* Timeline Components */
+  .timeline-item {
+    color: #0f172a !important;
+  }
+  
+  .timeline-content {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+  }
+
+  /* ============================================================================
+   * NAVIGATION AND MENUS - HIGH CONTRAST
+   * ============================================================================ */
+  
+  nav {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+  }
+  
+  .nav-link {
+    color: #334155 !important;
+  }
+  
+  .nav-link:hover {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+  }
+  
+  .nav-link.active {
+    background-color: #0ea5e9 !important;
+    color: #ffffff !important;
+  }
+
+  /* ============================================================================
+   * DROPDOWN AND POPOVER FIXES
+   * ============================================================================ */
+  
+  .dropdown-content, .popover-content {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .dropdown-item {
+    color: #334155 !important;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+  }
+
+  /* ============================================================================
+   * ACCESSIBILITY ENHANCEMENTS
+   * ============================================================================ */
+  
+  /* Focus states - highly visible for safety-critical operations */
+  *:focus {
+    outline: 2px solid #0AD1E0 !important;
+    outline-offset: 2px !important;
+  }
+  
+  /* High contrast mode improvements */
+  @media (prefers-contrast: high) {
+    .card, .input, .btn-outline {
+      border-width: 2px !important;
+    }
+    
+    .text-muted-foreground {
+      color: #475569 !important;
+    }
+    
+    .status-emergency {
+      border-width: 3px !important;
+    }
+  }
+  
+  /* Reduced motion safety */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ============================================================================
+ * DARK MODE OVERRIDES - FOR INDOOR/EVENING USE
+ * ============================================================================ */
+
+.dark {
+  /* Only apply dark mode when explicitly set, not by default */
+}
+
+.dark .bg-background {
+  background-color: #0f172a !important;
+}
+
+.dark .text-foreground {
+  color: #f8fafc !important;
+}
+
+.dark .card {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
+}
+
+.dark .status-safe {
+  background-color: #14532d !important;
+  color: #bbf7d0 !important;
+}
+
+.dark .status-caution {
+  background-color: #92400e !important;
+  color: #fed7aa !important;
+}
+
+.dark .status-critical {
+  background-color: #991b1b !important;
+  color: #fecaca !important;
+}
+
+.dark .status-emergency {
+  background-color: #7f1d1d !important;
+  color: #fee2e2 !important;
+  border-color: #b91c1c !important;
+}

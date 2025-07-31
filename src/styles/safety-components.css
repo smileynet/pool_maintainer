@@ -1,0 +1,538 @@
+/**
+ * Safety-Critical Component Styles
+ * 
+ * Pre-built CSS classes for pool maintenance safety patterns
+ * Designed for high visibility and accessibility compliance
+ * Using pure CSS with design tokens for maximum compatibility
+ */
+
+@layer components {
+  /* ============================================================================
+   * CHEMICAL STATUS INDICATORS
+   * ============================================================================ */
+  
+  .chemical-status-safe {
+    background-color: var(--color-safe-50);
+    color: var(--color-safe-dark);
+    border-color: var(--color-safe-light);
+    border-width: 1px;
+    border-style: solid;
+    padding: 0.5rem;
+    border-radius: var(--radius);
+  }
+  
+  .chemical-status-caution {
+    background-color: var(--color-caution-50);
+    color: var(--color-caution-dark);
+    border-color: var(--color-caution-light);
+    border-width: 1px;
+    border-style: solid;
+    padding: 0.5rem;
+    border-radius: var(--radius);
+  }
+  
+  .chemical-status-critical {
+    background-color: var(--color-critical-50);
+    color: var(--color-critical-dark);
+    border-color: var(--color-critical-light);
+    border-width: 1px;
+    border-style: solid;
+    padding: 0.5rem;
+    border-radius: var(--radius);
+  }
+  
+  .chemical-status-emergency {
+    background-color: var(--color-emergency-light);
+    color: var(--color-emergency-dark);
+    border-color: var(--color-emergency);
+    border-width: 2px;
+    border-style: solid;
+    padding: 0.5rem;
+    border-radius: var(--radius);
+    font-weight: var(--font-weight-emergency);
+    box-shadow: 0 0 0 2px var(--color-emergency-light);
+  }
+
+  /* High contrast variants */
+  .high-contrast .chemical-status-safe {
+    background-color: var(--color-hc-background);
+    color: var(--color-hc-safe);
+    border-color: var(--color-hc-safe);
+    border-width: 2px;
+  }
+  
+  .high-contrast .chemical-status-caution {
+    background-color: var(--color-hc-background);
+    color: var(--color-hc-caution);
+    border-color: var(--color-hc-caution);
+    border-width: 2px;
+  }
+  
+  .high-contrast .chemical-status-critical {
+    background-color: var(--color-hc-background);
+    color: var(--color-hc-critical);
+    border-color: var(--color-hc-critical);
+    border-width: 2px;
+  }
+  
+  .high-contrast .chemical-status-emergency {
+    background-color: var(--color-emergency-50);
+    color: var(--color-hc-emergency);
+    border-color: var(--color-hc-emergency);
+    border-width: 4px;
+    font-weight: 800;
+  }
+
+  /* ============================================================================
+   * SAFETY ALERT COMPONENTS
+   * ============================================================================ */
+  
+  .safety-alert {
+    position: relative;
+    border-radius: var(--radius-md);
+    border-width: 1px;
+    border-style: solid;
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-standard);
+  }
+  
+  .safety-alert-info {
+    background-color: #eff6ff;
+    color: #1e40af;
+    border-color: #bfdbfe;
+  }
+  
+  .safety-alert-success {
+    background-color: var(--color-safe-50);
+    color: var(--color-safe-dark);
+    border-color: var(--color-safe-light);
+  }
+  
+  .safety-alert-warning {
+    background-color: var(--color-caution-50);
+    color: var(--color-caution-dark);
+    border-color: var(--color-caution-light);
+  }
+  
+  .safety-alert-danger {
+    background-color: var(--color-critical-50);
+    color: var(--color-critical-dark);
+    border-color: var(--color-critical-light);
+  }
+  
+  .safety-alert-emergency {
+    background-color: var(--color-emergency-50);
+    color: var(--color-emergency-dark);
+    border-color: var(--color-emergency);
+    border-width: 2px;
+    box-shadow: var(--shadow-emergency);
+    animation: emergency-pulse var(--duration-pulse) infinite;
+  }
+
+  /* Emergency pulse animation */
+  @keyframes emergency-pulse {
+    0%, 100% { 
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+    }
+    50% { 
+      box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+    }
+  }
+
+  /* Disable animation for reduced motion */
+  .reduced-motion .safety-alert-emergency {
+    animation: none;
+  }
+
+  /* ============================================================================
+   * CHEMICAL READING DISPLAYS  
+   * ============================================================================ */
+  
+  .chemical-reading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    border-radius: var(--radius-lg);
+    border-width: 1px;
+    border-style: solid;
+    background-color: var(--color-background);
+    border-color: var(--color-border);
+    transition: color var(--transition-standard);
+  }
+  
+  .chemical-reading-value {
+    font-size: var(--font-size-chemical-reading);
+    font-weight: var(--font-weight-chemical);
+    letter-spacing: -0.025em;
+  }
+  
+  .chemical-reading-unit {
+    font-size: var(--font-size-status-label);
+    color: var(--color-text-muted);
+    margin-left: 0.25rem;
+  }
+  
+  .chemical-reading-label {
+    font-size: var(--font-size-status-label);
+    font-weight: var(--font-weight-status);
+    color: var(--color-text-secondary);
+  }
+  
+  .chemical-reading-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-status);
+  }
+
+  /* ============================================================================
+   * EQUIPMENT STATUS INDICATORS
+   * ============================================================================ */
+  
+  .equipment-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-status-label);
+    font-weight: var(--font-weight-status);
+    border-width: 1px;
+    border-style: solid;
+  }
+  
+  .equipment-status-running {
+    background-color: var(--color-safe-50);
+    color: var(--color-safe-dark);
+    border-color: var(--color-safe-light);
+  }
+  
+  .equipment-status-maintenance {
+    background-color: var(--color-caution-50);
+    color: var(--color-caution-dark);
+    border-color: var(--color-caution-light);
+  }
+  
+  .equipment-status-stopped {
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-700);
+    border-color: var(--color-gray-200);
+  }
+  
+  .equipment-status-error {
+    background-color: var(--color-critical-50);
+    color: var(--color-critical-dark);
+    border-color: var(--color-critical-light);
+  }
+
+  /* Status indicator dots */
+  .status-dot {
+    width: var(--size-status-indicator);
+    height: var(--size-status-indicator);
+    border-radius: var(--radius-full);
+  }
+  
+  .status-dot-running {
+    background-color: var(--color-safe);
+    animation: status-pulse var(--duration-pulse) infinite;
+  }
+  
+  .status-dot-maintenance {
+    background-color: var(--color-caution);
+    animation: status-blink var(--duration-blink) infinite;
+  }
+  
+  .status-dot-stopped {
+    background-color: var(--color-gray-400);
+  }
+  
+  .status-dot-error {
+    background-color: var(--color-critical);
+    animation: status-blink 0.5s infinite;
+  }
+
+  @keyframes status-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  @keyframes status-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  /* Disable animations for reduced motion */
+  .reduced-motion .status-dot-running,
+  .reduced-motion .status-dot-maintenance,
+  .reduced-motion .status-dot-error {
+    animation: none;
+  }
+
+  /* ============================================================================
+   * EMERGENCY ACTION BUTTONS
+   * ============================================================================ */
+  
+  .emergency-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: var(--color-critical);
+    color: white;
+    border: 1px solid var(--color-critical-dark);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    transition: all var(--transition-alert);
+    min-width: 120px;
+    min-height: var(--size-touch-target);
+  }
+  
+  .emergency-button:hover {
+    background-color: var(--color-critical-dark);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .emergency-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.3);
+  }
+  
+  .emergency-button:active {
+    background-color: var(--color-emergency-dark);
+    transform: scale(0.95);
+  }
+  
+  .emergency-button:disabled {
+    background-color: var(--color-gray-400);
+    border-color: var(--color-gray-500);
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  .emergency-button:disabled:hover {
+    background-color: var(--color-gray-400);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .emergency-button-large {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    min-width: 160px;
+    min-height: var(--size-emergency-button);
+  }
+
+  /* High contrast emergency button */
+  .high-contrast .emergency-button {
+    background-color: var(--color-hc-critical);
+    border-color: var(--color-hc-emergency);
+    border-width: 2px;
+  }
+  
+  .high-contrast .emergency-button:hover {
+    background-color: var(--color-hc-emergency);
+  }
+  
+  .high-contrast .emergency-button:focus {
+    box-shadow: 0 0 0 4px rgba(185, 28, 28, 0.4);
+  }
+
+  /* ============================================================================
+   * POOL STATUS CARDS
+   * ============================================================================ */
+  
+  .pool-status-card {
+    position: relative;
+    background-color: var(--color-background);
+    border-radius: var(--radius-xl);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--color-border);
+    box-shadow: var(--shadow-sm);
+    padding: 1.5rem;
+    transition: all var(--transition-standard);
+  }
+  
+  .pool-status-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-border-hover);
+  }
+  
+  .pool-status-card-safe {
+    border-left-width: 4px;
+    border-left-color: var(--color-safe);
+    background-color: color-mix(in srgb, var(--color-safe-50) 30%, var(--color-background));
+  }
+  
+  .pool-status-card-caution {
+    border-left-width: 4px;
+    border-left-color: var(--color-caution);
+    background-color: color-mix(in srgb, var(--color-caution-50) 30%, var(--color-background));
+  }
+  
+  .pool-status-card-critical {
+    border-left-width: 4px;
+    border-left-color: var(--color-critical);
+    background-color: color-mix(in srgb, var(--color-critical-50) 30%, var(--color-background));
+  }
+  
+  .pool-status-card-emergency {
+    border-left-width: 4px;
+    border-left-color: var(--color-emergency-dark);
+    border-width: 2px;
+    background-color: color-mix(in srgb, var(--color-emergency-50) 50%, var(--color-background));
+    box-shadow: var(--shadow-emergency);
+  }
+
+  /* ============================================================================
+   * CHEMICAL TIMELINE COMPONENTS
+   * ============================================================================ */
+  
+  .timeline-item {
+    position: relative;
+    padding-bottom: var(--spacing-timeline-gap);
+  }
+  
+  .timeline-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 1.25rem;
+    top: 2.5rem;
+    width: 1px;
+    height: 100%;
+    background-color: var(--color-border);
+  }
+  
+  .timeline-dot {
+    position: absolute;
+    left: 0.75rem;
+    top: 0.75rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: var(--radius-full);
+    border-width: 2px;
+    border-style: solid;
+    background-color: var(--color-background);
+  }
+  
+  .timeline-dot-safe {
+    border-color: var(--color-safe);
+    background-color: var(--color-safe-50);
+  }
+  
+  .timeline-dot-caution {
+    border-color: var(--color-caution);
+    background-color: var(--color-caution-50);
+  }
+  
+  .timeline-dot-critical {
+    border-color: var(--color-critical);
+    background-color: var(--color-critical-50);
+  }
+  
+  .timeline-dot-emergency {
+    border-color: var(--color-emergency-dark);
+    background-color: var(--color-emergency-50);
+    border-width: 4px;
+  }
+  
+  .timeline-content {
+    margin-left: 3rem;
+    background-color: var(--color-background);
+    border-radius: var(--radius-lg);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--color-border);
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* ============================================================================
+   * ACCESSIBILITY ENHANCEMENTS
+   * ============================================================================ */
+  
+  /* Dyslexic font support */
+  .dyslexic-font {
+    font-family: var(--font-family-dyslexic);
+  }
+  
+  .dyslexic-font .chemical-reading-value,
+  .dyslexic-font .chemical-reading-label {
+    font-family: var(--font-family-dyslexic);
+  }
+
+  /* Font scaling support */
+  .scaled-font {
+    font-size: calc(1rem * var(--font-scale, 1));
+  }
+  
+  .scaled-font-sm {
+    font-size: calc(0.875rem * var(--font-scale, 1));
+  }
+  
+  .scaled-font-lg {
+    font-size: calc(1.125rem * var(--font-scale, 1));
+  }
+  
+  .scaled-font-xl {
+    font-size: calc(1.25rem * var(--font-scale, 1));
+  }
+
+  /* Focus enhancements for safety-critical elements */
+  .safety-focus {
+    outline: none;
+  }
+  
+  .safety-focus:focus {
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+  }
+  
+  .high-contrast .safety-focus:focus {
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.6), 0 0 0 6px rgba(255, 255, 255, 1);
+  }
+
+  /* ============================================================================
+   * PRINT STYLES FOR COMPLIANCE REPORTS
+   * ============================================================================ */
+  
+  @media print {
+    .safety-alert-emergency {
+      border: 4px solid black;
+      background-color: #f3f4f6;
+      animation: none;
+      box-shadow: none;
+    }
+    
+    .chemical-status-emergency {
+      border: 2px solid black;
+      background-color: #f3f4f6;
+    }
+    
+    .equipment-status {
+      border: 1px solid black;
+    }
+    
+    .pool-status-card {
+      border: 1px solid #6b7280;
+      box-shadow: none;
+      break-inside: avoid;
+    }
+    
+    .timeline-item {
+      break-inside: avoid;
+    }
+    
+    .emergency-button {
+      border: 2px solid black;
+      background-color: #f3f4f6;
+      color: black;
+    }
+  }
+}

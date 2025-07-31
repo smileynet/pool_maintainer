@@ -103,11 +103,11 @@ const ChemicalInput = ({
             )}
           >
             <div className={cn('font-medium', validation.color)}>{validation.message}</div>
-            <div className="mt-1 text-gray-600">
+            <div className="mt-1 text-muted-foreground">
               Acceptable: {getAcceptableRange(chemical)} | Ideal: {getIdealRange(chemical)}
             </div>
             {validation.recommendation && (
-              <div className="mt-2 text-xs text-gray-700">
+              <div className="mt-2 text-xs text-foreground">
                 <strong>Action:</strong> {validation.recommendation}
               </div>
             )}
@@ -234,11 +234,11 @@ export const ChemicalTestForm = ({
             <TestTube className="h-5 w-5 text-blue-500" />
             Chemical Test Entry
           </h3>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-muted-foreground">
             Record chemical readings with MAHC compliance validation
           </p>
         </div>
-        <div className="flex items-center gap-2 text-xs text-gray-500">
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <Clock className="h-4 w-4" />
           {new Date().toLocaleString()}
         </div>
@@ -374,7 +374,7 @@ export const ChemicalTestForm = ({
         </Label>
         <textarea
           id="notes"
-          className="resize-vertical min-h-[80px] w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          className="resize-vertical min-h-[80px] w-full rounded-md border border-input px-3 py-2 text-sm focus:border-transparent focus:ring-2 focus:ring-ring focus:outline-none bg-background text-foreground"
           placeholder="Additional observations, equipment issues, or special conditions..."
           value={formData.notes}
           onChange={(e) => setFormData((prev) => ({ ...prev, notes: e.target.value }))}

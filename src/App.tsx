@@ -98,8 +98,8 @@ function App() {
     <div className="space-y-8">
       {/* Welcome Section */}
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome to Pool Maintenance</h2>
-        <p className="text-gray-600">Monitor and manage community pool safety and maintenance operations.</p>
+        <h2 className="text-2xl font-bold text-foreground mb-2">Welcome to Pool Maintenance</h2>
+        <p className="text-muted-foreground">Monitor and manage community pool safety and maintenance operations.</p>
       </div>
 
       {/* Metrics Grid */}
@@ -109,10 +109,10 @@ function App() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">{metric.title}</p>
+                  <p className="text-sm font-medium text-muted-foreground">{metric.title}</p>
                   <div className="flex items-center gap-2 mt-2">
                     <span className="text-2xl font-bold">{metric.value}</span>
-                    <div className="flex items-center gap-1 text-sm text-green-600">
+                    <div className="flex items-center gap-1 text-sm text-green-600 dark:text-green-400">
                       <TrendingUp className="h-4 w-4" />
                       <span>{metric.change}</span>
                     </div>
@@ -141,10 +141,10 @@ function App() {
           <CardContent>
             <div className="space-y-4">
               {recentReadings.map((reading) => (
-                <div key={reading.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div key={reading.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
                   <div className="flex-1">
                     <h4 className="font-medium">{reading.name}</h4>
-                    <div className="flex items-center gap-4 mt-1 text-sm text-gray-600">
+                    <div className="flex items-center gap-4 mt-1 text-sm text-muted-foreground">
                       <span>Cl: {reading.chlorine} ppm</span>
                       <span>pH: {reading.ph}</span>
                       <span>{reading.lastTested}</span>
@@ -181,7 +181,7 @@ function App() {
                 <TestTube className="mr-3 h-5 w-5" />
                 <div className="text-left">
                   <div className="font-medium">Record Chemical Reading</div>
-                  <div className="text-sm text-gray-500">Log chlorine, pH, and other measurements</div>
+                  <div className="text-sm text-muted-foreground">Log chlorine, pH, and other measurements</div>
                 </div>
               </Button>
               
@@ -193,7 +193,7 @@ function App() {
                 <Users className="mr-3 h-5 w-5" />
                 <div className="text-left">
                   <div className="font-medium">Assign Maintenance Task</div>
-                  <div className="text-sm text-gray-500">Schedule work for technicians</div>
+                  <div className="text-sm text-muted-foreground">Schedule work for technicians</div>
                 </div>
               </Button>
               
@@ -205,7 +205,7 @@ function App() {
                 <MapPin className="mr-3 h-5 w-5" />
                 <div className="text-left">
                   <div className="font-medium">Pool Status Update</div>
-                  <div className="text-sm text-gray-500">Change operational status</div>
+                  <div className="text-sm text-muted-foreground">Change operational status</div>
                 </div>
               </Button>
               
@@ -217,7 +217,7 @@ function App() {
                 <Activity className="mr-3 h-5 w-5" />
                 <div className="text-left">
                   <div className="font-medium">View Reports</div>
-                  <div className="text-sm text-gray-500">Access maintenance history and analytics</div>
+                  <div className="text-sm text-muted-foreground">Access maintenance history and analytics</div>
                 </div>
               </Button>
             </div>
@@ -230,7 +230,7 @@ function App() {
         <Card className="bg-blue-50 border-blue-200">
           <CardContent className="pt-6">
             <h3 className="text-lg font-semibold mb-2">Component Documentation</h3>
-            <p className="text-gray-600 mb-4">
+            <p className="text-muted-foreground mb-4">
               Explore our complete UI component library with pool maintenance examples
             </p>
             <Button asChild>
@@ -248,14 +248,14 @@ function App() {
   const renderAnalytics = () => (
     <div className="space-y-8">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Analytics & Reports</h2>
-        <p className="text-gray-600">Advanced analytics and reporting features coming in Phase 2.3</p>
+        <h2 className="text-2xl font-bold text-foreground mb-2">Analytics & Reports</h2>
+        <p className="text-muted-foreground">Advanced analytics and reporting features coming in Phase 2.3</p>
       </div>
       
       <Card className="p-12 text-center">
         <BarChart3 className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-        <h3 className="text-lg font-medium text-gray-900 mb-2">Analytics Dashboard</h3>
-        <p className="text-gray-500 mb-4">
+        <h3 className="text-lg font-medium text-foreground mb-2">Analytics Dashboard</h3>
+        <p className="text-muted-foreground mb-4">
           Advanced reporting, trend analysis, and predictive maintenance features will be available in the next phase.
         </p>
         <div className="flex justify-center gap-2">
@@ -269,14 +269,14 @@ function App() {
   )
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-background shadow-sm border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <Droplet className="h-8 w-8 text-blue-600 mr-3" />
-              <h1 className="text-xl font-semibold text-gray-900">Pool Maintenance System</h1>
+              <h1 className="text-xl font-semibold text-foreground">Pool Maintenance System</h1>
             </div>
             <div className="flex items-center gap-4">
               <Button variant="outline">
@@ -293,7 +293,7 @@ function App() {
       </header>
 
       {/* Navigation Tabs */}
-      <div className="bg-white border-b">
+      <div className="bg-background border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex space-x-8" aria-label="Tabs">
             {tabs.map((tab) => {
@@ -306,7 +306,7 @@ function App() {
                     'flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap',
                     activeTab === tab.id
                       ? 'border-blue-500 text-blue-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
                   )}
                   aria-current={activeTab === tab.id ? 'page' : undefined}
                 >
