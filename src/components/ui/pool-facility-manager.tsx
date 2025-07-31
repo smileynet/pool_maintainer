@@ -371,32 +371,25 @@ const PoolFacilityCard = ({
   const chlorineStatus = getChemicalStatus(pool.chemicalLevels.freeChlorine, 'chlorine')
   const phStatus = getChemicalStatus(pool.chemicalLevels.ph, 'ph')
 
-  // Add visual pulse for critical conditions
-  const hasCriticalIssue =
-    pool.status === 'emergency' ||
-    criticalAlerts > 0 ||
-    chlorineStatus.status === 'critical' ||
-    phStatus.status === 'critical'
+  // Simplified critical condition check
+  const hasCriticalIssue = pool.status === 'emergency' || criticalAlerts > 0
 
   return (
     <Card
       className={cn(
-        'card-interactive relative overflow-hidden transition-all duration-300',
-        pool.status === 'emergency' && 'ring-destructive animate-pulse ring-2',
-        pool.status === 'maintenance' && 'ring-1 ring-yellow-500',
-        hasCriticalIssue && 'shadow-destructive/20 shadow-lg'
+        'card-interactive relative overflow-hidden',
+        pool.status === 'emergency' && 'ring-destructive ring-2',
+        pool.status === 'maintenance' && 'ring-1 ring-yellow-500'
       )}
     >
-      {/* Critical Alert Banner */}
-      {hasCriticalIssue && (
-        <div className="bg-destructive absolute inset-x-0 top-0 h-1 animate-pulse" />
-      )}
+      {/* Simplified Critical Alert Banner */}
+      {hasCriticalIssue && <div className="bg-destructive absolute inset-x-0 top-0 h-1" />}
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div>
             <CardTitle className="flex items-center gap-2">
               {hasCriticalIssue ? (
-                <Siren className="text-destructive h-4 w-4 animate-pulse" />
+                <Siren className="text-destructive h-4 w-4" />
               ) : (
                 <MapPin className="text-primary h-4 w-4" />
               )}
@@ -452,7 +445,6 @@ const PoolFacilityCard = ({
                 }
                 className={cn(
                   'text-xs',
-                  occupancyPercentage > 90 && 'animate-pulse',
                   occupancyPercentage > 75 &&
                     occupancyPercentage <= 90 &&
                     'border-yellow-500 text-yellow-700'
@@ -475,10 +467,8 @@ const PoolFacilityCard = ({
                 )}
                 style={{ width: `${occupancyPercentage}%` }}
               >
-                {/* Animated stripes for high capacity */}
-                {occupancyPercentage > 75 && (
-                  <div className="bg-stripes absolute inset-0 opacity-20" />
-                )}
+                {/* Simple high capacity indicator */}
+                {occupancyPercentage > 90 && <div className="absolute inset-0 bg-white/10" />}
               </div>
             </div>
             {/* Capacity threshold markers */}
@@ -539,81 +529,38 @@ const PoolFacilityCard = ({
           <div className="space-y-2">
             <div className="flex flex-wrap gap-1">
               {criticalAlerts > 0 && (
-                <Badge variant="destructive" className="animate-pulse text-xs">
-                  <Siren className="mr-1 h-3 w-3" />
+                <Badge variant="destructive" className="text-xs">
+                  <AlertTriangle className="mr-1 h-3 w-3" />
                   {criticalAlerts} Critical
                 </Badge>
               )}
               {highAlerts > 0 && (
                 <Badge variant="outline" className="border-yellow-500 text-xs text-yellow-700">
-                  <AlertTriangle className="mr-1 h-3 w-3" />
                   {highAlerts} High
                 </Badge>
               )}
             </div>
-            {/* Most recent critical alert */}
-            {pool.alerts.filter((a) => a.severity === 'critical')[0] && (
-              <div className="text-destructive bg-destructive/10 rounded px-2 py-1 text-xs">
-                {pool.alerts.filter((a) => a.severity === 'critical')[0].message}
-              </div>
-            )}
           </div>
         )}
 
-        {/* Enhanced Assignment and Schedule */}
-        <div className="space-y-3">
-          {/* Technician Assignment with Workload */}
-          <div className="bg-muted/30 rounded-lg p-3">
-            <div className="mb-2 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="bg-primary/20 flex h-8 w-8 items-center justify-center rounded-full">
-                  <span className="text-primary text-sm font-medium">
-                    {pool.assignedTechnician
-                      .split(' ')
-                      .map((n) => n[0])
-                      .join('')}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-foreground text-sm font-medium">
-                    {pool.assignedTechnician}
-                  </span>
-                  <div className="text-muted-foreground text-xs">Assigned Technician</div>
-                </div>
-              </div>
-              {/* Workload Indicator */}
-              <div className="text-right">
-                <Badge variant="outline" className="text-xs">
-                  {pool.status === 'emergency'
-                    ? 'Priority'
-                    : pool.status === 'maintenance'
-                      ? 'Active'
-                      : 'Monitoring'}
-                </Badge>
-              </div>
-            </div>
-
-            {/* Next Maintenance Schedule */}
-            <div className="flex items-center gap-2 text-xs">
-              <Clock className="text-muted-foreground h-3 w-3" />
-              <span className="text-muted-foreground">Next maintenance:</span>
-              <span
-                className={cn(
-                  'font-medium',
-                  new Date(pool.nextMaintenance) <= new Date(Date.now() + 24 * 60 * 60 * 1000)
-                    ? 'text-orange-600'
-                    : new Date(pool.nextMaintenance) <=
-                        new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
-                      ? 'text-yellow-600'
-                      : 'text-muted-foreground'
-                )}
-              >
-                {new Date(pool.nextMaintenance).toLocaleDateString()}
-              </span>
-              {new Date(pool.nextMaintenance) <= new Date(Date.now() + 24 * 60 * 60 * 1000) && (
-                <AlertCircle className="h-3 w-3 text-orange-600" />
+        {/* Assignment and Schedule */}
+        <div className="space-y-1 text-sm">
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">Technician:</span>
+            <span className="text-foreground font-medium">{pool.assignedTechnician}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">Next Maintenance:</span>
+            <span
+              className={cn(
+                'text-xs',
+                new Date(pool.nextMaintenance) <= new Date(Date.now() + 24 * 60 * 60 * 1000)
+                  ? 'text-primary font-medium'
+                  : 'text-muted-foreground'
               )}
-            </div>
+            >
+              {new Date(pool.nextMaintenance).toLocaleDateString()}
+            </span>
           </div>
         </div>
 
@@ -687,119 +634,42 @@ const PoolDetailView = ({
         </Select>
       </div>
 
-      {/* Chemical Levels Detail with Visual Indicators */}
+      {/* Simplified Chemical Levels */}
       <div>
-        <h4 className="mb-3 flex items-center gap-2 font-medium">
-          <TestTube className="h-4 w-4" />
-          Chemical Levels
-        </h4>
-        <div className="space-y-3">
-          {/* Chlorine Level */}
-          <div className="space-y-1">
-            <div className="flex items-center justify-between">
-              <span className="text-sm">Free Chlorine</span>
-              <div className="flex items-center gap-2">
-                <span
-                  className={cn(
-                    'font-medium',
-                    getChemicalStatus(pool.chemicalLevels.freeChlorine, 'chlorine').color
-                  )}
-                >
-                  {pool.chemicalLevels.freeChlorine.toFixed(1)} ppm
-                </span>
-                {getChemicalStatus(pool.chemicalLevels.freeChlorine, 'chlorine').status ===
-                  'critical' && <AlertCircle className="text-destructive h-4 w-4 animate-pulse" />}
-              </div>
+        <h4 className="mb-3 font-medium">Chemical Levels</h4>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <div className="flex justify-between">
+              <span>Free Chlorine:</span>
+              <span
+                className={getChemicalStatus(pool.chemicalLevels.freeChlorine, 'chlorine').color}
+              >
+                {pool.chemicalLevels.freeChlorine.toFixed(1)} ppm
+              </span>
             </div>
-            <div className="bg-muted relative h-2 overflow-hidden rounded-full">
-              <div className="absolute flex h-full w-full">
-                <div className="bg-destructive/30 w-[33%]"></div>
-                <div className="w-[34%] bg-green-500/30"></div>
-                <div className="bg-destructive/30 w-[33%]"></div>
-              </div>
-              <div
-                className={cn(
-                  'absolute top-0 h-full w-1',
-                  getChemicalStatus(pool.chemicalLevels.freeChlorine, 'chlorine').bg
-                )}
-                style={{
-                  left: `${Math.max(0, Math.min(100, (pool.chemicalLevels.freeChlorine / 4.5) * 100))}%`,
-                }}
-              />
-            </div>
-            <div className="text-muted-foreground flex justify-between text-xs">
-              <span>0</span>
-              <span className="text-green-600">1.0-3.0</span>
-              <span>4.5</span>
+            <div className="flex justify-between">
+              <span>pH Level:</span>
+              <span className={getChemicalStatus(pool.chemicalLevels.ph, 'ph').color}>
+                {pool.chemicalLevels.ph.toFixed(1)}
+              </span>
             </div>
           </div>
-
-          {/* pH Level */}
-          <div className="space-y-1">
-            <div className="flex items-center justify-between">
-              <span className="text-sm">pH Level</span>
-              <div className="flex items-center gap-2">
-                <span
-                  className={cn(
-                    'font-medium',
-                    getChemicalStatus(pool.chemicalLevels.ph, 'ph').color
-                  )}
-                >
-                  {pool.chemicalLevels.ph.toFixed(1)}
-                </span>
-                {getChemicalStatus(pool.chemicalLevels.ph, 'ph').status === 'critical' && (
-                  <AlertCircle className="text-destructive h-4 w-4 animate-pulse" />
-                )}
-              </div>
+          <div className="space-y-2">
+            <div className="flex justify-between">
+              <span>Total Alkalinity:</span>
+              <span
+                className={getChemicalStatus(pool.chemicalLevels.alkalinity, 'alkalinity').color}
+              >
+                {pool.chemicalLevels.alkalinity} ppm
+              </span>
             </div>
-            <div className="bg-muted relative h-2 overflow-hidden rounded-full">
-              <div className="absolute flex h-full w-full">
-                <div className="bg-destructive/30 w-[30%]"></div>
-                <div className="w-[40%] bg-green-500/30"></div>
-                <div className="bg-destructive/30 w-[30%]"></div>
-              </div>
-              <div
-                className={cn(
-                  'absolute top-0 h-full w-1',
-                  getChemicalStatus(pool.chemicalLevels.ph, 'ph').bg
-                )}
-                style={{
-                  left: `${Math.max(0, Math.min(100, ((pool.chemicalLevels.ph - 6.0) / 3.0) * 100))}%`,
-                }}
-              />
-            </div>
-            <div className="text-muted-foreground flex justify-between text-xs">
-              <span>6.0</span>
-              <span className="text-green-600">7.2-7.6</span>
-              <span>9.0</span>
-            </div>
-          </div>
-
-          {/* Alkalinity and Temperature */}
-          <div className="grid grid-cols-2 gap-3 pt-2">
-            <div>
-              <span className="text-muted-foreground text-sm">Alkalinity</span>
-              <div className="flex items-center gap-1">
-                <span
-                  className={cn(
-                    'font-medium',
-                    getChemicalStatus(pool.chemicalLevels.alkalinity, 'alkalinity').color
-                  )}
-                >
-                  {pool.chemicalLevels.alkalinity} ppm
-                </span>
-                {getChemicalStatus(pool.chemicalLevels.alkalinity, 'alkalinity').status !==
-                  'safe' && <span className="text-xs">(80-120)</span>}
-              </div>
-            </div>
-            <div>
-              <span className="text-muted-foreground text-sm">Temperature</span>
-              <div className="font-medium">{pool.chemicalLevels.temperature}°F</div>
+            <div className="flex justify-between">
+              <span>Temperature:</span>
+              <span>{pool.chemicalLevels.temperature}°F</span>
             </div>
           </div>
         </div>
-        <div className="text-muted-foreground mt-3 flex items-center gap-1 text-xs">
-          <Clock className="h-3 w-3" />
+        <div className="text-muted-foreground mt-2 text-xs">
           Last tested: {new Date(pool.chemicalLevels.lastTested).toLocaleString()}
         </div>
       </div>
@@ -847,7 +717,6 @@ const PoolDetailView = ({
                       : 'destructive'
                 }
                 className={cn(
-                  pool.equipment.pump === 'failure' && 'animate-pulse',
                   pool.equipment.pump === 'maintenance' && 'border-yellow-500 text-yellow-700'
                 )}
               >
@@ -858,7 +727,7 @@ const PoolDetailView = ({
                     : 'Failure'}
               </Badge>
               {pool.equipment.pump === 'failure' && (
-                <AlertTriangle className="text-destructive h-4 w-4 animate-pulse" />
+                <AlertTriangle className="text-destructive h-4 w-4" />
               )}
             </div>
           </div>
@@ -899,7 +768,6 @@ const PoolDetailView = ({
                       : 'destructive'
                 }
                 className={cn(
-                  pool.equipment.filter === 'replacement' && 'animate-pulse',
                   pool.equipment.filter === 'needs_cleaning' && 'border-yellow-500 text-yellow-700'
                 )}
               >
@@ -910,7 +778,7 @@ const PoolDetailView = ({
                     : 'Replace'}
               </Badge>
               {pool.equipment.filter === 'replacement' && (
-                <AlertTriangle className="text-destructive h-4 w-4 animate-pulse" />
+                <AlertTriangle className="text-destructive h-4 w-4" />
               )}
             </div>
           </div>
@@ -1170,7 +1038,7 @@ export const PoolFacilityManager = () => {
               onClick={() => setAutoRefresh(!autoRefresh)}
               size="sm"
             >
-              <Activity className={cn('mr-1 h-3 w-3', autoRefresh && 'animate-pulse')} />
+              <Activity className="mr-1 h-3 w-3" />
               {autoRefresh ? 'Auto' : 'Manual'}
             </Button>
             <span className="text-muted-foreground text-xs">
@@ -1184,12 +1052,12 @@ export const PoolFacilityManager = () => {
         </div>
       </div>
 
-      {/* Real-time Status Indicators */}
+      {/* Simplified Status Indicators */}
       {(criticalAlerts > 0 || emergencyPools > 0) && (
-        <div className="border-destructive bg-destructive/10 animate-pulse rounded-lg border p-4">
+        <div className="border-destructive bg-destructive/10 rounded-lg border p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Siren className="text-destructive h-5 w-5" />
+              <AlertTriangle className="text-destructive h-5 w-5" />
               <div>
                 <h3 className="text-destructive font-semibold">Critical Alerts Active</h3>
                 <p className="text-muted-foreground text-sm">
@@ -1232,14 +1100,11 @@ export const PoolFacilityManager = () => {
           </div>
         </Card>
         <Card
-          className={cn(
-            'card-interactive p-4',
-            emergencyPools > 0 && 'ring-destructive animate-pulse ring-2'
-          )}
+          className={cn('card-interactive p-4', emergencyPools > 0 && 'ring-destructive ring-2')}
         >
           <div className="text-center">
             <div className="flex items-center justify-center gap-1">
-              {emergencyPools > 0 && <Siren className="text-destructive h-5 w-5 animate-pulse" />}
+              {emergencyPools > 0 && <AlertTriangle className="text-destructive h-5 w-5" />}
               <span className="text-destructive text-2xl font-bold">{emergencyPools}</span>
             </div>
             <div className="text-muted-foreground text-sm">Emergency</div>
