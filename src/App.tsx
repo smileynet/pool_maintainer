@@ -57,32 +57,32 @@ function App() {
       value: '3',
       change: '+0',
       icon: MapPin,
-      color: 'text-[var(--color-dominant-primary)]',
-      bgColor: 'bg-[var(--color-dominant-light)]',
+      color: 'text-[var(--semantic-brand-primary)]',
+      bgColor: 'bg-[var(--primitive-blue-100)]',
     },
     {
       title: 'Pending Tasks',
       value: '7',
       change: '+2',
       icon: Clock,
-      color: 'text-[var(--color-accent-primary)]',
-      bgColor: 'bg-[var(--color-accent-light)]',
+      color: 'text-[var(--semantic-action-primary)]',
+      bgColor: 'bg-[var(--primitive-orange-100)]',
     },
     {
       title: 'Available Technicians',
       value: '4',
       change: '+1',
       icon: Users,
-      color: 'text-[var(--color-secondary-primary)]',
-      bgColor: 'bg-[var(--color-secondary-lighter)]',
+      color: 'text-[var(--semantic-brand-secondary)]',
+      bgColor: 'bg-[var(--primitive-green-100)]',
     },
     {
       title: 'Critical Alerts',
       value: '1',
       change: '-2',
       icon: AlertTriangle,
-      color: 'text-[var(--color-accent-secondary)]',
-      bgColor: 'bg-[var(--color-accent-secondary-light)]',
+      color: 'text-[var(--semantic-status-critical)]',
+      bgColor: 'bg-[var(--primitive-coral-100)]',
     },
   ]
 
@@ -98,10 +98,10 @@ function App() {
     <div className="space-y-8">
       {/* Welcome Section */}
       <div>
-        <h2 className="mb-2 text-2xl font-bold text-[var(--color-text-on-dominant)]">
+        <h2 className="mb-2 text-2xl font-bold text-[var(--semantic-text-primary)]">
           Welcome to Pool Maintenance
         </h2>
-        <p className="text-[var(--color-text-on-dominant-light)]">
+        <p className="text-[var(--semantic-text-secondary)]">
           Monitor and manage community pool safety and maintenance operations.
         </p>
       </div>
@@ -116,7 +116,7 @@ function App() {
                   <p className="text-muted-foreground text-sm font-medium">{metric.title}</p>
                   <div className="mt-2 flex items-center gap-2">
                     <span className="text-2xl font-bold">{metric.value}</span>
-                    <div className="flex items-center gap-1 text-sm text-[var(--color-secondary-primary)]">
+                    <div className="flex items-center gap-1 text-sm text-[var(--semantic-brand-secondary)]">
                       <TrendingUp className="h-4 w-4" />
                       <span>{metric.change}</span>
                     </div>
@@ -162,8 +162,8 @@ function App() {
                   <Badge
                     className={
                       reading.status === 'good'
-                        ? 'bg-[var(--color-secondary-primary)] hover:bg-[var(--color-secondary-primary)]/80 text-white'
-                        : 'bg-[var(--color-accent-primary)] text-[var(--color-text-on-accent-primary)] hover:bg-[var(--color-accent-primary)]/80'
+                        ? 'bg-[var(--semantic-status-safe)] text-white hover:bg-[var(--semantic-status-safe)]/80'
+                        : 'bg-[var(--semantic-status-caution)] text-[var(--semantic-text-primary)] hover:bg-[var(--semantic-status-caution)]/80'
                     }
                   >
                     {reading.status === 'good' && <CheckCircle className="mr-1 h-3 w-3" />}
@@ -242,13 +242,18 @@ function App() {
 
       {/* Component Library Link */}
       <div className="text-center">
-        <Card className="border-[var(--color-secondary-light)] bg-[var(--color-secondary-lighter)]">
+        <Card className="border-[var(--semantic-border-default)] bg-[var(--primitive-green-100)]">
           <CardContent className="pt-6">
-            <h3 className="mb-2 text-lg font-semibold text-[var(--color-text-on-secondary-light)]">Component Documentation</h3>
-            <p className="text-[var(--color-text-on-secondary-light)] mb-4 opacity-80">
+            <h3 className="mb-2 text-lg font-semibold text-[var(--semantic-text-primary)]">
+              Component Documentation
+            </h3>
+            <p className="mb-4 text-[var(--semantic-text-secondary)] opacity-80">
               Explore our complete UI component library with pool maintenance examples
             </p>
-            <Button className="btn-60-30-10-primary" asChild>
+            <Button
+              className="bg-[var(--semantic-action-primary)] text-white hover:bg-[var(--primitive-orange-600)]"
+              asChild
+            >
               <a href="http://localhost:6080" target="_blank" rel="noopener noreferrer">
                 View Storybook Documentation
               </a>
@@ -263,47 +268,71 @@ function App() {
   const renderAnalytics = () => (
     <div className="space-y-8">
       <div>
-        <h2 className="text-[var(--color-text-on-dominant)] mb-2 text-2xl font-bold">Analytics & Reports</h2>
-        <p className="text-[var(--color-text-on-dominant-light)]">
+        <h2 className="mb-2 text-2xl font-bold text-[var(--semantic-text-primary)]">
+          Analytics & Reports
+        </h2>
+        <p className="text-[var(--semantic-text-secondary)]">
           Advanced analytics and reporting features coming in Phase 2.3
         </p>
       </div>
 
       <Card className="bg-card p-12 text-center">
-        <BarChart3 className="mx-auto mb-4 h-16 w-16 text-[var(--color-text-on-dominant-light)]" />
-        <h3 className="text-[var(--color-text-on-dominant)] mb-2 text-lg font-medium">Analytics Dashboard</h3>
-        <p className="text-[var(--color-text-on-dominant-light)] mb-4">
+        <BarChart3 className="mx-auto mb-4 h-16 w-16 text-[var(--semantic-text-secondary)]" />
+        <h3 className="mb-2 text-lg font-medium text-[var(--semantic-text-primary)]">
+          Analytics Dashboard
+        </h3>
+        <p className="mb-4 text-[var(--semantic-text-secondary)]">
           Advanced reporting, trend analysis, and predictive maintenance features will be available
           in the next phase.
         </p>
         <div className="flex justify-center gap-2">
-          <Badge variant="outline" className="border-[var(--color-secondary-primary)] text-[var(--color-secondary-primary)]">Chemical Trends</Badge>
-          <Badge variant="outline" className="border-[var(--color-secondary-primary)] text-[var(--color-secondary-primary)]">Usage Analytics</Badge>
-          <Badge variant="outline" className="border-[var(--color-accent-primary)] text-[var(--color-accent-primary)]">Performance Reports</Badge>
-          <Badge variant="outline" className="border-[var(--color-accent-secondary)] text-[var(--color-accent-secondary)]">Compliance Tracking</Badge>
+          <Badge
+            variant="outline"
+            className="border-[var(--semantic-brand-secondary)] text-[var(--semantic-brand-secondary)]"
+          >
+            Chemical Trends
+          </Badge>
+          <Badge
+            variant="outline"
+            className="border-[var(--semantic-brand-secondary)] text-[var(--semantic-brand-secondary)]"
+          >
+            Usage Analytics
+          </Badge>
+          <Badge
+            variant="outline"
+            className="border-[var(--semantic-action-primary)] text-[var(--semantic-action-primary)]"
+          >
+            Performance Reports
+          </Badge>
+          <Badge
+            variant="outline"
+            className="border-[var(--semantic-status-critical)] text-[var(--semantic-status-critical)]"
+          >
+            Compliance Tracking
+          </Badge>
         </div>
       </Card>
     </div>
   )
 
   return (
-    <div className="min-h-screen bg-[var(--color-dominant-lighter)]">
+    <div className="min-h-screen bg-[var(--semantic-surface-primary)]">
       {/* Header - 30% Green Theme */}
-      <header className="border-b border-[var(--color-secondary-light)] bg-[var(--nav-background)] shadow-sm">
+      <header className="border-b border-[var(--semantic-border-default)] bg-[var(--semantic-surface-secondary)] shadow-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
-              <Droplet className="mr-3 h-8 w-8 text-[var(--color-dominant-primary)]" />
-              <h1 className="text-xl font-semibold text-[var(--nav-text)]">
+              <Droplet className="mr-3 h-8 w-8 text-[var(--semantic-brand-primary)]" />
+              <h1 className="text-xl font-semibold text-[var(--semantic-text-primary)]">
                 Pool Maintenance System
               </h1>
             </div>
             <div className="flex items-center gap-4">
-              <Button className="btn-60-30-10-primary">
+              <Button className="bg-[var(--semantic-action-primary)] text-white hover:bg-[var(--primitive-orange-600)]">
                 <TestTube className="mr-2 h-4 w-4" />
                 New Reading
               </Button>
-              <Button className="btn-60-30-10-secondary">
+              <Button className="bg-[var(--semantic-action-secondary)] text-white hover:bg-[var(--primitive-green-500)]">
                 <Settings className="mr-2 h-4 w-4" />
                 Settings
               </Button>
@@ -313,7 +342,7 @@ function App() {
       </header>
 
       {/* Navigation Tabs - 30% Green Structure */}
-      <div className="border-b border-[var(--color-secondary-light)] bg-[var(--nav-background)]">
+      <div className="border-b border-[var(--semantic-border-default)] bg-[var(--semantic-surface-secondary)]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <nav className="flex space-x-8" aria-label="Tabs">
             {tabs.map((tab) => {
@@ -325,8 +354,8 @@ function App() {
                   className={cn(
                     'flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap',
                     activeTab === tab.id
-                      ? 'border-blue-500 text-blue-600'
-                      : 'text-muted-foreground hover:text-foreground hover:border-border border-transparent'
+                      ? 'border-[var(--semantic-border-focus)] text-[var(--semantic-action-primary)]'
+                      : 'border-transparent text-[var(--semantic-text-secondary)] hover:border-[var(--semantic-border-default)] hover:text-[var(--semantic-text-primary)]'
                   )}
                   aria-current={activeTab === tab.id ? 'page' : undefined}
                 >
@@ -340,7 +369,7 @@ function App() {
       </div>
 
       {/* Main Content - 60% Blue Theme */}
-      <main className="mx-auto min-h-screen max-w-7xl bg-[var(--color-content-background)] px-4 py-8 sm:px-6 lg:px-8">
+      <main className="mx-auto min-h-screen max-w-7xl bg-[var(--semantic-surface-primary)] px-4 py-8 sm:px-6 lg:px-8">
         {activeTab === 'overview' && renderOverview()}
         {activeTab === 'facilities' && <PoolFacilityManager />}
         {activeTab === 'analytics' && renderAnalytics()}

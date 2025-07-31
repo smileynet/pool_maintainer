@@ -5,6 +5,8 @@
 @import './styles/wcag-color-pairs.css';
 /* GRADIENT OVERLAYS - Visual depth and modern design elements */
 @import './styles/gradient-overlays.css';
+/* COLOR ZONES - Distinct visual areas for different application sections */
+@import './styles/color-zones.css';
 /* Keep safety components and theme fixes for compatibility */
 @import './styles/safety-components.css';
 @import './styles/theme-fixes.css';
@@ -18,45 +20,45 @@
 /* SHADCN/UI INTEGRATION WITH UNIFIED TOKEN SYSTEM */
 @layer base {
   :root {
-    /* Map shadcn/ui variables to unified semantic tokens */
+    /* Map shadcn/ui variables to Crystal Waters theme */
     /* These must be in HSL format for Tailwind compatibility */
 
-    /* Background & Text - 60% Blue Distribution */
-    --background: 210 40% 98%; /* Maps to --semantic-surface-primary */
-    --foreground: 222 84% 4.9%; /* Maps to --semantic-text-primary */
+    /* Background & Text - 60% Crystal Blue Distribution */
+    --background: 220 40% 85%; /* Crystal blue background */
+    --foreground: 220 65% 35%; /* Deep blue text */
 
     /* Card Components */
-    --card: 0 0% 98%; /* Maps to --semantic-surface-elevated */
-    --card-foreground: 222 84% 4.9%; /* Maps to --semantic-text-primary */
+    --card: 220 20% 98%; /* Near white elevated surfaces */
+    --card-foreground: 220 65% 35%; /* Deep blue text */
 
     /* Popover Components */
-    --popover: 210 40% 95%; /* Maps to --semantic-surface-overlay */
-    --popover-foreground: 222 84% 4.9%;
+    --popover: 0 0% 98%; /* White overlays */
+    --popover-foreground: 220 65% 35%;
 
-    /* Primary Actions - 7% Yellow (Main CTAs) */
-    --primary: 47 96% 69%; /* Maps to --semantic-action-primary */
-    --primary-foreground: 222 84% 4.9%;
+    /* Primary Actions - 7% Sunset Orange (Main CTAs) */
+    --primary: 45 85% 65%; /* Sunset orange */
+    --primary-foreground: 0 0% 98%; /* White text on orange */
 
-    /* Secondary Actions - 30% Green (Structural) */
-    --secondary: 122 39% 49%; /* Maps to --semantic-action-secondary */
-    --secondary-foreground: 210 40% 98%;
+    /* Secondary Actions - 30% Pool Green (Structural) */
+    --secondary: 145 40% 65%; /* Pool green */
+    --secondary-foreground: 0 0% 98%; /* White text on green */
 
     /* Muted Elements */
-    --muted: 210 40% 96%; /* Maps to --semantic-surface-secondary */
-    --muted-foreground: 215 16% 47%;
+    --muted: 220 30% 90%; /* Light crystal blue */
+    --muted-foreground: 220 20% 60%; /* Muted blue text */
 
     /* Accent Elements - 3% Coral */
-    --accent: 12 76% 61%; /* Maps to --semantic-action-tertiary */
-    --accent-foreground: 210 40% 98%;
+    --accent: 25 65% 65%; /* Coral accent */
+    --accent-foreground: 0 0% 98%; /* White text on coral */
 
     /* Destructive Actions */
-    --destructive: 0 84% 64%; /* Maps to --semantic-status-critical */
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 25 70% 55%; /* Coral for errors */
+    --destructive-foreground: 0 0% 98%; /* White text */
 
     /* Borders & Inputs */
-    --border: 214 32% 91%; /* Maps to --semantic-border-default */
-    --input: 214 32% 91%; /* Maps to --semantic-border-default */
-    --ring: 12 76% 61%; /* Maps to --semantic-border-focus */
+    --border: 220 30% 90%; /* Light blue borders */
+    --input: 220 30% 90%; /* Light blue inputs */
+    --ring: 45 85% 75%; /* Orange focus ring */
 
     /* Border Radius */
     --radius: 0.5rem;
