@@ -1,10 +1,10 @@
 # Pool Maintenance System - Claude Code Configuration
 
-Project-specific Claude Code instructions for the community pool maintenance and scheduling management system.
+Project-specific Claude Code instructions for the pool maintenance data management system - a spreadsheet replacement that makes data entry, review, and management easier than traditional methods.
 
-**Project Type**: Frontend Web Application (React 19 + TypeScript + Storybook)  
-**Last Updated**: 2025-07-30  
-**Maintenance**: Update with each phase completion
+**Project Type**: Frontend Web Application (React 19 + TypeScript + Vite)  
+**Last Updated**: 2025-07-31  
+**Maintenance**: Quarterly review cycle
 
 ## 🚀 Quick Reference
 
@@ -51,30 +51,30 @@ src/
 
 ### Pool Maintenance System Overview
 
-Community pool maintenance and scheduling management platform focusing on:
+Spreadsheet replacement system that digitizes pool maintenance workflows with better UX, validation, and data management:
 
-- **Chemical Management**: Water quality monitoring and MAHC compliance
-- **Maintenance Scheduling**: Task assignment and completion tracking
-- **Staff Management**: Technician scheduling and certification tracking
-- **Safety Compliance**: Real-time monitoring and emergency response
-- **Reporting**: Analytics and compliance audit trails
+- **Chemical Test Entry**: Fast, validated data entry with MAHC compliance checking
+- **Data Persistence**: localStorage-based storage with CSV import/export for spreadsheet compatibility
+- **Status Monitoring**: Real-time pool status dashboard derived from test data
+- **Trend Analysis**: Visual charts showing chemical levels over time
+- **Mobile-Friendly**: Responsive design for field technicians using tablets/phones
 
-### Safety-Critical Features
+### Core Requirements
 
-**IMPORTANT**: This system manages public safety. Always prioritize:
+**CRITICAL**: This system replaces spreadsheets. Always ensure:
 
-- Chemical level validation (MAHC compliance ranges)
-- Emergency response workflows
-- Staff certification requirements
-- Audit trail completeness
-- Real-time alert systems
+- **Faster Data Entry**: Chemical test form must be quicker than spreadsheet input
+- **Better Data Review**: History browsing clearer than spreadsheet rows
+- **Superior Visualization**: Status overview more informative than manual tracking
+- **Data Validation**: Prevent errors that commonly occur in spreadsheets
+- **Spreadsheet Compatibility**: Export functionality maintains CSV format compatibility
 
 ### Chemical Safety Ranges (MAHC Compliance)
 
-- **Free Chlorine**: 1.0-3.0 ppm (critical below 0.5 ppm)
-- **pH Level**: 7.2-7.6 (optimal for chlorine effectiveness)
-- **Total Alkalinity**: 80-120 ppm (pH stability)
-- **Temperature**: Monitor for comfort and chemical effectiveness
+- **Free Chlorine**: 1.0-3.0 ppm (ideal), 0.5-5.0 ppm (acceptable)
+- **pH Level**: 7.2-7.6 (ideal), 7.0-8.0 (acceptable)
+- **Total Alkalinity**: 80-120 ppm (ideal), 60-180 ppm (acceptable)
+- **Temperature**: 78-82°F (ideal), 70-90°F (acceptable)
 
 ## 🛠️ Technology Stack
 
@@ -109,79 +109,35 @@ Community pool maintenance and scheduling management platform focusing on:
 ### Code Quality Requirements
 
 ```bash
-# Pre-commit checks (automated via Husky)
-bun run lint:fix         # Must pass with 0 errors
-bun run format           # Auto-format all files
-bun run type-check       # Must pass strict TypeScript
+# Quality checks (run before any commit)
+bun run quality      # Run all checks
+bun run quality:fix  # Auto-fix issues
+bun run type-check   # TypeScript validation
 ```
 
-### Component Development
+### Implementation Principles
 
-1. **shadcn/ui First**: Use existing components, customize for pool maintenance
-2. **Story-Driven Development**: Create Storybook stories with realistic pool data
-3. **Accessibility**: WCAG 2.1 AA compliance required
-4. **Type Safety**: Full TypeScript coverage with strict mode
-5. **Testing**: Unit tests for logic, visual tests for UI
+1. **Performance First**: Data entry must be faster than spreadsheets
+2. **Validation Always**: Prevent common spreadsheet errors with MAHC validation
+3. **Mobile Responsive**: All interfaces work on phones/tablets for field use
+4. **Export Compatible**: Maintain CSV format for spreadsheet compatibility
+5. **Offline Capable**: localStorage ensures functionality without internet
 
-### Pool Maintenance Patterns
+### Data Management Patterns
 
-- Use `src/test/fixtures/pool-maintenance-data.ts` for realistic test data
-- Follow MAHC guidelines for chemical validation
-- Include safety status indicators in all pool-related components
-- Use consistent color coding: Green (safe), Yellow (caution), Red (critical)
-- Implement proper error boundaries for safety-critical operations
+- Use `src/lib/localStorage.ts` for all data persistence operations
+- Validate against `src/lib/mahc-validation.ts` for chemical safety
+- Status indicators: Green (safe), Yellow (caution), Red (critical/emergency)
+- Always provide clear error messages for validation failures
+- Auto-save drafts to prevent data loss during field entry
 
-## 📋 Project Phases
+## 📋 Project Status
 
-### ✅ Phase 1.1: Foundation (COMPLETED)
+- **Completed Work**: See `.claude/COMPLETED.md` for delivered features
+- **Active Tasks**: See `.claude/PROJECT.md` for current sprint work
+- **Future Plans**: See `.claude/ROADMAP.md` for long-term vision
 
-- [x] Vite + React 19 + TypeScript setup
-- [x] shadcn/ui integration
-- [x] Tailwind CSS configuration
-- [x] Basic project structure
-
-### ✅ Phase 1.2: Quality Infrastructure (COMPLETED)
-
-- [x] ESLint v9 with flat configuration
-- [x] Prettier with Tailwind CSS plugin
-- [x] Husky git hooks setup
-- [x] TypeScript strict mode
-- [x] Testing framework setup (Vitest + Playwright)
-
-### ✅ Phase 1.3: Storybook Documentation (COMPLETED)
-
-- [x] Storybook 8.6 configuration
-- [x] CSF3 story format setup
-- [x] Component documentation infrastructure
-- [x] Pool maintenance test data fixtures
-- [x] Comprehensive component library:
-  - [x] Button, Input, Select, Badge components
-  - [x] Card, Form patterns, Dialog components
-  - [x] Navigation, Table, Chart components
-  - [x] Calendar scheduling components
-- [x] MDX documentation guides
-- [x] Network accessibility (dev:5080, storybook:6080)
-
-### 🚧 Phase 2.1: Core Pool Management (NEXT)
-
-- [ ] Pool facility management components
-- [ ] Real-time chemical monitoring interface
-- [ ] Safety alert system
-- [ ] Basic dashboard layout
-
-### 📋 Phase 2.2: Task Management
-
-- [ ] Maintenance task scheduling
-- [ ] Technician assignment interface
-- [ ] Task completion tracking
-- [ ] Priority-based task queuing
-
-### 📋 Phase 2.3: Advanced Features
-
-- [ ] Chemical trend analysis
-- [ ] Compliance reporting
-- [ ] Emergency response workflows
-- [ ] Mobile-responsive technician interface
+The core spreadsheet replacement functionality is complete and operational.
 
 ## 🔧 Tool Configuration
 
@@ -217,58 +173,59 @@ bun run type-check       # Must pass strict TypeScript
 - Component prop documentation
 - Safety-critical code must have detailed comments
 
-## 🚨 Safety & Compliance
+## 🚨 Data Integrity & Validation
 
-### Critical Validation Rules
+### Critical Rules
 
-1. **Chemical Levels**: Always validate against MAHC ranges
-2. **Emergency Alerts**: Immediate UI feedback for critical values
-3. **Audit Trails**: Log all chemical readings and maintenance actions
-4. **Staff Certification**: Verify technician qualifications for tasks
-5. **Equipment Safety**: Include safety checks in maintenance workflows
+1. **Always Validate Input**: Use MAHC ranges to prevent dangerous chemical levels
+2. **Never Lose Data**: Auto-save drafts, confirm before deletion
+3. **Clear Visual Feedback**: Color-coded status for immediate understanding
+4. **CSV Compatibility**: Maintain format compatibility for data portability
+5. **Responsive Design**: Ensure all features work on mobile devices
 
 ### Error Handling
 
-- Fail safely for chemical monitoring systems
-- Provide clear error messages for safety violations
-- Implement proper fallbacks for critical operations
-- Log all safety-related errors for audit purposes
+- Show clear validation messages during data entry
+- Highlight out-of-range values with appropriate colors
+- Provide CSV import error details with row numbers
+- Never silently fail - always inform the user
 
 ## 🎨 UI/UX Guidelines
 
-### Pool Maintenance Design System
+### Design System
 
-- **Primary Color**: Sky blue (#0ea5e9) - water/cleanliness
-- **Success**: Emerald (#10b981) - safe conditions
-- **Warning**: Amber (#f59e0b) - caution states
-- **Danger**: Red (#ef4444) - critical alerts
+- **Theme**: Electric Lagoon - vibrant, professional pool maintenance theme
+- **Primary**: Blue tones for water/pool association
+- **Success**: Green (#10b981) - safe chemical levels
+- **Warning**: Yellow (#f59e0b) - caution required
+- **Danger**: Red (#ef4444) - critical/emergency status
 
-### Component Patterns
+### Key UI Patterns
 
-- Status badges with color coding
-- Chemical reading displays with range indicators
-- Emergency action buttons (prominent, accessible)
-- Technician assignment interfaces
-- Time-sensitive task indicators
+- Form fields with instant validation feedback
+- Status cards showing at-a-glance pool health
+- Filterable tables for efficient data browsing
+- Interactive charts with reference lines for compliance
+- Mobile-first responsive design for field use
 
-## 🤖 Claude Code Integration
+## 🤖 Implementation Notes
 
-### Hooks Configuration
+### Key Files
 
-```json
-{
-  "pre-commit": "bun run quality:fix && bun run test:run",
-  "pre-push": "bun run validate:full"
-}
+- `src/lib/localStorage.ts` - Data persistence layer
+- `src/lib/mahc-validation.ts` - Chemical safety validation
+- `src/components/ui/chemical-test-form.tsx` - Primary data entry
+- `src/components/ui/pool-status-dashboard.tsx` - Real-time monitoring
+- `src/components/ui/chemical-trend-chart.tsx` - Trend visualization
+
+### Testing Approach
+
+```bash
+bun run test         # Unit tests
+bun run test:e2e     # End-to-end tests
+bun run test:visual  # Visual regression
 ```
-
-### Custom Commands
-
-- Monitor pool safety compliance in code changes
-- Validate chemical range calculations
-- Check accessibility compliance
-- Verify test coverage for safety-critical components
 
 ---
 
-**Remember**: This system manages public pool safety. Always prioritize safety compliance, proper validation, and emergency response capabilities in all development decisions.
+**Remember**: This system replaces spreadsheets. Every feature must be easier, faster, and more reliable than manual spreadsheet management. Focus on user workflow efficiency and data integrity above all else.

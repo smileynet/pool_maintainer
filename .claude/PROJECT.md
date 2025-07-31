@@ -1,176 +1,157 @@
 # Pool Maintenance System - Current Project Tasks
 
-**Project**: Pool Maintenance Data Management - Spreadsheet Replacement  
-**Phase**: 2.1 Core Data Entry & Management (Refocused)  
+**Project**: Pool Maintenance Data Management - Continuous Improvement  
+**Phase**: Optimization & Enhancement  
 **Last Updated**: 2025-07-31  
-**Next Review**: Basic workflow completion
+**Next Review**: Sprint completion
 
-## 🎯 Project Vision
+## 🎯 Current Focus
 
-**Current State**: Users track pool maintenance in spreadsheets  
-**Goal**: Simple app that makes data entry, review, and management easier than spreadsheets  
-**Approach**: Digitize existing workflows with better UX, validation, and organization
+The core spreadsheet replacement functionality is complete. Current work focuses on optimization, polish, and preparing for multi-user features.
 
-## 🎯 Current Sprint - Phase 2.1: Core Pool Management
+## 🚧 Active Tasks
 
-### ✅ Recently Completed (Phase 1.3)
+### Code Quality & Maintenance
 
-- [x] **Storybook Documentation Complete** - Comprehensive component library with pool maintenance examples
-- [x] **Network Accessibility** - Dev server (5080) and Storybook (6080) accessible on local network
-- [x] **Code Quality Pipeline** - ESLint, Prettier, Husky hooks, TypeScript strict mode
-- [x] **Component Library** - Button, Input, Select, Badge, Card, Form patterns, Navigation, Table, Chart, Calendar
-- [x] **Test Infrastructure** - Vitest unit tests, Playwright E2E/visual tests
-- [x] **Main App Update** - Replaced default Vite page with pool maintenance dashboard
+1. **Fix GitHub Hook Failures** `[IN PROGRESS]`
+   - **Issue**: Pre-commit hooks reporting failures incorrectly
+   - **Impact**: Developers using --no-verify to bypass
+   - **Solution**: Debug hook configuration and fix lint-staged setup
+   - **Priority**: Low (workaround available)
 
-### ✅ Recently Completed (Foundation)
+2. **Optimize Bundle Size** `[READY]`
+   - **Issue**: Chart libraries creating large bundle
+   - **Target**: Reduce initial load time by 30%
+   - **Approach**:
+     - Implement code splitting for Recharts
+     - Lazy load analytics components
+     - Tree-shake unused chart types
+   - **Priority**: Medium
 
-- [x] **Component Library** - Complete UI component system with forms, tables, cards, and responsive design
-- [x] **Responsive Design System** - Mobile-first design that works well on tablets/phones for field use
-- [x] **Chemical Test Form Framework** - Basic form structure for chemical data entry
-- [x] **Pool Facility Display Components** - Components for showing pool status and history
-- [x] **MAHC Validation Logic** - Chemical safety range validation and compliance checking
-- [x] **Modern Theming** - Clean, professional interface suitable for maintenance operations
+3. **Simplify Analytics Tab** `[READY]`
+   - **Issue**: "Coming Soon" placeholders create confusion
+   - **Solution**: Remove placeholder cards, focus on existing charts
+   - **Priority**: High (user experience)
 
-### 🚧 Active Tasks (Spreadsheet Replacement Focus)
+### Performance Enhancements
 
-#### PRIMARY WORKFLOW
+4. **Implement Service Worker** `[READY]`
+   - **Goal**: True offline capability for field technicians
+   - **Features**:
+     - Cache static assets for offline use
+     - Queue data changes when offline
+     - Sync when connection restored
+   - **Priority**: High (field use requirement)
 
-1. **Chemical Test Data Entry** `[READY]`
-   - **Description**: Make chemical test entry faster and more accurate than spreadsheets
-   - **Acceptance Criteria**:
-     - Quick, validated form for common chemical tests
-     - Auto-fill technician names and pool selections
-     - Instant MAHC compliance feedback during entry
-     - Save draft capability for incomplete tests
-   - **Replaces**: Manual spreadsheet data entry
+5. **Optimize Large Dataset Handling** `[PLANNED]`
+   - **Issue**: Performance degrades with 1000+ tests
+   - **Solution**:
+     - Virtual scrolling for test history
+     - Pagination for API preparation
+     - Indexed localStorage queries
+   - **Priority**: Medium
 
-2. **Test History & Review** `[READY]`
-   - **Description**: Better way to review past tests than scrolling spreadsheet rows
-   - **Acceptance Criteria**:
-     - Searchable, filterable test history
-     - Visual indicators for out-of-range readings
-     - Export capability to CSV/Excel
-     - Trend visualization for key chemicals
-   - **Replaces**: Spreadsheet browsing and manual analysis
+### User Experience Polish
 
-3. **Pool Status Dashboard** `[READY]`
-   - **Description**: At-a-glance pool status derived from recent test data
-   - **Acceptance Criteria**:
-     - Current status based on most recent tests
-     - Highlight pools needing attention
-     - Simple pool selection for new tests
-     - Basic summary statistics
-   - **Replaces**: Manual spreadsheet status tracking
+6. **Add Keyboard Shortcuts** `[PLANNED]`
+   - **Goal**: Power user efficiency
+   - **Shortcuts**:
+     - Ctrl+N: New test
+     - Ctrl+S: Save draft
+     - Ctrl+E: Export data
+     - /: Focus search
+   - **Priority**: Low
 
-#### ENHANCED FEATURES
+7. **Enhanced Error Recovery** `[PLANNED]`
+   - **Features**:
+     - Auto-recovery for failed saves
+     - Undo/redo for critical operations
+     - Better error messages with solutions
+   - **Priority**: Medium
 
-4. **Data Management Tools** `[FUTURE]`
-   - **Description**: Organization and cleanup tools better than spreadsheet capabilities
-   - **Acceptance Criteria**:
-     - Bulk edit/delete capabilities
-     - Data validation and cleanup tools
-     - Backup and restore functionality
-     - User management for multi-person teams
+## 📋 Next Sprint: Multi-User Preparation
 
-### 📋 Future Enhancements (Phase 2.2+)
+### Foundation Work
 
-#### Beyond Basic Spreadsheet Replacement
+1. **User Identification System**
+   - Simple user profiles in localStorage
+   - Associate tests with users
+   - User preference storage
 
-- [ ] **Maintenance Task Tracking** - Simple task lists and completion tracking
-- [ ] **Multi-User Support** - Team collaboration features
-- [ ] **Advanced Analytics** - Trend analysis and reporting
-- [ ] **Mobile App** - Native mobile app for field technicians
-- [ ] **Integration** - Connect with existing pool management systems
+2. **Data Sync Architecture**
+   - Prepare data structure for future API
+   - Conflict resolution strategy
+   - Optimistic updates pattern
 
-### 📋 Phase 2.3: Mobile & Advanced Features
+3. **Permission Model Design**
+   - Read-only vs edit permissions
+   - Pool-specific access controls
+   - Admin vs technician roles
 
-#### Mobile-First Interface Development
+### Feature Enhancements
 
-- [ ] **Mobile-First Chemical Testing Interface**
-  - Touch-optimized chemical reading forms
-  - Quick entry patterns for field technicians
-  - Offline capability for remote testing
-  - Large touch targets for safety-critical actions
+4. **Saved Filter Presets**
+   - Common filter combinations
+   - User-specific saved searches
+   - Quick filter buttons
 
-- [ ] **Mobile Responsive Pool Cards Layout**
-  - Swipe gestures for pool status changes
-  - Condensed information hierarchy for small screens
-  - Optimized loading for slower connections
-  - Emergency action accessibility on mobile
+5. **Bulk Operations Expansion**
+   - Bulk edit chemical readings
+   - Bulk status updates
+   - Batch import improvements
 
-- [ ] **Touch-Friendly Quick Actions for Technicians**
-  - Large, easily accessible action buttons
-  - Voice input capabilities for hands-free operation
-  - Camera integration for visual inspections
-  - GPS integration for facility location tracking
+## 🔧 Technical Debt
 
-#### Advanced Analytics & Automation
+### High Priority
 
-- [ ] **Chemical Trend Analysis and Predictive Maintenance**
-- [ ] **Compliance Reporting and Audit Trail Generation**
-- [ ] **Emergency Response Workflow Automation**
-- [ ] **Integration with External Pool Management Systems**
+- [ ] Remove eslint-disable comments where possible
+- [ ] Add missing TypeScript types for chart components
+- [ ] Improve test coverage for localStorage operations
 
-### 🚫 Blocked Tasks
+### Medium Priority
 
-Currently no blocked tasks.
+- [ ] Refactor large components (>250 lines)
+- [ ] Consolidate duplicate validation logic
+- [ ] Add performance monitoring
 
-### 📊 Phase Progress
+### Low Priority
 
-**Phase 1.3 Completion**: ✅ 100% (Storybook documentation complete)
+- [ ] Update to latest dependency versions
+- [ ] Remove unused Storybook addons
+- [ ] Optimize image assets
 
-**Phase 2.1 Progress**: 🚧 40% (Foundation complete, core workflows in progress)
+## 📊 Success Metrics
 
-- UI Foundation: ✅ Complete (Components, responsive design, theming)
-- Chemical Data Entry: 🚧 In Progress (Form exists, needs workflow integration)
-- Test History & Review: ❌ Not Started (Basic display exists, needs enhancement)
-- Pool Status Dashboard: 🚧 Partial (Over-engineered, needs simplification)
-- Data Management: ❌ Not Started (Export, search, filtering needed)
+### Current Sprint
 
-**Overall Project Progress**: ~30% (Solid foundation, focused on core workflows)
+- [ ] Bundle size < 500KB gzipped
+- [ ] Initial load time < 2 seconds
+- [ ] Zero console errors in production
+- [ ] 100% feature parity when offline
 
-### 🔧 Technical Debt & Improvements
+### Next Sprint
 
-1. **Component Library Warnings** `[LOW PRIORITY]`
-   - Clean up ESLint warnings for react-refresh/only-export-components
-   - Consider extracting constants to separate files where appropriate
-   - Remove unused eslint-disable directive in mockServiceWorker.js
+- [ ] Support 3+ concurrent users
+- [ ] Data sync within 5 seconds
+- [ ] Permission system tested
+- [ ] Migration path documented
 
-2. **Testing Coverage Enhancement** `[MEDIUM PRIORITY]`
-   - Add unit tests for pool safety calculation functions
-   - Implement visual regression tests for critical components
-   - Add E2E tests for complete user workflows
+## 🚫 Blocked Tasks
 
-3. **Performance Optimization** `[LOW PRIORITY]`
-   - Implement code splitting for component library
-   - Add lazy loading for chart components
-   - Optimize bundle size analysis
+None currently.
 
-### 🎯 Success Metrics
+## 🎯 Definition of Done
 
-**Phase 2.1 Completion Criteria** (Spreadsheet Replacement):
+A task is complete when:
 
-- [ ] Chemical test entry is faster than spreadsheet input
-- [ ] Test history browsing is clearer than spreadsheet rows
-- [ ] Pool status overview is more informative than manual tracking
-- [ ] Data validation prevents errors that occur in spreadsheets
-- [ ] Export functionality maintains spreadsheet compatibility
-- [ ] Mobile interface works well for field data entry
-
-**Quality Gates**:
-
-- Zero ESLint errors
-- TypeScript strict mode compliance
-- 90%+ test coverage for safety-critical functions
-- Accessibility compliance (WCAG 2.1 AA)
-- Performance budgets met
-
-### 🗓️ Timeline Expectations
-
-**Phase 2.1 Target**: Complete within 2-3 development sessions
-**Phase 2.2 Target**: Task management system operational
-**Phase 2.3 Target**: Advanced analytics and reporting features
+- ✅ Feature works as specified
+- ✅ Tests pass (unit + e2e)
+- ✅ No TypeScript errors
+- ✅ No ESLint errors
+- ✅ Responsive on mobile
+- ✅ Accessible (WCAG AA)
+- ✅ Documented in Storybook
 
 ---
 
-**Next Action**: Begin Pool Facility Management Interface implementation with real-time status monitoring and capacity tracking.
+**Next Action**: Fix GitHub hooks to restore automated quality checks, then optimize bundle size for better performance.

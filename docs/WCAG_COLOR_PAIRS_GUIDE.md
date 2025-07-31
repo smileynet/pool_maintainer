@@ -17,12 +17,14 @@ The WCAG Color Pairs System provides pre-tested, accessibility-compliant color c
 **Current Status**: 56% of tested combinations pass WCAG AA standards
 
 **Passing Combinations** (10/18):
+
 - ✅ All primary text combinations (17.64-17.68:1 contrast)
-- ✅ All secondary text combinations (13.70-13.73:1 contrast)  
+- ✅ All secondary text combinations (13.70-13.73:1 contrast)
 - ✅ Yellow button combinations (9.23:1 contrast)
 - ✅ Selected shadcn/ui combinations
 
 **Failing Combinations** (8/18):
+
 - ❌ Green/coral on light backgrounds (2.88-3.75:1 contrast)
 - ❌ Some shadcn/ui color pairs (2.33-2.82:1 contrast)
 
@@ -48,11 +50,7 @@ Use pre-tested CSS classes for guaranteed accessibility:
 ```jsx
 // React Example
 function AccessibleButton({ variant = 'primary' }) {
-  return (
-    <button className={`wcag-button-${variant}`}>
-      Click me
-    </button>
-  );
+  return <button className={`wcag-button-${variant}`}>Click me</button>
 }
 ```
 
@@ -65,23 +63,23 @@ import { useWcagColors, WcagStandard } from '@/hooks/useWcagColors';
 
 function StatusBadge({ status }: { status: 'safe' | 'caution' | 'critical' }) {
   const { getColorPair, validateCustomColors } = useWcagColors();
-  
+
   // Get pre-tested color pair
   const colors = getColorPair('status', status, WcagStandard.AA);
-  
+
   // Validate custom colors
   const validation = validateCustomColors('#ff0000', '#ffffff');
-  
+
   if (!validation.isValid) {
     console.warn('Accessibility issue:', validation.recommendation);
   }
-  
+
   return (
-    <div 
+    <div
       className={colors?.cssClass}
-      style={{ 
+      style={{
         backgroundColor: colors?.background,
-        color: colors?.foreground 
+        color: colors?.foreground
       }}
     >
       Status: {status}
@@ -96,32 +94,33 @@ function StatusBadge({ status }: { status: 'safe' | 'caution' | 'critical' }) {
 Use utility functions for validation and suggestions:
 
 ```typescript
-import { 
-  validateColorPair, 
+import {
+  validateColorPair,
   suggestAlternatives,
   checkKnownFailure,
-  WcagStandard 
-} from '@/utils/wcag-color-pairs';
+  WcagStandard,
+} from '@/utils/wcag-color-pairs'
 
 // Validate custom color combination
-const validation = validateColorPair('#65a33c', '#f8f8f8', WcagStandard.AA);
-console.log(validation);
+const validation = validateColorPair('#65a33c', '#f8f8f8', WcagStandard.AA)
+console.log(validation)
 // Output: { isValid: false, contrastRatio: 2.88, recommendation: "..." }
 
 // Check known failures
-const failure = checkKnownFailure('var(--primitive-green-500)', 'var(--primitive-gray-50)');
-console.log(failure);
+const failure = checkKnownFailure('var(--primitive-green-500)', 'var(--primitive-gray-50)')
+console.log(failure)
 // Output: { reason: "Light green on white fails AA standard", contrastRatio: 2.88 }
 
 // Get alternatives
-const alternatives = suggestAlternatives('button', WcagStandard.AA);
-console.log(alternatives);
+const alternatives = suggestAlternatives('button', WcagStandard.AA)
+console.log(alternatives)
 // Output: Array of suggested ColorPair objects
 ```
 
 ## 🎨 Available Color Categories
 
 ### Text Combinations
+
 Best for body text, headings, and general content:
 
 ```css
@@ -131,6 +130,7 @@ Best for body text, headings, and general content:
 ```
 
 ### Button Combinations
+
 Pre-tested button color schemes:
 
 ```css
@@ -140,6 +140,7 @@ Pre-tested button color schemes:
 ```
 
 ### Status Indicators
+
 Safety-critical status colors:
 
 ```css
@@ -194,7 +195,7 @@ import { useWcagValidation } from '@/hooks/useWcagColors';
 function MyComponent({ backgroundColor, textColor }: Props) {
   // Automatically validates colors in development and shows warnings
   useWcagValidation(backgroundColor, textColor, WcagStandard.AA, 'MyComponent');
-  
+
   return <div style={{ backgroundColor, color: textColor }}>Content</div>;
 }
 ```
@@ -235,9 +236,9 @@ If you have existing components using failing combinations:
 
 ```typescript
 // ❌ Before (fails WCAG)
-<div style={{ 
+<div style={{
   backgroundColor: 'var(--primitive-green-500)',
-  color: 'var(--primitive-gray-50)' 
+  color: 'var(--primitive-gray-50)'
 }}>
   Status: Safe
 </div>
@@ -259,8 +260,8 @@ The system accounts for WCAG text size requirements:
 
 ```typescript
 // Validate for different text sizes
-const normalTextValidation = validateColorPair(bg, fg, WcagStandard.AA, WcagSize.NORMAL);
-const largeTextValidation = validateColorPair(bg, fg, WcagStandard.AA, WcagSize.LARGE);
+const normalTextValidation = validateColorPair(bg, fg, WcagStandard.AA, WcagSize.NORMAL)
+const largeTextValidation = validateColorPair(bg, fg, WcagStandard.AA, WcagSize.LARGE)
 ```
 
 ### Dark Mode Considerations
@@ -280,11 +281,7 @@ The system integrates with your existing pre-commit hooks:
 ```json
 {
   "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "npm run test:contrast",
-      "eslint --fix",
-      "prettier --write"
-    ]
+    "src/**/*.{ts,tsx}": ["npm run test:contrast", "eslint --fix", "prettier --write"]
   }
 }
 ```
