@@ -1,0 +1,667 @@
+/**
+ * Gradient Overlays System
+ * 
+ * Creates visual depth using subtle gradients based on our unified token system.
+ * Follows 60-30-10 color distribution (Blue-Green-Yellow/Coral) with OKLCH color space.
+ * 
+ * Features:
+ * - Pool-themed gradient patterns
+ * - WCAG-compliant overlay combinations
+ * - Responsive gradient scaling
+ * - Dark mode adaptations
+ * - Performance-optimized using CSS custom properties
+ * 
+ * Usage: Apply gradient classes or use CSS custom properties directly
+ */
+
+/* ============================================================================
+ * GRADIENT FOUNDATIONS
+ * Base gradient definitions using unified token system
+ * ============================================================================ */
+
+:root {
+  /* === PRIMARY GRADIENTS (60% Blue Distribution) === */
+  
+  /* Pool Water Gradients - Main brand gradients */
+  --gradient-pool-surface: linear-gradient(
+    135deg,
+    var(--primitive-blue-50) 0%,
+    var(--primitive-blue-100) 50%,
+    var(--primitive-blue-200) 100%
+  );
+  
+  --gradient-pool-depth: linear-gradient(
+    180deg,
+    var(--primitive-blue-100) 0%,
+    var(--primitive-blue-300) 100%
+  );
+  
+  --gradient-pool-sparkle: radial-gradient(
+    ellipse at center,
+    var(--primitive-blue-50) 0%,
+    var(--primitive-blue-200) 70%,
+    var(--primitive-blue-400) 100%
+  );
+  
+  /* Card and Surface Gradients */
+  --gradient-card-elevated: linear-gradient(
+    145deg,
+    var(--semantic-surface-elevated) 0%,
+    var(--primitive-blue-50) 100%
+  );
+  
+  --gradient-surface-primary: linear-gradient(
+    180deg,
+    var(--semantic-surface-primary) 0%,
+    var(--primitive-blue-100) 100%
+  );
+  
+  /* === SECONDARY GRADIENTS (30% Green Distribution) === */
+  
+  /* Nature/Outdoor Gradients - Structural elements */
+  --gradient-nature-fresh: linear-gradient(
+    120deg,
+    var(--primitive-green-100) 0%,
+    var(--primitive-green-200) 50%,
+    var(--primitive-blue-100) 100%
+  );
+  
+  --gradient-lawn-to-pool: linear-gradient(
+    90deg,
+    var(--primitive-green-200) 0%,
+    var(--primitive-blue-200) 100%
+  );
+  
+  --gradient-forest-depth: linear-gradient(
+    180deg,
+    var(--primitive-green-300) 0%,
+    var(--primitive-green-500) 100%
+  );
+  
+  /* === ACCENT GRADIENTS (10% Yellow/Coral Distribution) === */
+  
+  /* Sunshine Gradients - Primary actions (7%) */
+  --gradient-sunshine-glow: radial-gradient(
+    circle at center,
+    var(--primitive-yellow-300) 0%,
+    var(--primitive-yellow-500) 70%,
+    var(--primitive-yellow-600) 100%
+  );
+  
+  --gradient-sunshine-warm: linear-gradient(
+    45deg,
+    var(--primitive-yellow-200) 0%,
+    var(--primitive-yellow-400) 100%
+  );
+  
+  /* Coral Gradients - Secondary actions (3%) */
+  --gradient-coral-sunset: linear-gradient(
+    135deg,
+    var(--primitive-coral-300) 0%,
+    var(--primitive-coral-500) 100%
+  );
+  
+  --gradient-coral-glow: radial-gradient(
+    ellipse at top,
+    var(--primitive-coral-200) 0%,
+    var(--primitive-coral-400) 100%
+  );
+  
+  /* === STATUS GRADIENTS === */
+  
+  /* Safe Status - Green gradients */
+  --gradient-status-safe: linear-gradient(
+    135deg,
+    var(--primitive-green-400) 0%,
+    var(--primitive-green-600) 100%
+  );
+  
+  /* Caution Status - Yellow gradients */
+  --gradient-status-caution: linear-gradient(
+    135deg,
+    var(--primitive-yellow-400) 0%,
+    var(--primitive-yellow-600) 100%
+  );
+  
+  /* Critical Status - Coral gradients */
+  --gradient-status-critical: linear-gradient(
+    135deg,
+    var(--primitive-coral-400) 0%,
+    var(--primitive-coral-600) 100%
+  );
+  
+  /* Emergency Status - Deep coral gradients */
+  --gradient-status-emergency: linear-gradient(
+    135deg,
+    var(--primitive-coral-500) 0%,
+    var(--primitive-coral-700) 100%
+  );
+  
+  /* === OVERLAY GRADIENTS === */
+  
+  /* Subtle overlays for content layering */
+  --gradient-overlay-light: linear-gradient(
+    180deg,
+    oklch(0.98 0.01 210 / 0.0) 0%,
+    oklch(0.98 0.01 210 / 0.3) 100%
+  );
+  
+  --gradient-overlay-medium: linear-gradient(
+    180deg,
+    oklch(0.95 0.03 210 / 0.0) 0%,
+    oklch(0.95 0.03 210 / 0.5) 100%
+  );
+  
+  --gradient-overlay-strong: linear-gradient(
+    180deg,
+    oklch(0.18 0.00 0 / 0.0) 0%,
+    oklch(0.18 0.00 0 / 0.7) 100%
+  );
+  
+  /* Directional overlays for visual flow */
+  --gradient-overlay-top: linear-gradient(
+    0deg,
+    oklch(0.98 0.01 210 / 0.0) 0%,
+    oklch(0.98 0.01 210 / 0.4) 100%
+  );
+  
+  --gradient-overlay-bottom: linear-gradient(
+    180deg,
+    oklch(0.98 0.01 210 / 0.0) 0%,
+    oklch(0.98 0.01 210 / 0.4) 100%
+  );
+  
+  --gradient-overlay-left: linear-gradient(
+    90deg,
+    oklch(0.98 0.01 210 / 0.0) 0%,
+    oklch(0.98 0.01 210 / 0.4) 100%
+  );
+  
+  --gradient-overlay-right: linear-gradient(
+    270deg,
+    oklch(0.98 0.01 210 / 0.0) 0%,
+    oklch(0.98 0.01 210 / 0.4) 100%
+  );
+  
+  /* === INTERACTIVE GRADIENTS === */
+  
+  /* Hover state gradients */
+  --gradient-hover-subtle: linear-gradient(
+    135deg,
+    oklch(0.95 0.03 210 / 0.5) 0%,
+    oklch(0.95 0.03 210 / 0.8) 100%
+  );
+  
+  --gradient-hover-medium: linear-gradient(
+    135deg,
+    var(--primitive-coral-100) 0%,
+    var(--primitive-coral-200) 100%
+  );
+  
+  /* Focus state gradients */
+  --gradient-focus-ring: conic-gradient(
+    from 0deg,
+    var(--primitive-coral-400),
+    var(--primitive-coral-500),
+    var(--primitive-coral-400)
+  );
+  
+  /* === SPECIALIZED GRADIENTS === */
+  
+  /* Pool equipment status gradients */
+  --gradient-equipment-running: linear-gradient(
+    90deg,
+    var(--primitive-green-300) 0%,
+    var(--primitive-blue-300) 100%
+  );
+  
+  --gradient-equipment-maintenance: linear-gradient(
+    90deg,
+    var(--primitive-yellow-300) 0%,
+    var(--primitive-yellow-500) 100%
+  );
+  
+  --gradient-equipment-error: linear-gradient(
+    90deg,
+    var(--primitive-coral-400) 0%,
+    var(--primitive-coral-600) 100%
+  );
+  
+  /* Chart and data visualization gradients */
+  --gradient-chart-primary: linear-gradient(
+    45deg,
+    var(--primitive-blue-300) 0%,
+    var(--primitive-blue-500) 100%
+  );
+  
+  --gradient-chart-secondary: linear-gradient(
+    45deg,
+    var(--primitive-green-300) 0%,
+    var(--primitive-green-500) 100%
+  );
+  
+  --gradient-chart-accent: linear-gradient(
+    45deg,
+    var(--primitive-yellow-300) 0%,
+    var(--primitive-yellow-500) 100%
+  );
+}
+
+/* ============================================================================
+ * DARK MODE GRADIENT ADAPTATIONS
+ * Maintains visual hierarchy in dark environments
+ * ============================================================================ */
+
+.dark {
+  /* Adapt overlays for dark mode */
+  --gradient-overlay-light: linear-gradient(
+    180deg,
+    oklch(0.15 0.03 210 / 0.0) 0%,
+    oklch(0.15 0.03 210 / 0.3) 100%
+  );
+  
+  --gradient-overlay-medium: linear-gradient(
+    180deg,
+    oklch(0.20 0.05 210 / 0.0) 0%,
+    oklch(0.20 0.05 210 / 0.5) 100%
+  );
+  
+  --gradient-overlay-strong: linear-gradient(
+    180deg,
+    oklch(0.98 0.00 0 / 0.0) 0%,
+    oklch(0.98 0.00 0 / 0.7) 100%
+  );
+  
+  /* Adapt pool gradients for evening use */
+  --gradient-pool-surface: linear-gradient(
+    135deg,
+    oklch(0.15 0.03 210) 0%,
+    oklch(0.20 0.05 210) 50%,
+    oklch(0.25 0.07 210) 100%
+  );
+  
+  --gradient-card-elevated: linear-gradient(
+    145deg,
+    oklch(0.25 0.00 0) 0%,
+    oklch(0.15 0.03 210) 100%
+  );
+  
+  /* Maintain status color recognition in dark mode */
+  --gradient-status-safe: linear-gradient(
+    135deg,
+    oklch(0.70 0.15 135) 0%,
+    oklch(0.58 0.17 135) 100%
+  );
+  
+  --gradient-status-critical: linear-gradient(
+    135deg,
+    oklch(0.65 0.18 35) 0%,
+    oklch(0.55 0.22 35) 100%
+  );
+}
+
+/* ============================================================================
+ * UTILITY CLASSES
+ * Ready-to-use gradient applications
+ * ============================================================================ */
+
+/* === BACKGROUND GRADIENTS === */
+
+.gradient-pool-surface {
+  background: var(--gradient-pool-surface);
+}
+
+.gradient-pool-depth {
+  background: var(--gradient-pool-depth);
+}
+
+.gradient-pool-sparkle {
+  background: var(--gradient-pool-sparkle);
+}
+
+.gradient-card-elevated {
+  background: var(--gradient-card-elevated);
+}
+
+.gradient-surface-primary {
+  background: var(--gradient-surface-primary);
+}
+
+.gradient-nature-fresh {
+  background: var(--gradient-nature-fresh);
+}
+
+.gradient-sunshine-glow {
+  background: var(--gradient-sunshine-glow);
+}
+
+.gradient-coral-sunset {
+  background: var(--gradient-coral-sunset);
+}
+
+/* === STATUS GRADIENTS === */
+
+.gradient-status-safe {
+  background: var(--gradient-status-safe);
+  color: var(--semantic-text-inverse);
+}
+
+.gradient-status-caution {
+  background: var(--gradient-status-caution);
+  color: var(--semantic-text-primary);
+}
+
+.gradient-status-critical {
+  background: var(--gradient-status-critical);
+  color: var(--semantic-text-inverse);
+}
+
+.gradient-status-emergency {
+  background: var(--gradient-status-emergency);
+  color: var(--semantic-text-inverse);
+}
+
+/* === OVERLAY CLASSES === */
+
+.gradient-overlay-light {
+  position: relative;
+}
+
+.gradient-overlay-light::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-overlay-light);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.gradient-overlay-medium {
+  position: relative;
+}
+
+.gradient-overlay-medium::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-overlay-medium);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.gradient-overlay-strong {
+  position: relative;
+}
+
+.gradient-overlay-strong::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-overlay-strong);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* === INTERACTIVE GRADIENT EFFECTS === */
+
+.gradient-hover {
+  transition: all 300ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.gradient-hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-hover-subtle);
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.gradient-hover:hover::before {
+  opacity: 1;
+}
+
+.gradient-focus {
+  position: relative;
+}
+
+.gradient-focus:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--gradient-focus-ring);
+}
+
+/* === SPECIALIZED COMPONENT GRADIENTS === */
+
+/* Button gradients */
+.btn-gradient-primary {
+  background: var(--gradient-sunshine-glow);
+  color: var(--semantic-text-primary);
+  border: none;
+  transition: all 300ms ease;
+}
+
+.btn-gradient-primary:hover {
+  background: var(--gradient-sunshine-warm);
+  transform: translateY(-1px);
+  box-shadow: var(--component-shadow-md);
+}
+
+.btn-gradient-secondary {
+  background: var(--gradient-nature-fresh);
+  color: var(--semantic-text-primary);
+  border: none;
+  transition: all 300ms ease;
+}
+
+.btn-gradient-secondary:hover {
+  background: var(--gradient-forest-depth);
+  color: var(--semantic-text-inverse);
+  transform: translateY(-1px);
+  box-shadow: var(--component-shadow-md);
+}
+
+.btn-gradient-destructive {
+  background: var(--gradient-coral-sunset);
+  color: var(--semantic-text-inverse);
+  border: none;
+  transition: all 300ms ease;
+}
+
+.btn-gradient-destructive:hover {
+  background: var(--gradient-status-critical);
+  transform: translateY(-1px);
+  box-shadow: var(--component-shadow-md);
+}
+
+/* Card gradients */
+.card-gradient-elevated {
+  background: var(--gradient-card-elevated);
+  border: 1px solid var(--semantic-border-default);
+  box-shadow: var(--component-shadow-sm);
+  transition: all 300ms ease;
+}
+
+.card-gradient-elevated:hover {
+  background: var(--gradient-pool-sparkle);
+  box-shadow: var(--component-shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Header gradients */
+.header-gradient {
+  background: var(--gradient-pool-depth);
+  color: var(--semantic-text-inverse);
+  position: relative;
+}
+
+.header-gradient::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gradient-coral-glow);
+}
+
+/* === ANIMATION GRADIENTS === */
+
+@keyframes gradient-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.gradient-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--primitive-blue-100) 0%,
+    var(--primitive-blue-50) 50%,
+    var(--primitive-blue-100) 100%
+  );
+  background-size: 200% 100%;
+  animation: gradient-shimmer 2s ease-in-out infinite;
+}
+
+@keyframes gradient-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.gradient-pulse {
+  animation: gradient-pulse 2s ease-in-out infinite;
+}
+
+/* === RESPONSIVE GRADIENT SCALING === */
+
+@media (max-width: 768px) {
+  /* Simplify gradients on mobile for performance */
+  .gradient-pool-sparkle {
+    background: var(--gradient-pool-surface);
+  }
+  
+  .gradient-shimmer {
+    animation: none;
+    background: var(--primitive-blue-100);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Respect motion preferences */
+  .gradient-shimmer,
+  .gradient-pulse {
+    animation: none;
+  }
+  
+  .gradient-hover {
+    transition: none;
+  }
+  
+  .gradient-hover::before {
+    transition: none;
+  }
+}
+
+/* ============================================================================
+ * HIGH CONTRAST MODE ADAPTATIONS
+ * Ensure gradients remain functional in high contrast environments
+ * ============================================================================ */
+
+@media (prefers-contrast: high) {
+  /* Simplify gradients to solid colors for better contrast */
+  .gradient-pool-surface {
+    background: var(--primitive-blue-100);
+  }
+  
+  .gradient-card-elevated {
+    background: var(--semantic-surface-elevated);
+    border: 2px solid var(--semantic-border-default);
+  }
+  
+  .gradient-status-safe {
+    background: var(--primitive-green-600);
+  }
+  
+  .gradient-status-critical {
+    background: var(--primitive-coral-600);
+  }
+  
+  .gradient-status-caution {
+    background: var(--primitive-yellow-600);
+  }
+}
+
+/* ============================================================================
+ * DEVELOPER UTILITIES
+ * Helper classes for testing and development
+ * ============================================================================ */
+
+/* Show gradient boundaries in development */
+.gradient-debug {
+  position: relative;
+}
+
+.gradient-debug::after {
+  content: 'GRADIENT';
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 8px;
+  background: rgba(255, 255, 0, 0.8);
+  color: black;
+  padding: 2px 4px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Remove debug indicators in production */
+@media (prefers-reduced-motion: no-preference) {
+  .gradient-debug::after {
+    display: none;
+  }
+}
+
+/* ============================================================================
+ * PERFORMANCE OPTIMIZATIONS
+ * GPU acceleration and memory management
+ * ============================================================================ */
+
+.gradient-optimized {
+  /* Force GPU acceleration for smooth gradients */
+  transform: translateZ(0);
+  will-change: background;
+}
+
+.gradient-static {
+  /* Prevent unnecessary repaints for static gradients */
+  will-change: auto;
+}
+
+/* ============================================================================
+ * GRADIENT SYSTEM SUMMARY
+ * 
+ * Total gradients: 30+ predefined patterns
+ * Color distribution: 60% Blue, 30% Green, 10% Yellow/Coral
+ * Accessibility: High contrast and reduced motion support
+ * Performance: GPU-accelerated with mobile optimizations
+ * Dark mode: Full adaptation with maintained semantics
+ * 
+ * Usage patterns:
+ * 1. .gradient-{name} for direct background application
+ * 2. --gradient-{name} CSS custom properties for programmatic use
+ * 3. .gradient-overlay-{strength} for content layering
+ * 4. .btn-gradient-{variant} for interactive elements
+ * 5. .card-gradient-{type} for content containers
+ * ============================================================================ */

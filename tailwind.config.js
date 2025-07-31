@@ -18,6 +18,7 @@ export default {
     },
     extend: {
       colors: {
+        // Shadcn/ui compatibility colors (HSL format for Tailwind)
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -51,6 +52,22 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        
+        // Direct access to unified token system (OKLCH format)
+        // Use these for new components that don't need shadcn/ui compatibility
+        'semantic-brand-primary': 'var(--semantic-brand-primary)',
+        'semantic-brand-secondary': 'var(--semantic-brand-secondary)',
+        'semantic-text-primary': 'var(--semantic-text-primary)',
+        'semantic-text-secondary': 'var(--semantic-text-secondary)',
+        'semantic-surface-primary': 'var(--semantic-surface-primary)',
+        'semantic-surface-elevated': 'var(--semantic-surface-elevated)',
+        'semantic-action-primary': 'var(--semantic-action-primary)',
+        'semantic-action-secondary': 'var(--semantic-action-secondary)',
+        'semantic-action-tertiary': 'var(--semantic-action-tertiary)',
+        'semantic-status-safe': 'var(--semantic-status-safe)',
+        'semantic-status-caution': 'var(--semantic-status-caution)',
+        'semantic-status-critical': 'var(--semantic-status-critical)',
+        'semantic-status-emergency': 'var(--semantic-status-emergency)',
       },
       borderRadius: {
         lg: "var(--radius)",

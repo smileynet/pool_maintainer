@@ -57,32 +57,32 @@ function App() {
       value: '3',
       change: '+0',
       icon: MapPin,
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-50',
+      color: 'text-[var(--color-dominant-primary)]',
+      bgColor: 'bg-[var(--color-dominant-light)]',
     },
     {
       title: 'Pending Tasks',
       value: '7',
       change: '+2',
       icon: Clock,
-      color: 'text-orange-600',
-      bgColor: 'bg-orange-50',
+      color: 'text-[var(--color-accent-primary)]',
+      bgColor: 'bg-[var(--color-accent-light)]',
     },
     {
       title: 'Available Technicians',
       value: '4',
       change: '+1',
       icon: Users,
-      color: 'text-green-600',
-      bgColor: 'bg-green-50',
+      color: 'text-[var(--color-secondary-primary)]',
+      bgColor: 'bg-[var(--color-secondary-lighter)]',
     },
     {
       title: 'Critical Alerts',
       value: '1',
       change: '-2',
       icon: AlertTriangle,
-      color: 'text-red-600',
-      bgColor: 'bg-red-50',
+      color: 'text-[var(--color-accent-secondary)]',
+      bgColor: 'bg-[var(--color-accent-secondary-light)]',
     },
   ]
 
@@ -116,7 +116,7 @@ function App() {
                   <p className="text-muted-foreground text-sm font-medium">{metric.title}</p>
                   <div className="mt-2 flex items-center gap-2">
                     <span className="text-2xl font-bold">{metric.value}</span>
-                    <div className="flex items-center gap-1 text-sm text-green-600 dark:text-green-400">
+                    <div className="flex items-center gap-1 text-sm text-[var(--color-secondary-primary)]">
                       <TrendingUp className="h-4 w-4" />
                       <span>{metric.change}</span>
                     </div>
@@ -162,8 +162,8 @@ function App() {
                   <Badge
                     className={
                       reading.status === 'good'
-                        ? 'bg-green-500 hover:bg-green-500/80'
-                        : 'bg-yellow-500 text-black hover:bg-yellow-500/80'
+                        ? 'bg-[var(--color-secondary-primary)] hover:bg-[var(--color-secondary-primary)]/80 text-white'
+                        : 'bg-[var(--color-accent-primary)] text-[var(--color-text-on-accent-primary)] hover:bg-[var(--color-accent-primary)]/80'
                     }
                   >
                     {reading.status === 'good' && <CheckCircle className="mr-1 h-3 w-3" />}
@@ -242,13 +242,13 @@ function App() {
 
       {/* Component Library Link */}
       <div className="text-center">
-        <Card className="border-blue-200 bg-blue-50">
+        <Card className="border-[var(--color-secondary-light)] bg-[var(--color-secondary-lighter)]">
           <CardContent className="pt-6">
-            <h3 className="mb-2 text-lg font-semibold">Component Documentation</h3>
-            <p className="text-muted-foreground mb-4">
+            <h3 className="mb-2 text-lg font-semibold text-[var(--color-text-on-secondary-light)]">Component Documentation</h3>
+            <p className="text-[var(--color-text-on-secondary-light)] mb-4 opacity-80">
               Explore our complete UI component library with pool maintenance examples
             </p>
-            <Button asChild>
+            <Button className="btn-60-30-10-primary" asChild>
               <a href="http://localhost:6080" target="_blank" rel="noopener noreferrer">
                 View Storybook Documentation
               </a>
@@ -263,24 +263,24 @@ function App() {
   const renderAnalytics = () => (
     <div className="space-y-8">
       <div>
-        <h2 className="text-foreground mb-2 text-2xl font-bold">Analytics & Reports</h2>
-        <p className="text-muted-foreground">
+        <h2 className="text-[var(--color-text-on-dominant)] mb-2 text-2xl font-bold">Analytics & Reports</h2>
+        <p className="text-[var(--color-text-on-dominant-light)]">
           Advanced analytics and reporting features coming in Phase 2.3
         </p>
       </div>
 
-      <Card className="p-12 text-center">
-        <BarChart3 className="mx-auto mb-4 h-16 w-16 text-gray-400" />
-        <h3 className="text-foreground mb-2 text-lg font-medium">Analytics Dashboard</h3>
-        <p className="text-muted-foreground mb-4">
+      <Card className="bg-card p-12 text-center">
+        <BarChart3 className="mx-auto mb-4 h-16 w-16 text-[var(--color-text-on-dominant-light)]" />
+        <h3 className="text-[var(--color-text-on-dominant)] mb-2 text-lg font-medium">Analytics Dashboard</h3>
+        <p className="text-[var(--color-text-on-dominant-light)] mb-4">
           Advanced reporting, trend analysis, and predictive maintenance features will be available
           in the next phase.
         </p>
         <div className="flex justify-center gap-2">
-          <Badge variant="outline">Chemical Trends</Badge>
-          <Badge variant="outline">Usage Analytics</Badge>
-          <Badge variant="outline">Performance Reports</Badge>
-          <Badge variant="outline">Compliance Tracking</Badge>
+          <Badge variant="outline" className="border-[var(--color-secondary-primary)] text-[var(--color-secondary-primary)]">Chemical Trends</Badge>
+          <Badge variant="outline" className="border-[var(--color-secondary-primary)] text-[var(--color-secondary-primary)]">Usage Analytics</Badge>
+          <Badge variant="outline" className="border-[var(--color-accent-primary)] text-[var(--color-accent-primary)]">Performance Reports</Badge>
+          <Badge variant="outline" className="border-[var(--color-accent-secondary)] text-[var(--color-accent-secondary)]">Compliance Tracking</Badge>
         </div>
       </Card>
     </div>

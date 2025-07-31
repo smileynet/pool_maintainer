@@ -1,7 +1,11 @@
 @import 'tw-animate-css';
-@import './styles/design-tokens.css';
-@import './styles/community-pool-palette.css';
-@import './styles/60-30-10-tokens.css';
+/* UNIFIED TOKEN SYSTEM - Single source of truth for all colors */
+@import './styles/unified-token-system.css';
+/* WCAG-COMPLIANT COLOR PAIRS - Pre-tested accessible combinations */
+@import './styles/wcag-color-pairs.css';
+/* GRADIENT OVERLAYS - Visual depth and modern design elements */
+@import './styles/gradient-overlays.css';
+/* Keep safety components and theme fixes for compatibility */
 @import './styles/safety-components.css';
 @import './styles/theme-fixes.css';
 
@@ -11,70 +15,84 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Pool Maintenance Theme System - Light Mode Optimized for Outdoor Use */
+/* SHADCN/UI INTEGRATION WITH UNIFIED TOKEN SYSTEM */
 @layer base {
   :root {
-    /* Light theme colors - 60-30-10 Community Pool Distribution */
-    --background: 194 100% 98%; /* Dominant light blue (#F8FDFF) - 60% */
-    --foreground: 231 44% 32%; /* Deep indigo text (#1A237E) */
+    /* Map shadcn/ui variables to unified semantic tokens */
+    /* These must be in HSL format for Tailwind compatibility */
+    
+    /* Background & Text - 60% Blue Distribution */
+    --background: 210 40% 98%;  /* Maps to --semantic-surface-primary */
+    --foreground: 222 84% 4.9%; /* Maps to --semantic-text-primary */
 
-    --card: 0 0% 100%; /* White cards on blue background */
-    --card-foreground: 231 44% 32%;
+    /* Card Components */
+    --card: 0 0% 98%;           /* Maps to --semantic-surface-elevated */
+    --card-foreground: 222 84% 4.9%; /* Maps to --semantic-text-primary */
 
-    --popover: 186 94% 95%; /* Pool foam color */
-    --popover-foreground: 231 44% 32%;
+    /* Popover Components */
+    --popover: 210 40% 95%;     /* Maps to --semantic-surface-overlay */
+    --popover-foreground: 222 84% 4.9%;
 
-    --primary: 45 97% 69%; /* Sunshine yellow (#FFD962) - 10% accent */
-    --primary-foreground: 231 44% 32%; /* Deep indigo on yellow */
+    /* Primary Actions - 7% Yellow (Main CTAs) */
+    --primary: 47 96% 69%;      /* Maps to --semantic-action-primary */
+    --primary-foreground: 222 84% 4.9%;
 
-    --secondary: 122 39% 49%; /* Grass green (#4CAF50) - 30% structural */
-    --secondary-foreground: 0 0% 100%; /* White on green */
+    /* Secondary Actions - 30% Green (Structural) */
+    --secondary: 122 39% 49%;   /* Maps to --semantic-action-secondary */
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 186 94% 97%; /* Very light pool tint */
-    --muted-foreground: 233 34% 54%; /* Lighter indigo */
+    /* Muted Elements */
+    --muted: 210 40% 96%;       /* Maps to --semantic-surface-secondary */
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 16 100% 66%; /* Coral accent (#FF7F50) - 10% secondary accent */
-    --accent-foreground: 0 0% 100%; /* White on coral */
+    /* Accent Elements - 3% Coral */
+    --accent: 12 76% 61%;       /* Maps to --semantic-action-tertiary */
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 16 100% 66%; /* Coral for destructive actions */
-    --destructive-foreground: 0 0% 100%;
+    /* Destructive Actions */
+    --destructive: 0 84% 64%;   /* Maps to --semantic-status-critical */
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 186 94% 95%; /* Light pool blue borders */
-    --input: 186 94% 95%;
-    --ring: 16 100% 66%; /* Coral focus ring */
+    /* Borders & Inputs */
+    --border: 214 32% 91%;      /* Maps to --semantic-border-default */
+    --input: 214 32% 91%;       /* Maps to --semantic-border-default */
+    --ring: 12 76% 61%;         /* Maps to --semantic-border-focus */
 
+    /* Border Radius */
     --radius: 0.5rem;
   }
 
   .dark {
-    /* Dark mode - Evening Pool Operations */
-    --background: 213 68% 13%; /* Deep ocean blue (#001F3F) */
-    --foreground: 210 100% 94%; /* Light blue-white (#E3F2FD) */
+    /* Dark mode mappings to unified token system */
+    /* Evening pool operations with maintained semantic relationships */
+    
+    --background: 220 13% 9%;       /* Maps to dark --semantic-surface-primary */
+    --foreground: 210 40% 92%;      /* Maps to dark --semantic-text-primary */
 
-    --card: 213 100% 20%; /* Pool blue card (#003366) */
-    --card-foreground: 210 100% 94%;
+    --card: 220 13% 12%;            /* Maps to dark --semantic-surface-elevated */
+    --card-foreground: 210 40% 92%;
 
-    --popover: 213 100% 20%;
-    --popover-foreground: 210 100% 94%;
+    --popover: 220 13% 15%;         /* Maps to dark --semantic-surface-overlay */
+    --popover-foreground: 210 40% 92%;
 
-    --primary: 199 100% 34%; /* Deep pool blue (#0080AB) */
-    --primary-foreground: 210 100% 94%;
+    --primary: 47 96% 69%;          /* Keep primary action colors visible */
+    --primary-foreground: 220 13% 9%;
 
-    --secondary: 45 100% 50%; /* Evening sunshine (#FFB300) */
-    --secondary-foreground: 213 68% 13%;
+    --secondary: 122 39% 49%;       /* Keep secondary actions recognizable */
+    --secondary-foreground: 210 40% 92%;
 
-    --muted: 213 100% 15%; /* Darker blue surface */
-    --muted-foreground: 201 100% 74%; /* Muted light blue */
+    --muted: 220 13% 15%;           /* Maps to dark --semantic-surface-secondary */
+    --muted-foreground: 215 16% 65%;
 
-    --accent: 213 100% 25%; /* Pool blue accent */
-    --accent-foreground: 210 100% 94%;
+    --accent: 12 76% 61%;           /* Keep coral accent for consistency */
+    --accent-foreground: 210 40% 92%;
 
-    --destructive: 16 100% 64%; /* Bright coral (#FF7043) */
-    --destructive-foreground: 210 100% 94%;
+    --destructive: 0 84% 64%;       /* Keep destructive actions visible */
+    --destructive-foreground: 210 40% 92%;
 
-    --border: 207 89% 39%; /* Pool blue borders (#0277BD) */
-    --input: 207 89% 39%;
-    --ring: 199 100% 34%; /* Pool blue ring */
+    --border: 220 13% 20%;          /* Maps to dark --semantic-border-default */
+    --input: 220 13% 20%;
+    --ring: 12 76% 61%;             /* Maps to --semantic-border-focus */
   }
 }
 
@@ -87,70 +105,23 @@
   }
 }
 
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
-
-/* Additional chart and sidebar variables for component compatibility */
-:root {
-  --chart-1: var(--color-pool-primary);
-  --chart-2: var(--color-safe);
-  --chart-3: var(--color-caution);
-  --chart-4: var(--color-critical);
-  --chart-5: var(--color-emergency);
-  --sidebar: var(--color-background);
-  --sidebar-foreground: var(--color-text);
-  --sidebar-primary: var(--color-primary);
-  --sidebar-primary-foreground: var(--color-primary-foreground);
-  --sidebar-accent: var(--color-surface-hover);
-  --sidebar-accent-foreground: var(--color-text);
-  --sidebar-border: var(--color-border);
-  --sidebar-ring: var(--color-border-focus);
-}
-
-.dark {
-  /* Dark mode handled by design tokens media query */
-}
-
+/* Radius utilities for consistency */
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  :root {
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
   }
-  body {
-    @apply bg-background text-foreground;
+}
+
+/* Chart variables mapped to unified semantic tokens */
+@layer base {
+  :root {
+    --chart-1: var(--semantic-brand-primary);
+    --chart-2: var(--semantic-status-safe);
+    --chart-3: var(--semantic-status-caution);
+    --chart-4: var(--semantic-status-critical);
+    --chart-5: var(--semantic-status-emergency);
   }
 }

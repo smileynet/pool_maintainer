@@ -340,7 +340,7 @@ const PoolFacilityCard = ({
 
   return (
     <Card className={cn(
-      "relative overflow-hidden",
+      "card-interactive relative overflow-hidden",
       pool.status === 'emergency' && "ring-2 ring-red-500 ring-opacity-50",
       pool.status === 'maintenance' && "ring-1 ring-yellow-400"
     )}>
@@ -390,24 +390,24 @@ const PoolFacilityCard = ({
         {/* Chemical Levels Quick View */}
         <div className="grid grid-cols-2 gap-2 text-sm">
           <div>
-            <span className="text-gray-600">Free Cl:</span>
+            <span className="text-[var(--color-text-on-dominant-light)]">Free Cl:</span>
             <span className={cn("ml-1 font-medium", chlorineStatus.color)}>
               {pool.chemicalLevels.freeChlorine} ppm
             </span>
           </div>
           <div>
-            <span className="text-gray-600">pH:</span>
+            <span className="text-[var(--color-text-on-dominant-light)]">pH:</span>
             <span className={cn("ml-1 font-medium", phStatus.color)}>
               {pool.chemicalLevels.ph}
             </span>
           </div>
           <div>
-            <span className="text-gray-600">Temp:</span>
-            <span className="ml-1 font-medium">{pool.chemicalLevels.temperature}°F</span>
+            <span className="text-[var(--color-text-on-dominant-light)]">Temp:</span>
+            <span className="ml-1 font-medium text-[var(--color-text-on-dominant)]">{pool.chemicalLevels.temperature}°F</span>
           </div>
           <div>
-            <span className="text-gray-600">Last Test:</span>
-            <span className="ml-1 text-xs">
+            <span className="text-[var(--color-text-on-dominant-light)]">Last Test:</span>
+            <span className="ml-1 text-xs text-[var(--color-text-on-dominant-light)]">
               {new Date(pool.chemicalLevels.lastTested).toLocaleTimeString()}
             </span>
           </div>
@@ -417,13 +417,13 @@ const PoolFacilityCard = ({
         {pool.alerts.length > 0 && (
           <div className="flex flex-wrap gap-1">
             {criticalAlerts > 0 && (
-              <Badge className="bg-red-500 text-xs">
+              <Badge className="bg-[var(--color-accent-secondary)] text-white text-xs">
                 <AlertTriangle className="w-3 h-3 mr-1" />
                 {criticalAlerts} Critical
               </Badge>
             )}
             {highAlerts > 0 && (
-              <Badge className="bg-orange-500 text-xs">
+              <Badge className="bg-[var(--color-accent-primary)] text-[var(--color-text-on-accent-primary)] text-xs">
                 {highAlerts} High Priority
               </Badge>
             )}
@@ -433,16 +433,16 @@ const PoolFacilityCard = ({
         {/* Assignment and Schedule */}
         <div className="text-sm space-y-1">
           <div className="flex justify-between">
-            <span className="text-gray-600">Technician:</span>
-            <span className="font-medium">{pool.assignedTechnician}</span>
+            <span className="text-[var(--color-text-on-dominant-light)]">Technician:</span>
+            <span className="font-medium text-[var(--color-text-on-dominant)]">{pool.assignedTechnician}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-600">Next Maintenance:</span>
+            <span className="text-[var(--color-text-on-dominant-light)]">Next Maintenance:</span>
             <span className={cn(
               "text-xs",
               new Date(pool.nextMaintenance) <= new Date(Date.now() + 24 * 60 * 60 * 1000) 
-                ? "text-orange-600 font-medium" 
-                : "text-gray-500"
+                ? "text-[var(--color-accent-primary)] font-medium" 
+                : "text-[var(--color-text-on-dominant-light)]"
             )}>
               {new Date(pool.nextMaintenance).toLocaleDateString()}
             </span>
@@ -455,14 +455,18 @@ const PoolFacilityCard = ({
             size="sm"
             variant="outline"
             onClick={() => onQuickTest(pool.id)}
-            className="flex-1"
+            className="flex-1 border-[var(--color-accent-primary)] text-[var(--color-accent-primary)] hover:bg-[var(--color-accent-light)]"
           >
             <TestTube className="w-3 h-3 mr-1" />
             Quick Test
           </Button>
           <Dialog>
             <DialogTrigger asChild>
-              <Button size="sm" variant="outline">
+              <Button 
+                size="sm" 
+                variant="outline"
+                className="border-[var(--color-secondary-primary)] text-[var(--color-secondary-primary)] hover:bg-[var(--color-secondary-lighter)]"
+              >
                 <Eye className="w-3 h-3 mr-1" />
                 Details
               </Button>
@@ -727,15 +731,20 @@ export const PoolFacilityManager = () => {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h2 className="text-2xl font-bold">Pool Facility Management</h2>
-          <p className="text-gray-600">Real-time monitoring and management of all pool facilities</p>
+          <p className="text-[var(--color-text-on-dominant-light)]">Real-time monitoring and management of all pool facilities</p>
         </div>
         
         <div className="flex gap-2">
-          <Button variant="outline" onClick={handleRefresh} disabled={refreshing}>
+          <Button 
+            variant="outline" 
+            onClick={handleRefresh} 
+            disabled={refreshing}
+            className="border-[var(--color-secondary-primary)] text-[var(--color-secondary-primary)] hover:bg-[var(--color-secondary-lighter)]"
+          >
             <RefreshCw className={cn("w-4 h-4 mr-2", refreshing && "animate-spin")} />
             {refreshing ? 'Refreshing...' : 'Refresh'}
           </Button>
-          <Button>
+          <Button className="btn-60-30-10-primary">
             <Plus className="w-4 h-4 mr-2" />
             Add Pool
           </Button>
@@ -744,40 +753,40 @@ export const PoolFacilityManager = () => {
 
       {/* Summary Statistics */}
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-        <Card className="p-4">
+        <Card className="card-interactive p-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-blue-600">{totalPools}</div>
-            <div className="text-sm text-gray-600">Total Pools</div>
+            <div className="text-2xl font-bold text-[var(--color-dominant-primary)]">{totalPools}</div>
+            <div className="text-sm text-[var(--color-text-on-dominant-light)]">Total Pools</div>
           </div>
         </Card>
-        <Card className="p-4">
+        <Card className="card-interactive p-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-green-600">{operationalPools}</div>
-            <div className="text-sm text-gray-600">Operational</div>
+            <div className="text-2xl font-bold text-[var(--color-secondary-primary)]">{operationalPools}</div>
+            <div className="text-sm text-[var(--color-text-on-dominant-light)]">Operational</div>
           </div>
         </Card>
-        <Card className="p-4">
+        <Card className="card-interactive p-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-yellow-600">{maintenancePools}</div>
-            <div className="text-sm text-gray-600">Maintenance</div>
+            <div className="text-2xl font-bold text-[var(--color-accent-primary)]">{maintenancePools}</div>
+            <div className="text-sm text-[var(--color-text-on-dominant-light)]">Maintenance</div>
           </div>
         </Card>
-        <Card className="p-4">
+        <Card className="card-interactive p-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-red-600">{emergencyPools}</div>
-            <div className="text-sm text-gray-600">Emergency</div>
+            <div className="text-2xl font-bold text-[var(--color-accent-secondary)]">{emergencyPools}</div>
+            <div className="text-sm text-[var(--color-text-on-dominant-light)]">Emergency</div>
           </div>
         </Card>
-        <Card className="p-4">
+        <Card className="card-interactive p-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-orange-600">{totalAlerts}</div>
-            <div className="text-sm text-gray-600">Total Alerts</div>
+            <div className="text-2xl font-bold text-[var(--color-accent-primary)]">{totalAlerts}</div>
+            <div className="text-sm text-[var(--color-text-on-dominant-light)]">Total Alerts</div>
           </div>
         </Card>
-        <Card className="p-4">
+        <Card className="card-interactive p-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-red-600">{criticalAlerts}</div>
-            <div className="text-sm text-gray-600">Critical</div>
+            <div className="text-2xl font-bold text-[var(--color-accent-secondary)]">{criticalAlerts}</div>
+            <div className="text-sm text-[var(--color-text-on-dominant-light)]">Critical</div>
           </div>
         </Card>
       </div>
