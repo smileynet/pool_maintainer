@@ -19,6 +19,7 @@ import {
   Search,
   Filter,
   Download,
+  Upload,
   Calendar,
   AlertTriangle,
   CheckCircle,
@@ -26,14 +27,17 @@ import {
   Eye,
   Trash2,
   FileText,
+  X,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import {
   getChemicalTests,
   deleteChemicalTest,
   exportTestsToCSV,
+  importTestsFromCSV,
   getTestSummary,
   type ChemicalTest,
+  type ImportResult,
 } from '@/lib/localStorage'
 import { validateChemical, type ChemicalType } from '@/lib/mahc-validation'
 
@@ -53,6 +57,10 @@ export const ChemicalTestHistory = ({ onViewTest, onEditTest }: ChemicalTestHist
   const [poolFilter, setPoolFilter] = useState<string>('all')
   const [technicianFilter, setTechnicianFilter] = useState<string>('all')
   const [dateRange, setDateRange] = useState<string>('all')
+
+  // Import state
+  const [importResult, setImportResult] = useState<ImportResult | null>(null)
+  const [importing, setImporting] = useState(false)
 
   // Load tests from localStorage
   useEffect(() => {
@@ -171,6 +179,63 @@ export const ChemicalTestHistory = ({ onViewTest, onEditTest }: ChemicalTestHist
     }
   }
 
+  // Handle CSV import
+  const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    if (!file.name.toLowerCase().endsWith('.csv')) {
+      alert('Please select a CSV file')
+      return
+    }
+
+    setImporting(true)
+    setImportResult(null)
+
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      try {
+        const csvContent = e.target?.result as string
+        const result = importTestsFromCSV(csvContent)
+        setImportResult(result)
+
+        if (result.imported > 0) {
+          // Refresh the tests list
+          const updatedTests = getChemicalTests()
+          setTests(
+            updatedTests.sort(
+              (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+            )
+          )
+        }
+      } catch {
+        setImportResult({
+          success: false,
+          imported: 0,
+          skipped: 0,
+          errors: [{ row: 0, message: 'Failed to read file' }],
+        })
+      } finally {
+        setImporting(false)
+        // Clear the file input
+        event.target.value = ''
+      }
+    }
+
+    reader.onerror = () => {
+      setImportResult({
+        success: false,
+        imported: 0,
+        skipped: 0,
+        errors: [{ row: 0, message: 'Failed to read file' }],
+      })
+      setImporting(false)
+      event.target.value = ''
+    }
+
+    reader.readAsText(file)
+  }
+
   // Clear all filters
   const clearFilters = () => {
     setSearchTerm('')
@@ -287,10 +352,30 @@ export const ChemicalTestHistory = ({ onViewTest, onEditTest }: ChemicalTestHist
             </div>
           </div>
 
-          <Button onClick={handleExport} disabled={filteredTests.length === 0}>
-            <Download className="mr-2 h-4 w-4" />
-            Export CSV
-          </Button>
+          <div className="flex gap-2">
+            <Button onClick={handleExport} disabled={filteredTests.length === 0}>
+              <Download className="mr-2 h-4 w-4" />
+              Export CSV
+            </Button>
+
+            <div className="relative">
+              <input
+                type="file"
+                accept=".csv"
+                onChange={handleImport}
+                className="absolute inset-0 cursor-pointer opacity-0"
+                disabled={importing}
+              />
+              <Button variant="secondary" disabled={importing}>
+                {importing ? (
+                  <Clock className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <Upload className="mr-2 h-4 w-4" />
+                )}
+                {importing ? 'Importing...' : 'Import CSV'}
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -401,6 +486,86 @@ export const ChemicalTestHistory = ({ onViewTest, onEditTest }: ChemicalTestHist
           </div>
         </CardContent>
       </Card>
+
+      {/* Import Results */}
+      {importResult && (
+        <Card
+          className={cn(
+            'border-2',
+            importResult.success && importResult.imported > 0 && 'border-green-500 bg-green-50',
+            !importResult.success && 'border-red-500 bg-red-50',
+            importResult.success && importResult.imported === 0 && 'border-yellow-500 bg-yellow-50'
+          )}
+        >
+          <CardContent className="pt-4">
+            <div className="flex items-start justify-between">
+              <div className="flex items-start gap-3">
+                {importResult.success && importResult.imported > 0 && (
+                  <CheckCircle className="mt-0.5 h-5 w-5 text-green-600" />
+                )}
+                {!importResult.success && <AlertTriangle className="mt-0.5 h-5 w-5 text-red-600" />}
+                {importResult.success && importResult.imported === 0 && (
+                  <AlertTriangle className="mt-0.5 h-5 w-5 text-yellow-600" />
+                )}
+
+                <div className="flex-1">
+                  <h4
+                    className={cn(
+                      'font-medium',
+                      importResult.success && importResult.imported > 0 && 'text-green-800',
+                      !importResult.success && 'text-red-800',
+                      importResult.success && importResult.imported === 0 && 'text-yellow-800'
+                    )}
+                  >
+                    {importResult.success && importResult.imported > 0 && 'Import Successful'}
+                    {!importResult.success && 'Import Failed'}
+                    {importResult.success &&
+                      importResult.imported === 0 &&
+                      'Import Completed with Warnings'}
+                  </h4>
+
+                  <div
+                    className={cn(
+                      'mt-2 text-sm',
+                      importResult.success && importResult.imported > 0 && 'text-green-700',
+                      !importResult.success && 'text-red-700',
+                      importResult.success && importResult.imported === 0 && 'text-yellow-700'
+                    )}
+                  >
+                    <div className="mb-2">
+                      {importResult.imported} tests imported, {importResult.skipped} skipped
+                      {importResult.errors.length > 0 && `, ${importResult.errors.length} errors`}
+                    </div>
+
+                    {importResult.errors.length > 0 && (
+                      <div>
+                        <strong>Errors:</strong>
+                        <ul className="mt-1 list-inside list-disc space-y-1">
+                          {importResult.errors.slice(0, 5).map((error, index) => (
+                            <li key={index} className="text-xs">
+                              {error.row > 0 ? `Row ${error.row}: ` : ''}
+                              {error.message}
+                            </li>
+                          ))}
+                          {importResult.errors.length > 5 && (
+                            <li className="text-xs">
+                              ...and {importResult.errors.length - 5} more errors
+                            </li>
+                          )}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <Button variant="ghost" size="sm" onClick={() => setImportResult(null)}>
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Test History Table */}
       <Card>
