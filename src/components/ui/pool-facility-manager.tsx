@@ -792,7 +792,7 @@ export const PoolFacilityManager = () => {
             <RefreshCw className={cn('mr-2 h-4 w-4', refreshing && 'animate-spin')} />
             {refreshing ? 'Refreshing...' : 'Refresh'}
           </Button>
-          <Button className="bg-[var(--semantic-action-primary)] text-white hover:bg-[var(--semantic-action-primary)]/80">
+          <Button variant="default">
             <Plus className="mr-2 h-4 w-4" />
             Add Pool
           </Button>

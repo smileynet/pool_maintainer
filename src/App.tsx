@@ -98,10 +98,8 @@ function App() {
     <div className="space-y-8">
       {/* Welcome Section */}
       <div>
-        <h2 className="mb-2 text-2xl font-bold text-[var(--semantic-text-primary)]">
-          Welcome to Pool Maintenance
-        </h2>
-        <p className="text-[var(--semantic-text-secondary)]">
+        <h2 className="text-foreground mb-2 text-2xl font-bold">Welcome to Pool Maintenance</h2>
+        <p className="text-muted-foreground">
           Monitor and manage community pool safety and maintenance operations.
         </p>
       </div>
@@ -116,7 +114,7 @@ function App() {
                   <p className="text-muted-foreground text-sm font-medium">{metric.title}</p>
                   <div className="mt-2 flex items-center gap-2">
                     <span className="text-2xl font-bold">{metric.value}</span>
-                    <div className="flex items-center gap-1 text-sm text-[var(--semantic-brand-secondary)]">
+                    <div className="text-secondary flex items-center gap-1 text-sm">
                       <TrendingUp className="h-4 w-4" />
                       <span>{metric.change}</span>
                     </div>
@@ -159,13 +157,7 @@ function App() {
                       <span>{reading.lastTested}</span>
                     </div>
                   </div>
-                  <Badge
-                    className={
-                      reading.status === 'good'
-                        ? 'bg-[var(--semantic-status-safe)] text-white hover:bg-[var(--semantic-status-safe)]/80'
-                        : 'bg-[var(--semantic-status-caution)] text-[var(--semantic-text-primary)] hover:bg-[var(--semantic-status-caution)]/80'
-                    }
-                  >
+                  <Badge variant={reading.status === 'good' ? 'secondary' : 'outline'}>
                     {reading.status === 'good' && <CheckCircle className="mr-1 h-3 w-3" />}
                     {reading.status === 'warning' && <AlertTriangle className="mr-1 h-3 w-3" />}
                     {reading.status === 'good' ? 'Safe' : 'Attention'}
@@ -242,18 +234,13 @@ function App() {
 
       {/* Component Library Link */}
       <div className="text-center">
-        <Card className="border-[var(--semantic-border-default)] bg-[var(--semantic-surface-elevated)]">
+        <Card>
           <CardContent className="pt-6">
-            <h3 className="mb-2 text-lg font-semibold text-[var(--semantic-text-primary)]">
-              Component Documentation
-            </h3>
-            <p className="mb-4 text-[var(--semantic-text-secondary)] opacity-80">
+            <h3 className="text-foreground mb-2 text-lg font-semibold">Component Documentation</h3>
+            <p className="text-muted-foreground mb-4 opacity-80">
               Explore our complete UI component library with pool maintenance examples
             </p>
-            <Button
-              className="bg-[var(--semantic-action-primary)] text-white hover:bg-[var(--semantic-action-primary)]/80"
-              asChild
-            >
+            <Button variant="default" asChild>
               <a href="http://localhost:6080" target="_blank" rel="noopener noreferrer">
                 View Storybook Documentation
               </a>
@@ -268,20 +255,16 @@ function App() {
   const renderAnalytics = () => (
     <div className="space-y-8">
       <div>
-        <h2 className="mb-2 text-2xl font-bold text-[var(--semantic-text-primary)]">
-          Analytics & Reports
-        </h2>
-        <p className="text-[var(--semantic-text-secondary)]">
+        <h2 className="text-foreground mb-2 text-2xl font-bold">Analytics & Reports</h2>
+        <p className="text-muted-foreground">
           Advanced analytics and reporting features coming in Phase 2.3
         </p>
       </div>
 
       <Card className="bg-card p-12 text-center">
-        <BarChart3 className="mx-auto mb-4 h-16 w-16 text-[var(--semantic-text-secondary)]" />
-        <h3 className="mb-2 text-lg font-medium text-[var(--semantic-text-primary)]">
-          Analytics Dashboard
-        </h3>
-        <p className="mb-4 text-[var(--semantic-text-secondary)]">
+        <BarChart3 className="text-muted-foreground mx-auto mb-4 h-16 w-16" />
+        <h3 className="text-foreground mb-2 text-lg font-medium">Analytics Dashboard</h3>
+        <p className="text-muted-foreground mb-4">
           Advanced reporting, trend analysis, and predictive maintenance features will be available
           in the next phase.
         </p>
@@ -316,23 +299,21 @@ function App() {
   )
 
   return (
-    <div className="min-h-screen bg-[var(--semantic-surface-primary)]">
+    <div className="bg-background min-h-screen">
       {/* Header - 30% Green Theme */}
-      <header className="border-b border-[var(--semantic-border-default)] bg-[var(--semantic-surface-secondary)] shadow-sm">
+      <header className="bg-card border-b shadow-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
-              <Droplet className="mr-3 h-8 w-8 text-[var(--semantic-brand-primary)]" />
-              <h1 className="text-xl font-semibold text-[var(--semantic-text-primary)]">
-                Pool Maintenance System
-              </h1>
+              <Droplet className="text-primary mr-3 h-8 w-8" />
+              <h1 className="text-foreground text-xl font-semibold">Pool Maintenance System</h1>
             </div>
             <div className="flex items-center gap-4">
-              <Button className="bg-[var(--semantic-action-primary)] text-white hover:bg-[var(--semantic-action-primary)]/80">
+              <Button variant="default">
                 <TestTube className="mr-2 h-4 w-4" />
                 New Reading
               </Button>
-              <Button className="bg-[var(--semantic-action-secondary)] text-white hover:bg-[var(--semantic-action-secondary)]/80">
+              <Button variant="secondary">
                 <Settings className="mr-2 h-4 w-4" />
                 Settings
               </Button>
@@ -342,7 +323,7 @@ function App() {
       </header>
 
       {/* Navigation Tabs - 30% Green Structure */}
-      <div className="border-b border-[var(--semantic-border-default)] bg-[var(--semantic-surface-secondary)]">
+      <div className="bg-secondary/10 border-b">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <nav className="flex space-x-8" aria-label="Tabs">
             {tabs.map((tab) => {
@@ -354,8 +335,8 @@ function App() {
                   className={cn(
                     'flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap',
                     activeTab === tab.id
-                      ? 'border-[var(--semantic-border-focus)] text-[var(--semantic-action-primary)]'
-                      : 'border-transparent text-[var(--semantic-text-secondary)] hover:border-[var(--semantic-border-default)] hover:text-[var(--semantic-text-primary)]'
+                      ? 'border-primary text-primary'
+                      : 'text-muted-foreground hover:border-border hover:text-foreground border-transparent'
                   )}
                   aria-current={activeTab === tab.id ? 'page' : undefined}
                 >
@@ -369,7 +350,7 @@ function App() {
       </div>
 
       {/* Main Content - 60% Blue Theme */}
-      <main className="mx-auto min-h-screen max-w-7xl bg-[var(--semantic-surface-primary)] px-4 py-8 sm:px-6 lg:px-8">
+      <main className="mx-auto min-h-screen max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         {activeTab === 'overview' && renderOverview()}
         {activeTab === 'facilities' && <PoolFacilityManager />}
         {activeTab === 'analytics' && renderAnalytics()}

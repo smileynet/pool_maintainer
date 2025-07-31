@@ -173,18 +173,9 @@ export function ColorZoneDemo() {
             {/* Action Zone - CTAs */}
             <div className="zone-actions mt-6">
               <div className="flex gap-4">
-                <Button className="bg-[var(--semantic-action-primary)] hover:bg-[var(--semantic-action-primary)]/80">
-                  Record Test Results
-                </Button>
-                <Button
-                  variant="outline"
-                  className="border-[var(--semantic-action-secondary)] text-[var(--semantic-action-secondary)]"
-                >
-                  Schedule Maintenance
-                </Button>
-                <Button variant="ghost" className="text-[var(--semantic-action-tertiary)]">
-                  View Reports
-                </Button>
+                <Button variant="default">Record Test Results</Button>
+                <Button variant="secondary">Schedule Maintenance</Button>
+                <Button variant="destructive">View Reports</Button>
               </div>
             </div>
           </div>
