@@ -3,18 +3,18 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { PoolFacilityManager } from '@/components/ui/pool-facility-manager'
-import { 
-  Droplet, 
-  Users, 
-  Clock, 
-  TestTube, 
-  MapPin, 
+import {
+  Droplet,
+  Users,
+  Clock,
+  TestTube,
+  MapPin,
   AlertTriangle,
   CheckCircle,
   TrendingUp,
   Activity,
   BarChart3,
-  Settings
+  Settings,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import './App.css'
@@ -31,15 +31,15 @@ function App() {
       chlorine: 2.4,
       ph: 7.3,
       status: 'good',
-      lastTested: '2 hours ago'
+      lastTested: '2 hours ago',
     },
     {
-      id: 'pool-002', 
+      id: 'pool-002',
       name: 'Kiddie Pool',
       chlorine: 1.8,
       ph: 7.5,
       status: 'good',
-      lastTested: '45 minutes ago'
+      lastTested: '45 minutes ago',
     },
     {
       id: 'pool-003',
@@ -47,8 +47,8 @@ function App() {
       chlorine: 0.8,
       ph: 7.1,
       status: 'warning',
-      lastTested: '3 hours ago'
-    }
+      lastTested: '3 hours ago',
+    },
   ]
 
   const metrics = [
@@ -58,7 +58,7 @@ function App() {
       change: '+0',
       icon: MapPin,
       color: 'text-blue-600',
-      bgColor: 'bg-blue-50'
+      bgColor: 'bg-blue-50',
     },
     {
       title: 'Pending Tasks',
@@ -66,7 +66,7 @@ function App() {
       change: '+2',
       icon: Clock,
       color: 'text-orange-600',
-      bgColor: 'bg-orange-50'
+      bgColor: 'bg-orange-50',
     },
     {
       title: 'Available Technicians',
@@ -74,7 +74,7 @@ function App() {
       change: '+1',
       icon: Users,
       color: 'text-green-600',
-      bgColor: 'bg-green-50'
+      bgColor: 'bg-green-50',
     },
     {
       title: 'Critical Alerts',
@@ -82,8 +82,8 @@ function App() {
       change: '-2',
       icon: AlertTriangle,
       color: 'text-red-600',
-      bgColor: 'bg-red-50'
-    }
+      bgColor: 'bg-red-50',
+    },
   ]
 
   // Tab navigation items
@@ -98,19 +98,23 @@ function App() {
     <div className="space-y-8">
       {/* Welcome Section */}
       <div>
-        <h2 className="text-2xl font-bold text-foreground mb-2">Welcome to Pool Maintenance</h2>
-        <p className="text-muted-foreground">Monitor and manage community pool safety and maintenance operations.</p>
+        <h2 className="mb-2 text-2xl font-bold text-[var(--color-text-on-dominant)]">
+          Welcome to Pool Maintenance
+        </h2>
+        <p className="text-[var(--color-text-on-dominant-light)]">
+          Monitor and manage community pool safety and maintenance operations.
+        </p>
       </div>
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
         {metrics.map((metric, index) => (
           <Card key={index}>
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">{metric.title}</p>
-                  <div className="flex items-center gap-2 mt-2">
+                  <p className="text-muted-foreground text-sm font-medium">{metric.title}</p>
+                  <div className="mt-2 flex items-center gap-2">
                     <span className="text-2xl font-bold">{metric.value}</span>
                     <div className="flex items-center gap-1 text-sm text-green-600 dark:text-green-400">
                       <TrendingUp className="h-4 w-4" />
@@ -118,7 +122,9 @@ function App() {
                     </div>
                   </div>
                 </div>
-                <div className={`h-12 w-12 rounded-full ${metric.bgColor} flex items-center justify-center`}>
+                <div
+                  className={`h-12 w-12 rounded-full ${metric.bgColor} flex items-center justify-center`}
+                >
                   <metric.icon className={`h-6 w-6 ${metric.color}`} />
                 </div>
               </div>
@@ -128,7 +134,7 @@ function App() {
       </div>
 
       {/* Pool Status Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         {/* Recent Chemical Readings */}
         <Card>
           <CardHeader>
@@ -141,20 +147,25 @@ function App() {
           <CardContent>
             <div className="space-y-4">
               {recentReadings.map((reading) => (
-                <div key={reading.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                <div
+                  key={reading.id}
+                  className="bg-muted/50 flex items-center justify-between rounded-lg p-3"
+                >
                   <div className="flex-1">
                     <h4 className="font-medium">{reading.name}</h4>
-                    <div className="flex items-center gap-4 mt-1 text-sm text-muted-foreground">
+                    <div className="text-muted-foreground mt-1 flex items-center gap-4 text-sm">
                       <span>Cl: {reading.chlorine} ppm</span>
                       <span>pH: {reading.ph}</span>
                       <span>{reading.lastTested}</span>
                     </div>
                   </div>
-                  <Badge className={
-                    reading.status === 'good' 
-                      ? 'bg-green-500 hover:bg-green-500/80' 
-                      : 'bg-yellow-500 text-black hover:bg-yellow-500/80'
-                  }>
+                  <Badge
+                    className={
+                      reading.status === 'good'
+                        ? 'bg-green-500 hover:bg-green-500/80'
+                        : 'bg-yellow-500 text-black hover:bg-yellow-500/80'
+                    }
+                  >
                     {reading.status === 'good' && <CheckCircle className="mr-1 h-3 w-3" />}
                     {reading.status === 'warning' && <AlertTriangle className="mr-1 h-3 w-3" />}
                     {reading.status === 'good' ? 'Safe' : 'Attention'}
@@ -173,51 +184,55 @@ function App() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 gap-3">
-              <Button 
-                className="justify-start h-auto p-4" 
+              <Button
+                className="h-auto justify-start p-4"
                 variant="outline"
                 onClick={() => setActiveTab('facilities')}
               >
                 <TestTube className="mr-3 h-5 w-5" />
                 <div className="text-left">
                   <div className="font-medium">Record Chemical Reading</div>
-                  <div className="text-sm text-muted-foreground">Log chlorine, pH, and other measurements</div>
+                  <div className="text-muted-foreground text-sm">
+                    Log chlorine, pH, and other measurements
+                  </div>
                 </div>
               </Button>
-              
-              <Button 
-                className="justify-start h-auto p-4" 
+
+              <Button
+                className="h-auto justify-start p-4"
                 variant="outline"
                 onClick={() => setActiveTab('facilities')}
               >
                 <Users className="mr-3 h-5 w-5" />
                 <div className="text-left">
                   <div className="font-medium">Assign Maintenance Task</div>
-                  <div className="text-sm text-muted-foreground">Schedule work for technicians</div>
+                  <div className="text-muted-foreground text-sm">Schedule work for technicians</div>
                 </div>
               </Button>
-              
-              <Button 
-                className="justify-start h-auto p-4" 
+
+              <Button
+                className="h-auto justify-start p-4"
                 variant="outline"
                 onClick={() => setActiveTab('facilities')}
               >
                 <MapPin className="mr-3 h-5 w-5" />
                 <div className="text-left">
                   <div className="font-medium">Pool Status Update</div>
-                  <div className="text-sm text-muted-foreground">Change operational status</div>
+                  <div className="text-muted-foreground text-sm">Change operational status</div>
                 </div>
               </Button>
-              
-              <Button 
-                className="justify-start h-auto p-4" 
+
+              <Button
+                className="h-auto justify-start p-4"
                 variant="outline"
                 onClick={() => setActiveTab('analytics')}
               >
                 <Activity className="mr-3 h-5 w-5" />
                 <div className="text-left">
                   <div className="font-medium">View Reports</div>
-                  <div className="text-sm text-muted-foreground">Access maintenance history and analytics</div>
+                  <div className="text-muted-foreground text-sm">
+                    Access maintenance history and analytics
+                  </div>
                 </div>
               </Button>
             </div>
@@ -227,9 +242,9 @@ function App() {
 
       {/* Component Library Link */}
       <div className="text-center">
-        <Card className="bg-blue-50 border-blue-200">
+        <Card className="border-blue-200 bg-blue-50">
           <CardContent className="pt-6">
-            <h3 className="text-lg font-semibold mb-2">Component Documentation</h3>
+            <h3 className="mb-2 text-lg font-semibold">Component Documentation</h3>
             <p className="text-muted-foreground mb-4">
               Explore our complete UI component library with pool maintenance examples
             </p>
@@ -248,15 +263,18 @@ function App() {
   const renderAnalytics = () => (
     <div className="space-y-8">
       <div>
-        <h2 className="text-2xl font-bold text-foreground mb-2">Analytics & Reports</h2>
-        <p className="text-muted-foreground">Advanced analytics and reporting features coming in Phase 2.3</p>
+        <h2 className="text-foreground mb-2 text-2xl font-bold">Analytics & Reports</h2>
+        <p className="text-muted-foreground">
+          Advanced analytics and reporting features coming in Phase 2.3
+        </p>
       </div>
-      
+
       <Card className="p-12 text-center">
-        <BarChart3 className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-        <h3 className="text-lg font-medium text-foreground mb-2">Analytics Dashboard</h3>
+        <BarChart3 className="mx-auto mb-4 h-16 w-16 text-gray-400" />
+        <h3 className="text-foreground mb-2 text-lg font-medium">Analytics Dashboard</h3>
         <p className="text-muted-foreground mb-4">
-          Advanced reporting, trend analysis, and predictive maintenance features will be available in the next phase.
+          Advanced reporting, trend analysis, and predictive maintenance features will be available
+          in the next phase.
         </p>
         <div className="flex justify-center gap-2">
           <Badge variant="outline">Chemical Trends</Badge>
@@ -269,22 +287,24 @@ function App() {
   )
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800">
-      {/* Header */}
-      <header className="bg-background shadow-sm border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+    <div className="min-h-screen bg-[var(--color-dominant-lighter)]">
+      {/* Header - 30% Green Theme */}
+      <header className="border-b border-[var(--color-secondary-light)] bg-[var(--nav-background)] shadow-sm">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
-              <Droplet className="h-8 w-8 text-blue-600 mr-3" />
-              <h1 className="text-xl font-semibold text-foreground">Pool Maintenance System</h1>
+              <Droplet className="mr-3 h-8 w-8 text-[var(--color-dominant-primary)]" />
+              <h1 className="text-xl font-semibold text-[var(--nav-text)]">
+                Pool Maintenance System
+              </h1>
             </div>
             <div className="flex items-center gap-4">
-              <Button variant="outline">
-                <TestTube className="h-4 w-4 mr-2" />
+              <Button className="btn-60-30-10-primary">
+                <TestTube className="mr-2 h-4 w-4" />
                 New Reading
               </Button>
-              <Button variant="outline">
-                <Settings className="h-4 w-4 mr-2" />
+              <Button className="btn-60-30-10-secondary">
+                <Settings className="mr-2 h-4 w-4" />
                 Settings
               </Button>
             </div>
@@ -292,9 +312,9 @@ function App() {
         </div>
       </header>
 
-      {/* Navigation Tabs */}
-      <div className="bg-background border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Navigation Tabs - 30% Green Structure */}
+      <div className="border-b border-[var(--color-secondary-light)] bg-[var(--nav-background)]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <nav className="flex space-x-8" aria-label="Tabs">
             {tabs.map((tab) => {
               const TabIcon = tab.icon
@@ -303,14 +323,14 @@ function App() {
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as typeof activeTab)}
                   className={cn(
-                    'flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap',
+                    'flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap',
                     activeTab === tab.id
                       ? 'border-blue-500 text-blue-600'
-                      : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
+                      : 'text-muted-foreground hover:text-foreground hover:border-border border-transparent'
                   )}
                   aria-current={activeTab === tab.id ? 'page' : undefined}
                 >
-                  <TabIcon className="w-4 h-4" />
+                  <TabIcon className="h-4 w-4" />
                   <span>{tab.label}</span>
                 </button>
               )
@@ -319,8 +339,8 @@ function App() {
         </div>
       </div>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Main Content - 60% Blue Theme */}
+      <main className="mx-auto min-h-screen max-w-7xl bg-[var(--color-content-background)] px-4 py-8 sm:px-6 lg:px-8">
         {activeTab === 'overview' && renderOverview()}
         {activeTab === 'facilities' && <PoolFacilityManager />}
         {activeTab === 'analytics' && renderAnalytics()}

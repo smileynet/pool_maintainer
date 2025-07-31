@@ -1,0 +1,256 @@
+/**
+ * 60-30-10 Color Distribution System
+ * 
+ * Implementing research-backed color proportions for visually pleasing design:
+ * - 60% Robin Egg Blue: Primary backgrounds, content areas (trust/cleanliness)
+ * - 30% Grass Green: Navigation, structural elements (nature connection) 
+ * - 10% Yellow/Coral: CTAs, interactive elements (energy/warmth)
+ */
+
+:root {
+  /* ============================================================================
+   * 60% DOMINANT COLOR - ROBIN EGG BLUE FAMILY
+   * Primary backgrounds, content areas, foundational elements
+   * ============================================================================ */
+
+  /* Main Backgrounds - 60% Coverage */
+  --color-dominant-primary: #0ad1e0; /* Robin egg blue - main brand color */
+  --color-dominant-light: #e3faff; /* Pool foam - very light backgrounds */
+  --color-dominant-lighter: #f8fdff; /* Almost white with blue hint */
+  --color-dominant-medium: #a8e2f0; /* Water sparkles - medium backgrounds */
+  --color-dominant-dark: #3197d6; /* Deep water - darker accents */
+  --color-dominant-darkest: #1976d2; /* Ocean depth - high contrast */
+
+  /* Semantic 60% Assignments */
+  --color-page-background: var(--color-dominant-lighter); /* Main page bg */
+  --color-content-background: var(--color-dominant-light); /* Content areas */
+  --color-card-background: #ffffff; /* Cards stay white */
+  --color-surface-primary: var(--color-dominant-light); /* Primary surfaces */
+  --color-surface-secondary: var(--color-dominant-lighter); /* Secondary surfaces */
+  --color-panel-background: var(--color-dominant-light); /* Side panels */
+
+  /* Text on 60% Backgrounds */
+  --color-text-on-dominant: #1a237e; /* Deep indigo for maximum contrast */
+  --color-text-on-dominant-light: #283593; /* Medium indigo on light backgrounds */
+
+  /* ============================================================================
+   * 30% SECONDARY COLOR - GRASS GREEN FAMILY  
+   * Navigation, structural elements, organizational components
+   * ============================================================================ */
+
+  /* Structural Elements - 30% Coverage */
+  --color-secondary-primary: #4caf50; /* Fresh grass green - main secondary */
+  --color-secondary-light: #81c784; /* Light grass - hover states */
+  --color-secondary-lighter: #c8e6c9; /* Very light green - subtle backgrounds */
+  --color-secondary-dark: #388e3c; /* Dark grass - emphasis */
+  --color-secondary-darkest: #2e7d32; /* Forest green - high contrast */
+
+  /* Semantic 30% Assignments */
+  --color-navigation-background: var(--color-secondary-lighter); /* Nav background */
+  --color-navigation-active: var(--color-secondary-primary); /* Active nav items */
+  --color-header-background: var(--color-secondary-lighter); /* Header background */
+  --color-sidebar-background: var(--color-secondary-lighter); /* Sidebar background */
+  --color-section-divider: var(--color-secondary-light); /* Section borders */
+  --color-structural-accent: var(--color-secondary-primary); /* Structural elements */
+
+  /* Text on 30% Backgrounds */
+  --color-text-on-secondary: #ffffff; /* White text on green */
+  --color-text-on-secondary-light: #1a237e; /* Deep indigo on light green */
+
+  /* ============================================================================
+   * 10% ACCENT COLORS - YELLOW/CORAL FAMILY
+   * CTAs, interactive elements, attention-grabbing components  
+   * ============================================================================ */
+
+  /* Primary Accent - Sunshine Yellow (7% of total) */
+  --color-accent-primary: #ffd962; /* Sunshine yellow - main CTAs */
+  --color-accent-primary-light: #fff59d; /* Light sunshine - hover states */
+  --color-accent-primary-dark: #ffb300; /* Dark sunshine - pressed states */
+
+  /* Secondary Accent - Coral (3% of total) */
+  --color-accent-secondary: #ff7f50; /* Coral - secondary CTAs */
+  --color-accent-secondary-light: #ffab91; /* Light coral - hover states */
+  --color-accent-secondary-dark: #ff5722; /* Dark coral - pressed states */
+
+  /* Semantic 10% Assignments */
+  --color-cta-primary: var(--color-accent-primary); /* Main action buttons */
+  --color-cta-secondary: var(--color-accent-secondary); /* Secondary actions */
+  --color-link-primary: var(--color-accent-secondary); /* Primary links */
+  --color-link-hover: var(--color-accent-primary); /* Link hover state */
+  --color-highlight: var(--color-accent-primary); /* Important highlights */
+  --color-focus-ring: var(--color-accent-secondary); /* Focus indicators */
+
+  /* Text on 10% Backgrounds */
+  --color-text-on-accent-primary: #1a237e; /* Deep indigo on yellow */
+  --color-text-on-accent-secondary: #ffffff; /* White on coral */
+
+  /* ============================================================================
+   * VISUAL HIERARCHY IMPLEMENTATION
+   * Strategic color placement to guide user attention
+   * ============================================================================ */
+
+  /* Primary Attention (Sunshine Yellow) */
+  --color-attention-primary: var(--color-accent-primary);
+  --color-attention-primary-bg: var(--color-accent-primary);
+  --color-attention-primary-text: var(--color-text-on-accent-primary);
+
+  /* Secondary Attention (Coral) */
+  --color-attention-secondary: var(--color-accent-secondary);
+  --color-attention-secondary-bg: var(--color-accent-secondary);
+  --color-attention-secondary-text: var(--color-text-on-accent-secondary);
+
+  /* Structural Attention (Grass Green) */
+  --color-attention-structural: var(--color-secondary-primary);
+  --color-attention-structural-bg: var(--color-secondary-primary);
+  --color-attention-structural-text: var(--color-text-on-secondary);
+
+  /* Background Flow (Robin Egg Blue) */
+  --color-flow-primary: var(--color-dominant-primary);
+  --color-flow-light: var(--color-dominant-light);
+  --color-flow-lighter: var(--color-dominant-lighter);
+
+  /* ============================================================================
+   * COMPONENT-SPECIFIC APPLICATIONS
+   * Predefined color combinations for common UI patterns
+   * ============================================================================ */
+
+  /* Button Hierarchy Following 60-30-10 */
+  --btn-primary-bg: var(--color-accent-primary); /* 10% - Yellow CTA */
+  --btn-primary-text: var(--color-text-on-accent-primary);
+  --btn-primary-hover: var(--color-accent-primary-light);
+
+  --btn-secondary-bg: var(--color-secondary-primary); /* 30% - Green structural */
+  --btn-secondary-text: var(--color-text-on-secondary);
+  --btn-secondary-hover: var(--color-secondary-light);
+
+  --btn-tertiary-bg: var(--color-dominant-primary); /* 60% - Blue background */
+  --btn-tertiary-text: var(--color-text-on-dominant);
+  --btn-tertiary-hover: var(--color-dominant-medium);
+
+  --btn-destructive-bg: var(--color-accent-secondary); /* 10% - Coral accent */
+  --btn-destructive-text: var(--color-text-on-accent-secondary);
+  --btn-destructive-hover: var(--color-accent-secondary-light);
+
+  /* Card System Following 60-30-10 */
+  --card-background: #ffffff; /* White cards on blue bg */
+  --card-border: var(--color-dominant-light); /* Light blue borders */
+  --card-header-bg: var(--color-dominant-light); /* Blue header backgrounds */
+  --card-accent: var(--color-secondary-primary); /* Green accent elements */
+
+  /* Form Elements Following 60-30-10 */
+  --form-background: var(--color-dominant-lighter); /* Light blue form bg */
+  --form-field-bg: #ffffff; /* White input fields */
+  --form-field-border: var(--color-dominant-light); /* Blue borders */
+  --form-field-focus: var(--color-accent-secondary); /* Coral focus states */
+  --form-label-color: var(--color-text-on-dominant); /* Indigo labels */
+
+  /* Navigation Following 60-30-10 */
+  --nav-background: var(--color-secondary-lighter); /* Light green nav bg */
+  --nav-text: var(--color-text-on-secondary-light); /* Indigo nav text */
+  --nav-active-bg: var(--color-secondary-primary); /* Green active state */
+  --nav-active-text: var(--color-text-on-secondary); /* White active text */
+  --nav-hover-bg: var(--color-secondary-light); /* Light green hover */
+  --nav-accent: var(--color-accent-primary); /* Yellow accent highlights */
+
+  /* Status Colors Integration with 60-30-10 */
+  --status-success-bg: var(--color-secondary-lighter); /* Light green success */
+  --status-success-text: var(--color-secondary-darkest); /* Dark green text */
+  --status-success-accent: var(--color-secondary-primary); /* Green accent */
+
+  --status-warning-bg: #fff3e0; /* Light sandy background */
+  --status-warning-text: #e65100; /* Dark sandy text */
+  --status-warning-accent: var(--color-sandy); /* Sandy accent */
+
+  --status-error-bg: #fbe9e7; /* Light coral background */
+  --status-error-text: #bf360c; /* Dark coral text */
+  --status-error-accent: var(--color-accent-secondary); /* Coral accent */
+
+  /* ============================================================================
+   * UTILITY CLASSES FOR 60-30-10 IMPLEMENTATION
+   * Ready-to-use classes for consistent color application
+   * ============================================================================ */
+}
+
+/* Utility Classes for 60-30-10 Distribution */
+.bg-dominant {
+  background-color: var(--color-dominant-primary);
+}
+.bg-dominant-light {
+  background-color: var(--color-dominant-light);
+}
+.bg-dominant-lighter {
+  background-color: var(--color-dominant-lighter);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary-primary);
+}
+.bg-secondary-light {
+  background-color: var(--color-secondary-light);
+}
+.bg-secondary-lighter {
+  background-color: var(--color-secondary-lighter);
+}
+
+.bg-accent-primary {
+  background-color: var(--color-accent-primary);
+}
+.bg-accent-secondary {
+  background-color: var(--color-accent-secondary);
+}
+
+.text-on-dominant {
+  color: var(--color-text-on-dominant);
+}
+.text-on-secondary {
+  color: var(--color-text-on-secondary);
+}
+.text-on-accent-primary {
+  color: var(--color-text-on-accent-primary);
+}
+.text-on-accent-secondary {
+  color: var(--color-text-on-accent-secondary);
+}
+
+/* Component Utility Classes */
+.btn-60-30-10-primary {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border: none;
+  transition: background-color 200ms ease;
+}
+
+.btn-60-30-10-primary:hover {
+  background-color: var(--btn-primary-hover);
+}
+
+.btn-60-30-10-secondary {
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  border: none;
+  transition: background-color 200ms ease;
+}
+
+.btn-60-30-10-secondary:hover {
+  background-color: var(--btn-secondary-hover);
+}
+
+.card-60-30-10 {
+  background-color: var(--card-background);
+  border: 1px solid var(--card-border);
+}
+
+.card-60-30-10 .card-header {
+  background-color: var(--card-header-bg);
+  color: var(--color-text-on-dominant-light);
+}
+
+.nav-60-30-10 {
+  background-color: var(--nav-background);
+  color: var(--nav-text);
+}
+
+.nav-60-30-10 .nav-item.active {
+  background-color: var(--nav-active-bg);
+  color: var(--nav-active-text);
+}

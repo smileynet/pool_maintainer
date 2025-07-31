@@ -1,6 +1,7 @@
 @import 'tw-animate-css';
 @import './styles/design-tokens.css';
 @import './styles/community-pool-palette.css';
+@import './styles/60-30-10-tokens.css';
 @import './styles/safety-components.css';
 @import './styles/theme-fixes.css';
 
@@ -13,67 +14,67 @@
 /* Pool Maintenance Theme System - Light Mode Optimized for Outdoor Use */
 @layer base {
   :root {
-    /* Light theme colors - Community Pool Outdoor Theme */
-    --background: 0 0% 100%;  /* Pure white for outdoor visibility */
-    --foreground: 231 44% 32%;  /* Deep indigo text (#1A237E) */
+    /* Light theme colors - 60-30-10 Community Pool Distribution */
+    --background: 194 100% 98%; /* Dominant light blue (#F8FDFF) - 60% */
+    --foreground: 231 44% 32%; /* Deep indigo text (#1A237E) */
 
-    --card: 0 0% 100%;
+    --card: 0 0% 100%; /* White cards on blue background */
     --card-foreground: 231 44% 32%;
 
-    --popover: 186 94% 95%;  /* Pool foam color */
+    --popover: 186 94% 95%; /* Pool foam color */
     --popover-foreground: 231 44% 32%;
 
-    --primary: 186 91% 47%;  /* Robin egg blue pool water */
-    --primary-foreground: 0 0% 100%;
+    --primary: 45 97% 69%; /* Sunshine yellow (#FFD962) - 10% accent */
+    --primary-foreground: 231 44% 32%; /* Deep indigo on yellow */
 
-    --secondary: 45 90% 68%;  /* Sunshine yellow */
-    --secondary-foreground: 231 44% 32%;
+    --secondary: 122 39% 49%; /* Grass green (#4CAF50) - 30% structural */
+    --secondary-foreground: 0 0% 100%; /* White on green */
 
-    --muted: 186 94% 97%;  /* Very light pool tint */
-    --muted-foreground: 233 34% 54%;  /* Lighter indigo */
+    --muted: 186 94% 97%; /* Very light pool tint */
+    --muted-foreground: 233 34% 54%; /* Lighter indigo */
 
-    --accent: 192 91% 89%;  /* Light pool blue accent */
-    --accent-foreground: 231 44% 32%;
+    --accent: 16 100% 66%; /* Coral accent (#FF7F50) - 10% secondary accent */
+    --accent-foreground: 0 0% 100%; /* White on coral */
 
-    --destructive: 14 100% 66%;  /* Coral critical */
+    --destructive: 16 100% 66%; /* Coral for destructive actions */
     --destructive-foreground: 0 0% 100%;
 
-    --border: 195 73% 80%;  /* Light pool blue borders */
-    --input: 195 73% 80%;
-    --ring: 186 91% 47%;  /* Pool water focus ring */
+    --border: 186 94% 95%; /* Light pool blue borders */
+    --input: 186 94% 95%;
+    --ring: 16 100% 66%; /* Coral focus ring */
 
     --radius: 0.5rem;
   }
 
   .dark {
     /* Dark mode - Evening Pool Operations */
-    --background: 213 68% 13%;  /* Deep ocean blue (#001F3F) */
-    --foreground: 210 100% 94%;  /* Light blue-white (#E3F2FD) */
+    --background: 213 68% 13%; /* Deep ocean blue (#001F3F) */
+    --foreground: 210 100% 94%; /* Light blue-white (#E3F2FD) */
 
-    --card: 213 100% 20%;  /* Pool blue card (#003366) */
+    --card: 213 100% 20%; /* Pool blue card (#003366) */
     --card-foreground: 210 100% 94%;
 
     --popover: 213 100% 20%;
     --popover-foreground: 210 100% 94%;
 
-    --primary: 199 100% 34%;  /* Deep pool blue (#0080AB) */
+    --primary: 199 100% 34%; /* Deep pool blue (#0080AB) */
     --primary-foreground: 210 100% 94%;
 
-    --secondary: 45 100% 50%;  /* Evening sunshine (#FFB300) */
+    --secondary: 45 100% 50%; /* Evening sunshine (#FFB300) */
     --secondary-foreground: 213 68% 13%;
 
-    --muted: 213 100% 15%;  /* Darker blue surface */
-    --muted-foreground: 201 100% 74%;  /* Muted light blue */
+    --muted: 213 100% 15%; /* Darker blue surface */
+    --muted-foreground: 201 100% 74%; /* Muted light blue */
 
-    --accent: 213 100% 25%;  /* Pool blue accent */
+    --accent: 213 100% 25%; /* Pool blue accent */
     --accent-foreground: 210 100% 94%;
 
-    --destructive: 16 100% 64%;  /* Bright coral (#FF7043) */
+    --destructive: 16 100% 64%; /* Bright coral (#FF7043) */
     --destructive-foreground: 210 100% 94%;
 
-    --border: 207 89% 39%;  /* Pool blue borders (#0277BD) */
+    --border: 207 89% 39%; /* Pool blue borders (#0277BD) */
     --input: 207 89% 39%;
-    --ring: 199 100% 34%;  /* Pool blue ring */
+    --ring: 199 100% 34%; /* Pool blue ring */
   }
 }
 
