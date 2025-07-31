@@ -3,10 +3,6 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { PoolFacilityManager } from '@/components/ui/pool-facility-manager'
-import { ColorPaletteDisplay } from '@/components/ColorPaletteDisplay'
-import { ActualColorDisplay } from '@/components/ActualColorDisplay'
-import { PageDiagnostics } from '@/components/PageDiagnostics'
-import { DebugColors } from '@/components/DebugColors'
 import {
   Droplet,
   Users,
@@ -25,9 +21,7 @@ import './App.css'
 
 function App() {
   // Navigation state
-  const [activeTab, setActiveTab] = useState<'overview' | 'facilities' | 'analytics' | 'colors'>(
-    'overview'
-  )
+  const [activeTab, setActiveTab] = useState<'overview' | 'facilities' | 'analytics'>('overview')
 
   // Mock data for the pool maintenance dashboard
   const recentReadings = [
@@ -97,7 +91,6 @@ function App() {
     { id: 'overview', label: 'Overview', icon: Activity },
     { id: 'facilities', label: 'Pool Facilities', icon: MapPin },
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
-    { id: 'colors', label: 'Color Palette', icon: Settings },
   ]
 
   // Render overview dashboard content
@@ -276,30 +269,10 @@ function App() {
           in the next phase.
         </p>
         <div className="flex justify-center gap-2">
-          <Badge
-            variant="outline"
-            className="border-[var(--semantic-brand-secondary)] text-[var(--semantic-brand-secondary)]"
-          >
-            Chemical Trends
-          </Badge>
-          <Badge
-            variant="outline"
-            className="border-[var(--semantic-brand-secondary)] text-[var(--semantic-brand-secondary)]"
-          >
-            Usage Analytics
-          </Badge>
-          <Badge
-            variant="outline"
-            className="border-[var(--semantic-action-primary)] text-[var(--semantic-action-primary)]"
-          >
-            Performance Reports
-          </Badge>
-          <Badge
-            variant="outline"
-            className="border-[var(--semantic-status-critical)] text-[var(--semantic-status-critical)]"
-          >
-            Compliance Tracking
-          </Badge>
+          <Badge variant="secondary">Chemical Trends</Badge>
+          <Badge variant="secondary">Usage Analytics</Badge>
+          <Badge variant="warning">Performance Reports</Badge>
+          <Badge variant="critical">Compliance Tracking</Badge>
         </div>
       </Card>
     </div>
@@ -361,14 +334,6 @@ function App() {
         {activeTab === 'overview' && renderOverview()}
         {activeTab === 'facilities' && <PoolFacilityManager />}
         {activeTab === 'analytics' && renderAnalytics()}
-        {activeTab === 'colors' && (
-          <>
-            <DebugColors />
-            <PageDiagnostics />
-            <ActualColorDisplay />
-            <ColorPaletteDisplay />
-          </>
-        )}
       </main>
     </div>
   )
