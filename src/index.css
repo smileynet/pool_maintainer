@@ -20,45 +20,45 @@
 /* SHADCN/UI INTEGRATION WITH UNIFIED TOKEN SYSTEM */
 @layer base {
   :root {
-    /* Map shadcn/ui variables to Crystal Waters theme */
+    /* Map shadcn/ui variables to Electric Lagoon theme */
     /* These must be in HSL format for Tailwind compatibility */
 
-    /* Background & Text - 60% Crystal Blue Distribution */
-    --background: 220 40% 85%; /* Crystal blue background */
-    --foreground: 220 65% 35%; /* Deep blue text */
+    /* Background & Text - 60% Electric Blue Distribution */
+    --background: 200 20% 94%; /* Electric lagoon background - more vibrant */
+    --foreground: 200 60% 20%; /* Deep electric blue text - more vibrant */
 
     /* Card Components */
-    --card: 220 20% 98%; /* Near white elevated surfaces */
-    --card-foreground: 220 65% 35%; /* Deep blue text */
+    --card: 200 15% 98%; /* Near white elevated surfaces */
+    --card-foreground: 200 60% 20%; /* Deep electric blue text */
 
     /* Popover Components */
     --popover: 0 0% 98%; /* White overlays */
-    --popover-foreground: 220 65% 35%;
+    --popover-foreground: 200 60% 20%;
 
-    /* Primary Actions - 7% Sunset Orange (Main CTAs) */
-    --primary: 45 85% 65%; /* Sunset orange */
-    --primary-foreground: 0 0% 98%; /* White text on orange */
+    /* Primary Actions - 7% Electric Yellow (Main CTAs) */
+    --primary: 90 85% 68%; /* More vibrant electric yellow */
+    --primary-foreground: 200 60% 20%; /* Dark text on yellow */
 
-    /* Secondary Actions - 30% Pool Green (Structural) */
-    --secondary: 145 40% 65%; /* Pool green */
-    --secondary-foreground: 0 0% 98%; /* White text on green */
+    /* Secondary Actions - 30% Electric Mint (Structural) */
+    --secondary: 140 65% 55%; /* More vibrant electric mint green */
+    --secondary-foreground: 200 60% 20%; /* Dark text on mint */
 
     /* Muted Elements */
-    --muted: 220 30% 90%; /* Light crystal blue */
-    --muted-foreground: 220 20% 60%; /* Muted blue text */
+    --muted: 200 25% 85%; /* Light electric blue - more vibrant */
+    --muted-foreground: 200 35% 45%; /* Muted electric text - more vibrant */
 
-    /* Accent Elements - 3% Coral */
-    --accent: 25 65% 65%; /* Coral accent */
+    /* Accent Elements - 3% Electric Coral */
+    --accent: 25 85% 60%; /* More vibrant electric coral accent */
     --accent-foreground: 0 0% 98%; /* White text on coral */
 
     /* Destructive Actions */
-    --destructive: 25 70% 55%; /* Coral for errors */
+    --destructive: 25 90% 55%; /* More vibrant electric coral for errors */
     --destructive-foreground: 0 0% 98%; /* White text */
 
     /* Borders & Inputs */
-    --border: 220 30% 90%; /* Light blue borders */
-    --input: 220 30% 90%; /* Light blue inputs */
-    --ring: 45 85% 75%; /* Orange focus ring */
+    --border: 200 30% 85%; /* Light electric blue borders - more vibrant */
+    --input: 200 30% 85%; /* Light electric blue inputs - more vibrant */
+    --ring: 90 85% 65%; /* More vibrant electric yellow focus ring */
 
     /* Border Radius */
     --radius: 0.5rem;
@@ -66,35 +66,35 @@
 
   .dark {
     /* Dark mode mappings to unified token system */
-    /* Evening pool operations with maintained semantic relationships */
+    /* Evening pool operations with electric theme maintained */
 
-    --background: 220 13% 9%; /* Maps to dark --semantic-surface-primary */
-    --foreground: 210 40% 92%; /* Maps to dark --semantic-text-primary */
+    --background: 200 18% 8%; /* Maps to dark electric lagoon */
+    --foreground: 200 40% 92%; /* Maps to light electric text */
 
-    --card: 220 13% 12%; /* Maps to dark --semantic-surface-elevated */
-    --card-foreground: 210 40% 92%;
+    --card: 200 18% 11%; /* Maps to dark electric surface */
+    --card-foreground: 200 40% 92%;
 
-    --popover: 220 13% 15%; /* Maps to dark --semantic-surface-overlay */
-    --popover-foreground: 210 40% 92%;
+    --popover: 200 18% 14%; /* Maps to dark electric overlay */
+    --popover-foreground: 200 40% 92%;
 
-    --primary: 47 96% 69%; /* Keep primary action colors visible */
-    --primary-foreground: 220 13% 9%;
+    --primary: 90 85% 74%; /* Keep electric yellow visible */
+    --primary-foreground: 200 18% 8%;
 
-    --secondary: 122 39% 49%; /* Keep secondary actions recognizable */
-    --secondary-foreground: 210 40% 92%;
+    --secondary: 140 55% 52%; /* Keep electric mint recognizable */
+    --secondary-foreground: 200 40% 92%;
 
-    --muted: 220 13% 15%; /* Maps to dark --semantic-surface-secondary */
-    --muted-foreground: 215 16% 65%;
+    --muted: 200 18% 16%; /* Maps to dark electric surface */
+    --muted-foreground: 200 25% 65%;
 
-    --accent: 12 76% 61%; /* Keep coral accent for consistency */
-    --accent-foreground: 210 40% 92%;
+    --accent: 25 80% 65%; /* Keep electric coral accent */
+    --accent-foreground: 200 40% 92%;
 
-    --destructive: 0 84% 64%; /* Keep destructive actions visible */
-    --destructive-foreground: 210 40% 92%;
+    --destructive: 25 85% 64%; /* Keep electric coral destructive */
+    --destructive-foreground: 200 40% 92%;
 
-    --border: 220 13% 20%; /* Maps to dark --semantic-border-default */
-    --input: 220 13% 20%;
-    --ring: 12 76% 61%; /* Maps to --semantic-border-focus */
+    --border: 200 18% 22%; /* Maps to dark electric border */
+    --input: 200 18% 22%;
+    --ring: 25 80% 65%; /* Maps to electric coral focus */
   }
 }
 
@@ -121,10 +121,10 @@
 /* Chart variables mapped to unified semantic tokens */
 @layer base {
   :root {
-    --chart-1: var(--semantic-brand-primary);
-    --chart-2: var(--semantic-status-safe);
-    --chart-3: var(--semantic-status-caution);
-    --chart-4: var(--semantic-status-critical);
-    --chart-5: var(--semantic-status-emergency);
+    --chart-1: var(--semantic-brand-primary); /* Electric blue */
+    --chart-2: var(--semantic-status-safe); /* Electric mint */
+    --chart-3: var(--semantic-status-caution); /* Electric yellow */
+    --chart-4: var(--semantic-status-critical); /* Electric coral */
+    --chart-5: var(--semantic-status-emergency); /* Dark electric coral */
   }
 }

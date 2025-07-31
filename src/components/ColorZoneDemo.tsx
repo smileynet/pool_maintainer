@@ -126,19 +126,23 @@ export function ColorZoneDemo() {
                   <ul className="space-y-3">
                     <li className="flex items-center justify-between">
                       <span>Main Pump</span>
-                      <Badge className="bg-green-500 text-white">Running</Badge>
+                      <Badge className="bg-[var(--semantic-status-safe)] text-white">Running</Badge>
                     </li>
                     <li className="flex items-center justify-between">
                       <span>Filter System</span>
-                      <Badge className="bg-green-500 text-white">Active</Badge>
+                      <Badge className="bg-[var(--semantic-status-safe)] text-white">Active</Badge>
                     </li>
                     <li className="flex items-center justify-between">
                       <span>Heater</span>
-                      <Badge className="bg-yellow-500 text-black">Maintenance</Badge>
+                      <Badge className="bg-[var(--semantic-status-caution)] text-[var(--semantic-text-primary)]">
+                        Maintenance
+                      </Badge>
                     </li>
                     <li className="flex items-center justify-between">
                       <span>Chemical Feeder</span>
-                      <Badge className="bg-gray-500 text-white">Offline</Badge>
+                      <Badge className="bg-[var(--semantic-equipment-offline)] text-white">
+                        Offline
+                      </Badge>
                     </li>
                   </ul>
                 </div>
@@ -169,7 +173,7 @@ export function ColorZoneDemo() {
             {/* Action Zone - CTAs */}
             <div className="zone-actions mt-6">
               <div className="flex gap-4">
-                <Button className="bg-[var(--semantic-action-primary)] hover:bg-[var(--primitive-yellow-600)]">
+                <Button className="bg-[var(--semantic-action-primary)] hover:bg-[var(--semantic-action-primary)]/80">
                   Record Test Results
                 </Button>
                 <Button

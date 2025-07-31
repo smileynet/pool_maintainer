@@ -88,7 +88,7 @@ const ChemicalInput = ({
           className={cn(
             'transition-colors',
             validation?.status === 'emergency' &&
-              'border-[var(--semantic-status-emergency)] bg-[var(--primitive-coral-50)] focus-visible:ring-[var(--semantic-status-emergency)]',
+              'border-[var(--semantic-status-emergency)] bg-[var(--semantic-surface-elevated)] focus-visible:ring-[var(--semantic-status-emergency)]',
             validation?.status === 'critical' &&
               'border-[var(--semantic-status-critical)] focus-visible:ring-[var(--semantic-status-critical)]',
             validation?.status === 'warning' &&
@@ -390,11 +390,11 @@ export const ChemicalTestForm = ({
           className={cn(
             'border-2',
             complianceReport.overall === 'emergency' &&
-              'border-[var(--semantic-status-emergency)] bg-[var(--primitive-coral-100)]',
+              'border-[var(--semantic-status-emergency)] bg-[var(--semantic-surface-elevated)]',
             complianceReport.overall === 'non-compliant' &&
-              'border-[var(--semantic-status-critical)] bg-[var(--primitive-coral-100)]',
+              'border-[var(--semantic-status-critical)] bg-[var(--semantic-surface-elevated)]',
             complianceReport.overall === 'warning' &&
-              'border-[var(--semantic-status-caution)] bg-[var(--primitive-yellow-100)]'
+              'border-[var(--semantic-status-caution)] bg-[var(--semantic-surface-elevated)]'
           )}
         >
           <CardContent className="pt-4">
@@ -475,7 +475,7 @@ export const ChemicalTestForm = ({
             </div>
 
             {poolClosure.shouldClose && (
-              <div className="mt-3 rounded-md border border-[var(--semantic-status-emergency)] bg-[var(--primitive-coral-100)] p-3">
+              <div className="mt-3 rounded-md border border-[var(--semantic-status-emergency)] bg-[var(--semantic-surface-elevated)] p-3">
                 <div className="text-sm font-medium text-[var(--semantic-text-primary)]">
                   🚫 Pool Closure Required
                 </div>
@@ -496,9 +496,9 @@ export const ChemicalTestForm = ({
           className={cn(
             'flex-1',
             complianceReport?.overall === 'emergency' &&
-              'bg-[var(--semantic-status-emergency)] hover:bg-[var(--primitive-coral-600)]',
+              'bg-[var(--semantic-status-emergency)] hover:bg-[var(--semantic-status-critical)/50)]',
             complianceReport?.overall === 'non-compliant' &&
-              'bg-[var(--semantic-status-critical)] hover:bg-[var(--primitive-coral-600)]'
+              'bg-[var(--semantic-status-critical)] hover:bg-[var(--semantic-status-critical)/50)]'
           )}
         >
           <CheckCircle className="mr-2 h-4 w-4" />

@@ -3,7 +3,7 @@
  * 
  * Three-Layer Architecture: Primitive → Semantic → Component
  * Color Space: OKLCH for perceptual uniformity and accessibility
- * Distribution: 60-30-10 (Robin Egg Blue, Grass Green, Yellow/Coral)
+ * Distribution: 60-30-10 (Electric Lagoon Blue, Grass Green, Yellow/Coral)
  * 
  * ⚠️  SAFETY-CRITICAL COLORS - See COLOR_SYSTEM_DOCUMENTATION.md before modifying
  * ♿  WCAG AA/AAA compliant color pairs - Do not modify without testing
@@ -16,53 +16,53 @@
  * ============================================================================ */
 
 :root {
-  /* === ROBIN EGG BLUE FAMILY - Pool Water Theme === */
-  --primitive-blue-50: oklch(0.98 0.01 210); /* Almost white with blue hint */
-  --primitive-blue-100: oklch(0.95 0.03 210); /* Very light pool blue */
-  --primitive-blue-200: oklch(0.9 0.05 210); /* Light pool blue */
-  --primitive-blue-300: oklch(0.82 0.08 210); /* Pool foam blue */
-  --primitive-blue-400: oklch(0.75 0.12 210); /* Water sparkles */
-  --primitive-blue-500: oklch(0.7 0.15 210); /* Main pool blue */
-  --primitive-blue-600: oklch(0.62 0.18 210); /* Deeper water */
-  --primitive-blue-700: oklch(0.52 0.2 210); /* Deep water */
-  --primitive-blue-800: oklch(0.42 0.22 210); /* Ocean depth */
-  --primitive-blue-900: oklch(0.32 0.24 210); /* Darkest pool blue */
+  /* === ELECTRIC LAGOON BLUE FAMILY - Vibrant Pool Water Theme === */
+  --primitive-blue-50: oklch(0.98 0.01 200); /* Almost white with electric hint */
+  --primitive-blue-100: oklch(0.94 0.04 200); /* Very light electric blue */
+  --primitive-blue-200: oklch(0.88 0.08 200); /* Light electric blue */
+  --primitive-blue-300: oklch(0.82 0.12 200); /* Electric lagoon foam */
+  --primitive-blue-400: oklch(0.76 0.16 200); /* Electric sparkles */
+  --primitive-blue-500: oklch(0.7 0.2 200); /* Main electric lagoon blue */
+  --primitive-blue-600: oklch(0.64 0.24 200); /* Deeper electric water */
+  --primitive-blue-700: oklch(0.58 0.28 200); /* Deep electric water */
+  --primitive-blue-800: oklch(0.52 0.32 200); /* Electric ocean depth */
+  --primitive-blue-900: oklch(0.46 0.36 200); /* Darkest electric blue */
 
-  /* === GRASS GREEN FAMILY - Nature/Outdoor Theme === */
-  --primitive-green-50: oklch(0.97 0.02 135); /* Almost white with green hint */
-  --primitive-green-100: oklch(0.93 0.04 135); /* Very light grass */
-  --primitive-green-200: oklch(0.85 0.06 135); /* Light grass */
-  --primitive-green-300: oklch(0.78 0.09 135); /* Fresh lawn */
-  --primitive-green-400: oklch(0.7 0.12 135); /* Spring green */
-  --primitive-green-500: oklch(0.65 0.15 135); /* Fresh grass - main green */
-  --primitive-green-600: oklch(0.58 0.17 135); /* Forest green */
-  --primitive-green-700: oklch(0.48 0.19 135); /* Dark grass */
-  --primitive-green-800: oklch(0.38 0.2 135); /* Deep forest */
-  --primitive-green-900: oklch(0.28 0.21 135); /* Darkest green */
+  /* === MINT GREEN FAMILY - Fresh/Modern Theme === */
+  --primitive-green-50: oklch(0.97 0.02 140); /* Almost white with mint hint */
+  --primitive-green-100: oklch(0.92 0.05 140); /* Very light mint */
+  --primitive-green-200: oklch(0.84 0.08 140); /* Light mint */
+  --primitive-green-300: oklch(0.76 0.12 140); /* Fresh mint */
+  --primitive-green-400: oklch(0.68 0.16 140); /* Spring mint */
+  --primitive-green-500: oklch(0.48 0.26 140); /* Main mint green - darker for contrast */
+  --primitive-green-600: oklch(0.42 0.28 140); /* Rich mint */
+  --primitive-green-700: oklch(0.42 0.28 140); /* Deep mint */
+  --primitive-green-800: oklch(0.36 0.3 140); /* Dark mint */
+  --primitive-green-900: oklch(0.3 0.32 140); /* Darkest mint */
 
-  /* === SUNSHINE YELLOW FAMILY - Energy/Attention === */
-  --primitive-yellow-50: oklch(0.98 0.02 85); /* Almost white with yellow hint */
-  --primitive-yellow-100: oklch(0.95 0.04 85); /* Very light sunshine */
-  --primitive-yellow-200: oklch(0.9 0.07 85); /* Light sunshine */
-  --primitive-yellow-300: oklch(0.85 0.1 85); /* Bright sunshine */
-  --primitive-yellow-400: oklch(0.82 0.13 85); /* Warm sunshine */
-  --primitive-yellow-500: oklch(0.78 0.15 85); /* Main sunshine yellow */
-  --primitive-yellow-600: oklch(0.72 0.17 85); /* Rich sunshine */
-  --primitive-yellow-700: oklch(0.65 0.19 85); /* Deep sunshine */
-  --primitive-yellow-800: oklch(0.55 0.2 85); /* Dark yellow */
-  --primitive-yellow-900: oklch(0.45 0.21 85); /* Darkest yellow */
+  /* === ELECTRIC YELLOW FAMILY - High Energy/Attention === */
+  --primitive-yellow-50: oklch(0.98 0.02 90); /* Almost white with electric hint */
+  --primitive-yellow-100: oklch(0.94 0.06 90); /* Very light electric yellow */
+  --primitive-yellow-200: oklch(0.88 0.1 90); /* Light electric yellow */
+  --primitive-yellow-300: oklch(0.82 0.14 90); /* Bright electric yellow */
+  --primitive-yellow-400: oklch(0.78 0.18 90); /* Vibrant electric yellow */
+  --primitive-yellow-500: oklch(0.74 0.22 90); /* Main electric yellow */
+  --primitive-yellow-600: oklch(0.68 0.24 90); /* Rich electric yellow */
+  --primitive-yellow-700: oklch(0.62 0.26 90); /* Deep electric yellow */
+  --primitive-yellow-800: oklch(0.56 0.28 90); /* Dark electric yellow */
+  --primitive-yellow-900: oklch(0.5 0.3 90); /* Darkest electric yellow */
 
-  /* === CORAL FAMILY - Friendly/Secondary Attention === */
-  --primitive-coral-50: oklch(0.97 0.02 35); /* Almost white with coral hint */
-  --primitive-coral-100: oklch(0.92 0.05 35); /* Very light coral */
-  --primitive-coral-200: oklch(0.85 0.08 35); /* Light coral */
-  --primitive-coral-300: oklch(0.78 0.12 35); /* Soft coral */
-  --primitive-coral-400: oklch(0.72 0.15 35); /* Warm coral */
-  --primitive-coral-500: oklch(0.68 0.18 35); /* Main coral */
-  --primitive-coral-600: oklch(0.62 0.2 35); /* Rich coral */
-  --primitive-coral-700: oklch(0.55 0.22 35); /* Deep coral */
-  --primitive-coral-800: oklch(0.45 0.23 35); /* Dark coral */
-  --primitive-coral-900: oklch(0.35 0.24 35); /* Darkest coral */
+  /* === ELECTRIC CORAL FAMILY - Vibrant/Secondary Attention === */
+  --primitive-coral-50: oklch(0.97 0.02 25); /* Almost white with electric coral hint */
+  --primitive-coral-100: oklch(0.91 0.06 25); /* Very light electric coral */
+  --primitive-coral-200: oklch(0.83 0.1 25); /* Light electric coral */
+  --primitive-coral-300: oklch(0.75 0.14 25); /* Soft electric coral */
+  --primitive-coral-400: oklch(0.69 0.18 25); /* Warm electric coral */
+  --primitive-coral-500: oklch(0.5 0.3 25); /* Main electric coral - darker for contrast */
+  --primitive-coral-600: oklch(0.45 0.32 25); /* Rich electric coral */
+  --primitive-coral-700: oklch(0.46 0.3 25); /* Deep electric coral */
+  --primitive-coral-800: oklch(0.4 0.32 25); /* Dark electric coral */
+  --primitive-coral-900: oklch(0.34 0.34 25); /* Darkest electric coral */
 
   /* === NEUTRAL GRAY FAMILY - Text/Infrastructure === */
   --primitive-gray-50: oklch(0.98 0 0); /* Near white */
@@ -166,7 +166,7 @@
 
   /* Secondary Buttons - 30% Green (Structural Actions) */
   --component-button-secondary-bg: var(--semantic-action-secondary);
-  --component-button-secondary-text: var(--semantic-text-inverse);
+  --component-button-secondary-text: var(--semantic-text-primary);
   --component-button-secondary-border: var(--semantic-action-secondary);
   --component-button-secondary-hover-bg: var(--primitive-green-600);
   --component-button-secondary-hover-border: var(--primitive-green-600);
@@ -457,5 +457,5 @@
  * Color space: OKLCH for perceptual uniformity
  * Accessibility: WCAG AA/AAA compliant pairs
  * Architecture: Three-layer hierarchy with clear separation
- * Distribution: 60-30-10 (Blue, Green, Yellow/Coral)
+ * Distribution: 60-30-10 (Electric Blue, Mint Green, Electric Yellow/Coral)
  * ============================================================================ */

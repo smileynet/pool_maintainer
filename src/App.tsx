@@ -58,7 +58,7 @@ function App() {
       change: '+0',
       icon: MapPin,
       color: 'text-[var(--semantic-brand-primary)]',
-      bgColor: 'bg-[var(--primitive-blue-100)]',
+      bgColor: 'bg-[var(--semantic-surface-secondary)]',
     },
     {
       title: 'Pending Tasks',
@@ -66,7 +66,7 @@ function App() {
       change: '+2',
       icon: Clock,
       color: 'text-[var(--semantic-action-primary)]',
-      bgColor: 'bg-[var(--primitive-orange-100)]',
+      bgColor: 'bg-[var(--semantic-surface-elevated)]',
     },
     {
       title: 'Available Technicians',
@@ -74,7 +74,7 @@ function App() {
       change: '+1',
       icon: Users,
       color: 'text-[var(--semantic-brand-secondary)]',
-      bgColor: 'bg-[var(--primitive-green-100)]',
+      bgColor: 'bg-[var(--semantic-surface-elevated)]',
     },
     {
       title: 'Critical Alerts',
@@ -82,7 +82,7 @@ function App() {
       change: '-2',
       icon: AlertTriangle,
       color: 'text-[var(--semantic-status-critical)]',
-      bgColor: 'bg-[var(--primitive-coral-100)]',
+      bgColor: 'bg-[var(--semantic-surface-elevated)]',
     },
   ]
 
@@ -242,7 +242,7 @@ function App() {
 
       {/* Component Library Link */}
       <div className="text-center">
-        <Card className="border-[var(--semantic-border-default)] bg-[var(--primitive-green-100)]">
+        <Card className="border-[var(--semantic-border-default)] bg-[var(--semantic-surface-elevated)]">
           <CardContent className="pt-6">
             <h3 className="mb-2 text-lg font-semibold text-[var(--semantic-text-primary)]">
               Component Documentation
@@ -251,7 +251,7 @@ function App() {
               Explore our complete UI component library with pool maintenance examples
             </p>
             <Button
-              className="bg-[var(--semantic-action-primary)] text-white hover:bg-[var(--primitive-orange-600)]"
+              className="bg-[var(--semantic-action-primary)] text-white hover:bg-[var(--semantic-action-primary)]/80"
               asChild
             >
               <a href="http://localhost:6080" target="_blank" rel="noopener noreferrer">
@@ -328,11 +328,11 @@ function App() {
               </h1>
             </div>
             <div className="flex items-center gap-4">
-              <Button className="bg-[var(--semantic-action-primary)] text-white hover:bg-[var(--primitive-orange-600)]">
+              <Button className="bg-[var(--semantic-action-primary)] text-white hover:bg-[var(--semantic-action-primary)]/80">
                 <TestTube className="mr-2 h-4 w-4" />
                 New Reading
               </Button>
-              <Button className="bg-[var(--semantic-action-secondary)] text-white hover:bg-[var(--primitive-green-500)]">
+              <Button className="bg-[var(--semantic-action-secondary)] text-white hover:bg-[var(--semantic-action-secondary)]/80">
                 <Settings className="mr-2 h-4 w-4" />
                 Settings
               </Button>

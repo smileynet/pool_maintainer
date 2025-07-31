@@ -467,13 +467,13 @@ export const ChemicalHistoryTimeline = ({
                 className={cn(
                   'transition-all duration-200',
                   reading.status === 'emergency' &&
-                    'border-[var(--semantic-status-emergency)] bg-[var(--primitive-coral-100)]',
+                    'border-[var(--semantic-status-emergency)] bg-[var(--semantic-surface-elevated)]',
                   reading.status === 'critical' &&
-                    'border-[var(--semantic-status-critical)] bg-[var(--primitive-coral-100)]',
+                    'border-[var(--semantic-status-critical)] bg-[var(--semantic-surface-elevated)]',
                   reading.status === 'warning' &&
-                    'border-[var(--semantic-status-caution)] bg-[var(--primitive-yellow-100)]',
+                    'border-[var(--semantic-status-caution)] bg-[var(--semantic-surface-elevated)]',
                   reading.status === 'compliant' &&
-                    'border-[var(--semantic-status-safe)] bg-[var(--primitive-green-100)]'
+                    'border-[var(--semantic-status-safe)] bg-[var(--semantic-surface-elevated)]'
                 )}
               >
                 <CardHeader className="pb-2">
@@ -573,7 +573,7 @@ export const ChemicalHistoryTimeline = ({
                               className={cn(
                                 'rounded-lg border p-2',
                                 isSelected &&
-                                  'border-[var(--semantic-brand-primary)] bg-[var(--primitive-blue-100)]'
+                                  'border-[var(--semantic-brand-primary)] bg-[var(--semantic-surface-elevated)]'
                               )}
                             >
                               <div className="text-xs text-[var(--semantic-text-secondary)]">

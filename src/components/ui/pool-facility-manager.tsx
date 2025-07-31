@@ -469,7 +469,7 @@ const PoolFacilityCard = ({
             size="sm"
             variant="outline"
             onClick={() => onQuickTest(pool.id)}
-            className="flex-1 border-[var(--semantic-action-primary)] text-[var(--semantic-action-primary)] hover:bg-[var(--primitive-orange-100)]"
+            className="flex-1 border-[var(--semantic-action-primary)] text-[var(--semantic-action-primary)] hover:bg-[var(--semantic-surface-elevated)]"
           >
             <TestTube className="mr-1 h-3 w-3" />
             Quick Test
@@ -479,7 +479,7 @@ const PoolFacilityCard = ({
               <Button
                 size="sm"
                 variant="outline"
-                className="border-[var(--semantic-brand-secondary)] text-[var(--semantic-brand-secondary)] hover:bg-[var(--primitive-green-100)]"
+                className="border-[var(--semantic-brand-secondary)] text-[var(--semantic-brand-secondary)] hover:bg-[var(--semantic-surface-elevated)]"
               >
                 <Eye className="mr-1 h-3 w-3" />
                 Details
@@ -640,12 +640,12 @@ const PoolDetailView = ({
                 className={cn(
                   'rounded-lg border-l-4 p-3',
                   alert.severity === 'critical'
-                    ? 'border-[var(--semantic-status-critical)] bg-[var(--primitive-coral-100)]'
+                    ? 'border-[var(--semantic-status-critical)] bg-[var(--semantic-surface-elevated)]'
                     : alert.severity === 'high'
-                      ? 'border-[var(--semantic-status-critical)] bg-[var(--primitive-coral-100)]'
+                      ? 'border-[var(--semantic-status-critical)] bg-[var(--semantic-surface-elevated)]'
                       : alert.severity === 'medium'
-                        ? 'border-[var(--semantic-status-caution)] bg-[var(--primitive-yellow-100)]'
-                        : 'border-[var(--semantic-brand-primary)] bg-[var(--primitive-blue-100)]'
+                        ? 'border-[var(--semantic-status-caution)] bg-[var(--semantic-surface-elevated)]'
+                        : 'border-[var(--semantic-brand-primary)] bg-[var(--semantic-surface-elevated)]'
                 )}
               >
                 <div className="flex items-start justify-between">
@@ -787,12 +787,12 @@ export const PoolFacilityManager = () => {
             variant="outline"
             onClick={handleRefresh}
             disabled={refreshing}
-            className="border-[var(--semantic-brand-secondary)] text-[var(--semantic-brand-secondary)] hover:bg-[var(--primitive-green-100)]"
+            className="border-[var(--semantic-brand-secondary)] text-[var(--semantic-brand-secondary)] hover:bg-[var(--semantic-surface-elevated)]"
           >
             <RefreshCw className={cn('mr-2 h-4 w-4', refreshing && 'animate-spin')} />
             {refreshing ? 'Refreshing...' : 'Refresh'}
           </Button>
-          <Button className="bg-[var(--semantic-action-primary)] text-white hover:bg-[var(--primitive-orange-600)]">
+          <Button className="bg-[var(--semantic-action-primary)] text-white hover:bg-[var(--semantic-action-primary)]/80">
             <Plus className="mr-2 h-4 w-4" />
             Add Pool
           </Button>
