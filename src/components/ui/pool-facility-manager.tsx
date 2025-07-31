@@ -377,14 +377,14 @@ const PoolFacilityCard = ({
   return (
     <Card
       className={cn(
-        'card-interactive relative overflow-hidden',
+        '@container card-interactive relative overflow-hidden',
         pool.status === 'emergency' && 'ring-destructive ring-2',
         pool.status === 'maintenance' && 'ring-1 ring-yellow-500'
       )}
     >
       {/* Simplified Critical Alert Banner */}
       {hasCriticalIssue && <div className="bg-destructive absolute inset-x-0 top-0 h-1" />}
-      <CardHeader className="pb-3">
+      <CardHeader className="pb-3 @lg:pb-4">
         <div className="flex items-start justify-between">
           <div>
             <CardTitle className="flex items-center gap-2">
@@ -414,7 +414,53 @@ const PoolFacilityCard = ({
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 @lg:space-y-6">
+        {/* Mobile-First: Essential Information Only */}
+        <div className="@lg:hidden space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-muted-foreground">Occupancy</span>
+            <div className="flex items-center gap-2">
+              <span className={cn(
+                'text-sm font-medium',
+                occupancyPercentage > 90 ? 'text-destructive' : 
+                occupancyPercentage > 75 ? 'text-yellow-600' : 'text-green-600'
+              )}>
+                {pool.currentOccupancy}/{pool.capacity}
+              </span>
+              <Badge variant={occupancyPercentage > 90 ? 'destructive' : 'secondary'} className="text-xs">
+                {occupancyPercentage}%
+              </Badge>
+            </div>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">Chlorine:</span>
+            <span className={getChemicalStatus(pool.chemicalLevels.freeChlorine, 'chlorine').color}>
+              {pool.chemicalLevels.freeChlorine.toFixed(1)} ppm
+            </span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">pH:</span>
+            <span className={getChemicalStatus(pool.chemicalLevels.ph, 'ph').color}>
+              {pool.chemicalLevels.ph.toFixed(1)}
+            </span>
+          </div>
+          {pool.alerts.length > 0 && (
+            <div className="flex gap-1">
+              {criticalAlerts > 0 && (
+                <Badge variant="destructive" className="text-xs">
+                  {criticalAlerts} Critical
+                </Badge>
+              )}
+            </div>
+          )}
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">Technician:</span>
+            <span className="font-medium">{pool.assignedTechnician}</span>
+          </div>
+        </div>
+
+        {/* Desktop: Enhanced Information */}
+        <div className="hidden @lg:block space-y-4">
         {/* Enhanced Occupancy and Capacity */}
         <div className="space-y-2">
           <div className="flex items-center justify-between text-sm">
@@ -564,25 +610,27 @@ const PoolFacilityCard = ({
           </div>
         </div>
 
-        {/* Quick Actions */}
+        </div>
+        
+        {/* Quick Actions - Mobile Optimized */}
         <div className="flex gap-2 pt-2">
           <Button
             size="sm"
             variant="outline"
             onClick={() => onQuickTest(pool.id)}
-            className="flex-1"
+            className="flex-1 @lg:flex-none"
           >
             <TestTube className="mr-1 h-3 w-3" />
-            Quick Test
+            <span className="@lg:inline hidden">Quick </span>Test
           </Button>
           <Dialog>
             <DialogTrigger asChild>
-              <Button size="sm" variant="outline" className="">
+              <Button size="sm" variant="outline" className="flex-1 @lg:flex-none">
                 <Eye className="mr-1 h-3 w-3" />
                 Details
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-2xl">
+            <DialogContent className="max-w-2xl @4xl:max-w-4xl">
               <DialogHeader>
                 <DialogTitle>{pool.name} - Facility Details</DialogTitle>
                 <DialogDescription>
@@ -1017,11 +1065,11 @@ export const PoolFacilityManager = () => {
   )
 
   return (
-    <div className="space-y-6">
+    <div className="@container mx-auto max-w-7xl space-y-6">
       {/* Header and Controls */}
-      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+      <div className="flex flex-col items-start justify-between gap-4 @lg:flex-row @lg:items-center">
         <div>
-          <h2 className="text-2xl font-bold">Pool Facility Management</h2>
+          <h2 className="text-2xl font-bold @lg:text-3xl">Pool Facility Management</h2>
           <p className="text-muted-foreground">
             Real-time monitoring and management of all pool facilities
           </p>
@@ -1073,8 +1121,8 @@ export const PoolFacilityManager = () => {
         </div>
       )}
 
-      {/* Summary Statistics */}
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
+      {/* Summary Statistics - Responsive Grid */}
+      <div className="grid grid-cols-2 gap-4 @lg:grid-cols-4 @4xl:grid-cols-6">
         <Card className="card-interactive p-4">
           <div className="text-center">
             <div className="text-primary text-2xl font-bold">{totalPools}</div>
@@ -1124,8 +1172,9 @@ export const PoolFacilityManager = () => {
         </Card>
       </div>
 
-      {/* Filters and Sorting */}
-      <div className="flex flex-wrap gap-4">
+      {/* Filters and Sorting - Responsive Layout */}
+      <div className="flex flex-col gap-4 @lg:flex-row @lg:items-center @lg:justify-between">
+        <div className="flex flex-wrap gap-4">
         <Select value={filterStatus} onValueChange={setFilterStatus}>
           <SelectTrigger className="w-40">
             <SelectValue placeholder="Filter by status" />
@@ -1151,13 +1200,14 @@ export const PoolFacilityManager = () => {
           </SelectContent>
         </Select>
 
-        <div className="text-muted-foreground flex items-center text-sm">
+        </div>
+        <div className="text-sm text-muted-foreground @lg:text-right">
           Showing {filteredAndSortedPools.length} of {totalPools} pools
         </div>
       </div>
 
-      {/* Pool Cards Grid */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {/* Pool Cards Grid - Container-based Responsive */}
+      <div className="grid grid-cols-1 gap-4 @lg:grid-cols-2 @3xl:grid-cols-3 @6xl:grid-cols-4 @lg:gap-6">
         {filteredAndSortedPools.map((pool) => (
           <PoolFacilityCard
             key={pool.id}
