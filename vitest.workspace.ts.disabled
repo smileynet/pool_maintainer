@@ -29,6 +29,7 @@ export default defineWorkspace([
       environment: 'node',
       testTimeout: 30000, // Extended timeout for performance tests
       reporters: ['default', 'json'],
+      setupFiles: [], // No setup files for Node environment
       outputFile: {
         json: './test-results/performance-results.json',
       },

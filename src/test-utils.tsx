@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, RenderOptions } from '@testing-library/react'
-import { ChemicalTest, PoolFacility } from '@/types'
+import { ChemicalTest, PoolFacility } from '@/lib/localStorage'
 
 // Pool Maintenance System Test Utilities
 // Enhanced test utilities for pool maintenance workflows

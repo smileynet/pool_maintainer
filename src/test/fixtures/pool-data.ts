@@ -1,7 +1,7 @@
 // Pool Maintenance System Test Fixtures
 // Realistic test data for pool maintenance scenarios
 
-import { ChemicalTest, PoolFacility } from '@/types'
+import { ChemicalTest, PoolFacility } from '@/lib/localStorage'
 
 // Realistic chemical test data for various scenarios
 export const SAMPLE_CHEMICAL_TESTS: ChemicalTest[] = [

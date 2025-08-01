@@ -2,8 +2,9 @@
 // Critical pool calculation functions performance testing
 
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { createMockChemicalTest, createPerformanceMocks } from '../mocking-patterns'
-import { CHEMICAL_TREND_DATA } from '../fixtures/pool-data'
+import { createMockChemicalTest } from '../../src/test-utils'
+import { createPerformanceMocks } from '../../src/test/mocking-patterns'
+import { CHEMICAL_TREND_DATA } from '../../src/test/fixtures/pool-data'
 
 // Pool calculation functions (would be imported from actual implementation)
 // These are examples of what would be benchmarked
@@ -213,14 +214,14 @@ describe('Pool Calculation Performance Benchmarks', () => {
     })
 
     it('should recover from slow operations gracefully', async () => {
-      const slowOperation = simulateSlowOperation(100)
+      const slowOperation = simulateSlowOperation(30) // Reduce delay
       const startTime = performance.now()
       
       try {
         await Promise.race([
           slowOperation(),
           new Promise((_, reject) => 
-            setTimeout(() => reject(new Error('Timeout')), 50)
+            setTimeout(() => reject(new Error('Timeout')), 20) // Shorter timeout
           )
         ])
       } catch (error) {
@@ -228,7 +229,7 @@ describe('Pool Calculation Performance Benchmarks', () => {
         const duration = endTime - startTime
         
         expect((error as Error).message).toBe('Timeout')
-        expect(duration).toBeLessThan(60) // Should timeout quickly
+        expect(duration).toBeLessThan(30) // Should timeout quickly
       }
     })
   })
