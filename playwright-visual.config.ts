@@ -22,7 +22,7 @@ export default defineConfig({
   /* Shared settings for all the projects below */
   use: {
     /* Base URL for Storybook */
-    baseURL: 'http://localhost:6006',
+    baseURL: 'http://localhost:6080',
 
     /* Collect trace when retrying the failed test */
     trace: 'on-first-retry',
@@ -73,7 +73,7 @@ export default defineConfig({
   /* Run Storybook before starting the tests */
   webServer: {
     command: 'bun run storybook',
-    url: 'http://localhost:6006',
+    url: 'http://localhost:6080',
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
   },
