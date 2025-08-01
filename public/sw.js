@@ -135,7 +135,7 @@ async function networkFirstStrategy(request) {
     }
     
     return networkResponse;
-  } catch (_error) {
+  } catch {
     console.log('[SW] Network failed for:', request.url, 'trying cache...');
     
     const cachedResponse = await caches.match(request);
