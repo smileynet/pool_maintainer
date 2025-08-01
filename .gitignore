@@ -25,3 +25,10 @@ dist-ssr
 
 *storybook.log
 storybook-static
+
+# Test artifacts
+test-results/
+playwright-report/
+playwright-visual-report/
+tests/visual/__screenshots__/
+coverage/
