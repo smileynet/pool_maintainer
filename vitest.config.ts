@@ -20,9 +20,47 @@ export default defineConfig({
       '**/.{idea,git,cache,output,temp}/**',
       '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build}.config.*',
     ],
+    // Pool Maintenance System optimizations
+    testTimeout: 10000, // Pool calculations may need extra time
+    hookTimeout: 10000,
+    pool: 'threads',
+    poolOptions: {
+      threads: {
+        singleThread: false,
+        minThreads: 1,
+        maxThreads: 4,
+      },
+    },
+    // Enhanced reporting for pool maintenance workflows
+    reporter: ['default', 'json', 'html'],
+    outputFile: {
+      json: './test-results/results.json',
+      html: './test-results/index.html',
+    },
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html', 'lcov'],
+      thresholds: {
+        global: {
+          branches: 80,
+          functions: 80,
+          lines: 80,
+          statements: 80,
+        },
+        // Critical pool safety functions require higher coverage
+        'src/lib/mahc-validation.ts': {
+          branches: 95,
+          functions: 95,
+          lines: 95,
+          statements: 95,
+        },
+        'src/lib/localStorage.ts': {
+          branches: 90,
+          functions: 90,
+          lines: 90,
+          statements: 90,
+        },
+      },
       exclude: [
         '**/node_modules/**',
         'src/test-setup.ts',
@@ -31,6 +69,8 @@ export default defineConfig({
         '**/dist/**',
         '.claude/**',
         'tests/e2e/**',
+        '**/*.stories.{ts,tsx}',
+        'src/mocks/**',
       ],
     },
   },
