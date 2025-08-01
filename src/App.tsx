@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { PoolFacilityManager } from '@/components/ui/pool-facility-manager'
 import { ChemicalTestHistory } from '@/components/ui/chemical-test-history'
 import { PoolStatusDashboard } from '@/components/ui/pool-status-dashboard'
 import { ChemicalTrendChart } from '@/components/ui/chemical-trend-chart'
+import { OfflineIndicator } from '@/components/ui/offline-indicator'
 import { Droplet, TestTube, MapPin, Activity, BarChart3, Settings, History } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import './App.css'
@@ -140,48 +140,6 @@ function App() {
       {/* Chemical Trend Charts */}
       <ChemicalTrendChart />
 
-      {/* Future Analytics Features */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <BarChart3 className="h-5 w-5" />
-            Advanced Analytics
-          </CardTitle>
-          <CardDescription>Additional reporting features coming soon</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <div className="p-4 text-center">
-              <Badge variant="secondary" className="mb-2">
-                Coming Soon
-              </Badge>
-              <h4 className="font-medium">Usage Analytics</h4>
-              <p className="text-muted-foreground text-sm">Pool utilization patterns</p>
-            </div>
-            <div className="p-4 text-center">
-              <Badge variant="secondary" className="mb-2">
-                Coming Soon
-              </Badge>
-              <h4 className="font-medium">Performance Reports</h4>
-              <p className="text-muted-foreground text-sm">Maintenance efficiency metrics</p>
-            </div>
-            <div className="p-4 text-center">
-              <Badge variant="secondary" className="mb-2">
-                Coming Soon
-              </Badge>
-              <h4 className="font-medium">Compliance Tracking</h4>
-              <p className="text-muted-foreground text-sm">MAHC compliance history</p>
-            </div>
-            <div className="p-4 text-center">
-              <Badge variant="secondary" className="mb-2">
-                Coming Soon
-              </Badge>
-              <h4 className="font-medium">Predictive Insights</h4>
-              <p className="text-muted-foreground text-sm">Maintenance predictions</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   )
 
@@ -196,6 +154,7 @@ function App() {
               <h1 className="text-foreground text-xl font-semibold">Pool Maintenance System</h1>
             </div>
             <div className="flex items-center gap-4">
+              <OfflineIndicator />
               <Button variant="default">
                 <TestTube className="mr-2 h-4 w-4" />
                 New Reading

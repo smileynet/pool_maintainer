@@ -1,157 +1,152 @@
 # Pool Maintenance System - Current Project Tasks
 
 **Project**: Pool Maintenance Data Management - Continuous Improvement  
-**Phase**: Optimization & Enhancement  
+**Phase**: Performance Optimization & Multi-User Preparation  
 **Last Updated**: 2025-07-31  
 **Next Review**: Sprint completion
 
 ## 🎯 Current Focus
 
-The core spreadsheet replacement functionality is complete. Current work focuses on optimization, polish, and preparing for multi-user features.
+The core spreadsheet replacement functionality and offline capabilities are complete. Current work focuses on performance optimization and preparing for multi-user collaboration features.
 
-## 🚧 Active Tasks
+## 🚧 Active Tasks (Current Sprint)
 
-### Code Quality & Maintenance
+### Performance & Code Quality
 
-1. **Fix GitHub Hook Failures** `[IN PROGRESS]`
-   - **Issue**: Pre-commit hooks reporting failures incorrectly
-   - **Impact**: Developers using --no-verify to bypass
-   - **Solution**: Debug hook configuration and fix lint-staged setup
-   - **Priority**: Low (workaround available)
-
-2. **Optimize Bundle Size** `[READY]`
-   - **Issue**: Chart libraries creating large bundle
-   - **Target**: Reduce initial load time by 30%
+1. **Optimize Bundle Size** `[READY]`
+   - **Issue**: Chart libraries (Recharts) creating large bundle (~2MB)
+   - **Target**: Reduce initial load time by 30% (under 500KB gzipped)
    - **Approach**:
-     - Implement code splitting for Recharts
-     - Lazy load analytics components
-     - Tree-shake unused chart types
-   - **Priority**: Medium
+     - Implement code splitting for Recharts components
+     - Lazy load analytics tab components
+     - Tree-shake unused chart types and features
+     - Optimize import patterns
+   - **Priority**: High (affects mobile field use)
 
-3. **Simplify Analytics Tab** `[READY]`
-   - **Issue**: "Coming Soon" placeholders create confusion
-   - **Solution**: Remove placeholder cards, focus on existing charts
-   - **Priority**: High (user experience)
+2. **Fix GitHub Hook Failures** `[READY]`
+   - **Issue**: Pre-commit hooks reporting failures incorrectly
+   - **Impact**: Developers using --no-verify to bypass quality checks
+   - **Solution**: Debug lint-staged configuration and hook execution
+   - **Priority**: Medium (quality assurance)
 
 ### Performance Enhancements
 
-4. **Implement Service Worker** `[READY]`
-   - **Goal**: True offline capability for field technicians
-   - **Features**:
-     - Cache static assets for offline use
-     - Queue data changes when offline
-     - Sync when connection restored
-   - **Priority**: High (field use requirement)
+3. **Optimize Large Dataset Handling** `[PLANNED]`
+   - **Issue**: Performance degrades with 1000+ chemical tests
+   - **Solution**: 
+     - Implement virtual scrolling for test history table
+     - Add pagination for better data loading
+     - Optimize localStorage queries with indexing
+     - Implement data archiving for old tests
+   - **Priority**: Medium (scalability)
 
-5. **Optimize Large Dataset Handling** `[PLANNED]`
-   - **Issue**: Performance degrades with 1000+ tests
-   - **Solution**:
-     - Virtual scrolling for test history
-     - Pagination for API preparation
-     - Indexed localStorage queries
-   - **Priority**: Medium
+4. **Enhanced Error Recovery** `[PLANNED]`
+   - **Features**:
+     - Auto-recovery for failed localStorage operations
+     - Undo/redo functionality for critical operations
+     - Better error messages with actionable solutions
+     - Graceful degradation for missing data
+   - **Priority**: Medium (reliability)
 
 ### User Experience Polish
 
-6. **Add Keyboard Shortcuts** `[PLANNED]`
-   - **Goal**: Power user efficiency
+5. **Add Keyboard Shortcuts** `[PLANNED]`
+   - **Goal**: Power user efficiency for frequent operations
    - **Shortcuts**:
-     - Ctrl+N: New test
-     - Ctrl+S: Save draft
-     - Ctrl+E: Export data
-     - /: Focus search
-   - **Priority**: Low
+     - `Ctrl+N`: New chemical test
+     - `Ctrl+S`: Save current draft
+     - `Ctrl+E`: Export test data
+     - `/`: Focus search input
+     - `Esc`: Close dialogs/cancel operations
+   - **Priority**: Low (nice-to-have)
 
-7. **Enhanced Error Recovery** `[PLANNED]`
-   - **Features**:
-     - Auto-recovery for failed saves
-     - Undo/redo for critical operations
-     - Better error messages with solutions
-   - **Priority**: Medium
+## 📋 Next Sprint: Multi-User Foundation
 
-## 📋 Next Sprint: Multi-User Preparation
-
-### Foundation Work
+### Foundation Work `[READY]`
 
 1. **User Identification System**
-   - Simple user profiles in localStorage
-   - Associate tests with users
-   - User preference storage
+   - Simple user profiles stored in localStorage
+   - Associate chemical tests with specific users
+   - User preference storage (theme, filters, etc.)
+   - Technician certification tracking
 
-2. **Data Sync Architecture**
-   - Prepare data structure for future API
-   - Conflict resolution strategy
-   - Optimistic updates pattern
+2. **Data Sync Architecture Design**
+   - Prepare data structure for future API integration
+   - Design conflict resolution strategy for concurrent edits
+   - Plan optimistic updates pattern
+   - Define data migration path from localStorage to API
 
 3. **Permission Model Design**
-   - Read-only vs edit permissions
+   - Define user roles (admin, technician, viewer)
    - Pool-specific access controls
-   - Admin vs technician roles
+   - Read-only vs edit permissions per user type
+   - Audit trail for sensitive operations
 
-### Feature Enhancements
+### Feature Enhancements `[PLANNED]`
 
 4. **Saved Filter Presets**
-   - Common filter combinations
+   - Common filter combinations (e.g., "This Week's Tests")
    - User-specific saved searches
-   - Quick filter buttons
+   - Quick filter buttons in UI
+   - Import/export filter configurations
 
 5. **Bulk Operations Expansion**
-   - Bulk edit chemical readings
-   - Bulk status updates
-   - Batch import improvements
+   - Bulk edit chemical readings across multiple tests
+   - Bulk status updates (approve/flag multiple tests)
+   - Enhanced batch import with validation
+   - Bulk delete with confirmation
 
 ## 🔧 Technical Debt
 
 ### High Priority
-
-- [ ] Remove eslint-disable comments where possible
-- [ ] Add missing TypeScript types for chart components
-- [ ] Improve test coverage for localStorage operations
+- [ ] Remove remaining eslint-disable comments where possible
+- [ ] Add comprehensive TypeScript types for all chart components
+- [ ] Improve test coverage for localStorage and offline queue operations
+- [ ] Add error boundary components for critical sections
 
 ### Medium Priority
-
-- [ ] Refactor large components (>250 lines)
-- [ ] Consolidate duplicate validation logic
-- [ ] Add performance monitoring
+- [ ] Refactor components over 250 lines (chemical-test-history.tsx: 689 lines)
+- [ ] Consolidate duplicate validation logic across components
+- [ ] Add performance monitoring and bundle size tracking
+- [ ] Optimize image assets and remove unused dependencies
 
 ### Low Priority
-
-- [ ] Update to latest dependency versions
-- [ ] Remove unused Storybook addons
-- [ ] Optimize image assets
+- [ ] Update to latest dependency versions (quarterly review)
+- [ ] Remove unused Storybook addons and stories
+- [ ] Add comprehensive JSDoc documentation
+- [ ] Set up automated security scanning
 
 ## 📊 Success Metrics
 
-### Current Sprint
+### Current Sprint Targets
+- [ ] Bundle size < 500KB gzipped (currently ~2MB)
+- [ ] Initial load time < 2 seconds on 3G connection
+- [ ] Zero console errors in production build
+- [ ] Performance score > 90 in Lighthouse
+- [ ] All pre-commit hooks working correctly
 
-- [ ] Bundle size < 500KB gzipped
-- [ ] Initial load time < 2 seconds
-- [ ] Zero console errors in production
-- [ ] 100% feature parity when offline
-
-### Next Sprint
-
-- [ ] Support 3+ concurrent users
-- [ ] Data sync within 5 seconds
-- [ ] Permission system tested
-- [ ] Migration path documented
+### Next Sprint Targets
+- [ ] Support 3+ concurrent users with localStorage simulation
+- [ ] Data sync conflict resolution tested
+- [ ] Permission system fully implemented
+- [ ] Migration path to API architecture documented
 
 ## 🚫 Blocked Tasks
 
-None currently.
+None currently. All tasks have clear paths forward.
 
 ## 🎯 Definition of Done
 
 A task is complete when:
-
-- ✅ Feature works as specified
-- ✅ Tests pass (unit + e2e)
-- ✅ No TypeScript errors
-- ✅ No ESLint errors
-- ✅ Responsive on mobile
-- ✅ Accessible (WCAG AA)
-- ✅ Documented in Storybook
+- ✅ Feature works as specified across all browsers
+- ✅ All tests pass (unit + integration + e2e)
+- ✅ No TypeScript errors or warnings
+- ✅ No ESLint errors, warnings under threshold
+- ✅ Responsive design works on mobile devices
+- ✅ Meets WCAG AA accessibility standards
+- ✅ Performance impact measured and acceptable
+- ✅ Documentation updated (README, Storybook, etc.)
 
 ---
 
-**Next Action**: Fix GitHub hooks to restore automated quality checks, then optimize bundle size for better performance.
+**Next Action**: Implement code splitting and lazy loading for chart components to reduce bundle size, then fix GitHub hooks for reliable quality checks.

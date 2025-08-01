@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+// Console logging is temporarily enabled for debugging service worker registration
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
@@ -35,6 +37,9 @@ function mountApp() {
     )
     
     console.log('React app mounted successfully')
+    
+    // Register service worker for offline capability
+    registerServiceWorker()
   } catch (error) {
     console.error('Error mounting React app:', error)
     // Display error on page
@@ -62,4 +67,69 @@ if (document.readyState === 'loading') {
   // DOM is already loaded
   console.log('DOM already loaded, mounting immediately')
   mountApp()
+}
+
+// Service Worker Registration
+async function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    try {
+      console.log('Registering service worker...')
+      
+      const registration = await navigator.serviceWorker.register('/sw.js', {
+        scope: '/',
+      })
+      
+      console.log('Service worker registered successfully:', registration.scope)
+      
+      // Handle service worker updates
+      registration.addEventListener('updatefound', () => {
+        const newWorker = registration.installing
+        if (newWorker) {
+          console.log('New service worker installing...')
+          
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              console.log('New service worker installed, update available')
+              
+              // Notify user about update (could show a toast/banner)
+              if (window.confirm('A new version is available. Reload to update?')) {
+                window.location.reload()
+              }
+            }
+          })
+        }
+      })
+      
+      // Listen for messages from service worker
+      navigator.serviceWorker.addEventListener('message', (event) => {
+        console.log('Message from service worker:', event.data)
+        
+        const { type, data } = event.data
+        
+        switch (type) {
+          case 'SYNC_COMPLETE':
+            console.log(`Synced ${data.syncedItems} offline items`)
+            // Could show success notification
+            break
+            
+          case 'CACHE_UPDATED':
+            console.log('Cache updated with fresh content')
+            break
+            
+          default:
+            console.log('Unknown message from service worker:', type)
+        }
+      })
+      
+      // Check if we're running from cache (offline)
+      if (!navigator.onLine) {
+        console.log('App loaded from cache (offline mode)')
+      }
+      
+    } catch (error) {
+      console.error('Service worker registration failed:', error)
+    }
+  } else {
+    console.log('Service workers are not supported in this browser')
+  }
 }

@@ -8,30 +8,25 @@ Project-specific Claude Code instructions for the pool maintenance data manageme
 
 ## 🚀 Quick Reference
 
-### Development Commands
+### Immediate Actions
+- **New feature?** → Check PROJECT.md for priority order
+- **Build failing?** → Run `bun run quality:fix` then check TypeScript errors
+- **Performance issue?** → Bundle must stay under 500KB gzipped
+- **Data loss risk?** → All changes must go through localStorage.ts
 
+### Essential Commands
 ```bash
-# Development
-bun run dev          # Start dev server (http://localhost:5080, network accessible)
-bun run storybook    # Start Storybook (http://localhost:6080, network accessible)
-
-# Code Quality
-bun run quality      # Run all quality checks (lint + format + typecheck)
-bun run quality:fix  # Auto-fix issues and format code
-bun run lint         # ESLint check
-bun run lint:fix     # ESLint auto-fix
-bun run format       # Prettier format
-bun run type-check   # TypeScript check
+# Most Used
+bun run dev          # Start dev server (http://localhost:5080)
+bun run quality:fix  # Auto-fix all code issues before commit
+bun run build        # Check production bundle size
 
 # Testing
 bun run test         # Unit tests with Vitest
 bun run test:e2e     # End-to-end tests with Playwright
-bun run test:visual  # Visual regression tests
-bun run test:all     # All test suites
 
-# Build & Deploy
-bun run build        # Production build
-bun run validate     # Full validation (quality + tests + build)
+# Full Validation
+bun run validate     # Run everything (quality + tests + build)
 ```
 
 ### Project Structure
@@ -104,32 +99,42 @@ Spreadsheet replacement system that digitizes pool maintenance workflows with be
 - **Vitest**: Unit testing framework
 - **Playwright**: E2E and visual regression testing
 
-## 🎯 Development Standards
+## 🎯 Core Development Principles
 
-### Code Quality Requirements
+### 1. Performance First
+- **Bundle size limit**: 500KB gzipped maximum (currently ~2MB - needs optimization)
+- **Load time target**: Under 2 seconds on 3G connection
+- **Lazy loading**: Required for all chart components
+- **Measure impact**: Check bundle size with every feature addition
 
+### 2. Data Integrity Above All
+- **Never lose user data**: Auto-save drafts, confirm deletions
+- **Validate on input**: MAHC compliance checking in real-time
+- **Clear error messages**: Tell users exactly what's wrong and how to fix it
+- **Offline-first**: All features must work without internet connection
+
+### 3. Spreadsheet Replacement Standards
+- **Faster entry**: Every form must be quicker than spreadsheet input
+- **Better review**: Search/filter must beat manual spreadsheet scrolling  
+- **CSV compatibility**: Import/export must handle common spreadsheet formats
+- **Mobile-ready**: Field technicians use phones/tablets in wet conditions
+
+## 🔧 Technical Standards
+
+### Code Quality Gates
 ```bash
-# Quality checks (run before any commit)
-bun run quality      # Run all checks
-bun run quality:fix  # Auto-fix issues
-bun run type-check   # TypeScript validation
+# Pre-commit requirements (enforced by Husky)
+bun run quality:fix  # Must pass with 0 errors
+bun run type-check   # No TypeScript errors allowed
+bun run test         # All tests must pass
 ```
 
-### Implementation Principles
-
-1. **Performance First**: Data entry must be faster than spreadsheets
-2. **Validation Always**: Prevent common spreadsheet errors with MAHC validation
-3. **Mobile Responsive**: All interfaces work on phones/tablets for field use
-4. **Export Compatible**: Maintain CSV format for spreadsheet compatibility
-5. **Offline Capable**: localStorage ensures functionality without internet
-
-### Data Management Patterns
-
-- Use `src/lib/localStorage.ts` for all data persistence operations
-- Validate against `src/lib/mahc-validation.ts` for chemical safety
-- Status indicators: Green (safe), Yellow (caution), Red (critical/emergency)
-- Always provide clear error messages for validation failures
-- Auto-save drafts to prevent data loss during field entry
+### Implementation Rules
+- **TypeScript strict mode**: Zero `any` types, explicit return types
+- **Component size limit**: 250 lines max (refactor larger components)
+- **localStorage only**: All data operations through `src/lib/localStorage.ts`
+- **MAHC validation**: Use `src/lib/mahc-validation.ts` for all chemical ranges
+- **Error boundaries**: Wrap all data operations to prevent crashes
 
 ## 📋 Project Status
 
@@ -208,23 +213,27 @@ The core spreadsheet replacement functionality is complete and operational.
 - Interactive charts with reference lines for compliance
 - Mobile-first responsive design for field use
 
-## 🤖 Implementation Notes
+## 📊 Definition of Done
 
-### Key Files
+A feature is complete when:
+- ✅ **Faster than spreadsheets** - Measured and verified
+- ✅ **Works offline** - Service worker caches all assets
+- ✅ **Mobile tested** - Verified on actual phone/tablet
+- ✅ **No data loss** - Draft saving and recovery tested
+- ✅ **Bundle size checked** - Under 500KB gzipped target
+- ✅ **TypeScript strict** - Zero errors, no `any` types
+- ✅ **Tests pass** - Unit, E2E, and visual regression
+- ✅ **Accessible** - WCAG AA compliance verified
 
-- `src/lib/localStorage.ts` - Data persistence layer
-- `src/lib/mahc-validation.ts` - Chemical safety validation
-- `src/components/ui/chemical-test-form.tsx` - Primary data entry
-- `src/components/ui/pool-status-dashboard.tsx` - Real-time monitoring
-- `src/components/ui/chemical-trend-chart.tsx` - Trend visualization
+## 🚧 When Blocked
 
-### Testing Approach
-
-```bash
-bun run test         # Unit tests
-bun run test:e2e     # End-to-end tests
-bun run test:visual  # Visual regression
-```
+If you encounter blockers:
+1. **Document clearly** in PROJECT.md with:
+   - What you tried
+   - Why current solutions compromise quality
+   - What's needed to unblock
+2. **Find alternative work** - Check PROJECT.md for unblocked tasks
+3. **Never compromise quality** - Better to stop than ship broken code
 
 ---
 

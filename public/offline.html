@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pool Maintenance - Offline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0ad1e0 0%, #65a33c 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+        
+        .offline-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        
+        .offline-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1rem;
+            background: #f3f4f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .offline-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+        
+        .offline-message {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        
+        .retry-button {
+            background: #0ad1e0;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .retry-button:hover {
+            background: #09b8c7;
+        }
+        
+        .offline-tips {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            text-align: left;
+        }
+        
+        .offline-tips h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+        
+        .offline-tips ul {
+            font-size: 0.8rem;
+            color: #6b7280;
+            list-style-position: inside;
+        }
+        
+        .offline-tips li {
+            margin-bottom: 0.25rem;
+        }
+        
+        .connection-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 1rem;
+        }
+        
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ef4444;
+        }
+        
+        .status-indicator.online {
+            background: #10b981;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">🏊‍♂️</div>
+        <h1 class="offline-title">You're Offline</h1>
+        <p class="offline-message">
+            The Pool Maintenance System is currently unavailable. Your data is safe and will sync when you're back online.
+        </p>
+        
+        <button class="retry-button" onclick="window.location.reload()">
+            Try Again
+        </button>
+        
+        <div class="connection-status">
+            <div class="status-indicator" id="connection-indicator"></div>
+            <span id="connection-text">No internet connection</span>
+        </div>
+        
+        <div class="offline-tips">
+            <h3>What you can do offline:</h3>
+            <ul>
+                <li>View previously loaded chemical test data</li>
+                <li>Create new tests (will sync when online)</li>
+                <li>Browse pool status from cached data</li>
+                <li>Export test data as CSV</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Monitor connection status
+        function updateConnectionStatus() {
+            const indicator = document.getElementById('connection-indicator');
+            const text = document.getElementById('connection-text');
+            
+            if (navigator.onLine) {
+                indicator.classList.add('online');
+                text.textContent = 'Connection restored - Click "Try Again"';
+            } else {
+                indicator.classList.remove('online');
+                text.textContent = 'No internet connection';
+            }
+        }
+        
+        // Update status on page load
+        updateConnectionStatus();
+        
+        // Listen for online/offline events
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+        
+        // Auto-retry when connection is restored
+        window.addEventListener('online', () => {
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
