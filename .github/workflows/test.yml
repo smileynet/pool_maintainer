@@ -1,5 +1,8 @@
 name: Tests
 
+# Hybrid approach: Use Bun for fast dependency installation, npm for test execution
+# This provides optimal performance while maintaining compatibility with DOM testing
+
 on:
   push:
     branches: [main, develop]
@@ -19,6 +22,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
@@ -36,16 +44,16 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Run linting
-        run: bun run lint
+        run: npm run lint
 
       - name: Type check
-        run: bunx tsc --noEmit
+        run: npm run type-check
 
       - name: Run unit tests
-        run: bun run test
+        run: npm test
 
       - name: Run unit tests with coverage
-        run: bun run test:coverage
+        run: npm run test:coverage
 
       - name: Upload coverage reports
         uses: codecov/codecov-action@v4
@@ -59,7 +67,7 @@ jobs:
         run: bunx playwright install --with-deps
 
       - name: Run E2E tests
-        run: bun run test:e2e
+        run: npm run test:e2e
 
       - name: Upload Playwright report
         uses: actions/upload-artifact@v4
@@ -70,10 +78,10 @@ jobs:
           retention-days: 30
 
       - name: Build Storybook
-        run: bun run build-storybook
+        run: npm run build-storybook
 
       - name: Run visual regression tests
-        run: bun run test:visual
+        run: npm run test:visual
 
       - name: Upload visual regression report
         uses: actions/upload-artifact@v4
@@ -92,7 +100,7 @@ jobs:
           retention-days: 30
 
       - name: Build project
-        run: bun run build
+        run: npm run build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -109,6 +117,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
