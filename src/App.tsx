@@ -1,14 +1,27 @@
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { PoolFacilityManager } from '@/components/ui/pool-facility-manager'
-import { ChemicalTestHistory } from '@/components/ui/chemical-test-history'
 import { PoolStatusDashboard } from '@/components/ui/pool-status-dashboard'
-import { ChemicalTrendChart } from '@/components/ui/chemical-trend-chart'
 import { OfflineIndicator } from '@/components/ui/offline-indicator'
-import { Droplet, TestTube, MapPin, Activity, BarChart3, Settings, History } from 'lucide-react'
+import { MobileThemeSelector } from '@/components/ui/mobile-theme-selector'
+
+// Lazy load tab components for better code splitting
+const PoolFacilityManager = lazy(() => import('@/components/ui/pool-facility-manager'))
+const ChemicalTestHistory = lazy(() => import('@/components/ui/chemical-test-history'))
+const LazyChemicalTrendChart = lazy(() => import('@/components/ui/lazy-chemical-trend-chart').then(module => ({ default: module.LazyChemicalTrendChart })))
+import { Droplet, TestTube, MapPin, Activity, BarChart3, Settings, History, Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import './App.css'
+
+// Loading component for lazy-loaded tabs
+const TabLoadingFallback = ({ title }: { title: string }) => (
+  <div className="flex items-center justify-center py-16">
+    <div className="flex items-center space-x-3 text-muted-foreground">
+      <Loader2 className="h-5 w-5 animate-spin" />
+      <span>Loading {title}...</span>
+    </div>
+  </div>
+)
 
 function App() {
   // Navigation state
@@ -26,7 +39,7 @@ function App() {
 
   // Render overview dashboard content
   const renderOverview = () => (
-    <div className="space-y-8">
+    <div className="space-y-8 stagger-children">
       {/* Welcome Section */}
       <div>
         <h2 className="text-foreground mb-2 text-2xl font-bold">Pool Maintenance Dashboard</h2>
@@ -44,7 +57,7 @@ function App() {
       />
 
       {/* Quick Actions */}
-      <Card>
+      <Card className="card-glass">
         <CardHeader>
           <CardTitle>Quick Actions</CardTitle>
           <CardDescription>Common pool maintenance tasks</CardDescription>
@@ -108,28 +121,12 @@ function App() {
         </CardContent>
       </Card>
 
-      {/* Component Library Link */}
-      <div className="text-center">
-        <Card>
-          <CardContent className="pt-6">
-            <h3 className="text-foreground mb-2 text-lg font-semibold">Component Documentation</h3>
-            <p className="text-muted-foreground mb-4 opacity-80">
-              Explore our complete UI component library with pool maintenance examples
-            </p>
-            <Button variant="default" asChild>
-              <a href="http://localhost:6080" target="_blank" rel="noopener noreferrer">
-                View Storybook Documentation
-              </a>
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
     </div>
   )
 
   // Render analytics content
   const renderAnalytics = () => (
-    <div className="space-y-8">
+    <div className="content-data space-y-8">
       <div>
         <h2 className="text-foreground mb-2 text-2xl font-bold">Analytics & Reports</h2>
         <p className="text-muted-foreground">
@@ -138,16 +135,18 @@ function App() {
       </div>
 
       {/* Chemical Trend Charts */}
-      <ChemicalTrendChart />
+      <Suspense fallback={<TabLoadingFallback title="Chemical Trend Charts" />}>
+        <LazyChemicalTrendChart />
+      </Suspense>
 
     </div>
   )
 
   return (
-    <div className="bg-background min-h-screen">
-      {/* Header - 30% Green Theme */}
-      <header className="bg-card border-b shadow-sm">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="app-background gradient-subtle">
+      {/* Header - Modern Glass Effect */}
+      <header className="nav-glass backdrop-blur-md layout-app">
+        <div>
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
               <Droplet className="text-primary mr-3 h-8 w-8" />
@@ -155,6 +154,7 @@ function App() {
             </div>
             <div className="flex items-center gap-4">
               <OfflineIndicator />
+              <MobileThemeSelector />
               <Button variant="default">
                 <TestTube className="mr-2 h-4 w-4" />
                 New Reading
@@ -169,8 +169,8 @@ function App() {
       </header>
 
       {/* Navigation Tabs - 30% Green Structure */}
-      <div className="bg-secondary/10 border-b">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="bg-secondary/10 border-b layout-app">
+        <div>
           <nav className="flex space-x-8" aria-label="Tabs">
             {tabs.map((tab) => {
               const TabIcon = tab.icon
@@ -195,11 +195,19 @@ function App() {
         </div>
       </div>
 
-      {/* Main Content - 60% Blue Theme */}
-      <main className="mx-auto min-h-screen max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      {/* Main Content - Enhanced with Stagger Animations */}
+      <main className="layout-app min-h-screen py-8 page-enter">
         {activeTab === 'overview' && renderOverview()}
-        {activeTab === 'facilities' && <PoolFacilityManager />}
-        {activeTab === 'history' && <ChemicalTestHistory />}
+        {activeTab === 'facilities' && (
+          <Suspense fallback={<TabLoadingFallback title="Pool Facilities" />}>
+            <PoolFacilityManager />
+          </Suspense>
+        )}
+        {activeTab === 'history' && (
+          <Suspense fallback={<TabLoadingFallback title="Chemical Test History" />}>
+            <ChemicalTestHistory />
+          </Suspense>
+        )}
         {activeTab === 'analytics' && renderAnalytics()}
       </main>
     </div>

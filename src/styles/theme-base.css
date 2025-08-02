@@ -1,0 +1,77 @@
+/**
+ * Base Color Scales
+ * Generated from OKLCH color definitions
+ */
+
+:root {
+  /* Primary color scale (blue - pool water theme) */
+  --color-primary-50: oklch(0.97 0.02 220);
+  --color-primary-100: oklch(0.93 0.05 220);
+  --color-primary-200: oklch(0.85 0.10 220);
+  --color-primary-300: oklch(0.75 0.15 220);
+  --color-primary-400: oklch(0.65 0.20 220);
+  --color-primary-500: oklch(0.55 0.25 220);
+  --color-primary-600: oklch(0.45 0.25 220);
+  --color-primary-700: oklch(0.35 0.25 220);
+  --color-primary-800: oklch(0.25 0.20 220);
+  --color-primary-900: oklch(0.15 0.15 220);
+  --color-primary-950: oklch(0.08 0.10 220);
+
+  /* Neutral/Gray scale */
+  --color-neutral-50: oklch(0.98 0.00 0);
+  --color-neutral-100: oklch(0.95 0.00 0);
+  --color-neutral-200: oklch(0.90 0.00 0);
+  --color-neutral-300: oklch(0.80 0.00 0);
+  --color-neutral-400: oklch(0.65 0.00 0);
+  --color-neutral-500: oklch(0.50 0.00 0);
+  --color-neutral-600: oklch(0.40 0.00 0);
+  --color-neutral-700: oklch(0.30 0.00 0);
+  --color-neutral-800: oklch(0.20 0.00 0);
+  --color-neutral-900: oklch(0.10 0.00 0);
+  --color-neutral-950: oklch(0.05 0.00 0);
+
+  /* Success color scale (green - safe chemical levels) */
+  --color-success-50: oklch(0.96 0.02 145);
+  --color-success-100: oklch(0.90 0.05 145);
+  --color-success-200: oklch(0.82 0.10 145);
+  --color-success-300: oklch(0.72 0.15 145);
+  --color-success-400: oklch(0.62 0.18 145);
+  --color-success-500: oklch(0.52 0.20 145);
+  --color-success-600: oklch(0.42 0.20 145);
+  --color-success-700: oklch(0.32 0.18 145);
+  --color-success-800: oklch(0.22 0.15 145);
+  --color-success-900: oklch(0.14 0.10 145);
+  --color-success-950: oklch(0.08 0.08 145);
+
+  /* Warning color scale (yellow/orange - caution levels) */
+  --color-warning-50: oklch(0.97 0.02 85);
+  --color-warning-100: oklch(0.92 0.05 85);
+  --color-warning-200: oklch(0.84 0.10 85);
+  --color-warning-300: oklch(0.76 0.15 85);
+  --color-warning-400: oklch(0.68 0.18 85);
+  --color-warning-500: oklch(0.60 0.20 85);
+  --color-warning-600: oklch(0.50 0.20 85);
+  --color-warning-700: oklch(0.40 0.18 85);
+  --color-warning-800: oklch(0.30 0.15 85);
+  --color-warning-900: oklch(0.20 0.10 85);
+  --color-warning-950: oklch(0.12 0.08 85);
+
+  /* Destructive color scale (red - critical/dangerous levels) */
+  --color-destructive-50: oklch(0.97 0.02 25);
+  --color-destructive-100: oklch(0.92 0.05 25);
+  --color-destructive-200: oklch(0.84 0.10 25);
+  --color-destructive-300: oklch(0.74 0.15 25);
+  --color-destructive-400: oklch(0.64 0.18 25);
+  --color-destructive-500: oklch(0.54 0.20 25);
+  --color-destructive-600: oklch(0.44 0.20 25);
+  --color-destructive-700: oklch(0.34 0.18 25);
+  --color-destructive-800: oklch(0.24 0.15 25);
+  --color-destructive-900: oklch(0.16 0.10 25);
+  --color-destructive-950: oklch(0.09 0.08 25);
+
+  /* Pool-specific semantic colors */
+  --color-pool-safe: var(--color-success-500);
+  --color-pool-caution: var(--color-warning-500);
+  --color-pool-critical: var(--color-destructive-500);
+  --color-pool-unknown: var(--color-neutral-400);
+}

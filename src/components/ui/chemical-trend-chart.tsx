@@ -243,7 +243,7 @@ export const ChemicalTrendChart = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="content-data space-y-6">
       {/* Header and Controls */}
       <div className="flex items-center justify-between">
         <div>
@@ -367,9 +367,9 @@ export const ChemicalTrendChart = () => {
                   <p
                     className={cn(
                       'text-2xl font-bold',
-                      trendSummary.trend === 'up' && 'text-red-600',
-                      trendSummary.trend === 'down' && 'text-blue-600',
-                      trendSummary.trend === 'stable' && 'text-gray-600'
+                      trendSummary.trend === 'up' && 'text-destructive',
+                      trendSummary.trend === 'down' && 'text-primary',
+                      trendSummary.trend === 'stable' && 'text-muted-foreground'
                     )}
                   >
                     {trendSummary.change > 0 ? '+' : ''}
@@ -377,11 +377,11 @@ export const ChemicalTrendChart = () => {
                     {trendSummary.unit}
                   </p>
                 </div>
-                {trendSummary.trend === 'up' && <TrendingUp className="h-8 w-8 text-red-600" />}
+                {trendSummary.trend === 'up' && <TrendingUp className="h-8 w-8 text-destructive" />}
                 {trendSummary.trend === 'down' && (
-                  <TrendingDown className="h-8 w-8 text-blue-600" />
+                  <TrendingDown className="h-8 w-8 text-primary" />
                 )}
-                {trendSummary.trend === 'stable' && <Activity className="h-8 w-8 text-gray-600" />}
+                {trendSummary.trend === 'stable' && <Activity className="h-8 w-8 text-muted-foreground" />}
               </div>
             </CardContent>
           </Card>
@@ -518,14 +518,14 @@ export const ChemicalTrendChart = () => {
             <div>
               <h5 className="mb-2 text-sm font-medium">Ideal Range</h5>
               <div className="flex items-center gap-2">
-                <div className="h-1 w-4 rounded bg-green-500"></div>
+                <div className="h-1 w-4 rounded bg-success"></div>
                 <span className="text-sm">{idealRange}</span>
               </div>
             </div>
             <div>
               <h5 className="mb-2 text-sm font-medium">Acceptable Range</h5>
               <div className="flex items-center gap-2">
-                <div className="h-1 w-4 rounded bg-yellow-500"></div>
+                <div className="h-1 w-4 rounded bg-warning"></div>
                 <span className="text-sm">{acceptableRange}</span>
               </div>
             </div>

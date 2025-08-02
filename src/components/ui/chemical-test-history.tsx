@@ -323,7 +323,7 @@ export const ChemicalTestHistory = ({ onViewTest, onEditTest }: ChemicalTestHist
   }
 
   return (
-    <div className="space-y-6">
+    <div className="content-data space-y-6">
       {/* Header and Summary Stats */}
       <div className="flex items-center justify-between">
         <div>

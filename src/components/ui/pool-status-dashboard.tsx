@@ -225,40 +225,40 @@ export const PoolStatusDashboard = ({ onViewPool }: { onViewPool?: (poolId: stri
           variant: 'destructive' as const,
           icon: AlertTriangle,
           label: 'Emergency',
-          color: 'text-red-600',
-          bgColor: 'bg-red-50 border-red-200',
+          color: 'text-destructive',
+          bgColor: 'bg-destructive/10 border-destructive/20',
         }
       case 'critical':
         return {
           variant: 'destructive' as const,
           icon: AlertTriangle,
           label: 'Critical',
-          color: 'text-red-600',
-          bgColor: 'bg-red-50 border-red-200',
+          color: 'text-destructive',
+          bgColor: 'bg-destructive/10 border-destructive/20',
         }
       case 'caution':
         return {
           variant: 'outline' as const,
           icon: AlertTriangle,
           label: 'Caution',
-          color: 'text-yellow-600',
-          bgColor: 'bg-yellow-50 border-yellow-200',
+          color: 'text-warning',
+          bgColor: 'bg-warning/10 border-warning/20',
         }
       case 'safe':
         return {
           variant: 'secondary' as const,
           icon: CheckCircle,
           label: 'Safe',
-          color: 'text-green-600',
-          bgColor: 'bg-green-50 border-green-200',
+          color: 'text-success',
+          bgColor: 'bg-success/10 border-success/20',
         }
       default:
         return {
           variant: 'outline' as const,
           icon: Clock,
           label: 'Unknown',
-          color: 'text-gray-600',
-          bgColor: 'bg-gray-50 border-gray-200',
+          color: 'text-muted-foreground',
+          bgColor: 'bg-muted/10 border-muted/20',
         }
     }
   }
@@ -324,11 +324,11 @@ export const PoolStatusDashboard = ({ onViewPool }: { onViewPool?: (poolId: stri
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-muted-foreground text-sm font-medium">Safe Pools</p>
-                <p className="text-2xl font-bold text-green-600">
+                <p className="text-2xl font-bold text-success">
                   {pools.filter((p) => p.status === 'safe').length}
                 </p>
               </div>
-              <CheckCircle className="h-8 w-8 text-green-600" />
+              <CheckCircle className="h-8 w-8 text-success" />
             </div>
           </CardContent>
         </Card>
@@ -338,14 +338,14 @@ export const PoolStatusDashboard = ({ onViewPool }: { onViewPool?: (poolId: stri
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-muted-foreground text-sm font-medium">Need Attention</p>
-                <p className="text-2xl font-bold text-yellow-600">
+                <p className="text-2xl font-bold text-warning">
                   {
                     pools.filter((p) => ['caution', 'critical', 'emergency'].includes(p.status))
                       .length
                   }
                 </p>
               </div>
-              <AlertTriangle className="h-8 w-8 text-yellow-600" />
+              <AlertTriangle className="h-8 w-8 text-warning" />
             </div>
           </CardContent>
         </Card>
@@ -459,10 +459,10 @@ export const PoolStatusDashboard = ({ onViewPool }: { onViewPool?: (poolId: stri
                                 : Minus
                           const trendColor =
                             trend.trend === 'up'
-                              ? 'text-red-500'
+                              ? 'text-destructive'
                               : trend.trend === 'down'
-                                ? 'text-blue-500'
-                                : 'text-gray-500'
+                                ? 'text-primary'
+                                : 'text-muted-foreground'
 
                           return (
                             <div key={trend.chemical} className="flex items-center gap-1 text-xs">

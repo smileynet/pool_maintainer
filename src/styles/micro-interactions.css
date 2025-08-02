@@ -1,0 +1,540 @@
+/**
+ * Micro-Interactions and Smooth Transitions
+ * Enhanced user experience with smooth animations and transitions
+ */
+
+/* Base transition variables for consistency */
+:root {
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --transition-spring: 400ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  
+  /* Mobile-optimized transition durations */
+  --transition-mobile-fast: 100ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-mobile-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-mobile-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Apply faster transitions on mobile for better perceived performance */
+@media (max-width: 640px) {
+  :root {
+    --transition-fast: var(--transition-mobile-fast);
+    --transition-normal: var(--transition-mobile-normal);
+    --transition-slow: var(--transition-mobile-slow);
+  }
+}
+
+/* Global smooth transitions for all interactive elements */
+*,
+*::before,
+*::after {
+  transition: 
+    background-color var(--transition-normal),
+    border-color var(--transition-normal),
+    color var(--transition-normal),
+    box-shadow var(--transition-normal),
+    transform var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+/* Theme switching transitions */
+html {
+  transition: 
+    background-color var(--transition-slow),
+    color var(--transition-slow);
+}
+
+/* Enhanced smooth theme transitions */
+.theme-switching * {
+  transition: 
+    background-color var(--transition-slow) !important,
+    border-color var(--transition-slow) !important,
+    color var(--transition-slow) !important,
+    box-shadow var(--transition-slow) !important,
+    backdrop-filter var(--transition-slow) !important;
+}
+
+/* Button micro-interactions */
+button,
+[role="button"],
+.btn {
+  transition: 
+    all var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-normal);
+  cursor: pointer;
+  /* Ensure minimum touch target size */
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation; /* Prevent double-tap zoom */
+}
+
+/* Desktop hover effects */
+@media (pointer: fine) {
+  button:hover,
+  [role="button"]:hover,
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Touch-optimized active states */
+button:active,
+[role="button"]:active,
+.btn:active {
+  transform: scale(0.98);
+  transition: transform var(--transition-mobile-fast);
+}
+
+/* Mobile-specific touch feedback */
+@media (pointer: coarse) {
+  button,
+  [role="button"],
+  .btn {
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Touch ripple effect */
+  button::after,
+  [role="button"]::after,
+  .btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width var(--transition-normal), height var(--transition-normal);
+  }
+  
+  button:active::after,
+  [role="button"]:active::after,
+  .btn:active::after {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Focus ring improvements */
+:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+  transition: outline-offset var(--transition-fast);
+}
+
+:focus-visible:hover {
+  outline-offset: 4px;
+}
+
+/* Card hover effects */
+.card,
+[data-slot="card"] {
+  transition: 
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal),
+    backdrop-filter var(--transition-normal);
+}
+
+/* Desktop card hover */
+@media (pointer: fine) {
+  .card:hover,
+  [data-slot="card"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Mobile card interactions */
+@media (pointer: coarse) {
+  .card,
+  [data-slot="card"] {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .card:active,
+  [data-slot="card"]:active {
+    transform: scale(0.99);
+    transition: transform var(--transition-mobile-fast);
+  }
+}
+
+/* Glass card enhanced hover */
+.card-glass:hover {
+  transform: translateY(-3px);
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+}
+
+/* Link hover effects */
+a {
+  transition: 
+    color var(--transition-fast),
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+a:hover {
+  transform: translateX(2px);
+  opacity: 0.8;
+}
+
+/* Input field interactions */
+input,
+textarea,
+select {
+  transition: 
+    border-color var(--transition-normal),
+    box-shadow var(--transition-normal),
+    background-color var(--transition-normal);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--color-ring);
+  box-shadow: 0 0 0 3px rgba(var(--color-ring), 0.1);
+}
+
+/* Loading states */
+.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: loading-shimmer 2s infinite;
+}
+
+@keyframes loading-shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Stagger animations for lists */
+.stagger-children > * {
+  animation: stagger-in var(--transition-normal) ease-out backwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 50ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 100ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 150ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 200ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 250ms; }
+
+@keyframes stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modal entrance animations */
+.modal-enter {
+  animation: modal-enter var(--transition-spring) ease-out;
+}
+
+.modal-backdrop-enter {
+  animation: backdrop-enter var(--transition-normal) ease-out;
+}
+
+@keyframes modal-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes backdrop-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Dropdown animations */
+.dropdown-enter {
+  animation: dropdown-enter var(--transition-bounce) ease-out;
+  transform-origin: top;
+}
+
+@keyframes dropdown-enter {
+  from {
+    opacity: 0;
+    transform: scaleY(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+  }
+}
+
+/* Toast notification animations */
+.toast-enter {
+  animation: toast-enter var(--transition-spring) ease-out;
+}
+
+@keyframes toast-enter {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Pulse animation for important elements */
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Icon interactions */
+.icon {
+  transition: transform var(--transition-fast);
+}
+
+.icon:hover {
+  transform: scale(1.1);
+}
+
+.icon-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Theme toggle specific animations */
+.theme-toggle {
+  transition: all var(--transition-normal);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05) rotate(5deg);
+}
+
+/* Page transition effects */
+.page-enter {
+  animation: page-enter var(--transition-slow) ease-out;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Skeleton loading for cards */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-muted) 25%,
+    var(--color-accent) 50%,
+    var(--color-muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 2s infinite;
+  border-radius: inherit;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Improved scroll behavior */
+html {
+  scroll-behavior: smooth;
+  /* Momentum scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+/* Mobile-optimized scrollable areas */
+@media (max-width: 640px) {
+  .scrollable {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 1rem;
+  }
+  
+  .scrollable > * {
+    scroll-snap-align: start;
+  }
+  
+  /* Hide scrollbars on mobile for cleaner look */
+  .scrollable::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollable {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Swipeable cards on mobile */
+@media (pointer: coarse) {
+  .swipeable {
+    touch-action: pan-y;
+    user-select: none;
+  }
+  
+  .swipeable-item {
+    transition: transform var(--transition-normal);
+  }
+}
+
+/* Enhanced tab navigation */
+[role="tab"] {
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+[role="tab"]::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transition: transform var(--transition-normal);
+}
+
+[role="tab"][aria-selected="true"]::after {
+  transform: scaleX(1);
+}
+
+/* Progress indicators */
+.progress-bar {
+  transition: width var(--transition-normal) ease-out;
+}
+
+/* Enhanced glassmorphism hover states */
+.glass-interactive {
+  transition: 
+    backdrop-filter var(--transition-normal),
+    background-color var(--transition-normal),
+    transform var(--transition-normal);
+}
+
+.glass-interactive:hover {
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  transform: translateY(-1px);
+}
+
+/* Accessibility: Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .gradient-bg,
+  .gradient-subtle,
+  .hero-gradient {
+    animation: none !important;
+  }
+  
+  button:hover,
+  .card:hover,
+  .card-glass:hover {
+    transform: none !important;
+  }
+}
+
+/* High contrast mode adjustments */
+@media (prefers-contrast: high) {
+  button:hover,
+  [role="button"]:hover {
+    border: 2px solid currentColor;
+  }
+  
+  :focus-visible {
+    outline-width: 3px;
+    outline-style: solid;
+  }
+}
+
+/* Dark mode specific transition improvements */
+[data-theme="dark"] {
+  --transition-glow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] button:hover,
+[data-theme="dark"] .card:hover {
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+}
+
+/* Vibrant theme specific enhancements */
+[data-theme-variant="ocean"] .theme-toggle:hover {
+  filter: drop-shadow(0 0 8px oklch(0.55 0.32 200));
+}
+
+[data-theme-variant="sunset"] .theme-toggle:hover {
+  filter: drop-shadow(0 0 8px oklch(0.58 0.32 25));
+}
+
+[data-theme-variant="forest"] .theme-toggle:hover {
+  filter: drop-shadow(0 0 8px oklch(0.52 0.32 145));
+}
+
+[data-theme-variant="aurora"] .theme-toggle:hover {
+  filter: drop-shadow(0 0 8px oklch(0.55 0.32 280));
+}

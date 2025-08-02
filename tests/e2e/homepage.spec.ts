@@ -18,11 +18,12 @@ test.describe('Pool Maintenance System', () => {
     await page.goto('/')
     await page.waitForLoadState('networkidle')
 
-    // Check that navigation tabs are rendered
-    await expect(page.getByRole('button', { name: /Overview/i })).toBeVisible()
-    await expect(page.getByRole('button', { name: /Pool Facilities/i })).toBeVisible()
-    await expect(page.getByRole('button', { name: /Test History/i })).toBeVisible()
-    await expect(page.getByRole('button', { name: /Analytics/i })).toBeVisible()
+    // Check that navigation tabs are rendered - use nav element to scope the search
+    const nav = page.locator('nav')
+    await expect(nav.getByRole('button', { name: 'Overview' })).toBeVisible()
+    await expect(nav.getByRole('button', { name: 'Pool Facilities' })).toBeVisible()
+    await expect(nav.getByRole('button', { name: 'Test History' })).toBeVisible()
+    await expect(nav.getByRole('button', { name: 'Analytics' })).toBeVisible()
   })
 
   test('should display pool maintenance dashboard on overview tab', async ({ page }) => {
@@ -40,14 +41,15 @@ test.describe('Pool Maintenance System', () => {
     await page.goto('/')
     await page.waitForLoadState('networkidle')
 
-    // Click on Pool Facilities tab
-    await page.getByRole('button', { name: /Pool Facilities/i }).click()
+    // Click on Pool Facilities tab - use nav element to avoid conflicts
+    const nav = page.locator('nav')
+    await nav.getByRole('button', { name: 'Pool Facilities' }).click()
 
     // Should show facilities content
     await expect(page.locator('h2')).toContainText('Pool Facility Manager')
 
     // Click on Test History tab
-    await page.getByRole('button', { name: /Test History/i }).click()
+    await nav.getByRole('button', { name: 'Test History' }).click()
 
     // Should show history content
     await expect(page.locator('h2')).toContainText('Chemical Test History')
@@ -68,10 +70,9 @@ test.describe('Pool Maintenance System', () => {
     await page.goto('/')
     await page.waitForLoadState('networkidle')
 
-    // Check that navigation buttons are accessible
-    const navButtons = page
-      .getByRole('button')
-      .filter({ hasText: /Overview|Pool Facilities|Test History|Analytics/i })
+    // Check that navigation buttons are accessible - scope to nav element
+    const nav = page.locator('nav')
+    const navButtons = nav.getByRole('button')
     const buttonCount = await navButtons.count()
 
     expect(buttonCount).toBe(4)

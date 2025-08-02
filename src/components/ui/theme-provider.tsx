@@ -2,11 +2,13 @@ import React, { createContext, useContext, useEffect, useState, ReactNode } from
 
 // Theme configuration types
 export type ThemeMode = 'light' | 'dark' | 'system'
+export type ThemeVariant = 'default' | 'ocean' | 'sunset' | 'forest' | 'aurora'
 export type ContrastMode = 'normal' | 'high' | 'system'
 export type MotionMode = 'normal' | 'reduced' | 'system'
 
 export interface ThemeConfig {
   mode: ThemeMode
+  variant: ThemeVariant
   contrast: ContrastMode
   motion: MotionMode
   fontScale: number
@@ -24,6 +26,7 @@ export interface SafetyTheme {
 // Default theme configuration - Light mode for outdoor visibility
 const defaultThemeConfig: ThemeConfig = {
   mode: 'light',
+  variant: 'default',
   contrast: 'normal',
   motion: 'system',
   fontScale: 1.0,
@@ -38,7 +41,11 @@ interface ThemeContextType {
   isDarkMode: boolean
   isHighContrast: boolean
   isReducedMotion: boolean
+  currentVariant: ThemeVariant
   resetToDefaults: () => void
+  isMobile: boolean
+  isTablet: boolean
+  viewportWidth: number
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
@@ -130,6 +137,24 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [isHighContrast, setIsHighContrast] = useState(false)
   const [isReducedMotion, setIsReducedMotion] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
+  const [viewportWidth, setViewportWidth] = useState(0)
+
+  // Mobile viewport detection
+  useEffect(() => {
+    const updateViewport = () => {
+      const width = window.innerWidth
+      setViewportWidth(width)
+      setIsMobile(width < 640)
+      setIsTablet(width >= 640 && width < 1024)
+    }
+
+    updateViewport()
+    window.addEventListener('resize', updateViewport)
+
+    return () => window.removeEventListener('resize', updateViewport)
+  }, [])
 
   // Update theme function
   const updateTheme = (updates: Partial<ThemeConfig>) => {
@@ -183,8 +208,17 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
       // Apply theme classes to document
       const root = document.documentElement
       
-      // Dark mode class
+      // Add theme switching class to prevent flash
+      root.classList.add('theme-switching')
+      
+      // Dark mode class (legacy support)
       root.classList.toggle('dark', effectiveDarkMode)
+      
+      // New data-theme attribute for OKLCH variables
+      root.setAttribute('data-theme', effectiveDarkMode ? 'dark' : 'light')
+      
+      // Theme variant attribute for vibrant themes
+      root.setAttribute('data-theme-variant', config.variant)
       
       // High contrast class
       root.classList.toggle('high-contrast', effectiveHighContrast)
@@ -197,6 +231,23 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
       
       // Font scale CSS custom property
       root.style.setProperty('--font-scale', config.fontScale.toString())
+      
+      // Mobile-specific attributes
+      root.setAttribute('data-viewport', isMobile ? 'mobile' : isTablet ? 'tablet' : 'desktop')
+      root.classList.toggle('touch-device', 'ontouchstart' in window)
+      
+      // Mobile-optimized font scale
+      if (isMobile) {
+        const mobileScale = Math.max(config.fontScale, 1.0) // Ensure minimum 1.0 scale on mobile
+        root.style.setProperty('--mobile-font-scale', mobileScale.toString())
+      }
+      
+      // Remove theme switching class after transitions
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          root.classList.remove('theme-switching')
+        })
+      })
     }
 
     updateEffectiveTheme()
@@ -217,7 +268,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
       contrastQuery.removeEventListener('change', handleChange)
       motionQuery.removeEventListener('change', handleChange)
     }
-  }, [config])
+  }, [config, isMobile, isTablet])
 
   // Context value
   const value: ThemeContextType = {
@@ -227,7 +278,11 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     isDarkMode,
     isHighContrast,
     isReducedMotion,
+    currentVariant: config.variant,
     resetToDefaults,
+    isMobile,
+    isTablet,
+    viewportWidth,
   }
 
   return (
@@ -306,15 +361,15 @@ export const useChemicalStatusColors = () => {
   const getChemicalStatusClasses = (status: 'compliant' | 'warning' | 'critical' | 'emergency') => {
     switch (status) {
       case 'compliant':
-        return 'text-green-600 bg-green-50 border-green-200 dark:text-green-400 dark:bg-green-950 dark:border-green-800'
+        return 'text-success bg-success/10 border-success/20'
       case 'warning':
-        return 'text-amber-600 bg-amber-50 border-amber-200 dark:text-amber-400 dark:bg-amber-950 dark:border-amber-800'
+        return 'text-warning bg-warning/10 border-warning/20'
       case 'critical':
-        return 'text-red-600 bg-red-50 border-red-200 dark:text-red-400 dark:bg-red-950 dark:border-red-800'
+        return 'text-destructive bg-destructive/10 border-destructive/20'
       case 'emergency':
-        return 'text-red-700 bg-red-100 border-red-300 dark:text-red-300 dark:bg-red-950 dark:border-red-700 font-bold'
+        return 'text-destructive bg-destructive/20 border-destructive/30 font-bold'
       default:
-        return 'text-gray-600 bg-gray-50 border-gray-200'
+        return 'text-muted-foreground bg-muted/10 border-muted/20'
     }
   }
 

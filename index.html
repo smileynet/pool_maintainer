@@ -2,6 +2,56 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    
+    <!-- FOUC Prevention Script - Must run before any CSS -->
+    <script>
+      (function() {
+        try {
+          // Get stored theme preference
+          const storedTheme = localStorage.getItem('pool-maintenance-theme');
+          let theme = 'light';
+          let variant = 'default';
+          
+          if (storedTheme) {
+            try {
+              const config = JSON.parse(storedTheme);
+              // Get theme mode
+              if (config.mode === 'dark') {
+                theme = 'dark';
+              } else if (config.mode === 'system') {
+                // Check system preference
+                theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+              }
+              // Get theme variant
+              if (config.variant) {
+                variant = config.variant;
+              }
+            } catch (e) {
+              // Fallback to simple string check for backwards compatibility
+              if (storedTheme === 'dark') {
+                theme = 'dark';
+              } else if (storedTheme === 'system') {
+                theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+              }
+            }
+          } else {
+            // No stored preference, check system
+            theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          
+          // Apply theme immediately
+          document.documentElement.setAttribute('data-theme', theme);
+          document.documentElement.setAttribute('data-theme-variant', variant);
+          if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (error) {
+          // Fallback to light theme if anything fails
+          console.warn('Theme initialization failed:', error);
+        }
+      })();
+    </script>
+    
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pool Maintenance System</title>

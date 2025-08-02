@@ -630,7 +630,7 @@ const PoolFacilityCard = ({
                 Details
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-2xl @4xl:max-w-4xl">
+            <DialogContent className="max-w-[90vw] sm:max-w-lg md:max-w-2xl lg:max-w-3xl xl:max-w-4xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle>{pool.name} - Facility Details</DialogTitle>
                 <DialogDescription>
@@ -1065,7 +1065,7 @@ export const PoolFacilityManager = () => {
   )
 
   return (
-    <div className="@container mx-auto max-w-7xl space-y-6">
+    <div className="@container content-mixed space-y-6">
       {/* Header and Controls */}
       <div className="flex flex-col items-start justify-between gap-4 @lg:flex-row @lg:items-center">
         <div>

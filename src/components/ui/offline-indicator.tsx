@@ -102,8 +102,8 @@ export const OfflineIndicator = ({ className, showDetails = true }: OfflineIndic
         icon: WifiOff,
         label: 'Offline',
         variant: 'destructive' as const,
-        color: 'text-red-600',
-        bgColor: 'bg-red-50 border-red-200',
+        color: 'text-destructive',
+        bgColor: 'bg-destructive/10 border-destructive/20',
       }
     }
 
@@ -112,8 +112,8 @@ export const OfflineIndicator = ({ className, showDetails = true }: OfflineIndic
         icon: RefreshCw,
         label: 'Syncing...',
         variant: 'secondary' as const,
-        color: 'text-blue-600',
-        bgColor: 'bg-blue-50 border-blue-200',
+        color: 'text-primary',
+        bgColor: 'bg-primary/10 border-primary/20',
       }
     }
 
@@ -122,8 +122,8 @@ export const OfflineIndicator = ({ className, showDetails = true }: OfflineIndic
         icon: Clock,
         label: `${queueStats.total} pending`,
         variant: 'outline' as const,
-        color: 'text-yellow-600',
-        bgColor: 'bg-yellow-50 border-yellow-200',
+        color: 'text-warning',
+        bgColor: 'bg-warning/10 border-warning/20',
       }
     }
 
@@ -131,8 +131,8 @@ export const OfflineIndicator = ({ className, showDetails = true }: OfflineIndic
       icon: Wifi,
       label: 'Online',
       variant: 'secondary' as const,
-      color: 'text-green-600',
-      bgColor: 'bg-green-50 border-green-200',
+      color: 'text-success',
+      bgColor: 'bg-success/10 border-success/20',
     }
   }
 
@@ -192,9 +192,9 @@ export const OfflineIndicator = ({ className, showDetails = true }: OfflineIndic
               <div className="mb-3 rounded border p-2">
                 <div className="mb-1 flex items-center gap-2">
                   {lastSyncResult.success && lastSyncResult.failedItems === 0 ? (
-                    <CheckCircle className="h-4 w-4 text-green-600" />
+                    <CheckCircle className="h-4 w-4 text-success" />
                   ) : (
-                    <AlertTriangle className="h-4 w-4 text-yellow-600" />
+                    <AlertTriangle className="h-4 w-4 text-warning" />
                   )}
                   <span className="text-sm font-medium">Last Sync Result</span>
                 </div>
@@ -205,7 +205,7 @@ export const OfflineIndicator = ({ className, showDetails = true }: OfflineIndic
                     <div>Failed: {lastSyncResult.failedItems} items</div>
                   )}
                   {lastSyncResult.errors.length > 0 && (
-                    <div className="text-red-600">
+                    <div className="text-destructive">
                       {lastSyncResult.errors.length} errors occurred
                     </div>
                   )}
@@ -252,9 +252,9 @@ export const OfflineIndicator = ({ className, showDetails = true }: OfflineIndic
 
             {/* Offline Tips */}
             {!isOnline && (
-              <div className="mt-3 rounded bg-gray-50 p-2 text-xs">
+              <div className="mt-3 rounded bg-muted p-2 text-xs">
                 <p className="mb-1 font-medium">Offline Mode:</p>
-                <ul className="space-y-0.5 text-gray-600">
+                <ul className="space-y-0.5 text-muted-foreground">
                   <li>• Data will be saved locally</li>
                   <li>• Changes sync when connection restored</li>
                   <li>• All features remain available</li>

@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/54</span>
+                <span class='fraction'>0/51</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/54</span>
+                <span class='fraction'>0/51</span>
             </div>
         
             
@@ -141,9 +141,7 @@
 <a name='L76'></a><a href='#L76'>76</a>
 <a name='L77'></a><a href='#L77'>77</a>
 <a name='L78'></a><a href='#L78'>78</a>
-<a name='L79'></a><a href='#L79'>79</a>
-<a name='L80'></a><a href='#L80'>80</a>
-<a name='L81'></a><a href='#L81'>81</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L79'></a><a href='#L79'>79</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -159,9 +157,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -223,7 +218,8 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { defineConfig, devices } from '@playwright/test'<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { defineConfig, devices } from '@playwright/test'<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span>
 &nbsp;
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -239,14 +235,11 @@
   /* Opt out of parallel tests on CI. */
 <span class="cstat-no" title="statement not covered" >  workers: process.env.CI ? 1 : undefined,</span>
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-<span class="cstat-no" title="statement not covered" >  reporter: [</span>
-<span class="cstat-no" title="statement not covered" >    ['html'],</span>
-<span class="cstat-no" title="statement not covered" >    ['json', { outputFile: 'playwright-report/results.json' }],</span>
-<span class="cstat-no" title="statement not covered" >  ],</span>
+<span class="cstat-no" title="statement not covered" >  reporter: [['html'], ['json', { outputFile: 'playwright-report/results.json' }]],</span>
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 <span class="cstat-no" title="statement not covered" >  use: {</span>
     /* Base URL to use in actions like `await page.goto('/')`. */
-<span class="cstat-no" title="statement not covered" >    baseURL: 'http://localhost:5173',</span>
+<span class="cstat-no" title="statement not covered" >    baseURL: 'http://localhost:5080',</span>
 &nbsp;
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
 <span class="cstat-no" title="statement not covered" >    trace: 'on-first-retry',</span>
@@ -299,18 +292,19 @@
   /* Run your local dev server before starting the tests */
 <span class="cstat-no" title="statement not covered" >  webServer: {</span>
 <span class="cstat-no" title="statement not covered" >    command: 'bun run dev',</span>
-<span class="cstat-no" title="statement not covered" >    url: 'http://localhost:5173',</span>
+<span class="cstat-no" title="statement not covered" >    url: 'http://localhost:5080',</span>
 <span class="cstat-no" title="statement not covered" >    reuseExistingServer: !process.env.CI,</span>
 <span class="cstat-no" title="statement not covered" >    timeout: 120 * 1000,</span>
 <span class="cstat-no" title="statement not covered" >  },</span>
-<span class="cstat-no" title="statement not covered" >})</span></pre></td></tr></table></pre>
+<span class="cstat-no" title="statement not covered" >})</span>
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-29T14:17:55.197Z
+                at 2025-08-01T05:56:28.732Z
             </div>
         <script src="../prettify.js"></script>
         <script>

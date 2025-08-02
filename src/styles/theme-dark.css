@@ -1,0 +1,105 @@
+/**
+ * Dark Theme
+ * Semantic color tokens for dark mode
+ */
+
+[data-theme="dark"] {
+  /* Background colors */
+  --color-background: var(--color-neutral-950);
+  --color-foreground: var(--color-neutral-50);
+
+  /* Card/surface colors */
+  --color-card: var(--color-neutral-950);
+  --color-card-foreground: var(--color-neutral-50);
+
+  /* Popup/overlay colors */
+  --color-popover: var(--color-neutral-950);
+  --color-popover-foreground: var(--color-neutral-50);
+
+  /* Primary brand colors */
+  --color-primary: var(--color-primary-400);
+  --color-primary-foreground: var(--color-neutral-900);
+
+  /* Secondary/muted colors */
+  --color-secondary: var(--color-neutral-800);
+  --color-secondary-foreground: var(--color-neutral-50);
+
+  /* Muted/subtle colors */
+  --color-muted: var(--color-neutral-800);
+  --color-muted-foreground: var(--color-neutral-400);
+
+  /* Accent colors */
+  --color-accent: var(--color-neutral-800);
+  --color-accent-foreground: var(--color-neutral-50);
+
+  /* Destructive colors */
+  --color-destructive: var(--color-destructive-400);
+  --color-destructive-foreground: var(--color-neutral-50);
+
+  /* Success colors */
+  --color-success: var(--color-success-400);
+  --color-success-foreground: var(--color-neutral-900);
+
+  /* Warning colors */
+  --color-warning: var(--color-warning-400);
+  --color-warning-foreground: var(--color-neutral-900);
+
+  /* Border colors */
+  --color-border: var(--color-neutral-800);
+  --color-input: var(--color-neutral-800);
+
+  /* Ring/focus colors */
+  --color-ring: var(--color-primary-400);
+}
+
+/* Also apply dark theme when user prefers dark mode and no explicit theme is set */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    /* Background colors */
+    --color-background: var(--color-neutral-950);
+    --color-foreground: var(--color-neutral-50);
+
+    /* Card/surface colors */
+    --color-card: var(--color-neutral-950);
+    --color-card-foreground: var(--color-neutral-50);
+
+    /* Popup/overlay colors */
+    --color-popover: var(--color-neutral-950);
+    --color-popover-foreground: var(--color-neutral-50);
+
+    /* Primary brand colors */
+    --color-primary: var(--color-primary-400);
+    --color-primary-foreground: var(--color-neutral-900);
+
+    /* Secondary/muted colors */
+    --color-secondary: var(--color-neutral-800);
+    --color-secondary-foreground: var(--color-neutral-50);
+
+    /* Muted/subtle colors */
+    --color-muted: var(--color-neutral-800);
+    --color-muted-foreground: var(--color-neutral-400);
+
+    /* Accent colors */
+    --color-accent: var(--color-neutral-800);
+    --color-accent-foreground: var(--color-neutral-50);
+
+    /* Destructive colors */
+    --color-destructive: var(--color-destructive-400);
+    --color-destructive-foreground: var(--color-neutral-50);
+
+    /* Success colors */
+    --color-success: var(--color-success-400);
+    --color-success-foreground: var(--color-neutral-900);
+
+    /* Warning colors */
+    --color-warning: var(--color-warning-400);
+    --color-warning-foreground: var(--color-neutral-900);
+
+    /* Border colors */
+    --color-border: var(--color-neutral-800);
+    --color-input: var(--color-neutral-800);
+
+    /* Ring/focus colors */
+    --color-ring: var(--color-primary-400);
+  }
+}

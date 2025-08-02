@@ -1,0 +1,144 @@
+/**
+ * Theme Tokens
+ * Three-layer token architecture for dynamic theming
+ * 
+ * Layer 1: Base colors (theme-base.css)
+ * Layer 2: Semantic tokens (theme-light.css, theme-dark.css)
+ * Layer 3: Component tokens (defined below)
+ */
+
+/* Import base color scales */
+@import './theme-base.css';
+
+/* Import theme-specific semantic tokens */
+@import './theme-light.css';
+@import './theme-dark.css';
+
+/* Component-level tokens that reference semantic colors */
+:root {
+  /* Button component tokens */
+  --button-primary-bg: var(--color-primary);
+  --button-primary-fg: var(--color-primary-foreground);
+  --button-primary-hover: var(--color-primary-600);
+  --button-secondary-bg: var(--color-secondary);
+  --button-secondary-fg: var(--color-secondary-foreground);
+  --button-secondary-hover: var(--color-secondary);
+  --button-destructive-bg: var(--color-destructive);
+  --button-destructive-fg: var(--color-destructive-foreground);
+  --button-destructive-hover: var(--color-destructive-600);
+  --button-outline-border: var(--color-border);
+  --button-outline-fg: var(--color-foreground);
+  --button-outline-hover: var(--color-accent);
+  --button-ghost-hover: var(--color-accent);
+  --button-ghost-fg: var(--color-foreground);
+  
+  /* Card component tokens */
+  --card-bg: var(--color-card);
+  --card-fg: var(--color-card-foreground);
+  --card-border: var(--color-border);
+  --card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  
+  /* Input component tokens */
+  --input-bg: var(--color-background);
+  --input-fg: var(--color-foreground);
+  --input-border: var(--color-input);
+  --input-border-focus: var(--color-ring);
+  --input-placeholder: var(--color-muted-foreground);
+  --input-ring: var(--color-ring);
+  
+  /* Badge component tokens */
+  --badge-default-bg: var(--color-secondary);
+  --badge-default-fg: var(--color-secondary-foreground);
+  --badge-secondary-bg: var(--color-secondary);
+  --badge-secondary-fg: var(--color-secondary-foreground);
+  --badge-success-bg: var(--color-success);
+  --badge-success-fg: var(--color-success-foreground);
+  --badge-warning-bg: var(--color-warning);
+  --badge-warning-fg: var(--color-warning-foreground);
+  --badge-destructive-bg: var(--color-destructive);
+  --badge-destructive-fg: var(--color-destructive-foreground);
+  --badge-outline-border: var(--color-border);
+  --badge-outline-fg: var(--color-foreground);
+  
+  /* Pool status component tokens */
+  --pool-status-safe-bg: var(--color-pool-safe);
+  --pool-status-safe-fg: var(--color-success-foreground);
+  --pool-status-caution-bg: var(--color-pool-caution);
+  --pool-status-caution-fg: var(--color-warning-foreground);
+  --pool-status-critical-bg: var(--color-pool-critical);
+  --pool-status-critical-fg: var(--color-destructive-foreground);
+  --pool-status-unknown-bg: var(--color-pool-unknown);
+  --pool-status-unknown-fg: var(--color-foreground);
+
+  /* Navigation component tokens */
+  --nav-bg: var(--color-background);
+  --nav-fg: var(--color-foreground);
+  --nav-border: var(--color-border);
+  --nav-item-hover: var(--color-accent);
+  --nav-item-active: var(--color-primary);
+  --nav-item-active-fg: var(--color-primary-foreground);
+
+  /* Dialog/Modal component tokens */
+  --dialog-bg: var(--color-popover);
+  --dialog-fg: var(--color-popover-foreground);
+  --dialog-border: var(--color-border);
+  --dialog-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --dialog-overlay: rgb(0 0 0 / 0.8);
+
+  /* Select/Dropdown component tokens */
+  --select-bg: var(--color-background);
+  --select-fg: var(--color-foreground);
+  --select-border: var(--color-input);
+  --select-border-focus: var(--color-ring);
+  --select-content-bg: var(--color-popover);
+  --select-content-fg: var(--color-popover-foreground);
+  --select-item-hover: var(--color-accent);
+  --select-item-selected: var(--color-accent);
+}
+
+/* Dark theme component token overrides */
+[data-theme="dark"] {
+  --card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+  --dialog-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+  --dialog-overlay: rgb(0 0 0 / 0.9);
+}
+
+/* Smooth transitions for theme switching */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Disable transitions during theme switch to prevent flash */
+.theme-switching * {
+  transition: none !important;
+}
+
+/* Theme switching animation */
+html {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* Scrollbar theming */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted-foreground);
+}

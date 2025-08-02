@@ -13,6 +13,8 @@ export default tseslint.config([
       'dist/**',
       'build/**',
       'coverage/**',
+      'test-results/**',
+      'tests/e2e/**',
       'vite.config.ts',
       'tailwind.config.js',
       'postcss.config.js',

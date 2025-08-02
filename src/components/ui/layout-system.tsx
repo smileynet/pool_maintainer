@@ -133,8 +133,7 @@ export const ResponsiveCard: React.FC<ResponsiveCardProps> = ({
 }) => {
   const cardClasses = cn(
     // Base card styles
-    'rounded-lg border bg-white shadow-sm transition-all duration-200',
-    'dark:bg-gray-800 dark:border-gray-700',
+    'rounded-lg border bg-card border-border shadow-sm transition-all duration-200',
     
     // Variant-specific styles
     variant === 'compact' && 'p-3 @sm:p-4',
@@ -259,7 +258,7 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({
   )
 
   const sidebarClasses = cn(
-    'flex-shrink-0 border-r bg-gray-50 dark:bg-gray-900 dark:border-gray-700',
+    'flex-shrink-0 border-r bg-muted border-border',
     sidebarPosition === 'right' && 'border-r-0 border-l',
     sidebarWidthClasses[sidebarWidth],
     isCollapsed && 'w-16',
@@ -275,10 +274,10 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({
     <Container className={layoutClasses}>
       <aside className={sidebarClasses}>
         {collapsible && (
-          <div className="p-2 border-b dark:border-gray-700">
+          <div className="p-2 border-b border-border">
             <button
               onClick={() => setIsCollapsed(!isCollapsed)}
-              className="w-full p-2 text-sm rounded hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="w-full p-2 text-sm rounded hover:bg-muted transition-colors"
             >
               {isCollapsed ? '→' : '←'}
             </button>
@@ -313,14 +312,14 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   className
 }) => {
   const layoutClasses = cn(
-    'min-h-screen bg-gray-50 dark:bg-gray-900',
+    'min-h-screen bg-background',
     className
   )
 
   return (
     <Container className={layoutClasses}>
       {header && (
-        <header className="sticky top-0 z-40 border-b bg-white dark:bg-gray-800 dark:border-gray-700">
+        <header className="sticky top-0 z-40 border-b bg-card border-border">
           <div className="px-4 py-3 @lg:px-6">
             {header}
           </div>
@@ -330,7 +329,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
       <div className="flex flex-1">
         {sidebar && (
           <aside className="hidden @lg:flex @lg:w-64 @lg:flex-col @lg:fixed @lg:inset-y-0 @lg:z-50">
-            <div className="flex flex-col flex-grow pt-5 overflow-y-auto bg-white dark:bg-gray-800 border-r dark:border-gray-700">
+            <div className="flex flex-col flex-grow pt-5 overflow-y-auto bg-card border-r border-border">
               {sidebar}
             </div>
           </aside>

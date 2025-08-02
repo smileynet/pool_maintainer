@@ -11,7 +11,7 @@
     "grepInvert": null,
     "maxFailures": 0,
     "metadata": {
-      "actualWorkers": 6
+      "actualWorkers": 16
     },
     "preserveOutput": "always",
     "reporter": [
@@ -37,7 +37,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 6
+          "actualWorkers": 16
         },
         "id": "chromium",
         "name": "chromium",
@@ -53,7 +53,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 6
+          "actualWorkers": 16
         },
         "id": "firefox",
         "name": "firefox",
@@ -69,7 +69,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 6
+          "actualWorkers": 16
         },
         "id": "webkit",
         "name": "webkit",
@@ -85,7 +85,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 6
+          "actualWorkers": 16
         },
         "id": "Mobile Chrome",
         "name": "Mobile Chrome",
@@ -101,7 +101,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 6
+          "actualWorkers": 16
         },
         "id": "Mobile Safari",
         "name": "Mobile Safari",
@@ -117,7 +117,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 6
+          "actualWorkers": 16
         },
         "id": "Microsoft Edge",
         "name": "Microsoft Edge",
@@ -133,7 +133,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 6
+          "actualWorkers": 16
         },
         "id": "Google Chrome",
         "name": "Google Chrome",
@@ -152,7 +152,7 @@
     "workers": 16,
     "webServer": {
       "command": "bun run dev",
-      "url": "http://localhost:5173",
+      "url": "http://localhost:5080",
       "reuseExistingServer": true,
       "timeout": 120000
     }
@@ -166,7 +166,7 @@
       "specs": [],
       "suites": [
         {
-          "title": "Homepage",
+          "title": "Pool Maintenance System",
           "file": "homepage.spec.ts",
           "line": 3,
           "column": 6,
@@ -187,12 +187,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1624,
+                      "duration": 1062,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-07-29T14:15:24.268Z",
+                      "startTime": "2025-08-01T23:08:55.102Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -200,14 +200,14 @@
                   "status": "expected"
                 }
               ],
-              "id": "84e7eb052e8cbae1c9f0-9fed3458574e5d2041f0",
+              "id": "84e7eb052e8cbae1c9f0-2b8e49b88ba4e54faf38",
               "file": "homepage.spec.ts",
               "line": 4,
               "column": 3
             },
             {
-              "title": "should display shadcn/ui buttons with different variants",
-              "ok": true,
+              "title": "should display navigation tabs",
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -220,27 +220,67 @@
                     {
                       "workerIndex": 1,
                       "parallelIndex": 1,
-                      "status": "passed",
-                      "duration": 1615,
-                      "errors": [],
+                      "status": "failed",
+                      "duration": 1245,
+                      "error": {
+                        "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n",
+                        "stack": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:23:74",
+                        "location": {
+                          "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                          "column": 74,
+                          "line": 23
+                        },
+                        "snippet": "  21 |     // Check that navigation tabs are rendered\n  22 |     await expect(page.getByRole('button', { name: /Overview/i })).toBeVisible()\n> 23 |     await expect(page.getByRole('button', { name: /Pool Facilities/i })).toBeVisible()\n     |                                                                          ^\n  24 |     await expect(page.getByRole('button', { name: /Test History/i })).toBeVisible()\n  25 |     await expect(page.getByRole('button', { name: /Analytics/i })).toBeVisible()\n  26 |   })"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 74,
+                            "line": 23
+                          },
+                          "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n\n  21 |     // Check that navigation tabs are rendered\n  22 |     await expect(page.getByRole('button', { name: /Overview/i })).toBeVisible()\n> 23 |     await expect(page.getByRole('button', { name: /Pool Facilities/i })).toBeVisible()\n     |                                                                          ^\n  24 |     await expect(page.getByRole('button', { name: /Test History/i })).toBeVisible()\n  25 |     await expect(page.getByRole('button', { name: /Analytics/i })).toBeVisible()\n  26 |   })\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:23:74"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-07-29T14:15:24.317Z",
+                      "startTime": "2025-08-01T23:08:55.423Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--b6625-uld-display-navigation-tabs-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--b6625-uld-display-navigation-tabs-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--b6625-uld-display-navigation-tabs-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                        "column": 74,
+                        "line": 23
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
-              "id": "84e7eb052e8cbae1c9f0-9b9e6d0c18641fdd28d3",
+              "id": "84e7eb052e8cbae1c9f0-088a505d116d37804582",
               "file": "homepage.spec.ts",
               "line": 17,
               "column": 3
             },
             {
-              "title": "should have proper styling for default button",
+              "title": "should display pool maintenance dashboard on overview tab",
               "ok": true,
               "tags": [],
               "tests": [
@@ -255,12 +295,12 @@
                       "workerIndex": 2,
                       "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 1555,
+                      "duration": 1101,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-07-29T14:15:24.308Z",
+                      "startTime": "2025-08-01T23:08:55.372Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -268,14 +308,14 @@
                   "status": "expected"
                 }
               ],
-              "id": "84e7eb052e8cbae1c9f0-8c0d5414db6ff03e6187",
+              "id": "84e7eb052e8cbae1c9f0-5b9e7c49c326f217b3a8",
               "file": "homepage.spec.ts",
-              "line": 32,
+              "line": 28,
               "column": 3
             },
             {
-              "title": "should be interactive - buttons can be clicked",
-              "ok": true,
+              "title": "should switch between tabs",
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -288,23 +328,63 @@
                     {
                       "workerIndex": 3,
                       "parallelIndex": 3,
-                      "status": "passed",
-                      "duration": 1669,
-                      "errors": [],
+                      "status": "failed",
+                      "duration": 1211,
+                      "error": {
+                        "message": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n",
+                        "stack": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:44:66",
+                        "location": {
+                          "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                          "column": 66,
+                          "line": 44
+                        },
+                        "snippet": "  42 |\n  43 |     // Click on Pool Facilities tab\n> 44 |     await page.getByRole('button', { name: /Pool Facilities/i }).click()\n     |                                                                  ^\n  45 |\n  46 |     // Should show facilities content\n  47 |     await expect(page.locator('h2')).toContainText('Pool Facility Manager')"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 66,
+                            "line": 44
+                          },
+                          "message": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n\n  42 |\n  43 |     // Click on Pool Facilities tab\n> 44 |     await page.getByRole('button', { name: /Pool Facilities/i }).click()\n     |                                                                  ^\n  45 |\n  46 |     // Should show facilities content\n  47 |     await expect(page.locator('h2')).toContainText('Pool Facility Manager')\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:44:66"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-07-29T14:15:24.298Z",
+                      "startTime": "2025-08-01T23:08:55.195Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance-System-should-switch-between-tabs-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance-System-should-switch-between-tabs-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance-System-should-switch-between-tabs-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                        "column": 66,
+                        "line": 44
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
-              "id": "84e7eb052e8cbae1c9f0-72d9ab3426f9ae33dbba",
+              "id": "84e7eb052e8cbae1c9f0-403ed509303db659e2b0",
               "file": "homepage.spec.ts",
-              "line": 44,
+              "line": 39,
               "column": 3
             },
             {
@@ -323,12 +403,12 @@
                       "workerIndex": 4,
                       "parallelIndex": 4,
                       "status": "passed",
-                      "duration": 1590,
+                      "duration": 1059,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-07-29T14:15:24.272Z",
+                      "startTime": "2025-08-01T23:08:55.155Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -336,9 +416,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "84e7eb052e8cbae1c9f0-30d70eb1afda1a4857f1",
+              "id": "84e7eb052e8cbae1c9f0-9e5f294319df5acfc17e",
               "file": "homepage.spec.ts",
-              "line": 57,
+              "line": 56,
               "column": 3
             },
             {
@@ -357,62 +437,2006 @@
                       "workerIndex": 5,
                       "parallelIndex": 5,
                       "status": "failed",
-                      "duration": 6583,
+                      "duration": 1102,
                       "error": {
-                        "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: getByRole('button').first()\nExpected string: \u001b[32m\"button\"\u001b[39m\nReceived string: \u001b[31m\"\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button').first()\u001b[22m\n\u001b[2m    9 × locator resolved to <button data-slot=\"button\" class=\"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-fore…>count is 0</button>\u001b[22m\n\u001b[2m      - unexpected value \"null\"\u001b[22m\n",
-                        "stack": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: getByRole('button').first()\nExpected string: \u001b[32m\"button\"\u001b[39m\nReceived string: \u001b[31m\"\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button').first()\u001b[22m\n\u001b[2m    9 × locator resolved to <button data-slot=\"button\" class=\"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-fore…>count is 0</button>\u001b[22m\n\u001b[2m      - unexpected value \"null\"\u001b[22m\n\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:80:31",
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m7\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m7\u001b[39m\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:77:25",
                         "location": {
                           "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
-                          "column": 31,
-                          "line": 80
+                          "column": 25,
+                          "line": 77
                         },
-                        "snippet": "  78 |     // Check first button has proper role\n  79 |     const firstButton = buttons.first()\n> 80 |     await expect(firstButton).toHaveAttribute('type', 'button')\n     |                               ^\n  81 |   })\n  82 | })"
+                        "snippet": "  75 |     const buttonCount = await navButtons.count()\n  76 |\n> 77 |     expect(buttonCount).toBe(4)\n     |                         ^\n  78 |\n  79 |     // Check first button is accessible\n  80 |     const firstButton = navButtons.first()"
                       },
                       "errors": [
                         {
                           "location": {
                             "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
-                            "column": 31,
-                            "line": 80
+                            "column": 25,
+                            "line": 77
                           },
-                          "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: getByRole('button').first()\nExpected string: \u001b[32m\"button\"\u001b[39m\nReceived string: \u001b[31m\"\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button').first()\u001b[22m\n\u001b[2m    9 × locator resolved to <button data-slot=\"button\" class=\"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-fore…>count is 0</button>\u001b[22m\n\u001b[2m      - unexpected value \"null\"\u001b[22m\n\n\n  78 |     // Check first button has proper role\n  79 |     const firstButton = buttons.first()\n> 80 |     await expect(firstButton).toHaveAttribute('type', 'button')\n     |                               ^\n  81 |   })\n  82 | })\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:80:31"
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m7\u001b[39m\n\n  75 |     const buttonCount = await navButtons.count()\n  76 |\n> 77 |     expect(buttonCount).toBe(4)\n     |                         ^\n  78 |\n  79 |     // Check first button is accessible\n  80 |     const firstButton = navButtons.first()\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:77:25"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-07-29T14:15:24.298Z",
+                      "startTime": "2025-08-01T23:08:55.193Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Homepage-should-h-b2b75-er-accessibility-attributes-chromium/test-failed-1.png"
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--8ca3a-er-accessibility-attributes-chromium/test-failed-1.png"
                         },
                         {
                           "name": "video",
                           "contentType": "video/webm",
-                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Homepage-should-h-b2b75-er-accessibility-attributes-chromium/video.webm"
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--8ca3a-er-accessibility-attributes-chromium/video.webm"
                         },
                         {
                           "name": "error-context",
                           "contentType": "text/markdown",
-                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Homepage-should-h-b2b75-er-accessibility-attributes-chromium/error-context.md"
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--8ca3a-er-accessibility-attributes-chromium/error-context.md"
                         }
                       ],
                       "errorLocation": {
                         "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
-                        "column": 31,
-                        "line": 80
+                        "column": 25,
+                        "line": 77
                       }
                     }
                   ],
                   "status": "unexpected"
                 }
               ],
-              "id": "84e7eb052e8cbae1c9f0-1790949e4a65dc87a415",
+              "id": "84e7eb052e8cbae1c9f0-b1e2362ee3f14dae4c36",
               "file": "homepage.spec.ts",
-              "line": 68,
+              "line": 67,
+              "column": 3
+            },
+            {
+              "title": "should load the homepage successfully",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 6,
+                      "status": "timedOut",
+                      "duration": 30237,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 16,
+                            "line": 8
+                          },
+                          "message": "Error: page.waitForLoadState: Test timeout of 30000ms exceeded.\n\n   6 |\n   7 |     // Wait for the page to load\n>  8 |     await page.waitForLoadState('networkidle')\n     |                ^\n   9 |\n  10 |     // Check that the page title is correct\n  11 |     await expect(page).toHaveTitle('Pool Maintenance System')\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:8:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:55.173Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--03526-d-the-homepage-successfully-firefox/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--03526-d-the-homepage-successfully-firefox/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--03526-d-the-homepage-successfully-firefox/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-96f28e3e5ddfa2a97bd9",
+              "file": "homepage.spec.ts",
+              "line": 4,
+              "column": 3
+            },
+            {
+              "title": "should display navigation tabs",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 7,
+                      "status": "timedOut",
+                      "duration": 30230,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 16,
+                            "line": 19
+                          },
+                          "message": "Error: page.waitForLoadState: Test timeout of 30000ms exceeded.\n\n  17 |   test('should display navigation tabs', async ({ page }) => {\n  18 |     await page.goto('/')\n> 19 |     await page.waitForLoadState('networkidle')\n     |                ^\n  20 |\n  21 |     // Check that navigation tabs are rendered\n  22 |     await expect(page.getByRole('button', { name: /Overview/i })).toBeVisible()\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:19:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:55.301Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--b6625-uld-display-navigation-tabs-firefox/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--b6625-uld-display-navigation-tabs-firefox/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--b6625-uld-display-navigation-tabs-firefox/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-2c4645f71a113f8e50d7",
+              "file": "homepage.spec.ts",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "should display pool maintenance dashboard on overview tab",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 8,
+                      "status": "timedOut",
+                      "duration": 30322,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 16,
+                            "line": 30
+                          },
+                          "message": "Error: page.waitForLoadState: Test timeout of 30000ms exceeded.\n\n  28 |   test('should display pool maintenance dashboard on overview tab', async ({ page }) => {\n  29 |     await page.goto('/')\n> 30 |     await page.waitForLoadState('networkidle')\n     |                ^\n  31 |\n  32 |     // Check that the dashboard heading is visible\n  33 |     await expect(page.locator('h2')).toContainText('Pool Maintenance Dashboard')\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:30:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:55.326Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--57631-e-dashboard-on-overview-tab-firefox/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--57631-e-dashboard-on-overview-tab-firefox/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--57631-e-dashboard-on-overview-tab-firefox/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-cc54f67c810d2f7ffef2",
+              "file": "homepage.spec.ts",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "should switch between tabs",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 9,
+                      "status": "timedOut",
+                      "duration": 30228,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 16,
+                            "line": 41
+                          },
+                          "message": "Error: page.waitForLoadState: Test timeout of 30000ms exceeded.\n\n  39 |   test('should switch between tabs', async ({ page }) => {\n  40 |     await page.goto('/')\n> 41 |     await page.waitForLoadState('networkidle')\n     |                ^\n  42 |\n  43 |     // Click on Pool Facilities tab\n  44 |     await page.getByRole('button', { name: /Pool Facilities/i }).click()\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:41:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:55.152Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance-System-should-switch-between-tabs-firefox/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance-System-should-switch-between-tabs-firefox/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance-System-should-switch-between-tabs-firefox/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-93142b6f8813182df778",
+              "file": "homepage.spec.ts",
+              "line": 39,
+              "column": 3
+            },
+            {
+              "title": "should be responsive on mobile viewports",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 10,
+                      "status": "timedOut",
+                      "duration": 30230,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 16,
+                            "line": 60
+                          },
+                          "message": "Error: page.waitForLoadState: Test timeout of 30000ms exceeded.\n\n  58 |     await page.setViewportSize({ width: 375, height: 667 })\n  59 |     await page.goto('/')\n> 60 |     await page.waitForLoadState('networkidle')\n     |                ^\n  61 |\n  62 |     // Check that content is still visible on mobile\n  63 |     await expect(page.locator('h1')).toBeVisible()\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:60:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:55.371Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--98114-ponsive-on-mobile-viewports-firefox/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--98114-ponsive-on-mobile-viewports-firefox/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--98114-ponsive-on-mobile-viewports-firefox/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-46b207797f6b07b02bbf",
+              "file": "homepage.spec.ts",
+              "line": 56,
+              "column": 3
+            },
+            {
+              "title": "should have proper accessibility attributes",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 11,
+                      "status": "timedOut",
+                      "duration": 30237,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 16,
+                            "line": 69
+                          },
+                          "message": "Error: page.waitForLoadState: Test timeout of 30000ms exceeded.\n\n  67 |   test('should have proper accessibility attributes', async ({ page }) => {\n  68 |     await page.goto('/')\n> 69 |     await page.waitForLoadState('networkidle')\n     |                ^\n  70 |\n  71 |     // Check that navigation buttons are accessible\n  72 |     const navButtons = page\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:69:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:55.199Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--8ca3a-er-accessibility-attributes-firefox/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--8ca3a-er-accessibility-attributes-firefox/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--8ca3a-er-accessibility-attributes-firefox/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-3de32a967c9bb0b46ce4",
+              "file": "homepage.spec.ts",
+              "line": 67,
+              "column": 3
+            },
+            {
+              "title": "should load the homepage successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 12,
+                      "parallelIndex": 12,
+                      "status": "passed",
+                      "duration": 1741,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:55.157Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-d69e001f322569ad48df",
+              "file": "homepage.spec.ts",
+              "line": 4,
+              "column": 3
+            },
+            {
+              "title": "should display navigation tabs",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 13,
+                      "parallelIndex": 13,
+                      "status": "failed",
+                      "duration": 1906,
+                      "error": {
+                        "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n",
+                        "stack": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:23:74",
+                        "location": {
+                          "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                          "column": 74,
+                          "line": 23
+                        },
+                        "snippet": "  21 |     // Check that navigation tabs are rendered\n  22 |     await expect(page.getByRole('button', { name: /Overview/i })).toBeVisible()\n> 23 |     await expect(page.getByRole('button', { name: /Pool Facilities/i })).toBeVisible()\n     |                                                                          ^\n  24 |     await expect(page.getByRole('button', { name: /Test History/i })).toBeVisible()\n  25 |     await expect(page.getByRole('button', { name: /Analytics/i })).toBeVisible()\n  26 |   })"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 74,
+                            "line": 23
+                          },
+                          "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n\n  21 |     // Check that navigation tabs are rendered\n  22 |     await expect(page.getByRole('button', { name: /Overview/i })).toBeVisible()\n> 23 |     await expect(page.getByRole('button', { name: /Pool Facilities/i })).toBeVisible()\n     |                                                                          ^\n  24 |     await expect(page.getByRole('button', { name: /Test History/i })).toBeVisible()\n  25 |     await expect(page.getByRole('button', { name: /Analytics/i })).toBeVisible()\n  26 |   })\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:23:74"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:55.259Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--b6625-uld-display-navigation-tabs-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--b6625-uld-display-navigation-tabs-webkit/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--b6625-uld-display-navigation-tabs-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                        "column": 74,
+                        "line": 23
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-66d391c6476306eb60a0",
+              "file": "homepage.spec.ts",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "should display pool maintenance dashboard on overview tab",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 14,
+                      "status": "passed",
+                      "duration": 1785,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:55.274Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-04dc7a2beb7ee50a8963",
+              "file": "homepage.spec.ts",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "should switch between tabs",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 15,
+                      "parallelIndex": 15,
+                      "status": "failed",
+                      "duration": 1747,
+                      "error": {
+                        "message": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n",
+                        "stack": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:44:66",
+                        "location": {
+                          "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                          "column": 66,
+                          "line": 44
+                        },
+                        "snippet": "  42 |\n  43 |     // Click on Pool Facilities tab\n> 44 |     await page.getByRole('button', { name: /Pool Facilities/i }).click()\n     |                                                                  ^\n  45 |\n  46 |     // Should show facilities content\n  47 |     await expect(page.locator('h2')).toContainText('Pool Facility Manager')"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 66,
+                            "line": 44
+                          },
+                          "message": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n\n  42 |\n  43 |     // Click on Pool Facilities tab\n> 44 |     await page.getByRole('button', { name: /Pool Facilities/i }).click()\n     |                                                                  ^\n  45 |\n  46 |     // Should show facilities content\n  47 |     await expect(page.locator('h2')).toContainText('Pool Facility Manager')\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:44:66"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:55.236Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance-System-should-switch-between-tabs-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance-System-should-switch-between-tabs-webkit/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance-System-should-switch-between-tabs-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                        "column": 66,
+                        "line": 44
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-862c5706d2d280f7fad9",
+              "file": "homepage.spec.ts",
+              "line": 39,
+              "column": 3
+            },
+            {
+              "title": "should be responsive on mobile viewports",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1550,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:57.368Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-285f77089e1e54ce8b28",
+              "file": "homepage.spec.ts",
+              "line": 56,
+              "column": 3
+            },
+            {
+              "title": "should have proper accessibility attributes",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 17,
+                      "parallelIndex": 4,
+                      "status": "failed",
+                      "duration": 1687,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m7\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m7\u001b[39m\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:77:25",
+                        "location": {
+                          "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                          "column": 25,
+                          "line": 77
+                        },
+                        "snippet": "  75 |     const buttonCount = await navButtons.count()\n  76 |\n> 77 |     expect(buttonCount).toBe(4)\n     |                         ^\n  78 |\n  79 |     // Check first button is accessible\n  80 |     const firstButton = navButtons.first()"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 25,
+                            "line": 77
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m7\u001b[39m\n\n  75 |     const buttonCount = await navButtons.count()\n  76 |\n> 77 |     expect(buttonCount).toBe(4)\n     |                         ^\n  78 |\n  79 |     // Check first button is accessible\n  80 |     const firstButton = navButtons.first()\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:77:25"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:57.404Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--8ca3a-er-accessibility-attributes-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--8ca3a-er-accessibility-attributes-webkit/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--8ca3a-er-accessibility-attributes-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                        "column": 25,
+                        "line": 77
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-045e400dc7e3593afc17",
+              "file": "homepage.spec.ts",
+              "line": 67,
+              "column": 3
+            },
+            {
+              "title": "should load the homepage successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 18,
+                      "parallelIndex": 5,
+                      "status": "passed",
+                      "duration": 1208,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:57.468Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-79af563b0345ff11ce72",
+              "file": "homepage.spec.ts",
+              "line": 4,
+              "column": 3
+            },
+            {
+              "title": "should display navigation tabs",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 19,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 1314,
+                      "error": {
+                        "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n",
+                        "stack": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:23:74",
+                        "location": {
+                          "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                          "column": 74,
+                          "line": 23
+                        },
+                        "snippet": "  21 |     // Check that navigation tabs are rendered\n  22 |     await expect(page.getByRole('button', { name: /Overview/i })).toBeVisible()\n> 23 |     await expect(page.getByRole('button', { name: /Pool Facilities/i })).toBeVisible()\n     |                                                                          ^\n  24 |     await expect(page.getByRole('button', { name: /Test History/i })).toBeVisible()\n  25 |     await expect(page.getByRole('button', { name: /Analytics/i })).toBeVisible()\n  26 |   })"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 74,
+                            "line": 23
+                          },
+                          "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n\n  21 |     // Check that navigation tabs are rendered\n  22 |     await expect(page.getByRole('button', { name: /Overview/i })).toBeVisible()\n> 23 |     await expect(page.getByRole('button', { name: /Pool Facilities/i })).toBeVisible()\n     |                                                                          ^\n  24 |     await expect(page.getByRole('button', { name: /Test History/i })).toBeVisible()\n  25 |     await expect(page.getByRole('button', { name: /Analytics/i })).toBeVisible()\n  26 |   })\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:23:74"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:57.594Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--b6625-uld-display-navigation-tabs-Mobile-Chrome/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--b6625-uld-display-navigation-tabs-Mobile-Chrome/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--b6625-uld-display-navigation-tabs-Mobile-Chrome/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                        "column": 74,
+                        "line": 23
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-a96673b96fa2fd901da4",
+              "file": "homepage.spec.ts",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "should display pool maintenance dashboard on overview tab",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 20,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 1296,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:57.607Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-ca279c5312eea1c8a97f",
+              "file": "homepage.spec.ts",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "should switch between tabs",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 21,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 1261,
+                      "error": {
+                        "message": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n",
+                        "stack": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:44:66",
+                        "location": {
+                          "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                          "column": 66,
+                          "line": 44
+                        },
+                        "snippet": "  42 |\n  43 |     // Click on Pool Facilities tab\n> 44 |     await page.getByRole('button', { name: /Pool Facilities/i }).click()\n     |                                                                  ^\n  45 |\n  46 |     // Should show facilities content\n  47 |     await expect(page.locator('h2')).toContainText('Pool Facility Manager')"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 66,
+                            "line": 44
+                          },
+                          "message": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n\n  42 |\n  43 |     // Click on Pool Facilities tab\n> 44 |     await page.getByRole('button', { name: /Pool Facilities/i }).click()\n     |                                                                  ^\n  45 |\n  46 |     // Should show facilities content\n  47 |     await expect(page.locator('h2')).toContainText('Pool Facility Manager')\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:44:66"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:57.787Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance-System-should-switch-between-tabs-Mobile-Chrome/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance-System-should-switch-between-tabs-Mobile-Chrome/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance-System-should-switch-between-tabs-Mobile-Chrome/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                        "column": 66,
+                        "line": 44
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-744106fabceff4ee609e",
+              "file": "homepage.spec.ts",
+              "line": 39,
+              "column": 3
+            },
+            {
+              "title": "should be responsive on mobile viewports",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 22,
+                      "parallelIndex": 12,
+                      "status": "passed",
+                      "duration": 1335,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:58.129Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-3209320d31c339751615",
+              "file": "homepage.spec.ts",
+              "line": 56,
+              "column": 3
+            },
+            {
+              "title": "should have proper accessibility attributes",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 23,
+                      "parallelIndex": 15,
+                      "status": "failed",
+                      "duration": 1180,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m7\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m7\u001b[39m\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:77:25",
+                        "location": {
+                          "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                          "column": 25,
+                          "line": 77
+                        },
+                        "snippet": "  75 |     const buttonCount = await navButtons.count()\n  76 |\n> 77 |     expect(buttonCount).toBe(4)\n     |                         ^\n  78 |\n  79 |     // Check first button is accessible\n  80 |     const firstButton = navButtons.first()"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 25,
+                            "line": 77
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m7\u001b[39m\n\n  75 |     const buttonCount = await navButtons.count()\n  76 |\n> 77 |     expect(buttonCount).toBe(4)\n     |                         ^\n  78 |\n  79 |     // Check first button is accessible\n  80 |     const firstButton = navButtons.first()\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:77:25"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:58.342Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--8ca3a-er-accessibility-attributes-Mobile-Chrome/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--8ca3a-er-accessibility-attributes-Mobile-Chrome/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--8ca3a-er-accessibility-attributes-Mobile-Chrome/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                        "column": 25,
+                        "line": 77
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-fa101b1b8d18dc993147",
+              "file": "homepage.spec.ts",
+              "line": 67,
+              "column": 3
+            },
+            {
+              "title": "should load the homepage successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 24,
+                      "parallelIndex": 14,
+                      "status": "passed",
+                      "duration": 1498,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:58.393Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-ffa9e23bab64d8081212",
+              "file": "homepage.spec.ts",
+              "line": 4,
+              "column": 3
+            },
+            {
+              "title": "should display navigation tabs",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 25,
+                      "parallelIndex": 13,
+                      "status": "failed",
+                      "duration": 1536,
+                      "error": {
+                        "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n",
+                        "stack": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:23:74",
+                        "location": {
+                          "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                          "column": 74,
+                          "line": 23
+                        },
+                        "snippet": "  21 |     // Check that navigation tabs are rendered\n  22 |     await expect(page.getByRole('button', { name: /Overview/i })).toBeVisible()\n> 23 |     await expect(page.getByRole('button', { name: /Pool Facilities/i })).toBeVisible()\n     |                                                                          ^\n  24 |     await expect(page.getByRole('button', { name: /Test History/i })).toBeVisible()\n  25 |     await expect(page.getByRole('button', { name: /Analytics/i })).toBeVisible()\n  26 |   })"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 74,
+                            "line": 23
+                          },
+                          "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n\n  21 |     // Check that navigation tabs are rendered\n  22 |     await expect(page.getByRole('button', { name: /Overview/i })).toBeVisible()\n> 23 |     await expect(page.getByRole('button', { name: /Pool Facilities/i })).toBeVisible()\n     |                                                                          ^\n  24 |     await expect(page.getByRole('button', { name: /Test History/i })).toBeVisible()\n  25 |     await expect(page.getByRole('button', { name: /Analytics/i })).toBeVisible()\n  26 |   })\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:23:74"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:58.597Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--b6625-uld-display-navigation-tabs-Mobile-Safari/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--b6625-uld-display-navigation-tabs-Mobile-Safari/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--b6625-uld-display-navigation-tabs-Mobile-Safari/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                        "column": 74,
+                        "line": 23
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-785abebfa32b625c977f",
+              "file": "homepage.spec.ts",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "should display pool maintenance dashboard on overview tab",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 26,
+                      "parallelIndex": 5,
+                      "status": "passed",
+                      "duration": 1602,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:08:59.940Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-707acc712a1a4061b057",
+              "file": "homepage.spec.ts",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "should switch between tabs",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 28,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 1678,
+                      "error": {
+                        "message": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n",
+                        "stack": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:44:66",
+                        "location": {
+                          "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                          "column": 66,
+                          "line": 44
+                        },
+                        "snippet": "  42 |\n  43 |     // Click on Pool Facilities tab\n> 44 |     await page.getByRole('button', { name: /Pool Facilities/i }).click()\n     |                                                                  ^\n  45 |\n  46 |     // Should show facilities content\n  47 |     await expect(page.locator('h2')).toContainText('Pool Facility Manager')"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 66,
+                            "line": 44
+                          },
+                          "message": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n\n  42 |\n  43 |     // Click on Pool Facilities tab\n> 44 |     await page.getByRole('button', { name: /Pool Facilities/i }).click()\n     |                                                                  ^\n  45 |\n  46 |     // Should show facilities content\n  47 |     await expect(page.locator('h2')).toContainText('Pool Facility Manager')\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:44:66"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:09:00.229Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance-System-should-switch-between-tabs-Mobile-Safari/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance-System-should-switch-between-tabs-Mobile-Safari/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance-System-should-switch-between-tabs-Mobile-Safari/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                        "column": 66,
+                        "line": 44
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-275a3ba76da71a91519b",
+              "file": "homepage.spec.ts",
+              "line": 39,
+              "column": 3
+            },
+            {
+              "title": "should be responsive on mobile viewports",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 29,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1537,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:09:00.178Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-cc9c2f79493b5344b188",
+              "file": "homepage.spec.ts",
+              "line": 56,
+              "column": 3
+            },
+            {
+              "title": "should have proper accessibility attributes",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 27,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 1658,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m7\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m7\u001b[39m\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:77:25",
+                        "location": {
+                          "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                          "column": 25,
+                          "line": 77
+                        },
+                        "snippet": "  75 |     const buttonCount = await navButtons.count()\n  76 |\n> 77 |     expect(buttonCount).toBe(4)\n     |                         ^\n  78 |\n  79 |     // Check first button is accessible\n  80 |     const firstButton = navButtons.first()"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 25,
+                            "line": 77
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m7\u001b[39m\n\n  75 |     const buttonCount = await navButtons.count()\n  76 |\n> 77 |     expect(buttonCount).toBe(4)\n     |                         ^\n  78 |\n  79 |     // Check first button is accessible\n  80 |     const firstButton = navButtons.first()\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:77:25"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:09:00.198Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--8ca3a-er-accessibility-attributes-Mobile-Safari/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--8ca3a-er-accessibility-attributes-Mobile-Safari/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--8ca3a-er-accessibility-attributes-Mobile-Safari/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                        "column": 25,
+                        "line": 77
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-93f35e0390000c2bf2bb",
+              "file": "homepage.spec.ts",
+              "line": 67,
+              "column": 3
+            },
+            {
+              "title": "should load the homepage successfully",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [
+                    {
+                      "workerIndex": 30,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 7,
+                      "error": {
+                        "message": "Error: browserType.launch: Chromium distribution 'msedge' is not found at /opt/microsoft/msedge/msedge\nRun \"npx playwright install msedge\"",
+                        "stack": "Error: browserType.launch: Chromium distribution 'msedge' is not found at /opt/microsoft/msedge/msedge\nRun \"npx playwright install msedge\""
+                      },
+                      "errors": [
+                        {
+                          "message": "Error: browserType.launch: Chromium distribution 'msedge' is not found at /opt/microsoft/msedge/msedge\nRun \"npx playwright install msedge\""
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:09:00.338Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-16023a7accaff438dcfb",
+              "file": "homepage.spec.ts",
+              "line": 4,
+              "column": 3
+            },
+            {
+              "title": "should display navigation tabs",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [
+                    {
+                      "workerIndex": 31,
+                      "parallelIndex": 4,
+                      "status": "failed",
+                      "duration": 6,
+                      "error": {
+                        "message": "Error: browserType.launch: Chromium distribution 'msedge' is not found at /opt/microsoft/msedge/msedge\nRun \"npx playwright install msedge\"",
+                        "stack": "Error: browserType.launch: Chromium distribution 'msedge' is not found at /opt/microsoft/msedge/msedge\nRun \"npx playwright install msedge\""
+                      },
+                      "errors": [
+                        {
+                          "message": "Error: browserType.launch: Chromium distribution 'msedge' is not found at /opt/microsoft/msedge/msedge\nRun \"npx playwright install msedge\""
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:09:00.314Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-ca1641ea07aec1d6850a",
+              "file": "homepage.spec.ts",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "should display pool maintenance dashboard on overview tab",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [
+                    {
+                      "workerIndex": 32,
+                      "parallelIndex": 12,
+                      "status": "failed",
+                      "duration": 8,
+                      "error": {
+                        "message": "Error: browserType.launch: Chromium distribution 'msedge' is not found at /opt/microsoft/msedge/msedge\nRun \"npx playwright install msedge\"",
+                        "stack": "Error: browserType.launch: Chromium distribution 'msedge' is not found at /opt/microsoft/msedge/msedge\nRun \"npx playwright install msedge\""
+                      },
+                      "errors": [
+                        {
+                          "message": "Error: browserType.launch: Chromium distribution 'msedge' is not found at /opt/microsoft/msedge/msedge\nRun \"npx playwright install msedge\""
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:09:00.748Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-eb4d3a37a156108625da",
+              "file": "homepage.spec.ts",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "should switch between tabs",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [
+                    {
+                      "workerIndex": 33,
+                      "parallelIndex": 15,
+                      "status": "failed",
+                      "duration": 9,
+                      "error": {
+                        "message": "Error: browserType.launch: Chromium distribution 'msedge' is not found at /opt/microsoft/msedge/msedge\nRun \"npx playwright install msedge\"",
+                        "stack": "Error: browserType.launch: Chromium distribution 'msedge' is not found at /opt/microsoft/msedge/msedge\nRun \"npx playwright install msedge\""
+                      },
+                      "errors": [
+                        {
+                          "message": "Error: browserType.launch: Chromium distribution 'msedge' is not found at /opt/microsoft/msedge/msedge\nRun \"npx playwright install msedge\""
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:09:00.778Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-ca5ab636004c96204c60",
+              "file": "homepage.spec.ts",
+              "line": 39,
+              "column": 3
+            },
+            {
+              "title": "should be responsive on mobile viewports",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [
+                    {
+                      "workerIndex": 34,
+                      "parallelIndex": 14,
+                      "status": "failed",
+                      "duration": 7,
+                      "error": {
+                        "message": "Error: browserType.launch: Chromium distribution 'msedge' is not found at /opt/microsoft/msedge/msedge\nRun \"npx playwright install msedge\"",
+                        "stack": "Error: browserType.launch: Chromium distribution 'msedge' is not found at /opt/microsoft/msedge/msedge\nRun \"npx playwright install msedge\""
+                      },
+                      "errors": [
+                        {
+                          "message": "Error: browserType.launch: Chromium distribution 'msedge' is not found at /opt/microsoft/msedge/msedge\nRun \"npx playwright install msedge\""
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:09:01.342Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-893e297401eebb94a197",
+              "file": "homepage.spec.ts",
+              "line": 56,
+              "column": 3
+            },
+            {
+              "title": "should have proper accessibility attributes",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [
+                    {
+                      "workerIndex": 35,
+                      "parallelIndex": 4,
+                      "status": "failed",
+                      "duration": 7,
+                      "error": {
+                        "message": "Error: browserType.launch: Chromium distribution 'msedge' is not found at /opt/microsoft/msedge/msedge\nRun \"npx playwright install msedge\"",
+                        "stack": "Error: browserType.launch: Chromium distribution 'msedge' is not found at /opt/microsoft/msedge/msedge\nRun \"npx playwright install msedge\""
+                      },
+                      "errors": [
+                        {
+                          "message": "Error: browserType.launch: Chromium distribution 'msedge' is not found at /opt/microsoft/msedge/msedge\nRun \"npx playwright install msedge\""
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:09:01.547Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-2ef6041e8a686a5ec0f6",
+              "file": "homepage.spec.ts",
+              "line": 67,
+              "column": 3
+            },
+            {
+              "title": "should load the homepage successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Google Chrome",
+                  "projectName": "Google Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 36,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1069,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:09:01.641Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-a663171d74bae24d5062",
+              "file": "homepage.spec.ts",
+              "line": 4,
+              "column": 3
+            },
+            {
+              "title": "should display navigation tabs",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Google Chrome",
+                  "projectName": "Google Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 37,
+                      "parallelIndex": 13,
+                      "status": "failed",
+                      "duration": 1153,
+                      "error": {
+                        "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n",
+                        "stack": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:23:74",
+                        "location": {
+                          "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                          "column": 74,
+                          "line": 23
+                        },
+                        "snippet": "  21 |     // Check that navigation tabs are rendered\n  22 |     await expect(page.getByRole('button', { name: /Overview/i })).toBeVisible()\n> 23 |     await expect(page.getByRole('button', { name: /Pool Facilities/i })).toBeVisible()\n     |                                                                          ^\n  24 |     await expect(page.getByRole('button', { name: /Test History/i })).toBeVisible()\n  25 |     await expect(page.getByRole('button', { name: /Analytics/i })).toBeVisible()\n  26 |   })"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 74,
+                            "line": 23
+                          },
+                          "message": "Error: expect.toBeVisible: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n\n  21 |     // Check that navigation tabs are rendered\n  22 |     await expect(page.getByRole('button', { name: /Overview/i })).toBeVisible()\n> 23 |     await expect(page.getByRole('button', { name: /Pool Facilities/i })).toBeVisible()\n     |                                                                          ^\n  24 |     await expect(page.getByRole('button', { name: /Test History/i })).toBeVisible()\n  25 |     await expect(page.getByRole('button', { name: /Analytics/i })).toBeVisible()\n  26 |   })\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:23:74"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:09:01.610Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--b6625-uld-display-navigation-tabs-Google-Chrome/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--b6625-uld-display-navigation-tabs-Google-Chrome/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--b6625-uld-display-navigation-tabs-Google-Chrome/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                        "column": 74,
+                        "line": 23
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-64c9e54347ff6a18e682",
+              "file": "homepage.spec.ts",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "should display pool maintenance dashboard on overview tab",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Google Chrome",
+                  "projectName": "Google Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 38,
+                      "parallelIndex": 12,
+                      "status": "passed",
+                      "duration": 1100,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:09:01.930Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-a9efc6f6a121607fc596",
+              "file": "homepage.spec.ts",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "should switch between tabs",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Google Chrome",
+                  "projectName": "Google Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 39,
+                      "parallelIndex": 15,
+                      "status": "failed",
+                      "duration": 1206,
+                      "error": {
+                        "message": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n",
+                        "stack": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:44:66",
+                        "location": {
+                          "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                          "column": 66,
+                          "line": 44
+                        },
+                        "snippet": "  42 |\n  43 |     // Click on Pool Facilities tab\n> 44 |     await page.getByRole('button', { name: /Pool Facilities/i }).click()\n     |                                                                  ^\n  45 |\n  46 |     // Should show facilities content\n  47 |     await expect(page.locator('h2')).toContainText('Pool Facility Manager')"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 66,
+                            "line": 44
+                          },
+                          "message": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Pool Facilities/i }) resolved to 2 elements:\n    1) <button class=\"flex items-center space-x-2 border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap text-muted-foreground hover:border-border hover:text-foreground border-transparent\">…</button> aka getByRole('button', { name: 'Pool Facilities', exact: true })\n    2) <button data-slot=\"button\" class=\"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-ac…>…</button> aka getByRole('button', { name: 'Manage Pool Facilities' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Pool Facilities/i })\u001b[22m\n\n\n  42 |\n  43 |     // Click on Pool Facilities tab\n> 44 |     await page.getByRole('button', { name: /Pool Facilities/i }).click()\n     |                                                                  ^\n  45 |\n  46 |     // Should show facilities content\n  47 |     await expect(page.locator('h2')).toContainText('Pool Facility Manager')\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:44:66"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:09:01.913Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance-System-should-switch-between-tabs-Google-Chrome/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance-System-should-switch-between-tabs-Google-Chrome/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance-System-should-switch-between-tabs-Google-Chrome/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                        "column": 66,
+                        "line": 44
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-c2db0ffde6500600825c",
+              "file": "homepage.spec.ts",
+              "line": 39,
+              "column": 3
+            },
+            {
+              "title": "should be responsive on mobile viewports",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Google Chrome",
+                  "projectName": "Google Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 40,
+                      "parallelIndex": 14,
+                      "status": "passed",
+                      "duration": 1455,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:09:02.374Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-36fa45f6150ab7f88c53",
+              "file": "homepage.spec.ts",
+              "line": 56,
+              "column": 3
+            },
+            {
+              "title": "should have proper accessibility attributes",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Google Chrome",
+                  "projectName": "Google Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 41,
+                      "parallelIndex": 4,
+                      "status": "failed",
+                      "duration": 1483,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m7\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m7\u001b[39m\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:77:25",
+                        "location": {
+                          "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                          "column": 25,
+                          "line": 77
+                        },
+                        "snippet": "  75 |     const buttonCount = await navButtons.count()\n  76 |\n> 77 |     expect(buttonCount).toBe(4)\n     |                         ^\n  78 |\n  79 |     // Check first button is accessible\n  80 |     const firstButton = navButtons.first()"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                            "column": 25,
+                            "line": 77
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m7\u001b[39m\n\n  75 |     const buttonCount = await navButtons.count()\n  76 |\n> 77 |     expect(buttonCount).toBe(4)\n     |                         ^\n  78 |\n  79 |     // Check first button is accessible\n  80 |     const firstButton = navButtons.first()\n    at /home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts:77:25"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-01T23:09:02.556Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--8ca3a-er-accessibility-attributes-Google-Chrome/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--8ca3a-er-accessibility-attributes-Google-Chrome/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/sam/code/pool_maintainer/test-results/homepage-Pool-Maintenance--8ca3a-er-accessibility-attributes-Google-Chrome/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/sam/code/pool_maintainer/tests/e2e/homepage.spec.ts",
+                        "column": 25,
+                        "line": 77
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-5dfc5c155fc62d2a63ab",
+              "file": "homepage.spec.ts",
+              "line": 67,
               "column": 3
             }
           ]
@@ -422,11 +2446,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-07-29T14:15:22.336Z",
-    "duration": 8771.179,
-    "expected": 5,
+    "startTime": "2025-08-01T23:08:54.163Z",
+    "duration": 40169.748,
+    "expected": 15,
     "skipped": 0,
-    "unexpected": 1,
+    "unexpected": 27,
     "flaky": 0
   }
 }

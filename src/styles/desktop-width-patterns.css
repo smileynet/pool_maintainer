@@ -1,0 +1,419 @@
+/**
+ * Desktop Width Patterns
+ * Research-based optimal width patterns for desktop layouts
+ * Based on UX research and modern design systems
+ */
+
+/* Desktop Layout Width Principles:
+ * 1. Content should never span full viewport width on wide screens
+ * 2. Optimal reading width: 45-75 characters per line
+ * 3. Data tables: Can be wider but with horizontal scroll
+ * 4. Forms: Narrow widths (320-480px) for better UX
+ * 5. Dashboards: Grid-based with defined max-widths
+ */
+
+:root {
+  /* Research-based optimal widths */
+  --width-content-narrow: 320px;      /* Forms, narrow content */
+  --width-content-reading: 65ch;      /* Optimal reading width (~650px) */
+  --width-content-comfortable: 75ch;  /* Comfortable reading (~750px) */
+  --width-content-wide: 90ch;         /* Wide content, data tables (~900px) */
+  --width-content-full: 100%;         /* Full width when needed */
+  
+  /* Container max-widths based on common breakpoints */
+  --width-container-sm: 640px;        /* Small screens */
+  --width-container-md: 768px;        /* Medium screens */
+  --width-container-lg: 1024px;       /* Large screens */
+  --width-container-xl: 1280px;       /* Extra large */
+  --width-container-2xl: 1536px;      /* 2XL screens */
+  --width-container-max: 1920px;      /* Maximum reasonable width */
+  
+  /* Dashboard and application widths */
+  --width-sidebar: 280px;             /* Standard sidebar */
+  --width-sidebar-collapsed: 64px;    /* Collapsed sidebar */
+  --width-main-content: calc(100% - var(--width-sidebar) - 2rem);
+  
+  /* Form-specific widths */
+  --width-form-narrow: 320px;         /* Single column forms */
+  --width-form-medium: 480px;         /* Standard forms */
+  --width-form-wide: 640px;           /* Wide forms */
+  
+  /* Card and component widths */
+  --width-card-min: 280px;            /* Minimum card width */
+  --width-card-ideal: 360px;          /* Ideal card width */
+  --width-card-max: 480px;            /* Maximum card width */
+}
+
+/* Desktop-specific width patterns */
+@media (min-width: 1024px) {
+  :root {
+    /* Adjust widths for desktop */
+    --width-content-reading: 70ch;     /* Slightly wider on desktop */
+    --width-content-comfortable: 80ch;
+    --width-sidebar: 320px;            /* Wider sidebar on desktop */
+  }
+}
+
+/* Width utility classes */
+.w-content-narrow { max-width: var(--width-content-narrow); }
+.w-content-reading { max-width: var(--width-content-reading); }
+.w-content-comfortable { max-width: var(--width-content-comfortable); }
+.w-content-wide { max-width: var(--width-content-wide); }
+
+.w-container-sm { max-width: var(--width-container-sm); }
+.w-container-md { max-width: var(--width-container-md); }
+.w-container-lg { max-width: var(--width-container-lg); }
+.w-container-xl { max-width: var(--width-container-xl); }
+.w-container-2xl { max-width: var(--width-container-2xl); }
+.w-container-max { max-width: var(--width-container-max); }
+
+.w-form-narrow { max-width: var(--width-form-narrow); }
+.w-form-medium { max-width: var(--width-form-medium); }
+.w-form-wide { max-width: var(--width-form-wide); }
+
+.w-card-min { max-width: var(--width-card-min); }
+.w-card-ideal { max-width: var(--width-card-ideal); }
+.w-card-max { max-width: var(--width-card-max); }
+
+/* Centered content patterns */
+.content-centered {
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .content-centered {
+    padding-inline: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-centered {
+    padding-inline: var(--space-8);
+  }
+}
+
+/* Layout pattern classes */
+
+/* Reading content pattern - optimal for articles, documentation */
+.layout-reading {
+  max-width: var(--width-content-reading);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .layout-reading {
+    padding-inline: var(--space-8);
+  }
+}
+
+/* Form layout pattern - narrow, focused */
+.layout-form {
+  max-width: var(--width-form-medium);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .layout-form {
+    padding-inline: var(--space-6);
+  }
+}
+
+/* Dashboard layout pattern - constrained but spacious */
+.layout-dashboard {
+  max-width: var(--width-container-2xl);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .layout-dashboard {
+    padding-inline: var(--space-8);
+  }
+}
+
+/* Application layout pattern - optimal width for content */
+.layout-app {
+  max-width: var(--width-container-lg);  /* 1024px - much more reasonable */
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .layout-app {
+    padding-inline: var(--space-8);
+  }
+}
+
+/* Application layout pattern - sidebar + main content */
+.layout-application {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .layout-application {
+    grid-template-columns: var(--width-sidebar) 1fr;
+    max-width: var(--width-container-max);
+    margin-inline: auto;
+  }
+}
+
+/* Content width management for different content types */
+
+/* Text-heavy content (articles, documentation) */
+.content-prose {
+  max-width: var(--width-content-reading);
+  margin-inline: auto;
+}
+
+/* Data-heavy content (tables, lists) */
+.content-data {
+  max-width: var(--width-content-wide);
+  margin-inline: auto;
+}
+
+/* Mixed content (dashboards, forms with data) */
+.content-mixed {
+  max-width: var(--width-content-comfortable);
+  margin-inline: auto;
+}
+
+/* Full-width content (when you really need it) */
+.content-full {
+  max-width: var(--width-container-2xl);
+  margin-inline: auto;
+}
+
+/* Responsive width adjustments */
+
+/* Grid patterns that respect optimal widths */
+.grid-auto-fit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--width-card-min), 1fr));
+  gap: var(--space-6);
+  max-width: var(--width-container-2xl);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .grid-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(var(--width-card-ideal), 1fr));
+    padding-inline: var(--space-8);
+  }
+}
+
+.grid-auto-fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--width-card-min), 1fr));
+  gap: var(--space-6);
+  max-width: var(--width-container-2xl);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+/* Sidebar patterns */
+.sidebar-layout {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: 1fr;
+  max-width: var(--width-container-2xl);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .sidebar-layout {
+    grid-template-columns: var(--width-sidebar) 1fr;
+    padding-inline: var(--space-8);
+  }
+}
+
+/* Two-column patterns with optimal widths */
+.two-column-balanced {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: 1fr;
+  max-width: var(--width-container-xl);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .two-column-balanced {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.two-column-primary-secondary {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: 1fr;
+  max-width: var(--width-container-xl);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .two-column-primary-secondary {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* Three-column patterns */
+.three-column-equal {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: 1fr;
+  max-width: var(--width-container-2xl);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .three-column-equal {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .three-column-equal {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* Card grid patterns with optimal spacing */
+.card-grid-dense {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(var(--width-card-min), 1fr));
+  max-width: var(--width-container-2xl);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  .card-grid-dense {
+    gap: var(--space-6);
+    padding-inline: var(--space-8);
+  }
+}
+
+.card-grid-comfortable {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: repeat(auto-fill, minmax(var(--width-card-ideal), 1fr));
+  max-width: var(--width-container-2xl);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .card-grid-comfortable {
+    gap: var(--space-8);
+    padding-inline: var(--space-8);
+  }
+}
+
+/* Breakout patterns for when content needs to be wider than its container */
+.breakout-container {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
+.breakout-limited {
+  width: min(100vw, var(--width-container-2xl));
+  margin-left: calc(50% - min(50vw, var(--width-container-2xl) / 2));
+}
+
+/* Constrained patterns for forms and focused content */
+.constrained-narrow {
+  max-width: var(--width-form-narrow);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+.constrained-medium {
+  max-width: var(--width-form-medium);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+.constrained-wide {
+  max-width: var(--width-form-wide);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+/* Responsive helpers */
+.w-full-mobile {
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .w-full-mobile {
+    width: auto;
+  }
+}
+
+.w-constrained-desktop {
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .w-constrained-desktop {
+    max-width: var(--width-content-comfortable);
+    margin-inline: auto;
+  }
+}
+
+/* Table-specific width patterns */
+.table-container {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-inline: auto;
+}
+
+.table-narrow {
+  max-width: var(--width-content-reading);
+  margin-inline: auto;
+}
+
+.table-wide {
+  max-width: var(--width-container-2xl);
+  margin-inline: auto;
+}
+
+/* Modal and dialog width patterns */
+.modal-narrow {
+  max-width: var(--width-form-narrow);
+  width: calc(100vw - 2rem);
+}
+
+.modal-medium {
+  max-width: var(--width-form-medium);
+  width: calc(100vw - 2rem);
+}
+
+.modal-wide {
+  max-width: var(--width-form-wide);
+  width: calc(100vw - 2rem);
+}
+
+.modal-large {
+  max-width: var(--width-container-md);
+  width: calc(100vw - 2rem);
+}
+
+@media (min-width: 1024px) {
+  .modal-narrow,
+  .modal-medium,
+  .modal-wide,
+  .modal-large {
+    width: auto;
+  }
+}

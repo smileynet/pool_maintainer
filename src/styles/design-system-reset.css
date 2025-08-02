@@ -1,0 +1,428 @@
+/**
+ * Design System Reset & Defaults
+ * Enhanced CSS reset with sensible defaults for the Pool Maintenance System
+ * Prevents unintended styling and establishes consistent base behavior
+ */
+
+@layer base {
+  /* Modern CSS Reset with Design System Integration */
+  
+  /* Box model normalization */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Root and HTML defaults */
+  :root {
+    /* Default font size for rem calculations */
+    font-size: 16px;
+    
+    /* Default content constraints to prevent full-width sprawl */
+    --default-content-max-width: var(--width-container-lg, 1024px);
+    --default-section-spacing: var(--space-6, 1.5rem);
+    --default-component-padding: var(--space-4, 1rem);
+    --default-text-spacing: var(--space-3, 0.75rem);
+    
+    /* Default interactive element sizing */
+    --default-button-height: 2.5rem;
+    --default-input-height: 2.5rem;
+    --default-touch-target: 44px;
+    
+    /* Default border radius */
+    --default-radius: var(--radius, 0.5rem);
+    --default-radius-sm: calc(var(--default-radius) - 2px);
+    --default-radius-lg: calc(var(--default-radius) + 2px);
+  }
+
+  html {
+    /* Smooth scrolling for better UX */
+    scroll-behavior: smooth;
+    
+    /* Prevent horizontal scroll */
+    overflow-x: hidden;
+    
+    /* Better font rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    
+    /* Default line height for readability */
+    line-height: 1.5;
+  }
+
+  body {
+    /* Typography defaults */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 
+                 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 400;
+    
+    /* Color defaults from design system */
+    color: oklch(var(--foreground, 0.2 0.01 200));
+    background-color: oklch(var(--background, 0.98 0.01 200));
+    
+    /* Layout defaults */
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+    
+    /* Prevent horizontal scroll */
+    overflow-x: hidden;
+    
+    /* Better text selection */
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* Heading defaults with proper hierarchy */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.25;
+    margin-block-end: var(--default-text-spacing);
+    color: oklch(var(--foreground, 0.2 0.01 200));
+    
+    /* Prevent awkward line breaks */
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin-block-end: var(--space-6, 1.5rem);
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-block-end: var(--space-5, 1.25rem);
+  }
+
+  h3 {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    margin-block-end: var(--space-4, 1rem);
+  }
+
+  h4 {
+    font-size: 1.25rem;
+    margin-block-end: var(--default-text-spacing);
+  }
+
+  h5 {
+    font-size: 1.125rem;
+    margin-block-end: var(--default-text-spacing);
+  }
+
+  h6 {
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-block-end: var(--default-text-spacing);
+  }
+
+  /* Paragraph defaults for readability */
+  p {
+    margin-block-end: var(--space-4, 1rem);
+    max-width: 65ch; /* Optimal reading width */
+    
+    /* Better line breaks */
+    text-wrap: pretty;
+  }
+
+  p:last-child {
+    margin-block-end: 0;
+  }
+
+  /* List defaults */
+  ul, ol {
+    margin-block-end: var(--space-4, 1rem);
+    padding-inline-start: var(--space-6, 1.5rem);
+  }
+
+  li {
+    margin-block-end: var(--space-1, 0.25rem);
+  }
+
+  li:last-child {
+    margin-block-end: 0;
+  }
+
+  /* Link defaults */
+  a {
+    color: oklch(var(--primary, 0.55 0.15 200));
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.125em;
+    transition: all 0.2s ease;
+  }
+
+  a:hover,
+  a:focus-visible {
+    text-decoration-color: currentColor;
+    color: oklch(var(--primary, 0.45 0.15 200));
+  }
+
+  a:focus-visible {
+    outline: 2px solid oklch(var(--ring, 0.65 0.17 90));
+    outline-offset: 2px;
+    border-radius: var(--default-radius-sm);
+  }
+
+  /* Button defaults */
+  button {
+    font: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+    
+    /* Default button styling */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2, 0.5rem);
+    
+    min-height: var(--default-button-height);
+    padding-inline: var(--space-4, 1rem);
+    border-radius: var(--default-radius);
+    
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    
+    transition: all 0.2s ease;
+    
+    /* Ensure touch targets are accessible */
+    min-width: var(--default-touch-target);
+    min-height: var(--default-touch-target);
+  }
+
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  button:focus-visible {
+    outline: 2px solid oklch(var(--ring, 0.65 0.17 90));
+    outline-offset: 2px;
+  }
+
+  /* Form element defaults */
+  input,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+    background-color: oklch(var(--background, 0.98 0.01 200));
+    border: 1px solid oklch(var(--border, 0.85 0.03 200));
+    border-radius: var(--default-radius);
+    
+    min-height: var(--default-input-height);
+    padding-inline: var(--space-3, 0.75rem);
+    padding-block: var(--space-2, 0.5rem);
+    
+    transition: all 0.2s ease;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: oklch(var(--ring, 0.65 0.17 90));
+    box-shadow: 0 0 0 2px oklch(var(--ring, 0.65 0.17 90) / 0.2);
+  }
+
+  textarea {
+    min-height: calc(var(--default-input-height) * 2);
+    resize: vertical;
+    line-height: 1.5;
+  }
+
+  /* Table defaults */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-block-end: var(--space-6, 1.5rem);
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: var(--space-3, 0.75rem) var(--space-4, 1rem);
+    border-bottom: 1px solid oklch(var(--border, 0.85 0.03 200));
+  }
+
+  th {
+    font-weight: 600;
+    background-color: oklch(var(--muted, 0.85 0.02 200) / 0.5);
+  }
+
+  /* Image defaults */
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Code defaults */
+  code,
+  pre,
+  samp,
+  kbd {
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 
+                 'Cascadia Code', 'Fira Code', monospace;
+    font-size: 0.875em;
+  }
+
+  code {
+    background-color: oklch(var(--muted, 0.85 0.02 200) / 0.5);
+    padding: 0.125em 0.25em;
+    border-radius: var(--default-radius-sm);
+  }
+
+  pre {
+    background-color: oklch(var(--muted, 0.85 0.02 200) / 0.5);
+    padding: var(--space-4, 1rem);
+    border-radius: var(--default-radius);
+    overflow-x: auto;
+    margin-block-end: var(--space-6, 1.5rem);
+  }
+
+  pre code {
+    background: none;
+    padding: 0;
+  }
+
+  /* Blockquote defaults */
+  blockquote {
+    border-inline-start: 4px solid oklch(var(--primary, 0.55 0.15 200));
+    padding-inline-start: var(--space-6, 1.5rem);
+    padding-block: var(--space-4, 1rem);
+    margin-block-end: var(--space-6, 1.5rem);
+    font-style: italic;
+    color: oklch(var(--muted-foreground, 0.45 0.04 200));
+  }
+
+  /* Horizontal rule defaults */
+  hr {
+    border: none;
+    border-top: 1px solid oklch(var(--border, 0.85 0.03 200));
+    margin-block: var(--space-8, 2rem);
+  }
+
+  /* Selection defaults */
+  ::selection {
+    background-color: oklch(var(--primary, 0.55 0.15 200) / 0.2);
+  }
+
+  /* Focus defaults for accessibility */
+  :focus-visible {
+    outline: 2px solid oklch(var(--ring, 0.65 0.17 90));
+    outline-offset: 2px;
+  }
+
+  /* Reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    button,
+    input,
+    textarea,
+    select {
+      border-width: 2px;
+    }
+  }
+
+  /* Print styles */
+  @media print {
+    *,
+    *::before,
+    *::after {
+      background: transparent !important;
+      color: black !important;
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+      text-decoration: underline;
+    }
+
+    a[href]::after {
+      content: " (" attr(href) ")";
+    }
+
+    h1,
+    h2,
+    h3 {
+      page-break-after: avoid;
+    }
+
+    pre,
+    blockquote {
+      page-break-inside: avoid;
+    }
+
+    tr,
+    img {
+      page-break-inside: avoid;
+    }
+
+    p,
+    h2,
+    h3 {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+}
+
+/* Container defaults to prevent full-width sprawl */
+@layer components {
+  /* Default container behavior for any content */
+  .content-container {
+    max-width: var(--default-content-max-width);
+    margin-inline: auto;
+    padding-inline: var(--space-4, 1rem);
+  }
+
+  @media (min-width: 768px) {
+    .content-container {
+      padding-inline: var(--space-6, 1.5rem);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .content-container {
+      padding-inline: var(--space-8, 2rem);
+    }
+  }
+
+  /* Section spacing defaults */
+  .section-spacing {
+    padding-block: var(--default-section-spacing);
+  }
+
+  /* Component spacing defaults */
+  .component-spacing {
+    padding: var(--default-component-padding);
+  }
+}

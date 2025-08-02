@@ -1,0 +1,455 @@
+/**
+ * Desktop Typography Enhancements
+ * Optimized typography for desktop viewing with improved readability and visual hierarchy
+ */
+
+/* Desktop-optimized font sizes and spacing */
+@media (min-width: 1024px) {
+  :root {
+    /* Enhanced desktop font sizes for better readability on larger screens */
+    --text-desktop-xs: 0.8rem;      /* 12.8px - slightly larger than mobile */
+    --text-desktop-sm: 0.9rem;      /* 14.4px */
+    --text-desktop-base: 1.1rem;    /* 17.6px - comfortable body text */
+    --text-desktop-lg: 1.2rem;      /* 19.2px */
+    --text-desktop-xl: 1.35rem;     /* 21.6px */
+    --text-desktop-2xl: 1.6rem;     /* 25.6px */
+    --text-desktop-3xl: 2rem;       /* 32px */
+    --text-desktop-4xl: 2.5rem;     /* 40px */
+    --text-desktop-5xl: 3.2rem;     /* 51.2px */
+    --text-desktop-6xl: 4rem;       /* 64px */
+    
+    /* Desktop line heights for improved readability */
+    --leading-desktop-tight: 1.3;
+    --leading-desktop-normal: 1.6;   /* Slightly more spacious than mobile */
+    --leading-desktop-relaxed: 1.8;
+    
+    /* Desktop letter spacing for clarity */
+    --tracking-desktop-tight: -0.015em;
+    --tracking-desktop-normal: 0.01em;   /* Slight positive tracking for screens */
+    --tracking-desktop-wide: 0.04em;
+    
+    /* Optimized content widths for desktop reading */
+    --content-desktop-narrow: 50ch;   /* ~500px for dense text */
+    --content-desktop-optimal: 75ch;  /* ~750px optimal reading */
+    --content-desktop-wide: 90ch;     /* ~900px for data/tables */
+  }
+}
+
+/* Ultra-wide screen optimizations (2K+) */
+@media (min-width: 1920px) {
+  :root {
+    --text-desktop-base: 1.15rem;    /* 18.4px - even more comfortable */
+    --text-desktop-lg: 1.3rem;       /* 20.8px */
+    --leading-desktop-normal: 1.65;   /* More breathing room on large displays */
+    --content-desktop-optimal: 80ch;  /* Slightly wider optimal width */
+  }
+}
+
+/* Typography utilities for desktop */
+.text-desktop-xs { font-size: var(--text-desktop-xs); }
+.text-desktop-sm { font-size: var(--text-desktop-sm); }
+.text-desktop-base { font-size: var(--text-desktop-base); }
+.text-desktop-lg { font-size: var(--text-desktop-lg); }
+.text-desktop-xl { font-size: var(--text-desktop-xl); }
+.text-desktop-2xl { font-size: var(--text-desktop-2xl); }
+.text-desktop-3xl { font-size: var(--text-desktop-3xl); }
+.text-desktop-4xl { font-size: var(--text-desktop-4xl); }
+.text-desktop-5xl { font-size: var(--text-desktop-5xl); }
+.text-desktop-6xl { font-size: var(--text-desktop-6xl); }
+
+/* Desktop line height utilities */
+.leading-desktop-tight { line-height: var(--leading-desktop-tight); }
+.leading-desktop-normal { line-height: var(--leading-desktop-normal); }
+.leading-desktop-relaxed { line-height: var(--leading-desktop-relaxed); }
+
+/* Desktop letter spacing utilities */
+.tracking-desktop-tight { letter-spacing: var(--tracking-desktop-tight); }
+.tracking-desktop-normal { letter-spacing: var(--tracking-desktop-normal); }
+.tracking-desktop-wide { letter-spacing: var(--tracking-desktop-wide); }
+
+/* Enhanced desktop typography patterns */
+
+/* Desktop body text optimization */
+@media (min-width: 1024px) {
+  body {
+    font-size: var(--text-desktop-base);
+    line-height: var(--leading-desktop-normal);
+    letter-spacing: var(--tracking-desktop-normal);
+  }
+}
+
+/* Desktop heading hierarchy */
+.desktop-heading-1 {
+  font-size: var(--text-desktop-6xl);
+  line-height: var(--leading-desktop-tight);
+  letter-spacing: var(--tracking-desktop-tight);
+  font-weight: var(--font-bold);
+  margin-block-end: var(--space-8);
+}
+
+.desktop-heading-2 {
+  font-size: var(--text-desktop-5xl);
+  line-height: var(--leading-desktop-tight);
+  letter-spacing: var(--tracking-desktop-tight);
+  font-weight: var(--font-semibold);
+  margin-block-end: var(--space-6);
+}
+
+.desktop-heading-3 {
+  font-size: var(--text-desktop-4xl);
+  line-height: var(--leading-desktop-normal);
+  letter-spacing: var(--tracking-desktop-normal);
+  font-weight: var(--font-semibold);
+  margin-block-end: var(--space-4);
+}
+
+.desktop-heading-4 {
+  font-size: var(--text-desktop-3xl);
+  line-height: var(--leading-desktop-normal);
+  letter-spacing: var(--tracking-desktop-normal);
+  font-weight: var(--font-medium);
+  margin-block-end: var(--space-4);
+}
+
+.desktop-heading-5 {
+  font-size: var(--text-desktop-2xl);
+  line-height: var(--leading-desktop-normal);
+  letter-spacing: var(--tracking-desktop-normal);
+  font-weight: var(--font-medium);
+  margin-block-end: var(--space-3);
+}
+
+.desktop-heading-6 {
+  font-size: var(--text-desktop-xl);
+  line-height: var(--leading-desktop-normal);
+  letter-spacing: var(--tracking-desktop-wide);
+  font-weight: var(--font-medium);
+  margin-block-end: var(--space-3);
+  text-transform: uppercase;
+}
+
+/* Desktop prose optimization */
+.desktop-prose {
+  max-width: var(--content-desktop-optimal);
+  font-size: var(--text-desktop-base);
+  line-height: var(--leading-desktop-normal);
+  letter-spacing: var(--tracking-desktop-normal);
+}
+
+.desktop-prose p {
+  margin-block-end: var(--space-6);
+}
+
+.desktop-prose p:last-child {
+  margin-block-end: 0;
+}
+
+.desktop-prose h1 {
+  font-size: var(--text-desktop-6xl);
+  line-height: var(--leading-desktop-tight);
+  letter-spacing: var(--tracking-desktop-tight);
+  font-weight: var(--font-bold);
+  margin-block-end: var(--space-8);
+}
+
+.desktop-prose h2 {
+  font-size: var(--text-desktop-5xl);
+  line-height: var(--leading-desktop-tight);
+  letter-spacing: var(--tracking-desktop-tight);
+  font-weight: var(--font-semibold);
+  margin-block-end: var(--space-6);
+}
+
+.desktop-prose h3 {
+  font-size: var(--text-desktop-4xl);
+  line-height: var(--leading-desktop-normal);
+  letter-spacing: var(--tracking-desktop-normal);
+  font-weight: var(--font-semibold);
+  margin-block-end: var(--space-4);
+}
+
+.desktop-prose h4 {
+  font-size: var(--text-desktop-3xl);
+  line-height: var(--leading-desktop-normal);
+  letter-spacing: var(--tracking-desktop-normal);
+  font-weight: var(--font-medium);
+  margin-block-end: var(--space-4);
+}
+
+.desktop-prose h5 {
+  font-size: var(--text-desktop-2xl);
+  line-height: var(--leading-desktop-normal);
+  letter-spacing: var(--tracking-desktop-normal);
+  font-weight: var(--font-medium);
+  margin-block-end: var(--space-3);
+}
+
+.desktop-prose h6 {
+  font-size: var(--text-desktop-xl);
+  line-height: var(--leading-desktop-normal);
+  letter-spacing: var(--tracking-desktop-wide);
+  font-weight: var(--font-medium);
+  margin-block-end: var(--space-3);
+  text-transform: uppercase;
+}
+
+/* Desktop list optimization */
+.desktop-prose ul,
+.desktop-prose ol {
+  margin-block-end: var(--space-6);
+  padding-inline-start: var(--space-6);
+}
+
+.desktop-prose li {
+  margin-block-end: var(--space-2);
+}
+
+.desktop-prose li:last-child {
+  margin-block-end: 0;
+}
+
+/* Desktop code and monospace optimization */
+.desktop-code {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Cascadia Code', 'Fira Code', monospace;
+  font-size: 0.9em;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
+}
+
+.desktop-prose code {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Cascadia Code', 'Fira Code', monospace;
+  font-size: 0.9em;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
+  background-color: rgba(var(--muted), 0.3);
+  padding: 0.125em 0.25em;
+  border-radius: 0.25rem;
+}
+
+.desktop-prose pre {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Cascadia Code', 'Fira Code', monospace;
+  font-size: 0.9em;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
+  background-color: rgba(var(--muted), 0.5);
+  padding: var(--space-4);
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin-block-end: var(--space-6);
+}
+
+/* Desktop blockquote styling */
+.desktop-prose blockquote {
+  border-inline-start: 4px solid var(--color-primary);
+  padding-inline-start: var(--space-6);
+  padding-block: var(--space-4);
+  margin-block-end: var(--space-6);
+  font-style: italic;
+  font-size: var(--text-desktop-lg);
+  color: var(--color-muted-foreground);
+}
+
+/* Desktop table typography */
+.desktop-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-block-end: var(--space-8);
+  font-size: var(--text-desktop-sm);
+}
+
+.desktop-prose th {
+  font-weight: var(--font-semibold);
+  text-align: left;
+  border-bottom: 2px solid var(--color-border);
+  padding: var(--space-3) var(--space-4);
+}
+
+.desktop-prose td {
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-3) var(--space-4);
+}
+
+/* Enhanced desktop form typography */
+.desktop-form-label {
+  font-size: var(--text-desktop-sm);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-desktop-wide);
+  line-height: var(--leading-desktop-normal);
+  color: var(--color-foreground);
+}
+
+.desktop-form-description {
+  font-size: var(--text-desktop-xs);
+  line-height: var(--leading-desktop-relaxed);
+  color: var(--color-muted-foreground);
+  margin-block-start: var(--space-1);
+}
+
+.desktop-form-error {
+  font-size: var(--text-desktop-xs);
+  font-weight: var(--font-medium);
+  color: var(--color-destructive);
+  line-height: var(--leading-desktop-normal);
+  margin-block-start: var(--space-1);
+}
+
+/* Desktop data display typography */
+.desktop-data-label {
+  font-size: var(--text-desktop-xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-desktop-wide);
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+  line-height: var(--leading-desktop-tight);
+}
+
+.desktop-data-value {
+  font-size: var(--text-desktop-2xl);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-desktop-tight);
+  color: var(--color-foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+.desktop-data-unit {
+  font-size: var(--text-desktop-sm);
+  font-weight: var(--font-normal);
+  color: var(--color-muted-foreground);
+  margin-inline-start: var(--space-1);
+}
+
+/* Desktop navigation typography */
+.desktop-nav-primary {
+  font-size: var(--text-desktop-base);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-desktop-normal);
+  line-height: var(--leading-desktop-normal);
+}
+
+.desktop-nav-secondary {
+  font-size: var(--text-desktop-sm);
+  font-weight: var(--font-normal);
+  letter-spacing: var(--tracking-desktop-normal);
+  line-height: var(--leading-desktop-normal);
+}
+
+/* Desktop button typography */
+.desktop-button-text {
+  font-size: var(--text-desktop-sm);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-desktop-wide);
+  line-height: var(--leading-desktop-tight);
+}
+
+.desktop-button-large {
+  font-size: var(--text-desktop-base);
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-desktop-normal);
+  line-height: var(--leading-desktop-tight);
+}
+
+/* Desktop alert and notification typography */
+.desktop-alert-title {
+  font-size: var(--text-desktop-base);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-desktop-tight);
+  margin-block-end: var(--space-2);
+}
+
+.desktop-alert-description {
+  font-size: var(--text-desktop-sm);
+  line-height: var(--leading-desktop-normal);
+  color: var(--color-muted-foreground);
+}
+
+/* Responsive typography overrides for desktop - COMMENTED OUT TO PREVENT LAYOUT BREAKS */
+/* 
+@media (min-width: 1024px) {
+  h1 { @apply desktop-heading-1; }
+  h2 { @apply desktop-heading-2; }
+  h3 { @apply desktop-heading-3; }
+  h4 { @apply desktop-heading-4; }
+  h5 { @apply desktop-heading-5; }
+  h6 { @apply desktop-heading-6; }
+  
+  .prose,
+  .content,
+  article {
+    @apply desktop-prose;
+  }
+  
+  label {
+    @apply desktop-form-label;
+  }
+  
+  nav a {
+    @apply desktop-nav-primary;
+  }
+  
+  button {
+    @apply desktop-button-text;
+  }
+}
+*/
+
+/* Desktop reading modes */
+.desktop-reading-comfortable {
+  font-size: var(--text-desktop-lg);
+  line-height: var(--leading-desktop-relaxed);
+  max-width: var(--content-desktop-narrow);
+}
+
+.desktop-reading-spacious {
+  font-size: var(--text-desktop-xl);
+  line-height: var(--leading-loose);
+  max-width: var(--content-desktop-narrow);
+  letter-spacing: var(--tracking-desktop-wide);
+}
+
+/* Desktop focus and accessibility enhancements */
+.desktop-focus-text {
+  font-size: var(--text-desktop-2xl);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-desktop-normal);
+  text-align: center;
+  max-width: var(--content-desktop-narrow);
+  margin-inline: auto;
+}
+
+/* Desktop numeric and data formatting */
+.desktop-numeric {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  letter-spacing: var(--tracking-desktop-normal);
+}
+
+.desktop-currency {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  letter-spacing: var(--tracking-desktop-normal);
+  font-weight: var(--font-semibold);
+}
+
+.desktop-percentage {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  letter-spacing: var(--tracking-desktop-normal);
+  font-weight: var(--font-medium);
+  font-size: 0.9em;
+}
+
+/* Desktop status and badge typography */
+.desktop-status-text {
+  font-size: var(--text-desktop-xs);
+  font-weight: var(--font-bold);
+  letter-spacing: var(--tracking-desktop-wide);
+  text-transform: uppercase;
+  line-height: var(--leading-none);
+}
+
+.desktop-badge-text {
+  font-size: var(--text-desktop-xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-desktop-normal);
+  line-height: var(--leading-tight);
+}

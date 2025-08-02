@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const badgeVariants = cva(
-  'focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-md border px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] [&>svg]:pointer-events-none [&>svg]:size-3',
+  'badge-base focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex w-fit shrink-0 items-center justify-center gap-1 overflow-hidden transition-[color,box-shadow] focus-visible:ring-[3px] [&>svg]:pointer-events-none [&>svg]:size-3',
   {
     variants: {
       variant: {
@@ -13,13 +13,13 @@ const badgeVariants = cva(
         secondary:
           'bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90 border-transparent',
         destructive:
-          'bg-destructive [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60 border-transparent text-white',
+          'bg-destructive text-destructive-foreground [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 border-transparent',
         success:
-          'border-transparent bg-green-600 text-white focus-visible:ring-green-600/20 dark:focus-visible:ring-green-600/40 [a&]:hover:bg-green-700',
+          'border-transparent bg-success text-success-foreground focus-visible:ring-success/20 [a&]:hover:bg-success/90',
         warning:
-          'border-transparent bg-yellow-500 text-black focus-visible:ring-yellow-500/20 dark:focus-visible:ring-yellow-500/40 [a&]:hover:bg-yellow-600',
+          'border-transparent bg-warning text-warning-foreground focus-visible:ring-warning/20 [a&]:hover:bg-warning/90',
         critical:
-          'border-transparent bg-red-600 text-white focus-visible:ring-red-600/20 dark:focus-visible:ring-red-600/40 [a&]:hover:bg-red-700',
+          'border-transparent bg-destructive text-destructive-foreground focus-visible:ring-destructive/20 [a&]:hover:bg-destructive/90',
         outline: 'text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground',
       },
     },
@@ -29,15 +29,46 @@ const badgeVariants = cva(
   }
 )
 
+interface BadgeProps extends React.ComponentProps<'span'>, VariantProps<typeof badgeVariants> {
+  asChild?: boolean
+  icon?: React.ReactNode
+  iconPosition?: 'left' | 'right'
+  removable?: boolean
+  onRemove?: () => void
+}
+
 function Badge({
   className,
-  variant,
+  variant = 'default',
   asChild = false,
+  icon,
+  iconPosition = 'left',
+  removable = false,
+  onRemove,
+  children,
   ...props
-}: React.ComponentProps<'span'> & VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
+}: BadgeProps) {
   const Comp = asChild ? Slot : 'span'
 
-  return <Comp data-slot="badge" className={cn(badgeVariants({ variant }), className)} {...props} />
+  return (
+    <Comp data-slot="badge" className={cn(badgeVariants({ variant }), className)} {...props}>
+      {icon && iconPosition === 'left' && icon}
+      {children}
+      {icon && iconPosition === 'right' && icon}
+      {removable && (
+        <button
+          type="button"
+          onClick={onRemove}
+          className="ml-1 rounded-xs hover:bg-black/10 dark:hover:bg-white/10 p-0.5 transition-colors"
+          aria-label="Remove"
+        >
+          <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      )}
+    </Comp>
+  )
 }
 
 // eslint-disable-next-line react-refresh/only-export-components

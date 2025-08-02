@@ -1,0 +1,24 @@
+# Development Dockerfile with hot reload support
+FROM node:20-alpine
+
+# Install bun
+RUN npm install -g bun
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+COPY bun.lock ./
+
+# Install dependencies
+RUN bun install
+
+# Copy source code (will be overridden by volume mount)
+COPY . .
+
+# Expose ports for dev server and Storybook
+EXPOSE 5080 6080
+
+# Start development server
+CMD ["bun", "run", "dev", "--host", "0.0.0.0"]

@@ -80,11 +80,11 @@ const ChemicalInput = ({
           className={cn(
             'transition-colors',
             validation?.status === 'emergency' &&
-              'bg-card border-red-500 focus-visible:ring-red-500',
+              'bg-card border-destructive focus-visible:ring-destructive',
             validation?.status === 'critical' &&
               'border-destructive focus-visible:ring-destructive',
-            validation?.status === 'warning' && 'border-yellow-500 focus-visible:ring-yellow-500',
-            validation?.status === 'good' && 'border-green-500 focus-visible:ring-green-500'
+            validation?.status === 'warning' && 'border-warning focus-visible:ring-warning',
+            validation?.status === 'good' && 'border-success focus-visible:ring-success'
           )}
         />
         {validation && (
@@ -310,8 +310,8 @@ export const ChemicalTestForm = ({
       </div>
 
       {/* Pool and Technician Selection */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div className="space-y-2">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 desktop:gap-6">
+        <div className="form-group">
           <Label className="flex items-center gap-2 text-sm font-medium">
             <Droplet className="h-4 w-4" />
             Pool Selection
@@ -333,7 +333,7 @@ export const ChemicalTestForm = ({
           </Select>
         </div>
 
-        <div className="space-y-2">
+        <div className="form-group">
           <Label className="flex items-center gap-2 text-sm font-medium">
             <User className="h-4 w-4" />
             Technician
@@ -460,9 +460,9 @@ export const ChemicalTestForm = ({
         <Card
           className={cn(
             'border-2',
-            complianceReport.overall === 'emergency' && 'bg-card border-red-500',
+            complianceReport.overall === 'emergency' && 'bg-card border-destructive',
             complianceReport.overall === 'non-compliant' && 'border-destructive bg-card',
-            complianceReport.overall === 'warning' && 'bg-card border-yellow-500'
+            complianceReport.overall === 'warning' && 'bg-card border-warning'
           )}
         >
           <CardContent className="pt-4">
@@ -470,9 +470,9 @@ export const ChemicalTestForm = ({
               <AlertTriangle
                 className={cn(
                   'mt-0.5 h-5 w-5',
-                  complianceReport.overall === 'emergency' && 'text-red-500',
+                  complianceReport.overall === 'emergency' && 'text-destructive',
                   complianceReport.overall === 'non-compliant' && 'text-destructive',
-                  complianceReport.overall === 'warning' && 'text-yellow-600'
+                  complianceReport.overall === 'warning' && 'text-warning'
                 )}
               />
               <div className="flex-1">
@@ -536,7 +536,7 @@ export const ChemicalTestForm = ({
             </div>
 
             {poolClosure.shouldClose && (
-              <div className="bg-card mt-3 rounded-md border border-red-500 p-3">
+              <div className="bg-card mt-3 rounded-md border border-destructive p-3">
                 <div className="text-foreground text-sm font-medium">🚫 Pool Closure Required</div>
                 <div className="text-muted-foreground mt-1 text-xs">
                   {poolClosure.reasons.join('; ')}
@@ -552,22 +552,22 @@ export const ChemicalTestForm = ({
         <Card
           className={cn(
             'border-2',
-            saveStatus === 'saved' && 'border-green-500 bg-green-50',
-            saveStatus === 'error' && 'border-red-500 bg-red-50',
-            saveStatus === 'saving' && 'border-blue-500 bg-blue-50'
+            saveStatus === 'saved' && 'border-success bg-success/10',
+            saveStatus === 'error' && 'border-destructive bg-destructive/10',
+            saveStatus === 'saving' && 'border-primary bg-primary/10'
           )}
         >
           <CardContent className="pt-4">
             <div className="flex items-center gap-2">
-              {saveStatus === 'saving' && <Clock className="h-4 w-4 animate-spin text-blue-600" />}
-              {saveStatus === 'saved' && <CheckCircle className="h-4 w-4 text-green-600" />}
-              {saveStatus === 'error' && <AlertTriangle className="h-4 w-4 text-red-600" />}
+              {saveStatus === 'saving' && <Clock className="h-4 w-4 animate-spin text-primary" />}
+              {saveStatus === 'saved' && <CheckCircle className="h-4 w-4 text-success" />}
+              {saveStatus === 'error' && <AlertTriangle className="h-4 w-4 text-destructive" />}
               <span
                 className={cn(
                   'text-sm font-medium',
-                  saveStatus === 'saved' && 'text-green-800',
-                  saveStatus === 'error' && 'text-red-800',
-                  saveStatus === 'saving' && 'text-blue-800'
+                  saveStatus === 'saved' && 'text-success',
+                  saveStatus === 'error' && 'text-destructive',
+                  saveStatus === 'saving' && 'text-primary'
                 )}
               >
                 {saveStatus === 'saving' && 'Saving...'}
@@ -585,7 +585,7 @@ export const ChemicalTestForm = ({
           disabled={!hasRequiredFields || !hasReadings || saveStatus === 'saving'}
           className={cn(
             'flex-1',
-            complianceReport?.overall === 'emergency' && 'bg-red-600 text-white hover:bg-red-700',
+            complianceReport?.overall === 'emergency' && 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
             complianceReport?.overall === 'non-compliant' &&
               'bg-destructive hover:bg-destructive/90 text-white'
           )}

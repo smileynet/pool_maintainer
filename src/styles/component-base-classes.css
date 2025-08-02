@@ -1,0 +1,464 @@
+/**
+ * Component Base Classes with Default Styling
+ * Establishes consistent base styling that all components inherit
+ * Prevents components from needing explicit styling for basic functionality
+ */
+
+@layer components {
+  /* Base Card Component */
+  .card-base {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    
+    /* Sizing with sensible defaults */
+    width: 100%;
+    max-width: var(--default-content-max-width, 1024px);
+    
+    /* Spacing */
+    padding: var(--default-component-padding, 1rem);
+    gap: var(--space-4, 1rem);
+    
+    /* Visual styling */
+    background-color: oklch(var(--card, 0.98 0.005 200));
+    border: 1px solid oklch(var(--border, 0.85 0.03 200));
+    border-radius: var(--default-radius, 0.5rem);
+    box-shadow: 0 1px 3px 0 oklch(0 0 0 / 0.1), 0 1px 2px -1px oklch(0 0 0 / 0.1);
+    
+    /* Typography */
+    color: oklch(var(--card-foreground, 0.2 0.08 200));
+    
+    /* Transitions */
+    transition: all 0.2s ease;
+  }
+
+  .card-base:hover {
+    box-shadow: 0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
+  }
+
+  /* Card Header */
+  .card-header-base {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2, 0.5rem);
+    padding-bottom: var(--space-4, 1rem);
+    border-bottom: 1px solid oklch(var(--border, 0.85 0.03 200) / 0.5);
+  }
+
+  .card-title-base {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0;
+    color: oklch(var(--foreground, 0.2 0.01 200));
+  }
+
+  .card-description-base {
+    font-size: 0.875rem;
+    color: oklch(var(--muted-foreground, 0.45 0.04 200));
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Card Content */
+  .card-content-base {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4, 1rem);
+  }
+
+  /* Card Footer */
+  .card-footer-base {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3, 0.75rem);
+    padding-top: var(--space-4, 1rem);
+    border-top: 1px solid oklch(var(--border, 0.85 0.03 200) / 0.5);
+  }
+
+  /* Base Button Component */
+  .button-base {
+    /* Layout */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2, 0.5rem);
+    position: relative;
+    
+    /* Sizing */
+    min-height: var(--default-button-height, 2.5rem);
+    min-width: var(--default-touch-target, 44px);
+    padding-inline: var(--space-4, 1rem);
+    padding-block: var(--space-2, 0.5rem);
+    
+    /* Visual styling */
+    background-color: oklch(var(--primary, 0.55 0.15 200));
+    color: oklch(var(--primary-foreground, 0.98 0 0));
+    border: 1px solid oklch(var(--primary, 0.55 0.15 200));
+    border-radius: var(--default-radius, 0.5rem);
+    box-shadow: 0 1px 2px 0 oklch(0 0 0 / 0.05);
+    
+    /* Typography */
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    
+    /* Interaction */
+    cursor: pointer;
+    user-select: none;
+    touch-action: manipulation;
+    
+    /* Transitions */
+    transition: all 0.2s ease;
+  }
+
+  .button-base:hover:not(:disabled) {
+    background-color: oklch(var(--primary, 0.5 0.15 200));
+    border-color: oklch(var(--primary, 0.5 0.15 200));
+    box-shadow: 0 2px 4px 0 oklch(0 0 0 / 0.1);
+  }
+
+  .button-base:active:not(:disabled) {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px 0 oklch(0 0 0 / 0.1);
+  }
+
+  .button-base:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .button-base:focus-visible {
+    outline: 2px solid oklch(var(--ring, 0.65 0.17 90));
+    outline-offset: 2px;
+  }
+
+  /* Button variants */
+  .button-secondary-base {
+    background-color: oklch(var(--secondary, 0.55 0.16 140));
+    color: oklch(var(--secondary-foreground, 0.2 0.08 200));
+    border-color: oklch(var(--secondary, 0.55 0.16 140));
+  }
+
+  .button-secondary-base:hover:not(:disabled) {
+    background-color: oklch(var(--secondary, 0.5 0.16 140));
+    border-color: oklch(var(--secondary, 0.5 0.16 140));
+  }
+
+  .button-outline-base {
+    background-color: transparent;
+    color: oklch(var(--primary, 0.55 0.15 200));
+    border-color: oklch(var(--border, 0.85 0.03 200));
+    box-shadow: none;
+  }
+
+  .button-outline-base:hover:not(:disabled) {
+    background-color: oklch(var(--accent, 0.6 0.16 25) / 0.1);
+    border-color: oklch(var(--primary, 0.55 0.15 200));
+  }
+
+  .button-ghost-base {
+    background-color: transparent;
+    color: oklch(var(--foreground, 0.2 0.01 200));
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .button-ghost-base:hover:not(:disabled) {
+    background-color: oklch(var(--accent, 0.6 0.16 25) / 0.1);
+    color: oklch(var(--accent-foreground, 0.98 0 0));
+  }
+
+  /* Base Form Elements */
+  .input-base {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    
+    /* Sizing */
+    min-height: var(--default-input-height, 2.5rem);
+    padding-inline: var(--space-3, 0.75rem);
+    padding-block: var(--space-2, 0.5rem);
+    
+    /* Visual styling */
+    background-color: oklch(var(--background, 0.98 0.01 200));
+    border: 1px solid oklch(var(--input, 0.85 0.03 200));
+    border-radius: var(--default-radius, 0.5rem);
+    
+    /* Typography */
+    font-size: 0.875rem;
+    color: oklch(var(--foreground, 0.2 0.01 200));
+    
+    /* Transitions */
+    transition: all 0.2s ease;
+  }
+
+  .input-base:focus {
+    outline: none;
+    border-color: oklch(var(--ring, 0.65 0.17 90));
+    box-shadow: 0 0 0 2px oklch(var(--ring, 0.65 0.17 90) / 0.2);
+  }
+
+  .input-base:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: oklch(var(--muted, 0.85 0.02 200) / 0.5);
+  }
+
+  .input-base::placeholder {
+    color: oklch(var(--muted-foreground, 0.45 0.04 200));
+  }
+
+  /* Textarea specific styling */
+  .textarea-base {
+    min-height: calc(var(--default-input-height, 2.5rem) * 2);
+    resize: vertical;
+    line-height: 1.5;
+    padding-block: var(--space-3, 0.75rem);
+  }
+
+  /* Base Label */
+  .label-base {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25;
+    margin-bottom: var(--space-2, 0.5rem);
+    color: oklch(var(--foreground, 0.2 0.01 200));
+  }
+
+  /* Base Form Group */
+  .form-group-base {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2, 0.5rem);
+    margin-bottom: var(--space-4, 1rem);
+  }
+
+  .form-group-base:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Form description and error text */
+  .form-description-base {
+    font-size: 0.75rem;
+    color: oklch(var(--muted-foreground, 0.45 0.04 200));
+    line-height: 1.4;
+  }
+
+  .form-error-base {
+    font-size: 0.75rem;
+    color: oklch(var(--destructive, 0.55 0.18 25));
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* Base Badge Component */
+  .badge-base {
+    /* Layout */
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1, 0.25rem);
+    
+    /* Sizing */
+    height: 1.5rem;
+    padding-inline: var(--space-2, 0.5rem);
+    
+    /* Visual styling */
+    background-color: oklch(var(--primary, 0.55 0.15 200));
+    color: oklch(var(--primary-foreground, 0.98 0 0));
+    border-radius: calc(var(--default-radius, 0.5rem) * 0.75);
+    
+    /* Typography */
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    white-space: nowrap;
+  }
+
+  /* Badge variants */
+  .badge-secondary-base {
+    background-color: oklch(var(--secondary, 0.55 0.16 140));
+    color: oklch(var(--secondary-foreground, 0.2 0.08 200));
+  }
+
+  .badge-success-base {
+    background-color: oklch(var(--success, 0.4 0.16 140));
+    color: oklch(var(--success-foreground, 0.98 0 0));
+  }
+
+  .badge-warning-base {
+    background-color: oklch(var(--warning, 0.55 0.19 45));
+    color: oklch(var(--warning-foreground, 0.2 0.08 200));
+  }
+
+  .badge-destructive-base {
+    background-color: oklch(var(--destructive, 0.55 0.18 25));
+    color: oklch(var(--destructive-foreground, 0.98 0 0));
+  }
+
+  .badge-outline-base {
+    background-color: transparent;
+    color: oklch(var(--foreground, 0.2 0.01 200));
+    border: 1px solid oklch(var(--border, 0.85 0.03 200));
+  }
+
+  /* Base Table Component */
+  .table-base {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: var(--default-radius, 0.5rem);
+    overflow: hidden;
+    border: 1px solid oklch(var(--border, 0.85 0.03 200));
+  }
+
+  .table-header-base {
+    background-color: oklch(var(--muted, 0.85 0.02 200) / 0.5);
+  }
+
+  .table-header-cell-base {
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: oklch(var(--muted-foreground, 0.45 0.04 200));
+    padding: var(--space-3, 0.75rem) var(--space-4, 1rem);
+    border-bottom: 1px solid oklch(var(--border, 0.85 0.03 200));
+  }
+
+  .table-cell-base {
+    padding: var(--space-3, 0.75rem) var(--space-4, 1rem);
+    border-bottom: 1px solid oklch(var(--border, 0.85 0.03 200) / 0.5);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .table-row-base:hover {
+    background-color: oklch(var(--muted, 0.85 0.02 200) / 0.3);
+  }
+
+  .table-row-base:last-child .table-cell-base {
+    border-bottom: none;
+  }
+
+  /* Base Alert/Status Component */
+  .alert-base {
+    /* Layout */
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3, 0.75rem);
+    position: relative;
+    
+    /* Sizing */
+    width: 100%;
+    padding: var(--space-4, 1rem);
+    
+    /* Visual styling */
+    background-color: oklch(var(--muted, 0.85 0.02 200) / 0.3);
+    border: 1px solid oklch(var(--border, 0.85 0.03 200));
+    border-left: 4px solid oklch(var(--primary, 0.55 0.15 200));
+    border-radius: var(--default-radius, 0.5rem);
+    
+    /* Typography */
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .alert-success-base {
+    background-color: oklch(var(--success, 0.4 0.16 140) / 0.1);
+    border-left-color: oklch(var(--success, 0.4 0.16 140));
+    color: oklch(var(--success-foreground, 0.2 0.08 200));
+  }
+
+  .alert-warning-base {
+    background-color: oklch(var(--warning, 0.55 0.19 45) / 0.1);
+    border-left-color: oklch(var(--warning, 0.55 0.19 45));
+    color: oklch(var(--warning-foreground, 0.2 0.08 200));
+  }
+
+  .alert-destructive-base {
+    background-color: oklch(var(--destructive, 0.55 0.18 25) / 0.1);
+    border-left-color: oklch(var(--destructive, 0.55 0.18 25));
+    color: oklch(var(--destructive-foreground, 0.2 0.08 200));
+  }
+
+  /* Base Navigation Component */
+  .nav-base {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4, 1rem);
+    padding: var(--space-2, 0.5rem) 0;
+  }
+
+  .nav-link-base {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2, 0.5rem);
+    padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+    border-radius: var(--default-radius, 0.5rem);
+    
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: oklch(var(--muted-foreground, 0.45 0.04 200));
+    text-decoration: none;
+    
+    transition: all 0.2s ease;
+  }
+
+  .nav-link-base:hover {
+    background-color: oklch(var(--accent, 0.6 0.16 25) / 0.1);
+    color: oklch(var(--accent-foreground, 0.2 0.08 200));
+  }
+
+  .nav-link-active-base {
+    background-color: oklch(var(--accent, 0.6 0.16 25) / 0.2);
+    color: oklch(var(--accent-foreground, 0.2 0.08 200));
+    font-weight: 600;
+  }
+
+  /* Base Divider/Separator */
+  .divider-base {
+    height: 1px;
+    background-color: oklch(var(--border, 0.85 0.03 200));
+    border: none;
+    margin: var(--space-4, 1rem) 0;
+  }
+
+  .divider-vertical-base {
+    width: 1px;
+    height: 100%;
+    background-color: oklch(var(--border, 0.85 0.03 200));
+    margin: 0 var(--space-4, 1rem);
+  }
+
+  /* Responsive behavior for all base components */
+  @media (min-width: 768px) {
+    .card-base {
+      padding: calc(var(--default-component-padding, 1rem) * 1.5);
+    }
+    
+    .button-base {
+      padding-inline: var(--space-6, 1.5rem);
+    }
+    
+    .table-header-cell-base,
+    .table-cell-base {
+      padding: var(--space-4, 1rem) var(--space-6, 1.5rem);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .card-base {
+      padding: calc(var(--default-component-padding, 1rem) * 2);
+    }
+  }
+}

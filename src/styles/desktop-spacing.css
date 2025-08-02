@@ -1,0 +1,528 @@
+/**
+ * Desktop Spacing System
+ * Optimized whitespace and vertical rhythm for desktop viewing
+ * Based on 8px grid system with harmonic spacing scale
+ */
+
+/* Spacing Design Tokens */
+:root {
+  /* Base unit for vertical rhythm (24px = 1.5rem baseline) */
+  --spacing-baseline: 1.5rem;
+  
+  /* Harmonic spacing scale (based on musical intervals) */
+  --space-0: 0;
+  --space-px: 1px;
+  --space-0_5: 0.125rem;  /* 2px */
+  --space-1: 0.25rem;     /* 4px */
+  --space-1_5: 0.375rem;  /* 6px */
+  --space-2: 0.5rem;      /* 8px - base unit */
+  --space-3: 0.75rem;     /* 12px */
+  --space-4: 1rem;        /* 16px */
+  --space-5: 1.25rem;     /* 20px */
+  --space-6: 1.5rem;      /* 24px - baseline */
+  --space-8: 2rem;        /* 32px */
+  --space-10: 2.5rem;     /* 40px */
+  --space-12: 3rem;       /* 48px */
+  --space-16: 4rem;       /* 64px */
+  --space-20: 5rem;       /* 80px */
+  --space-24: 6rem;       /* 96px */
+  --space-32: 8rem;       /* 128px */
+  
+  /* Component-specific spacing */
+  --space-card-padding: var(--space-6);
+  --space-section-gap: var(--space-8);
+  --space-content-max: 72ch;
+  
+  /* Desktop-optimized spacing */
+  --space-desktop-gutter: var(--space-8);
+  --space-desktop-section: var(--space-16);
+  --space-desktop-hero: var(--space-24);
+}
+
+/* Desktop spacing overrides */
+@media (min-width: 1024px) {
+  :root {
+    /* Increase spacing for better visual hierarchy */
+    --space-card-padding: var(--space-8);
+    --space-section-gap: var(--space-12);
+    --space-desktop-gutter: var(--space-10);
+    --space-desktop-section: var(--space-20);
+    --space-desktop-hero: var(--space-32);
+  }
+}
+
+/* Ultra-wide spacing (2K+ displays) */
+@media (min-width: 1920px) {
+  :root {
+    --space-card-padding: var(--space-10);
+    --space-section-gap: var(--space-16);
+    --space-desktop-gutter: var(--space-12);
+    --space-desktop-section: var(--space-24);
+  }
+}
+
+/* Vertical Rhythm System */
+.vertical-rhythm {
+  line-height: var(--spacing-baseline);
+}
+
+.vertical-rhythm > * + * {
+  margin-block-start: var(--spacing-baseline);
+}
+
+/* Flow spacing utilities */
+.flow-xs > * + * { margin-block-start: var(--space-2); }
+.flow-sm > * + * { margin-block-start: var(--space-4); }
+.flow-md > * + * { margin-block-start: var(--space-6); }
+.flow-lg > * + * { margin-block-start: var(--space-8); }
+.flow-xl > * + * { margin-block-start: var(--space-12); }
+.flow-2xl > * + * { margin-block-start: var(--space-16); }
+
+/* Desktop flow spacing */
+@media (min-width: 1024px) {
+  .desktop\:flow-sm > * + * { margin-block-start: var(--space-6); }
+  .desktop\:flow-md > * + * { margin-block-start: var(--space-8); }
+  .desktop\:flow-lg > * + * { margin-block-start: var(--space-12); }
+  .desktop\:flow-xl > * + * { margin-block-start: var(--space-16); }
+  .desktop\:flow-2xl > * + * { margin-block-start: var(--space-20); }
+}
+
+/* Component Spacing Patterns */
+
+/* Card spacing optimization */
+.card-optimized {
+  padding: var(--space-card-padding);
+}
+
+.card-optimized > *:not(:first-child) {
+  margin-block-start: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .card-optimized {
+    padding: var(--space-8);
+  }
+  
+  .card-optimized > *:not(:first-child) {
+    margin-block-start: var(--space-8);
+  }
+}
+
+/* Section spacing */
+.section-spacing {
+  padding-block: var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .section-spacing {
+    padding-block: var(--space-desktop-section);
+  }
+}
+
+/* Content density classes */
+.density-comfortable {
+  --space-multiplier: 1;
+}
+
+.density-compact {
+  --space-multiplier: 0.75;
+}
+
+.density-spacious {
+  --space-multiplier: 1.5;
+}
+
+/* Apply density to spacing */
+[class*="density-"] {
+  --space-card-padding: calc(var(--space-6) * var(--space-multiplier));
+  --space-section-gap: calc(var(--space-8) * var(--space-multiplier));
+}
+
+/* Stack spacing patterns */
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.stack-xs { gap: var(--space-2); }
+.stack-sm { gap: var(--space-4); }
+.stack-md { gap: var(--space-6); }
+.stack-lg { gap: var(--space-8); }
+.stack-xl { gap: var(--space-12); }
+
+/* Desktop stack spacing */
+@media (min-width: 1024px) {
+  .desktop\:stack-sm { gap: var(--space-6); }
+  .desktop\:stack-md { gap: var(--space-8); }
+  .desktop\:stack-lg { gap: var(--space-12); }
+  .desktop\:stack-xl { gap: var(--space-16); }
+}
+
+/* Inline spacing patterns */
+.inline-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.inline-cluster-sm { gap: var(--space-2); }
+.inline-cluster-lg { gap: var(--space-6); }
+
+@media (min-width: 1024px) {
+  .inline-cluster { gap: var(--space-6); }
+  .inline-cluster-sm { gap: var(--space-4); }
+  .inline-cluster-lg { gap: var(--space-8); }
+}
+
+/* Form spacing optimization */
+.form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+@media (min-width: 1024px) {
+  .form-stack {
+    gap: var(--space-8);
+  }
+  
+  .form-group {
+    gap: var(--space-3);
+  }
+}
+
+/* Dialog/Modal spacing */
+.dialog-content {
+  padding: var(--space-6);
+}
+
+.dialog-header {
+  margin-block-end: var(--space-6);
+}
+
+.dialog-footer {
+  margin-block-start: var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .dialog-content {
+    padding: var(--space-8);
+  }
+  
+  .dialog-header {
+    margin-block-end: var(--space-8);
+  }
+  
+  .dialog-footer {
+    margin-block-start: var(--space-10);
+  }
+}
+
+/* Table spacing optimization */
+.table-comfortable th,
+.table-comfortable td {
+  padding: var(--space-4) var(--space-6);
+}
+
+.table-compact th,
+.table-compact td {
+  padding: var(--space-2) var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  .table-comfortable th,
+  .table-comfortable td {
+    padding: var(--space-6) var(--space-8);
+  }
+  
+  .table-compact th,
+  .table-compact td {
+    padding: var(--space-3) var(--space-6);
+  }
+}
+
+/* Optical spacing adjustments */
+.optical-adjust-icon {
+  /* Compensate for visual weight of icons */
+  margin-inline-end: calc(var(--space-2) * 0.75);
+}
+
+.optical-adjust-number {
+  /* Numbers appear smaller, need more space */
+  letter-spacing: 0.025em;
+}
+
+/* Responsive padding utilities */
+.p-responsive {
+  padding: var(--space-4);
+}
+
+.px-responsive {
+  padding-inline: var(--space-4);
+}
+
+.py-responsive {
+  padding-block: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .p-responsive { padding: var(--space-6); }
+  .px-responsive { padding-inline: var(--space-6); }
+  .py-responsive { padding-block: var(--space-6); }
+}
+
+@media (min-width: 1024px) {
+  .p-responsive { padding: var(--space-8); }
+  .px-responsive { padding-inline: var(--space-8); }
+  .py-responsive { padding-block: var(--space-8); }
+}
+
+@media (min-width: 1536px) {
+  .p-responsive { padding: var(--space-10); }
+  .px-responsive { padding-inline: var(--space-10); }
+  .py-responsive { padding-block: var(--space-10); }
+}
+
+/* Negative space utilities */
+.breathing-room {
+  margin: var(--space-8);
+}
+
+.breathing-room-x {
+  margin-inline: var(--space-8);
+}
+
+.breathing-room-y {
+  margin-block: var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .breathing-room { margin: var(--space-12); }
+  .breathing-room-x { margin-inline: var(--space-12); }
+  .breathing-room-y { margin-block: var(--space-12); }
+}
+
+/* Content boundary spacing */
+.content-boundary {
+  max-width: var(--space-content-max);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .content-boundary {
+    padding-inline: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-boundary {
+    padding-inline: var(--space-8);
+  }
+}
+
+/* Consistent component spacing overrides */
+.consistent-card-spacing {
+  padding: var(--space-card-padding);
+  
+  & > *:not(:first-child) {
+    margin-block-start: var(--space-6);
+  }
+  
+  & .card-header {
+    margin-block-end: var(--space-4);
+  }
+  
+  & .card-footer {
+    margin-block-start: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .consistent-card-spacing {
+    & > *:not(:first-child) {
+      margin-block-start: var(--space-8);
+    }
+    
+    & .card-header {
+      margin-block-end: var(--space-6);
+    }
+    
+    & .card-footer {
+      margin-block-start: var(--space-8);
+    }
+  }
+}
+
+/* Button spacing patterns */
+.button-group {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.button-group-sm { gap: var(--space-2); }
+.button-group-lg { gap: var(--space-4); }
+
+@media (min-width: 1024px) {
+  .button-group { gap: var(--space-4); }
+  .button-group-sm { gap: var(--space-3); }
+  .button-group-lg { gap: var(--space-6); }
+}
+
+/* Status indicator spacing */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.status-indicator-lg {
+  gap: var(--space-3);
+}
+
+/* Navigation spacing */
+.nav-spacing li + li {
+  margin-block-start: var(--space-1);
+}
+
+.nav-spacing-lg li + li {
+  margin-block-start: var(--space-2);
+}
+
+@media (min-width: 1024px) {
+  .nav-spacing li + li {
+    margin-block-start: var(--space-2);
+  }
+  
+  .nav-spacing-lg li + li {
+    margin-block-start: var(--space-3);
+  }
+}
+
+/* Chart and data visualization spacing */
+.chart-container {
+  padding: var(--space-4);
+}
+
+.chart-legend {
+  margin-block-start: var(--space-4);
+  gap: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  .chart-container {
+    padding: var(--space-6);
+  }
+  
+  .chart-legend {
+    margin-block-start: var(--space-6);
+    gap: var(--space-6);
+  }
+}
+
+/* Toast and notification spacing */
+.notification-spacing {
+  padding: var(--space-4);
+  gap: var(--space-3);
+}
+
+.notification-spacing-compact {
+  padding: var(--space-3);
+  gap: var(--space-2);
+}
+
+/* Badge and tag spacing */
+.badge-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.badge-group-lg {
+  gap: var(--space-3);
+}
+
+/* Header hierarchy spacing */
+.header-section {
+  margin-block-end: var(--space-6);
+}
+
+.header-section h1,
+.header-section h2,
+.header-section h3 {
+  margin-block-end: var(--space-2);
+}
+
+.header-section p {
+  margin-block-end: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  .header-section {
+    margin-block-end: var(--space-8);
+  }
+  
+  .header-section h1,
+  .header-section h2,
+  .header-section h3 {
+    margin-block-end: var(--space-3);
+  }
+  
+  .header-section p {
+    margin-block-end: var(--space-6);
+  }
+}
+
+/* Data display spacing */
+.data-list dt {
+  margin-block-start: var(--space-4);
+}
+
+.data-list dt:first-child {
+  margin-block-start: 0;
+}
+
+.data-list dd {
+  margin-block-start: var(--space-1);
+  margin-inline-start: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  .data-list dt {
+    margin-block-start: var(--space-6);
+  }
+  
+  .data-list dd {
+    margin-block-start: var(--space-2);
+    margin-inline-start: var(--space-6);
+  }
+}
+
+/* Search and filter spacing */
+.search-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: end;
+}
+
+.search-filters-compact {
+  gap: var(--space-3);
+}
+
+@media (min-width: 1024px) {
+  .search-filters {
+    gap: var(--space-6);
+  }
+  
+  .search-filters-compact {
+    gap: var(--space-4);
+  }
+}

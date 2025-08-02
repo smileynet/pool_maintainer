@@ -1,0 +1,164 @@
+/**
+ * Mobile-First Gradient System
+ * Performance-optimized gradients with mobile considerations
+ */
+
+/* Base gradient definitions */
+:root {
+  /* Simple gradients for mobile performance */
+  --gradient-simple-primary: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  --gradient-simple-secondary: linear-gradient(135deg, var(--color-secondary), var(--color-muted));
+  --gradient-simple-success: linear-gradient(135deg, var(--color-success), color-mix(in oklch, var(--color-success) 70%, var(--color-background)));
+  --gradient-simple-warning: linear-gradient(135deg, var(--color-warning), color-mix(in oklch, var(--color-warning) 70%, var(--color-background)));
+  --gradient-simple-destructive: linear-gradient(135deg, var(--color-destructive), color-mix(in oklch, var(--color-destructive) 70%, var(--color-background)));
+  
+  /* Radial gradients for buttons and interactive elements */
+  --gradient-radial-primary: radial-gradient(circle at 30% 30%, var(--color-primary), color-mix(in oklch, var(--color-primary) 80%, var(--color-accent)));
+  
+  /* Default to simple gradients */
+  --gradient-primary: var(--gradient-simple-primary);
+  --gradient-secondary: var(--gradient-simple-secondary);
+  --gradient-success: var(--gradient-simple-success);
+  --gradient-warning: var(--gradient-simple-warning);
+  --gradient-destructive: var(--gradient-simple-destructive);
+  --gradient-interactive: var(--gradient-radial-primary);
+}
+
+/* Complex gradients for larger screens */
+@media (min-width: 768px) {
+  :root {
+    /* Multi-stop gradients with better color transitions */
+    --gradient-complex-primary: linear-gradient(
+      135deg,
+      var(--color-primary) 0%,
+      color-mix(in oklch, var(--color-primary) 85%, var(--color-accent)) 25%,
+      color-mix(in oklch, var(--color-primary) 60%, var(--color-accent)) 50%,
+      color-mix(in oklch, var(--color-primary) 30%, var(--color-accent)) 75%,
+      var(--color-accent) 100%
+    );
+    
+    --gradient-complex-vibrant: linear-gradient(
+      90deg,
+      var(--color-primary) 0%,
+      var(--color-accent) 33%,
+      var(--color-secondary) 66%,
+      var(--color-primary) 100%
+    );
+    
+    /* Mesh gradients for desktop */
+    --gradient-mesh: conic-gradient(
+      from 180deg at 50% 50%,
+      var(--color-primary) 0deg,
+      var(--color-accent) 90deg,
+      var(--color-secondary) 180deg,
+      var(--color-primary) 360deg
+    );
+  }
+}
+
+/* Use complex gradients on desktop */
+@media (min-width: 1024px) {
+  :root {
+    --gradient-primary: var(--gradient-complex-primary);
+    --gradient-vibrant: var(--gradient-complex-vibrant);
+    --gradient-background: var(--gradient-mesh);
+  }
+}
+
+/* Gradient utilities */
+.gradient-primary {
+  background: var(--gradient-primary);
+}
+
+.gradient-secondary {
+  background: var(--gradient-secondary);
+}
+
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Mobile-optimized gradient overlays */
+.gradient-overlay {
+  position: relative;
+}
+
+.gradient-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    color-mix(in oklch, var(--color-background) 95%, transparent) 100%
+  );
+  pointer-events: none;
+}
+
+/* Performance considerations */
+@media (max-width: 640px) {
+  /* Disable gradient animations on mobile */
+  .gradient-animated {
+    animation: none !important;
+  }
+  
+  /* Simplify overlay gradients */
+  .gradient-overlay::before {
+    background: linear-gradient(
+      to bottom,
+      transparent 50%,
+      var(--color-background) 100%
+    );
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  /* Replace gradients with solid colors */
+  :root {
+    --gradient-primary: var(--color-primary);
+    --gradient-secondary: var(--color-secondary);
+    --gradient-success: var(--color-success);
+    --gradient-warning: var(--color-warning);
+    --gradient-destructive: var(--color-destructive);
+    --gradient-interactive: var(--color-primary);
+  }
+  
+  /* Disable all gradient animations */
+  * {
+    background-size: auto !important;
+    animation: none !important;
+  }
+}
+
+/* GPU-accelerated gradient animations for desktop */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .gradient-animated {
+    background-size: 200% 200%;
+    animation: gradient-shift 15s ease infinite;
+    will-change: background-position;
+  }
+}
+
+/* Touch-optimized gradient buttons */
+@media (pointer: coarse) {
+  .btn-gradient {
+    /* Larger gradient area for touch feedback */
+    background-size: 120% 120%;
+    background-position: center;
+    transition: background-size 0.2s ease;
+  }
+  
+  .btn-gradient:active {
+    background-size: 100% 100%;
+  }
+}

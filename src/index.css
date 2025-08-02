@@ -1,66 +1,257 @@
-/* Import custom styles first (CSS requirement) */
-@import 'tw-animate-css';
-@import './styles/unified-token-system.css';
-@import './styles/wcag-color-pairs.css';
-@import './styles/gradient-overlays.css';
-@import './styles/color-zones.css';
-@import './styles/safety-components.css';
+/* CSS imports MUST come first (PostCSS requirement) */
+/* Design system reset - MUST load before everything else */
+@import './styles/design-system-reset.css';
+@import './styles/default-properties.css';
 
-/* Tailwind directives */
+/* Core theme system - load first for optimal performance */
+@import './styles/theme-tokens.css';
+@import './styles/vibrant-themes.css';
+
+/* Essential visual enhancements */
+@import './styles/glassmorphism.css';
+@import './styles/modern-typography.css';
+
+/* Animation libraries - load after core styles */
+@import 'tw-animate-css';
+@import './styles/micro-interactions.css';
+
+/* Optional enhancements - load last */
+@import './styles/vibrant-gradients.css';
+@import './styles/mobile-gradients.css';
+@import './styles/desktop-grid.css';
+@import './styles/desktop-spacing.css';
+@import './styles/desktop-typography.css';
+@import './styles/desktop-width-patterns.css';
+@import './styles/component-base-classes.css';
+
+/* Tailwind directives AFTER imports */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Semantic color utilities - reduced !important usage after hardcoded fixes */
+@layer utilities {
+  /* Core text colors - minimal !important for legacy override */
+  .text-foreground {
+    color: var(--color-foreground);
+  }
+  
+  .text-muted-foreground {
+    color: var(--color-muted-foreground);
+  }
+  
+  .text-primary {
+    color: var(--color-primary);
+  }
+  
+  .text-primary-foreground {
+    color: var(--color-primary-foreground);
+  }
+  
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+  
+  .text-secondary-foreground {
+    color: var(--color-secondary-foreground);
+  }
+  
+  .text-card-foreground {
+    color: var(--color-card-foreground);
+  }
+  
+  .text-popover-foreground {
+    color: var(--color-popover-foreground) !important;
+  }
+  
+  .text-accent-foreground {
+    color: var(--color-accent-foreground) !important;
+  }
+  
+  .text-destructive {
+    color: var(--color-destructive);
+  }
+  
+  .text-destructive-foreground {
+    color: var(--color-destructive-foreground) !important;
+  }
+  
+  /* Success and warning text colors */
+  .text-success {
+    color: var(--color-success);
+  }
+  
+  .text-success-foreground {
+    color: var(--color-success-foreground) !important;
+  }
+  
+  .text-warning {
+    color: var(--color-warning);
+  }
+  
+  .text-warning-foreground {
+    color: var(--color-warning-foreground) !important;
+  }
+
+  /* Background color overrides with high specificity */
+  .bg-background {
+    background-color: var(--color-background);
+  }
+  
+  .bg-foreground {
+    background-color: var(--color-foreground) !important;
+  }
+  
+  .bg-card {
+    background-color: var(--color-card);
+  }
+  
+  .bg-popover {
+    background-color: var(--color-popover) !important;
+  }
+  
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  
+  .bg-primary-foreground {
+    background-color: var(--color-primary-foreground) !important;
+  }
+  
+  .bg-secondary {
+    background-color: var(--color-secondary);
+  }
+  
+  .bg-secondary-foreground {
+    background-color: var(--color-secondary-foreground) !important;
+  }
+  
+  .bg-muted {
+    background-color: var(--color-muted);
+  }
+  
+  .bg-accent {
+    background-color: var(--color-accent) !important;
+  }
+  
+  .bg-destructive {
+    background-color: var(--color-destructive) !important;
+  }
+  
+  .bg-success {
+    background-color: var(--color-success);
+  }
+  
+  .bg-warning {
+    background-color: var(--color-warning) !important;
+  }
+  
+  /* Border color overrides */
+  .border {
+    border-color: var(--color-border) !important;
+  }
+  
+  .border-border {
+    border-color: var(--color-border) !important;
+  }
+  
+  .border-input {
+    border-color: var(--color-input) !important;
+  }
+  
+  .border-primary {
+    border-color: var(--color-primary) !important;
+  }
+  
+  /* Remove any hardcoded grays and whites */
+  .text-gray-900,
+  .text-gray-800,
+  .text-gray-700,
+  .text-gray-600,
+  .text-gray-500,
+  .text-gray-400 {
+    color: var(--color-foreground) !important;
+  }
+  
+  .text-gray-300,
+  .text-gray-200,
+  .text-gray-100 {
+    color: var(--color-muted-foreground) !important;
+  }
+  
+  .text-white {
+    color: var(--color-primary-foreground) !important;
+  }
+  
+  .text-black {
+    color: var(--color-foreground) !important;
+  }
+  
+  .bg-white {
+    background-color: var(--color-background) !important;
+  }
+  
+  .bg-gray-50,
+  .bg-gray-100 {
+    background-color: var(--color-muted) !important;
+  }
+  
+  .bg-gray-900,
+  .bg-black {
+    background-color: var(--color-foreground) !important;
+  }
+}
 
 /* Electric Lagoon Theme - Following shadcn/ui best practices */
 @layer base {
   :root {
     /* Map shadcn/ui variables to Electric Lagoon theme */
-    /* These must be in HSL format for Tailwind compatibility */
+    /* Converted to OKLCH for consistency with vibrant theme system */
 
     /* Background & Text - 60% Electric Blue Distribution */
-    --background: 200 20% 94%; /* Electric lagoon background - more vibrant */
-    --foreground: 200 60% 20%; /* Deep electric blue text - more vibrant */
+    --background: 0.94 0.02 200; /* Electric lagoon background - more vibrant */
+    --foreground: 0.2 0.08 200; /* Deep electric blue text - more vibrant */
 
     /* Card Components */
-    --card: 200 15% 98%; /* Near white elevated surfaces */
-    --card-foreground: 200 60% 20%; /* Deep electric blue text */
+    --card: 0.98 0.005 200; /* Near white elevated surfaces */
+    --card-foreground: 0.2 0.08 200; /* Deep electric blue text */
 
     /* Popover Components */
-    --popover: 0 0% 98%; /* White overlays */
-    --popover-foreground: 200 60% 20%;
+    --popover: 0.98 0 0; /* White overlays */
+    --popover-foreground: 0.2 0.08 200;
 
     /* Primary Actions - 7% Electric Yellow (Main CTAs) */
-    --primary: 90 85% 68%; /* More vibrant electric yellow */
-    --primary-foreground: 200 60% 20%; /* Dark text on yellow */
+    --primary: 0.68 0.18 90; /* More vibrant electric yellow */
+    --primary-foreground: 0.2 0.08 200; /* Dark text on yellow */
 
     /* Secondary Actions - 30% Electric Mint (Structural) */
-    --secondary: 140 65% 55%; /* More vibrant electric mint green */
-    --secondary-foreground: 200 60% 20%; /* Dark text on mint */
+    --secondary: 0.55 0.16 140; /* More vibrant electric mint green */
+    --secondary-foreground: 0.2 0.08 200; /* Dark text on mint */
 
     /* Muted Elements */
-    --muted: 200 25% 85%; /* Light electric blue - more vibrant */
-    --muted-foreground: 200 35% 45%; /* Muted electric text - more vibrant */
+    --muted: 0.85 0.02 200; /* Light electric blue - more vibrant */
+    --muted-foreground: 0.45 0.04 200; /* Muted electric text - more vibrant */
 
     /* Accent Elements - 3% Electric Coral */
-    --accent: 25 85% 60%; /* More vibrant electric coral accent */
-    --accent-foreground: 0 0% 98%; /* White text on coral */
+    --accent: 0.6 0.16 25; /* More vibrant electric coral accent */
+    --accent-foreground: 0.98 0 0; /* White text on coral */
 
     /* Destructive Actions */
-    --destructive: 25 90% 55%; /* More vibrant electric coral for errors */
-    --destructive-foreground: 0 0% 98%; /* White text */
+    --destructive: 0.55 0.18 25; /* More vibrant electric coral for errors */
+    --destructive-foreground: 0.98 0 0; /* White text */
 
     /* Status Actions - Mapped to consistent semantic colors */
-    --success: 140 80% 40%; /* Electric green - safe status */
-    --success-foreground: 0 0% 98%; /* White text */
-    --warning: 45 95% 55%; /* Electric yellow - caution status */
-    --warning-foreground: 200 60% 20%; /* Dark text on yellow */
-    --critical: 0 85% 50%; /* Electric red - critical status */
-    --critical-foreground: 0 0% 98%; /* White text */
+    --success: 0.4 0.16 140; /* Electric green - safe status */
+    --success-foreground: 0.98 0 0; /* White text */
+    --warning: 0.55 0.19 45; /* Electric yellow - caution status */
+    --warning-foreground: 0.2 0.08 200; /* Dark text on yellow */
+    --critical: 0.5 0.17 0; /* Electric red - critical status */
+    --critical-foreground: 0.98 0 0; /* White text */
 
     /* Borders & Inputs */
-    --border: 200 30% 85%; /* Light electric blue borders - more vibrant */
-    --input: 200 30% 85%; /* Light electric blue inputs - more vibrant */
-    --ring: 90 85% 65%; /* More vibrant electric yellow focus ring */
+    --border: 0.85 0.03 200; /* Light electric blue borders - more vibrant */
+    --input: 0.85 0.03 200; /* Light electric blue inputs - more vibrant */
+    --ring: 0.65 0.17 90; /* More vibrant electric yellow focus ring */
 
     /* Border Radius */
     --radius: 0.5rem;
@@ -72,57 +263,57 @@
     --radius-xl: calc(var(--radius) + 4px);
 
     /* Chart colors */
-    --chart-1: 200 60% 20%; /* Electric blue */
-    --chart-2: 140 65% 55%; /* Electric mint */
-    --chart-3: 45 95% 55%; /* Electric yellow */
-    --chart-4: 25 85% 60%; /* Electric coral */
-    --chart-5: 0 85% 50%; /* Electric red */
+    --chart-1: 0.2 0.08 200; /* Electric blue */
+    --chart-2: 0.55 0.16 140; /* Electric mint */
+    --chart-3: 0.55 0.19 45; /* Electric yellow */
+    --chart-4: 0.6 0.16 25; /* Electric coral */
+    --chart-5: 0.5 0.17 0; /* Electric red */
   }
 
   .dark {
     /* Dark mode mappings to unified token system */
     /* Evening pool operations with electric theme maintained */
 
-    --background: 200 18% 8%; /* Maps to dark electric lagoon */
-    --foreground: 200 40% 92%; /* Maps to light electric text */
+    --background: 0.08 0.01 200; /* Maps to dark electric lagoon */
+    --foreground: 0.92 0.02 200; /* Maps to light electric text */
 
-    --card: 200 18% 11%; /* Maps to dark electric surface */
-    --card-foreground: 200 40% 92%;
+    --card: 0.11 0.01 200; /* Maps to dark electric surface */
+    --card-foreground: 0.92 0.02 200;
 
-    --popover: 200 18% 14%; /* Maps to dark electric overlay */
-    --popover-foreground: 200 40% 92%;
+    --popover: 0.14 0.02 200; /* Maps to dark electric overlay */
+    --popover-foreground: 0.92 0.02 200;
 
-    --primary: 90 85% 74%; /* Keep electric yellow visible */
-    --primary-foreground: 200 18% 8%;
+    --primary: 0.74 0.17 90; /* Keep electric yellow visible */
+    --primary-foreground: 0.08 0.01 200;
 
-    --secondary: 140 55% 52%; /* Keep electric mint recognizable */
-    --secondary-foreground: 200 40% 92%;
+    --secondary: 0.52 0.14 140; /* Keep electric mint recognizable */
+    --secondary-foreground: 0.92 0.02 200;
 
-    --muted: 200 18% 16%; /* Maps to dark electric surface */
-    --muted-foreground: 200 25% 65%;
+    --muted: 0.16 0.01 200; /* Maps to dark electric surface */
+    --muted-foreground: 0.65 0.03 200;
 
-    --accent: 25 80% 65%; /* Keep electric coral accent */
-    --accent-foreground: 200 40% 92%;
+    --accent: 0.65 0.14 25; /* Keep electric coral accent */
+    --accent-foreground: 0.92 0.02 200;
 
-    --destructive: 25 85% 64%; /* Keep electric coral destructive */
-    --destructive-foreground: 200 40% 92%;
+    --destructive: 0.64 0.16 25; /* Keep electric coral destructive */
+    --destructive-foreground: 0.92 0.02 200;
 
     /* Status Actions - Dark mode variants */
-    --success: 140 70% 45%; /* Brighter electric green for dark mode */
-    --success-foreground: 200 40% 92%;
-    --warning: 45 90% 60%; /* Brighter electric yellow for dark mode */
-    --warning-foreground: 200 18% 8%;
-    --critical: 0 80% 55%; /* Brighter electric red for dark mode */
-    --critical-foreground: 200 40% 92%;
+    --success: 0.45 0.14 140; /* Brighter electric green for dark mode */
+    --success-foreground: 0.92 0.02 200;
+    --warning: 0.6 0.18 45; /* Brighter electric yellow for dark mode */
+    --warning-foreground: 0.08 0.01 200;
+    --critical: 0.55 0.15 0; /* Brighter electric red for dark mode */
+    --critical-foreground: 0.92 0.02 200;
 
-    --border: 200 18% 22%; /* Maps to dark electric border */
-    --input: 200 18% 22%;
-    --ring: 25 80% 65%; /* Maps to electric coral focus */
+    --border: 0.22 0.01 200; /* Maps to dark electric border */
+    --input: 0.22 0.01 200;
+    --ring: 0.65 0.14 25; /* Maps to electric coral focus */
   }
 
   /* Global styles following shadcn/ui patterns */
   * {
-    border-color: hsl(var(--border));
+    border-color: oklch(var(--border));
   }
 
   html {
@@ -131,8 +322,8 @@
   }
 
   body {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
+    background-color: oklch(var(--background));
+    color: oklch(var(--foreground));
     font-feature-settings:
       'rlig' 1,
       'calt' 1;
