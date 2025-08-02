@@ -3,6 +3,7 @@ import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
+import type { PolymorphicComponentProps, IconableComponentProps } from '@/types'
 
 const badgeVariants = cva(
   'badge-base focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex w-fit shrink-0 items-center justify-center gap-1 overflow-hidden transition-[color,box-shadow] focus-visible:ring-[3px] [&>svg]:pointer-events-none [&>svg]:size-3',
@@ -29,10 +30,10 @@ const badgeVariants = cva(
   }
 )
 
-interface BadgeProps extends React.ComponentProps<'span'>, VariantProps<typeof badgeVariants> {
-  asChild?: boolean
-  icon?: React.ReactNode
-  iconPosition?: 'left' | 'right'
+interface BadgeProps extends React.ComponentProps<'span'>, 
+  VariantProps<typeof badgeVariants>,
+  Omit<PolymorphicComponentProps, 'children' | 'className'>,
+  Omit<IconableComponentProps, 'children' | 'className'> {
   removable?: boolean
   onRemove?: () => void
 }

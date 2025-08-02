@@ -1,10 +1,10 @@
 import * as React from 'react'
 
 import { cn } from '@/lib/utils'
+import type { FormComponentProps } from '@/types'
 
-interface InputProps extends React.ComponentProps<'input'> {
-  error?: boolean
-  helperText?: string
+interface InputProps extends React.ComponentProps<'input'>, 
+  Omit<FormComponentProps, 'children' | 'className' | 'disabled' | 'id' | 'name' | 'required' | 'aria-label' | 'aria-describedby' | 'aria-invalid'> {
   label?: string
   startIcon?: React.ReactNode
   endIcon?: React.ReactNode

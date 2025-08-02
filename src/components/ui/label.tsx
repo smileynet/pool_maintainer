@@ -4,11 +4,10 @@ import * as React from 'react'
 import * as LabelPrimitive from '@radix-ui/react-label'
 
 import { cn } from '@/lib/utils'
+import type { FormComponentProps } from '@/types'
 
-interface LabelProps extends React.ComponentProps<typeof LabelPrimitive.Root> {
-  required?: boolean
-  error?: boolean
-}
+interface LabelProps extends React.ComponentProps<typeof LabelPrimitive.Root>,
+  Pick<FormComponentProps, 'required' | 'error'> {}
 
 function Label({ 
   className, 

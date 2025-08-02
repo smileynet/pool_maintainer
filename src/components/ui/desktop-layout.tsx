@@ -1,12 +1,13 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
+import type { BaseComponentProps, VariantComponentProps } from '@/types'
 
-interface DesktopLayoutProps {
-  children: React.ReactNode
-  className?: string
-  variant?: 'default' | 'sidebar' | 'split' | 'holy-grail'
+type LayoutVariant = 'default' | 'sidebar' | 'split' | 'holy-grail'
+type ContentWidth = 'narrow' | 'medium' | 'wide' | 'full'
+
+interface DesktopLayoutProps extends BaseComponentProps, VariantComponentProps<LayoutVariant> {
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
-  contentWidth?: 'narrow' | 'medium' | 'wide' | 'full'
+  contentWidth?: ContentWidth
 }
 
 export function DesktopLayout({
@@ -37,9 +38,7 @@ export function DesktopLayout({
   )
 }
 
-interface GridContainerProps {
-  children: React.ReactNode
-  className?: string
+interface GridContainerProps extends BaseComponentProps {
   columns?: 'default' | 'wide' | 'ultra'
   gap?: 'sm' | 'md' | 'lg' | 'xl'
 }
@@ -63,9 +62,7 @@ export function GridContainer({
   )
 }
 
-interface GridItemProps {
-  children: React.ReactNode
-  className?: string
+interface GridItemProps extends BaseComponentProps {
   span?: number | { mobile?: number; tablet?: number; desktop?: number }
   align?: 'start' | 'center' | 'end'
 }
@@ -95,11 +92,10 @@ export function GridItem({
   )
 }
 
-interface SidebarLayoutProps {
+interface SidebarLayoutProps extends BaseComponentProps {
   sidebar: React.ReactNode
   main: React.ReactNode
   sidebarWidth?: 'narrow' | 'medium' | 'wide'
-  className?: string
 }
 
 export function SidebarLayout({

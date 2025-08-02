@@ -3,6 +3,7 @@ import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
+import type { PolymorphicComponentProps, LoadableComponentProps, IconableComponentProps } from '@/types'
 
 const buttonVariants = cva(
   "button-base focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
@@ -38,11 +39,11 @@ const buttonVariants = cva(
   }
 )
 
-interface ButtonProps extends React.ComponentProps<'button'>, VariantProps<typeof buttonVariants> {
-  asChild?: boolean
-  loading?: boolean
-  icon?: React.ReactNode
-  iconPosition?: 'left' | 'right'
+interface ButtonProps extends React.ComponentProps<'button'>, 
+  VariantProps<typeof buttonVariants>,
+  Omit<PolymorphicComponentProps, 'children' | 'className'>,
+  Omit<LoadableComponentProps, 'children' | 'className' | 'loadingText'>,
+  Omit<IconableComponentProps, 'children' | 'className'> {
   fullWidth?: boolean
 }
 

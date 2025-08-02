@@ -1,10 +1,11 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
+import type { BaseComponentProps, VariantComponentProps, DataComponentProps, SortableComponentProps } from '@/types'
 
-interface DesktopTableProps {
-  children: React.ReactNode
-  className?: string
-  density?: 'compact' | 'comfortable' | 'spacious'
+type TableDensity = 'compact' | 'comfortable' | 'spacious'
+
+interface DesktopTableProps extends BaseComponentProps {
+  density?: TableDensity
   striped?: boolean
   hoverable?: boolean
 }
@@ -35,9 +36,7 @@ export function DesktopTable({
   )
 }
 
-interface DesktopTableHeaderProps {
-  children: React.ReactNode
-  className?: string
+interface DesktopTableHeaderProps extends BaseComponentProps {
   sticky?: boolean
 }
 
@@ -59,20 +58,15 @@ export function DesktopTableHeader({
   )
 }
 
-interface DesktopTableBodyProps {
-  children: React.ReactNode
-  className?: string
-}
+interface DesktopTableBodyProps extends BaseComponentProps {}
 
 export function DesktopTableBody({ children, className }: DesktopTableBodyProps) {
   return <tbody className={cn('', className)}>{children}</tbody>
 }
 
-interface DesktopTableRowProps {
-  children: React.ReactNode
-  className?: string
-  variant?: 'default' | 'success' | 'warning' | 'destructive'
-}
+type TableRowVariant = 'default' | 'success' | 'warning' | 'destructive'
+
+interface DesktopTableRowProps extends BaseComponentProps, VariantComponentProps<TableRowVariant> {}
 
 export function DesktopTableRow({
   children,
@@ -94,11 +88,12 @@ export function DesktopTableRow({
   )
 }
 
-interface DesktopTableCellProps {
-  children: React.ReactNode
-  className?: string
-  align?: 'left' | 'center' | 'right'
-  width?: 'auto' | 'min' | 'max'
+type CellAlign = 'left' | 'center' | 'right'
+type CellWidth = 'auto' | 'min' | 'max'
+
+interface DesktopTableCellProps extends BaseComponentProps {
+  align?: CellAlign
+  width?: CellWidth
 }
 
 export function DesktopTableCell({
@@ -124,14 +119,10 @@ export function DesktopTableCell({
   )
 }
 
-interface DesktopTableHeaderCellProps {
-  children: React.ReactNode
-  className?: string
-  align?: 'left' | 'center' | 'right'
-  sortable?: boolean
-  sortDirection?: 'asc' | 'desc' | null
+interface DesktopTableHeaderCellProps extends BaseComponentProps, Omit<SortableComponentProps<never>, 'sortKey' | 'onSort'> {
+  align?: CellAlign
+  width?: CellWidth
   onSort?: () => void
-  width?: 'auto' | 'min' | 'max'
 }
 
 export function DesktopTableHeaderCell({
@@ -221,25 +212,22 @@ const tableStyles = `
 `
 
 // Advanced table features for desktop usage
-interface DesktopDataTableProps<T> {
-  data: T[]
-  columns: Array<{
-    key: keyof T
-    label: string
-    sortable?: boolean
-    align?: 'left' | 'center' | 'right'
-    width?: 'auto' | 'min' | 'max'
-    render?: (value: T[keyof T], item: T) => React.ReactNode
-  }>
-  className?: string
-  density?: 'compact' | 'comfortable' | 'spacious'
+interface DesktopDataTableColumn<T> {
+  key: keyof T
+  label: string
+  sortable?: boolean
+  align?: CellAlign
+  width?: CellWidth
+  render?: (value: T[keyof T], item: T) => React.ReactNode
+}
+
+interface DesktopDataTableProps<T> extends DataComponentProps<T>, Omit<SortableComponentProps<keyof T>, 'onSort'> {
+  columns: DesktopDataTableColumn<T>[]
+  density?: TableDensity
   striped?: boolean
   hoverable?: boolean
   sortBy?: keyof T
-  sortDirection?: 'asc' | 'desc'
   onSort?: (key: keyof T, direction: 'asc' | 'desc') => void
-  emptyMessage?: string
-  loading?: boolean
 }
 
 export function DesktopDataTable<T extends Record<string, unknown>>({

@@ -34,6 +34,30 @@ if git diff --cached --name-only | grep -E "\.(ts|tsx)$" | grep -E "(chemical|po
     bunx eslint --quiet --ext .ts,.tsx src/components/ui/*chemical* src/test/fixtures/pool-maintenance-data.ts 2>/dev/null || true
 fi
 
+# Maintainability pattern checks
+echo "🔧 Maintainability pattern validation..."
+STAGED_TS_FILES=$(git diff --cached --name-only | grep -E "\.(ts|tsx)$" | grep -v ".stories." | head -10)
+if [ ! -z "$STAGED_TS_FILES" ]; then
+    echo "  🏗️  Checking component complexity and patterns..."
+    
+    # Check for common props usage in new components
+    for file in $STAGED_TS_FILES; do
+        if [ -f "$file" ] && git diff --cached "$file" | grep -q "interface.*Props.*{" && ! git diff --cached "$file" | grep -q "extends.*ComponentProps"; then
+            echo "  💡 Consider extending common props interfaces in $file"
+        fi
+    done
+    
+    # Check for custom hook usage patterns
+    if echo "$STAGED_TS_FILES" | xargs git diff --cached | grep -q "useState.*\[\].*useState.*loading"; then
+        echo "  💡 Consider using custom hooks (useFetchData, usePaginatedData) for data fetching patterns"
+    fi
+    
+    # Check for lazy loading without error boundaries
+    if echo "$STAGED_TS_FILES" | xargs git diff --cached | grep -q "lazy(" && ! echo "$STAGED_TS_FILES" | xargs git diff --cached | grep -q "ErrorBoundary\|createLazy"; then
+        echo "  💡 Consider using enhanced lazy loading (createLazyComponent) for better error handling"
+    fi
+fi
+
 # Check for sensitive pool data in commits (excluding test/mock/hook files)
 echo "🔐 Scanning for sensitive pool data..."
 if git diff --cached --name-only | grep -vE "(test|spec|mock|stories|\.husky|pre-commit)" | xargs -I {} sh -c 'git diff --cached "$1" | grep -iE "(password|secret|api_key|token|chemical_formula)"' _ {} > /dev/null 2>&1; then
@@ -49,5 +73,41 @@ if git diff --cached --name-only | grep "\.stories\." > /dev/null; then
     rm -rf /tmp/storybook-build-test 2>/dev/null || true
 fi
 
+# Performance and bundle size checks
+echo "📊 Performance validation..."
+if git diff --cached --name-only | grep -E "(App\.tsx|main\.tsx|index\.tsx)" > /dev/null; then
+    echo "  🎯 Main application files changed - consider impact on bundle size"
+    
+    # Quick bundle size estimate
+    if command -v du >/dev/null 2>&1; then
+        CURRENT_SIZE=$(du -sh src/ 2>/dev/null | cut -f1 || echo "unknown")
+        echo "  📏 Current source size: $CURRENT_SIZE"
+    fi
+fi
+
+# Documentation consistency checks
+echo "📚 Documentation validation..."
+if git diff --cached --name-only | grep -E "\.md$" > /dev/null; then
+    echo "  📖 Markdown files changed - checking for broken links..."
+    # Basic markdown validation (could be enhanced with a proper tool)
+    if git diff --cached --name-only | grep -E "\.md$" | xargs grep -l "](.*md)" > /dev/null 2>&1; then
+        echo "  💡 Consider running link checker on updated documentation"
+    fi
+fi
+
+# Component export consistency
+if git diff --cached --name-only | grep -E "src/components.*\.(ts|tsx)$" > /dev/null; then
+    echo "  🔗 Component files changed - validating exports..."
+    COMPONENT_FILES=$(git diff --cached --name-only | grep -E "src/components.*\.(ts|tsx)$")
+    for file in $COMPONENT_FILES; do
+        if [ -f "$file" ] && ! git diff --cached "$file" | grep -q "export.*{"; then
+            if git diff --cached "$file" | grep -q "function.*[A-Z]" && ! git diff --cached "$file" | grep -q "export default"; then
+                echo "  💡 Consider adding proper exports in $file"
+            fi
+        fi
+    done
+fi
+
 echo "✅ All quality checks passed!"
 echo "🚀 Ready to commit - pool maintenance system is safe and clean!"
+echo "📈 Code quality improvements active: types, hooks, memoization, lazy loading, error boundaries"

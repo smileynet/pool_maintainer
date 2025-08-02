@@ -4,17 +4,19 @@ import { Button } from './button'
 import { Input } from './input'
 import { Label } from './label'
 import { DesktopCard, DesktopButtonGroup } from './desktop-variants'
+import type { BaseComponentProps, FormComponentProps, CollapsibleComponentProps } from '@/types'
 
 // Desktop-optimized Form layout with intelligent grouping
-interface DesktopFormProps {
-  children: React.ReactNode
-  className?: string
+type FormLayout = 'single' | 'two-column' | 'three-column'
+type FormSpacing = 'compact' | 'default' | 'comfortable'
+
+interface DesktopFormProps extends BaseComponentProps {
   onSubmit?: (e: React.FormEvent) => void
   title?: string
   description?: string
   actions?: React.ReactNode
-  layout?: 'single' | 'two-column' | 'three-column'
-  spacing?: 'compact' | 'default' | 'comfortable'
+  layout?: FormLayout
+  spacing?: FormSpacing
 }
 
 export function DesktopForm({
@@ -60,13 +62,9 @@ export function DesktopForm({
 }
 
 // Desktop-optimized Form section with collapsible functionality
-interface DesktopFormSectionProps {
+interface DesktopFormSectionProps extends BaseComponentProps, Omit<CollapsibleComponentProps, 'expanded' | 'onExpandedChange'> {
   title: string
-  children: React.ReactNode
-  className?: string
   description?: string
-  collapsible?: boolean
-  defaultExpanded?: boolean
   required?: boolean
 }
 
@@ -118,12 +116,13 @@ export function DesktopFormSection({
 }
 
 // Desktop-optimized Field group with enhanced layout
-interface DesktopFieldGroupProps {
-  children: React.ReactNode
-  className?: string
-  layout?: 'horizontal' | 'vertical' | 'inline'
-  spacing?: 'compact' | 'default' | 'comfortable'
-  align?: 'start' | 'center' | 'end'
+type FieldGroupLayout = 'horizontal' | 'vertical' | 'inline'
+type FieldGroupAlign = 'start' | 'center' | 'end'
+
+interface DesktopFieldGroupProps extends BaseComponentProps {
+  layout?: FieldGroupLayout
+  spacing?: FormSpacing
+  align?: FieldGroupAlign
 }
 
 export function DesktopFieldGroup({
@@ -151,19 +150,17 @@ export function DesktopFieldGroup({
 }
 
 // Desktop-optimized Input field with enhanced UX
-interface DesktopInputFieldProps {
+type InputFieldWidth = 'full' | 'auto' | 'sm' | 'md' | 'lg'
+
+interface DesktopInputFieldProps extends Omit<FormComponentProps, 'error' | 'helperText'> {
   label: string
-  id: string
   type?: string
   value?: string
   onChange?: (value: string) => void
   placeholder?: string
   description?: string
   error?: string
-  required?: boolean
-  disabled?: boolean
-  className?: string
-  width?: 'full' | 'auto' | 'sm' | 'md' | 'lg'
+  width?: InputFieldWidth
   prefix?: React.ReactNode
   suffix?: React.ReactNode
 }
@@ -239,12 +236,13 @@ export function DesktopInputField({
 }
 
 // Desktop-optimized Form actions with consistent spacing
-interface DesktopFormActionsProps {
-  children: React.ReactNode
-  className?: string
-  alignment?: 'start' | 'center' | 'end' | 'between'
-  spacing?: 'compact' | 'default' | 'comfortable'
-  orientation?: 'horizontal' | 'vertical'
+type FormActionsAlignment = 'start' | 'center' | 'end' | 'between'
+type FormActionsOrientation = 'horizontal' | 'vertical'
+
+interface DesktopFormActionsProps extends BaseComponentProps {
+  alignment?: FormActionsAlignment
+  spacing?: FormSpacing
+  orientation?: FormActionsOrientation
 }
 
 export function DesktopFormActions({
@@ -267,16 +265,17 @@ export function DesktopFormActions({
 }
 
 // Desktop-optimized Multi-step form with progress indication
-interface DesktopMultiStepFormProps {
-  steps: Array<{
-    title: string
-    description?: string
-    content: React.ReactNode
-    optional?: boolean
-  }>
+interface FormStep {
+  title: string
+  description?: string
+  content: React.ReactNode
+  optional?: boolean
+}
+
+interface DesktopMultiStepFormProps extends BaseComponentProps {
+  steps: FormStep[]
   currentStep: number
   onStepChange: (step: number) => void
-  className?: string
   showProgress?: boolean
 }
 
@@ -348,7 +347,7 @@ export function DesktopMultiStepForm({
 }
 
 // Desktop-optimized Form wizard navigation
-interface DesktopFormWizardNavigationProps {
+interface DesktopFormWizardNavigationProps extends BaseComponentProps {
   currentStep: number
   totalSteps: number
   onPrevious: () => void
@@ -356,7 +355,6 @@ interface DesktopFormWizardNavigationProps {
   onSubmit?: () => void
   canGoNext?: boolean
   isSubmitting?: boolean
-  className?: string
 }
 
 export function DesktopFormWizardNavigation({

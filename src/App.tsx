@@ -1,32 +1,37 @@
-import { useState, lazy, Suspense } from 'react'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { PoolStatusDashboard } from '@/components/ui/pool-status-dashboard'
 import { OfflineIndicator } from '@/components/ui/offline-indicator'
 import { MobileThemeSelector } from '@/components/ui/mobile-theme-selector'
 
-// Lazy load tab components for better code splitting
-const PoolFacilityManager = lazy(() => import('@/components/ui/pool-facility-manager'))
-const ChemicalTestHistory = lazy(() => import('@/components/ui/chemical-test-history'))
-const LazyChemicalTrendChart = lazy(() => import('@/components/ui/lazy-chemical-trend-chart').then(module => ({ default: module.LazyChemicalTrendChart })))
-import { Droplet, TestTube, MapPin, Activity, BarChart3, Settings, History, Loader2 } from 'lucide-react'
+// Enhanced lazy loading with error boundaries and preloading
+import {
+  LazyPoolFacilityManager,
+  LazyChemicalTestHistory,
+  LazyChemicalTrendChart
+} from '@/components/lazy'
+import { usePreloadComponent } from '@/utils/lazy-loading'
+
+import { Droplet, TestTube, MapPin, Activity, BarChart3, Settings, History } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import './App.css'
-
-// Loading component for lazy-loaded tabs
-const TabLoadingFallback = ({ title }: { title: string }) => (
-  <div className="flex items-center justify-center py-16">
-    <div className="flex items-center space-x-3 text-muted-foreground">
-      <Loader2 className="h-5 w-5 animate-spin" />
-      <span>Loading {title}...</span>
-    </div>
-  </div>
-)
 
 function App() {
   // Navigation state
   const [activeTab, setActiveTab] = useState<'overview' | 'facilities' | 'history' | 'analytics'>(
     'overview'
+  )
+
+  // Preload components based on user behavior
+  usePreloadComponent(
+    () => import('@/components/ui/pool-facility-manager'), 
+    activeTab === 'overview' // Preload facilities when on overview
+  )
+  
+  usePreloadComponent(
+    () => import('@/components/ui/chemical-test-history'),
+    activeTab === 'facilities' // Preload history when on facilities
   )
 
   // Tab navigation items
@@ -134,10 +139,8 @@ function App() {
         </p>
       </div>
 
-      {/* Chemical Trend Charts */}
-      <Suspense fallback={<TabLoadingFallback title="Chemical Trend Charts" />}>
-        <LazyChemicalTrendChart />
-      </Suspense>
+      {/* Chemical Trend Charts - now using enhanced lazy loading */}
+      <LazyChemicalTrendChart />
 
     </div>
   )
@@ -198,16 +201,8 @@ function App() {
       {/* Main Content - Enhanced with Stagger Animations */}
       <main className="layout-app min-h-screen py-8 page-enter">
         {activeTab === 'overview' && renderOverview()}
-        {activeTab === 'facilities' && (
-          <Suspense fallback={<TabLoadingFallback title="Pool Facilities" />}>
-            <PoolFacilityManager />
-          </Suspense>
-        )}
-        {activeTab === 'history' && (
-          <Suspense fallback={<TabLoadingFallback title="Chemical Test History" />}>
-            <ChemicalTestHistory />
-          </Suspense>
-        )}
+        {activeTab === 'facilities' && <LazyPoolFacilityManager />}
+        {activeTab === 'history' && <LazyChemicalTestHistory />}
         {activeTab === 'analytics' && renderAnalytics()}
       </main>
     </div>

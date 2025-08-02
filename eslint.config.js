@@ -5,6 +5,8 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 import storybook from 'eslint-plugin-storybook'
+// Note: Custom local rules moved to documentation for now
+// Will implement as proper ESLint plugin in future iteration
 
 export default tseslint.config([
   {
@@ -20,6 +22,8 @@ export default tseslint.config([
       'postcss.config.js',
       'node_modules/**',
       '.storybook/main.ts', // Storybook config can be complex
+      'eslint-local-rules.js', // Custom rules file (work in progress)
+      'public/mockServiceWorker.js', // Generated file
     ],
   },
   {
@@ -59,12 +63,32 @@ export default tseslint.config([
       'object-shorthand': 'error',
       'prefer-template': 'error',
       
+      // Maintainability patterns
+      'complexity': ['warn', { max: 15 }],
+      'max-depth': ['warn', { max: 4 }],
+      'max-lines-per-function': ['warn', { max: 50, skipBlankLines: true, skipComments: true }],
+      'max-params': ['warn', { max: 4 }],
+      
       // Prevent theming bypasses - enforce shadcn/ui patterns
       'no-restricted-syntax': [
         'error',
         {
           selector: 'JSXAttribute[name.name="className"][value.value=/var\\(--semantic-/]',
           message: 'Do not use semantic CSS variables directly. Use shadcn/ui component variants instead (e.g., variant="default" instead of className="bg-[var(--semantic-action-primary)]").',
+        },
+        // Enforce custom hooks usage patterns
+        {
+          selector: 'CallExpression[callee.name="useState"][arguments.0.type="ArrayExpression"]',
+          message: 'Consider using useFetchData hook for managing array state with loading/error handling.',
+        },
+        {
+          selector: 'VariableDeclarator[id.type="ArrayPattern"][init.callee.name="useState"]:has(ArrayPattern > Identifier[name=/loading|error/])',
+          message: 'Use custom hooks from @/hooks for data fetching patterns instead of manual loading/error state management.',
+        },
+        // Enforce error boundary usage
+        {
+          selector: 'CallExpression[callee.name="lazy"]:not(:has(CallExpression[callee.property.name="catch"]))',
+          message: 'Lazy-loaded components should use createLazyComponent or createLazyRoute from @/utils/lazy-loading for proper error handling.',
         },
       ],
     },
@@ -89,6 +113,31 @@ export default tseslint.config([
       'react-hooks/exhaustive-deps': 'error', // Critical for chemical reading state consistency
       'react-hooks/rules-of-hooks': 'error',
       
+      // Component maintainability patterns
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: 'react',
+              importNames: ['FC'],
+              message: 'Use function declarations instead of React.FC for better type inference.',
+            },
+          ],
+          patterns: [
+            {
+              group: ['../../../*'],
+              message: 'Avoid deep relative imports. Use absolute imports with @ alias.',
+            },
+            {
+              group: ['**/ui/*'],
+              importNames: ['*'],
+              message: 'Import UI components from @/components/ui/ using absolute imports.',
+            },
+          ],
+        },
+      ],
+      
       // Theming enforcement for React components
       'no-restricted-syntax': [
         'error',
@@ -103,6 +152,25 @@ export default tseslint.config([
         {
           selector: 'JSXAttribute[name.name="className"][value.value=/border-\\[var\\(--semantic-/]',
           message: 'Do not use semantic border variables directly. Use Tailwind utilities like border-border or border-muted.',
+        },
+        // Enforce common props usage
+        {
+          selector: 'TSInterfaceDeclaration[id.name=/Props$/]:not(:has(TSExtendsClause))',
+          message: 'Component prop interfaces should extend from common props interfaces (@/types/common-props) for consistency.',
+        },
+        // Enforce memo usage for heavy components  
+        {
+          selector: 'FunctionDeclaration[id.name=/Card|Table|Chart/]:not(:has(CallExpression[callee.name="memo"]))',
+          message: 'Consider wrapping heavy components (Card, Table, Chart) with React.memo for performance.',
+        },
+        // Prevent inline object/function props
+        {
+          selector: 'JSXExpressionContainer[expression.type="ObjectExpression"]',
+          message: 'Avoid inline objects in JSX props. Use useMemo or define outside component for stable references.',
+        },
+        {
+          selector: 'JSXExpressionContainer[expression.type="ArrowFunctionExpression"]',
+          message: 'Avoid inline functions in JSX props. Use useCallback or define outside component for stable references.',
         },
       ],
     },
