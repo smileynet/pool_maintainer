@@ -18,6 +18,8 @@ import {
 import { cn } from '@/lib/utils'
 import { getChemicalTests, getTestSummary, type ChemicalTest } from '@/lib/localStorage'
 import { validateChemical, type ChemicalType } from '@/lib/mahc-validation'
+import { PoolStatusSummaryWidget, usePoolStatusSummary } from './pool-status-summary'
+import { ChemicalMiniIndicator, ChemicalLevelIndicator } from './chemical-level-indicator'
 
 interface PoolStatus {
   poolId: string
@@ -264,6 +266,9 @@ export const PoolStatusDashboard = ({ onViewPool }: { onViewPool?: (poolId: stri
   }
 
   const summary = getTestSummary()
+  
+  // Always call hooks in the same order - before any early returns
+  const statusSummary = usePoolStatusSummary(pools, lastUpdated)
 
   if (loading) {
     return (
@@ -280,15 +285,21 @@ export const PoolStatusDashboard = ({ onViewPool }: { onViewPool?: (poolId: stri
 
   return (
     <div className="space-y-6">
+      {/* Status Summary Widget */}
+      <PoolStatusSummaryWidget 
+        summary={statusSummary} 
+        onRefresh={loadPoolStatus}
+      />
+
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h3 className="flex items-center gap-2 text-lg font-semibold">
             <MapPin className="text-primary h-5 w-5" />
-            Pool Status Dashboard
+            Pool Details
           </h3>
           <p className="text-muted-foreground text-sm">
-            Current status of {pools.length} pools from recent test data
+            Individual pool status and recent chemical readings
           </p>
         </div>
 
@@ -305,63 +316,6 @@ export const PoolStatusDashboard = ({ onViewPool }: { onViewPool?: (poolId: stri
         </div>
       </div>
 
-      {/* Summary Stats */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardContent className="pt-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-muted-foreground text-sm font-medium">Total Pools</p>
-                <p className="text-2xl font-bold">{pools.length}</p>
-              </div>
-              <MapPin className="text-primary h-8 w-8" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="pt-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-muted-foreground text-sm font-medium">Safe Pools</p>
-                <p className="text-2xl font-bold text-success">
-                  {pools.filter((p) => p.status === 'safe').length}
-                </p>
-              </div>
-              <CheckCircle className="h-8 w-8 text-success" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="pt-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-muted-foreground text-sm font-medium">Need Attention</p>
-                <p className="text-2xl font-bold text-warning">
-                  {
-                    pools.filter((p) => ['caution', 'critical', 'emergency'].includes(p.status))
-                      .length
-                  }
-                </p>
-              </div>
-              <AlertTriangle className="h-8 w-8 text-warning" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="pt-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-muted-foreground text-sm font-medium">Total Tests</p>
-                <p className="text-2xl font-bold">{summary.totalTests}</p>
-              </div>
-              <TestTube className="text-primary h-8 w-8" />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
 
       {/* Pool Status Cards */}
       {pools.length === 0 ? (
@@ -414,32 +368,30 @@ export const PoolStatusDashboard = ({ onViewPool }: { onViewPool?: (poolId: stri
                 </CardHeader>
 
                 <CardContent>
-                  {/* Current Chemical Levels */}
+                  {/* Current Chemical Levels with Visual Indicators */}
                   {pool.lastTest && (
                     <div className="mb-4">
-                      <h5 className="mb-2 text-sm font-medium">Current Levels</h5>
-                      <div className="grid grid-cols-2 gap-3 text-sm">
-                        <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground">Free Chlorine:</span>
-                          <span className="font-medium">
-                            {pool.lastTest.readings.freeChlorine} ppm
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground">pH:</span>
-                          <span className="font-medium">{pool.lastTest.readings.ph}</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground">Temperature:</span>
-                          <span className="font-medium">
-                            {pool.lastTest.readings.temperature}°F
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground">Alkalinity:</span>
-                          <span className="font-medium">
-                            {pool.lastTest.readings.alkalinity} ppm
-                          </span>
+                      <h5 className="mb-3 text-sm font-medium">Chemical Levels</h5>
+                      <div className="space-y-3">
+                        <ChemicalLevelIndicator 
+                          chemical="freeChlorine" 
+                          value={pool.lastTest.readings.freeChlorine}
+                          size="sm"
+                        />
+                        <ChemicalLevelIndicator 
+                          chemical="ph" 
+                          value={pool.lastTest.readings.ph}
+                          size="sm"
+                        />
+                        <div className="grid grid-cols-2 gap-3">
+                          <ChemicalMiniIndicator 
+                            chemical="alkalinity" 
+                            value={pool.lastTest.readings.alkalinity}
+                          />
+                          <ChemicalMiniIndicator 
+                            chemical="temperature" 
+                            value={pool.lastTest.readings.temperature}
+                          />
                         </div>
                       </div>
                     </div>

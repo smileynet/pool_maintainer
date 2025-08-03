@@ -406,12 +406,3 @@ export function DesktopFormWizardNavigation({
   )
 }
 
-export {
-  DesktopForm,
-  DesktopFormSection,
-  DesktopFieldGroup,
-  DesktopInputField,
-  DesktopFormActions,
-  DesktopMultiStepForm,
-  DesktopFormWizardNavigation,
-}

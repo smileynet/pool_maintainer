@@ -388,13 +388,3 @@ export function DesktopQuickActions({
   )
 }
 
-export {
-  DesktopCard,
-  DesktopButtonGroup,
-  DesktopStatusIndicator,
-  DesktopDataDisplay,
-  DesktopBadgeGroup,
-  DesktopPanel,
-  DesktopToolbar,
-  DesktopQuickActions,
-}

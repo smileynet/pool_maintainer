@@ -72,11 +72,14 @@ const ChemicalInput = ({
       <div className="space-y-1">
         <Input
           id={chemical}
+          data-testid={`${chemical}-input`}
           type="number"
           step={chemical === 'ph' ? '0.1' : chemical.includes('Chlorine') ? '0.1' : '1'}
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
+          aria-describedby={validation ? `${chemical}-validation` : undefined}
+          aria-invalid={validation && (validation.status === 'emergency' || validation.status === 'critical')}
           className={cn(
             'transition-colors',
             validation?.status === 'emergency' &&
@@ -89,6 +92,8 @@ const ChemicalInput = ({
         />
         {validation && (
           <div
+            id={`${chemical}-validation`}
+            data-testid={`${chemical}-validation`}
             className={cn(
               'rounded-md border p-2 text-xs',
               validation.bgColor,
@@ -291,7 +296,7 @@ export const ChemicalTestForm = ({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" data-testid="chemical-test-form">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -310,7 +315,8 @@ export const ChemicalTestForm = ({
       </div>
 
       {/* Pool and Technician Selection */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 desktop:gap-6">
+      <section aria-labelledby="pool-technician-section" className="grid grid-cols-1 gap-4 md:grid-cols-2 desktop:gap-6">
+        <h2 id="pool-technician-section" className="sr-only">Pool and Technician Selection</h2>
         <div className="form-group">
           <Label className="flex items-center gap-2 text-sm font-medium">
             <Droplet className="h-4 w-4" />
@@ -320,7 +326,7 @@ export const ChemicalTestForm = ({
             value={formData.poolId}
             onValueChange={(value) => setFormData((prev) => ({ ...prev, poolId: value }))}
           >
-            <SelectTrigger>
+            <SelectTrigger data-testid="pool-selector">
               <SelectValue placeholder="Select pool facility" />
             </SelectTrigger>
             <SelectContent>
@@ -343,7 +349,7 @@ export const ChemicalTestForm = ({
               value={formData.technician}
               onValueChange={(value) => setFormData((prev) => ({ ...prev, technician: value }))}
             >
-              <SelectTrigger>
+              <SelectTrigger data-testid="technician-selector">
                 <SelectValue placeholder="Select or enter technician name" />
               </SelectTrigger>
               <SelectContent>
@@ -357,17 +363,18 @@ export const ChemicalTestForm = ({
           ) : null}
           <Input
             type="text"
+            data-testid="technician-input"
             placeholder="Enter technician name"
             value={formData.technician || ''}
             onChange={(e) => setFormData((prev) => ({ ...prev, technician: e.target.value }))}
             className="mt-2"
           />
         </div>
-      </div>
+      </section>
 
       {/* Chemical Readings */}
-      <div>
-        <h4 className="mb-4 flex items-center gap-2 font-medium">
+      <section aria-labelledby="chemical-readings-section">
+        <h4 id="chemical-readings-section" className="mb-4 flex items-center gap-2 font-medium">
           <FlaskConical className="h-4 w-4" />
           Chemical Readings
         </h4>
@@ -439,7 +446,7 @@ export const ChemicalTestForm = ({
             placeholder="81"
           />
         </div>
-      </div>
+      </section>
 
       {/* Notes */}
       <div className="space-y-2">
@@ -448,6 +455,7 @@ export const ChemicalTestForm = ({
         </Label>
         <textarea
           id="notes"
+          data-testid="notes-input"
           className="resize-vertical border-input focus:ring-ring bg-background text-foreground min-h-[80px] w-full rounded-md border px-3 py-2 text-sm focus:border-transparent focus:ring-2 focus:outline-none"
           placeholder="Additional observations, equipment issues, or special conditions..."
           value={formData.notes}
@@ -458,6 +466,9 @@ export const ChemicalTestForm = ({
       {/* Enhanced Compliance Alerts */}
       {complianceReport && complianceReport.overall !== 'compliant' && hasReadings && (
         <Card
+          data-testid="compliance-alert"
+          role="alert"
+          aria-live={complianceReport.overall === 'emergency' ? 'assertive' : 'polite'}
           className={cn(
             'border-2',
             complianceReport.overall === 'emergency' && 'bg-card border-destructive',
@@ -550,6 +561,7 @@ export const ChemicalTestForm = ({
       {/* Save Status Feedback */}
       {saveStatus !== 'idle' && (
         <Card
+          data-testid="save-status"
           className={cn(
             'border-2',
             saveStatus === 'saved' && 'border-success bg-success/10',
@@ -583,6 +595,8 @@ export const ChemicalTestForm = ({
         <Button
           onClick={handleSubmit}
           disabled={!hasRequiredFields || !hasReadings || saveStatus === 'saving'}
+          data-testid="submit-test"
+          aria-label={saveStatus === 'saving' ? 'Submitting...' : 'Submit test'}
           className={cn(
             'flex-1',
             complianceReport?.overall === 'emergency' && 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
@@ -591,22 +605,25 @@ export const ChemicalTestForm = ({
           )}
         >
           <CheckCircle className="mr-2 h-4 w-4" />
-          {complianceReport?.overall === 'emergency' && 'Submit Emergency Test'}
-          {complianceReport?.overall === 'non-compliant' && 'Submit (Critical)'}
-          {complianceReport?.overall === 'warning' && 'Submit (Warning)'}
-          {(!complianceReport || complianceReport.overall === 'compliant') && 'Submit Test'}
+          {saveStatus === 'saving' && 'Submitting...'}
+          {saveStatus !== 'saving' && complianceReport?.overall === 'emergency' && 'Submit Emergency Test'}
+          {saveStatus !== 'saving' && complianceReport?.overall === 'non-compliant' && 'Submit (Critical)'}
+          {saveStatus !== 'saving' && complianceReport?.overall === 'warning' && 'Submit (Warning)'}
+          {saveStatus !== 'saving' && (!complianceReport || complianceReport.overall === 'compliant') && 'Submit Test'}
         </Button>
 
         <Button
           variant="secondary"
           onClick={handleSaveDraft}
           disabled={!formData.poolId || !formData.technician || saveStatus === 'saving'}
+          data-testid="save-draft"
+          aria-label="Save draft"
         >
           <Save className="mr-2 h-4 w-4" />
           Save Draft
         </Button>
 
-        <Button variant="outline" onClick={onCancel}>
+        <Button variant="outline" onClick={onCancel} data-testid="cancel" aria-label="Cancel">
           Cancel
         </Button>
       </div>

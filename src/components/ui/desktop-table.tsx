@@ -339,5 +339,4 @@ export {
   DesktopTableRow as TableRow,
   DesktopTableCell as TableCell,
   DesktopTableHeaderCell as TableHeaderCell,
-  DesktopDataTable,
 }

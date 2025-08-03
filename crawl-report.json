@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-08-02T23:09:02.464Z",
+  "url": "http://localhost:5080",
+  "summary": {
+    "errors": 4,
+    "warnings": 0,
+    "issues": 2
+  },
+  "errors": [
+    "HTTP 500: http://localhost:5080/src/components/lazy/index.ts?t=1754165803305",
+    "Console Error: Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "Navigation test failed: SyntaxError: Failed to execute 'querySelectorAll' on 'Document': 'button[role=\"tab\"], [role=\"tablist\"] button, button:contains(\"Overview\"), button:contains(\"Pool\"), button:contains(\"History\")' is not a valid selector.",
+    "Responsiveness test failed: this.page.waitForTimeout is not a function"
+  ],
+  "warnings": [],
+  "issues": [
+    "Page body content seems too short (< 100 characters)",
+    "No forms found on the page"
+  ]
+}

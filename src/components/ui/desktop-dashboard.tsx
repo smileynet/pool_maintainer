@@ -322,12 +322,3 @@ export function DesktopCollapsibleSidebar({
   )
 }
 
-export {
-  DesktopDashboard,
-  DesktopMetricsGrid,
-  DesktopContentSection,
-  DesktopSplitView,
-  DesktopStatusOverview,
-  DesktopMultiColumn,
-  DesktopCollapsibleSidebar,
-}

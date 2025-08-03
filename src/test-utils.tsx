@@ -1,6 +1,8 @@
 import React from 'react'
 import { render, RenderOptions } from '@testing-library/react'
+import { vi } from 'vitest'
 import { ChemicalTest, PoolFacility } from '@/lib/localStorage'
+import type { ValidationResult, ComplianceReport } from '@/lib/mahc-validation'
 
 // Pool Maintenance System Test Utilities
 // Enhanced test utilities for pool maintenance workflows
@@ -86,6 +88,120 @@ export const seedPoolTestData = (tests: ChemicalTest[], facilities: PoolFacility
   if (facilities.length > 0) {
     localStorage.setItem('pool-maintenance-facilities', JSON.stringify(facilities))
   }
+}
+
+// MAHC validation mocking utilities
+export const mockMAHCValidation = () => {
+  const mocks = {
+    validateChemical: vi.fn<[number, string], ValidationResult>((value, chemical) => {
+      // Default to good validation
+      return {
+        status: 'good',
+        severity: 'low',
+        color: 'text-green-700',
+        bgColor: 'bg-green-50',
+        borderColor: 'border-green-400',
+        message: `${chemical} within ideal range`,
+        requiresAction: false,
+        requiresClosure: false,
+      }
+    }),
+    
+    generateComplianceReport: vi.fn<[Partial<Record<string, number>>], ComplianceReport>((readings) => {
+      return {
+        overall: 'compliant',
+        totalTests: Object.keys(readings).length,
+        passedTests: Object.keys(readings).length,
+        warningTests: 0,
+        criticalTests: 0,
+        emergencyTests: 0,
+        details: [],
+        recommendations: [],
+        requiredActions: [],
+      }
+    }),
+    
+    shouldClosePool: vi.fn(() => ({
+      shouldClose: false,
+      reasons: [],
+    })),
+    
+    formatChemicalValue: vi.fn((value: number, chemical: string) => {
+      return `${value} ppm`
+    }),
+    
+    getAcceptableRange: vi.fn((chemical: string) => {
+      const ranges: Record<string, string> = {
+        freeChlorine: '1.0-3.0 ppm',
+        totalChlorine: '1.0-4.0 ppm',
+        ph: '7.2-7.6',
+        alkalinity: '80-120 ppm',
+        cyanuricAcid: '30-50 ppm',
+        calcium: '200-400 ppm',
+        temperature: '78-84 °F',
+      }
+      return ranges[chemical] || '0-100'
+    }),
+  }
+  
+  // Helper to mock specific validation scenarios
+  ;(mocks.validateChemical as any).mockScenario = (scenario: 'good' | 'warning' | 'critical' | 'emergency') => {
+    const scenarios: Record<string, ValidationResult> = {
+      good: {
+        status: 'good',
+        severity: 'low',
+        color: 'text-green-700',
+        bgColor: 'bg-green-50',
+        borderColor: 'border-green-400',
+        message: 'Within ideal range',
+        requiresAction: false,
+        requiresClosure: false,
+      },
+      warning: {
+        status: 'warning',
+        severity: 'medium',
+        color: 'text-orange-700',
+        bgColor: 'bg-orange-50',
+        borderColor: 'border-orange-400',
+        message: 'Outside ideal range',
+        recommendation: 'Adjust chemical levels',
+        requiresAction: true,
+        requiresClosure: false,
+      },
+      critical: {
+        status: 'critical',
+        severity: 'high',
+        color: 'text-red-700',
+        bgColor: 'bg-red-50',
+        borderColor: 'border-red-400',
+        message: 'Out of compliance range',
+        recommendation: 'Immediate adjustment required',
+        requiresAction: true,
+        requiresClosure: false,
+      },
+      emergency: {
+        status: 'emergency',
+        severity: 'critical',
+        color: 'text-red-900',
+        bgColor: 'bg-red-100',
+        borderColor: 'border-red-500',
+        message: 'Emergency level detected',
+        recommendation: 'Close pool immediately',
+        requiresAction: true,
+        requiresClosure: true,
+      },
+    }
+    
+    mocks.validateChemical.mockReturnValue(scenarios[scenario])
+  }
+  
+  return mocks
+}
+
+// Mock the MAHC validation module
+export const setupMAHCMocks = () => {
+  const mocks = mockMAHCValidation()
+  return mocks
 }
 
 // Re-export everything from testing library
